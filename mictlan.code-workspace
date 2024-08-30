@@ -1,0 +1,86 @@
+{
+	"folders": [
+		{
+			"name": "mictlan",
+			"path": "."
+		},
+		{
+			"name": "js/pkg",
+			"path": "js/pkg"
+		},
+		{
+			"name": "ossekai-client",
+			"path": "js/ossekai-client",
+			"settings": {
+				"editor.codeLens": true
+			}
+		},
+		{
+			"name": "hangaku-server",
+			"path": "js/hangaku-server"
+		},
+		{
+			"name": "go/pkg",
+			"path": "go/pkg"
+		},
+		{
+			"name": "ossekaiserver",
+			"path": "go/ossekaiserver"
+		},
+		{
+			"name": "hangakuai",
+			"path": "go/hangakuai"
+		},
+		{
+			"name": "python/pkg",
+			"path": "python/pkg"
+		},
+		{
+			"name": "syuron",
+			"path": "python/syuron"
+		},
+		{
+			"name": "LeanTutorial",
+			"path": "lean/LeanTutorial"
+		}
+	],
+	"settings": {
+		"files.autoSave": "afterDelay",
+		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
+		"terminal.integrated.defaultProfile.linux": "fish",
+		"bun.runtime": "/home/john/.bun/bin/bun",
+		"bun.debugTerminal.stopOnEntry": false,
+		"git.confirmSync": false,
+		/* git */
+		"git.autofetch": true,
+		"git.enableSmartCommit": true,
+		/* python */
+		"pylint.args": [
+			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない
+		],
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.autopep8"
+		},
+		"python.autoComplete.extraPaths": ["${workspaceFolder:mictlan}/python"],
+		"python.analysis.extraPaths": ["${workspaceFolder:mictlan}/python"],
+		"python.envFile": "${workspaceFolder:mictlan}/build/devcontainer/.env.python",
+		"notebook.formatOnSave.enabled": true,
+		/* js/ts */
+		"typescript.updateImportsOnFileMove.enabled": "always",
+		"[typescript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[jsonc]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[json]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		}
+	}
+}

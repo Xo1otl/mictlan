@@ -1,0 +1,52 @@
+classDiagram
+    class nbviewer_App {
+        -library: Library
+        -presenter: Presenter
+        +show(name: Name): Promise<T>
+    }
+    class nbviewer_Library {
+        <<interface>>
+        +notebook(name: Name): Promise<Notebook>
+    }
+    class nbviewer_Presenter {
+        <<interface>>
+        +render(notebook: Notebook): T
+    }
+    class localfile_Library {
+        +notebook(name: Name): Promise<Notebook>
+    }
+    class jupyter_Presenter {
+        +render(notebook: Notebook): Promise<HTML>
+    }
+    class elysia_launchNotebook {
+        <<function>>
+    }
+    class Name {
+        <<type>>
+        Brand<string, "Name">
+    }
+    class Notebook {
+        <<type>>
+        Brand<string, "Notebook">
+    }
+    class HTML {
+        <<type>>
+        Brand<string, "HTML">
+    }
+    class Brand {
+        <<type>>
+        Brand<T, K>
+    }
+
+    nbviewer_App --> nbviewer_Library : uses
+    nbviewer_App --> nbviewer_Presenter : uses
+    localfile_Library ..|> nbviewer_Library : implements
+    jupyter_Presenter ..|> nbviewer_Presenter : implements
+    elysia_launchNotebook --> nbviewer_App : creates
+    nbviewer_Library ..> Name : uses
+    nbviewer_Library ..> Notebook : uses
+    nbviewer_Presenter ..> Notebook : uses
+    jupyter_Presenter ..> HTML : returns
+    Name --|> Brand : extends
+    Notebook --|> Brand : extends
+    HTML --|> Brand : extends

@@ -1,0 +1,14 @@
+{
+	"name": "mictlan",
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "bun --filter '*' dev",
+		"lint": "bun --filter '*' lint",
+		"test": "bun --filter '*' test",
+		"build": "bun --filter '*' build"
+	},
+	"workspaces": ["./*"],
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3"
+	}
+}

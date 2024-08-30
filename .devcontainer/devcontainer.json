@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerComposeFile": "../build/docker-compose.yaml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"golang.go",
+				"leanprover.lean4",
+				"ms-python.autopep8",
+				"ms-python.debugpy",
+				"ms-python.pylint",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-toolsai.jupyter",
+				"oven.bun-vscode",
+				"tomoki1207.pdf",
+				"vscodevim.vim",
+				"bierner.markdown-mermaid",
+				"ms-vscode.live-server",
+				"statelyai.stately-vscode",
+				"biomejs.biome"
+			]
+		}
+	},
+	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
+	"features": {
+		"ghcr.io/devcontainers/features/go:1": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	}
+}

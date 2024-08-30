@@ -1,0 +1,22 @@
+alias c="clear"
+alias e="exit"
+alias phs="python3 -m http.server"
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+functions --copy cd standard_cd
+
+function cd
+  standard_cd $argv; and ls
+end
+
+set -g fish_greeting
+
+fish_add_path $HOME/.elan/bin
+fish_add_path $HOME/.bun/bin
+fish_add_path $HOME/sdk/go/bin
+fish_add_path $HOME/.local/bin # for pipx packages
+
+fish_vi_key_bindings

@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+.venv/
+poetry.lock
+bun.lockb
+
+# build outputs
+dist/
+out/
+__pycache__/
+
+# ide and development tools
+.lake/
+__debug_bin*
+
+# sensitive files
+testcredentials.json
+awsconfig.json
+.env
+id_rsa*
+id_ed25519*
+
+# temporary files
+playground/

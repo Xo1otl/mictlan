@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "mictlan"
+version = "0.1.0"
+description = ""
+authors = ["Xolotl <xolotl.mictl4n@gmail.com>"]
+
+
+[tool.poetry.group.pkg.dependencies]
+ipython = "^8.26.0"
+numpy = "^2.0.1"
+
+
+[tool.poetry.group.hangaku-server.dependencies]
+notebook = "^7.2.1"
+
+
+
+[tool.poetry.group.handai.dependencies]
+pycryptodome = "^3.20.0"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

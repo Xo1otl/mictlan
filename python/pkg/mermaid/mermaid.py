@@ -1,0 +1,21 @@
+import base64
+from IPython.display import Image, display
+
+
+def ink(graphbytes):
+    """Given a bytes object holding a Mermaid-format graph, return a URL that will generate the image."""
+    base64_bytes = base64.b64encode(graphbytes)
+    base64_string = base64_bytes.decode("ascii")
+    return "https://mermaid.ink/img/" + base64_string
+
+
+def mm_display(graphbytes):
+    """Given a bytes object holding a Mermaid-format graph, display it."""
+    display(Image(url=ink(graphbytes)))
+
+
+def display_file(path):
+    """Given a path to a file containing a Mermaid-format graph, display it"""
+    with open(path, 'rb') as f:
+        graphbytes = f.read()
+    mm_display(graphbytes)

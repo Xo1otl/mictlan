@@ -1,0 +1,22 @@
+{
+	"name": "pkg",
+	"type": "module",
+	"scripts": {
+		"lint": "biome lint"
+	},
+	"exports": {
+		"./email": "./email/index.ts",
+		"./statemachine": "./statemachine/index.ts",
+		"./xstatemachine": "./statemachine/xstatemachine/index.ts",
+		"./utilitytypes": "./utilitytypes/index.ts"
+	},
+	"dependencies": {
+		"xstate": "^5.17.4"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.1.8"
+	},
+	"peerDependencies": {
+		"typescript": "^5.5.4"
+	}
+}
