@@ -1,8 +1,8 @@
 package mnist
 
 import (
+	"lib/pkg/ann"
 	"path"
-	"pkg/ann"
 )
 
 // Set represents a data set of image-label pairs held in memory

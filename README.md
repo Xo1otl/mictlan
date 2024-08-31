@@ -58,6 +58,8 @@ aws sdk go を見習って internal を外部 package にするかも
 7. パッケージ公開:
    - package.json で適切にパスを公開する
 
+固有名詞でなければinterface、固有名詞ならば実装
+
 # TODO
 
 今回考えた state machine を使った設計で、しかのこダイアグラムをポチポチ進められるページを作る

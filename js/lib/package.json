@@ -1,0 +1,21 @@
+{
+	"name": "lib",
+	"type": "module",
+	"scripts": {
+		"lint": "biome lint"
+	},
+	"exports": {
+		"./email": "./pkg/email/index.ts",
+		"./state": "./pkg/state/index.ts",
+		"./utilitytypes": "./pkg/utilitytypes/index.ts"
+	},
+	"dependencies": {
+		"xstate": "^5.17.4"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.1.8"
+	},
+	"peerDependencies": {
+		"typescript": "^5.5.4"
+	}
+}

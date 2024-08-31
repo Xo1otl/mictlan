@@ -5,8 +5,8 @@
 			"path": "."
 		},
 		{
-			"name": "js/pkg",
-			"path": "js/pkg"
+			"name": "js/lib",
+			"path": "js/lib"
 		},
 		{
 			"name": "ossekai-client",
@@ -20,8 +20,8 @@
 			"path": "js/hangaku-server"
 		},
 		{
-			"name": "go/pkg",
-			"path": "go/pkg"
+			"name": "go/lib",
+			"path": "go/lib"
 		},
 		{
 			"name": "ossekaiserver",
@@ -32,8 +32,8 @@
 			"path": "go/hangakuai"
 		},
 		{
-			"name": "python/pkg",
-			"path": "python/pkg"
+			"name": "python/lib",
+			"path": "python/lib"
 		},
 		{
 			"name": "syuron",

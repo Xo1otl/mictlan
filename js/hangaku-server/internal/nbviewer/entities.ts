@@ -1,4 +1,4 @@
-import type { Brand } from "pkg/utilitytypes";
+import type { Brand } from "lib/utilitytypes";
 
 // これはentity
 

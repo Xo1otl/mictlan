@@ -1,5 +1,5 @@
-import * as email from "pkg/email";
-import type { Brand } from "pkg/utilitytypes";
+import * as email from "lib/email";
+import type { Brand } from "lib/utilitytypes";
 
 // emailであることを表すバリデーション等
 export class Username extends email.ValueObject {}
@@ -8,7 +8,7 @@ export type Password = Brand<string, "Password">;
 export type Code = Brand<string, "Code">;
 
 export type User = {
-  username: Username;
+	username: Username;
 };
 
 export type State = "unauthenticated" | "authenticated" | "pendingConfirmation";

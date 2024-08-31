@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "elysia": "^1.1.9",
-    "pkg": "workspace:*"
+    "lib": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.1.8"

@@ -48,7 +48,7 @@ export class App {
 		});
 	}
 
-	subscribe(listener: (state: State) => void): () => void {
+	subscribe(listener: (state: State) => void) {
 		return this.stateMachine.subscribe(listener);
 	}
 }

@@ -1,8 +1,8 @@
 package digitguesser
 
 import (
+	"lib/pkg/ann"
 	"math/rand"
-	"pkg/ann"
 )
 
 const (
