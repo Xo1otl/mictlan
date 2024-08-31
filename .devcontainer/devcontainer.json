@@ -24,7 +24,8 @@
 				"bierner.markdown-mermaid",
 				"ms-vscode.live-server",
 				"statelyai.stately-vscode",
-				"biomejs.biome"
+				"biomejs.biome",
+				"svelte.svelte-vscode"
 			]
 		}
 	},
