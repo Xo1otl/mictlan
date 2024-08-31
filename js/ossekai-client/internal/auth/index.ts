@@ -1,4 +1,4 @@
-export * from "./adapters";
+export * from "./interfaces";
 export * from "./app";
 export * from "./entities";
 export * from "./xstate";

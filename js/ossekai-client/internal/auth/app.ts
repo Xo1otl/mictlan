@@ -1,5 +1,5 @@
-import type { IAMService } from "./adapters";
-import type { StateMachine } from "./adapters";
+import type { IAMService } from "./interfaces";
+import type { StateMachine } from "./interfaces";
 import type { Password, Code, State, Username } from "./entities";
 
 export class App {
