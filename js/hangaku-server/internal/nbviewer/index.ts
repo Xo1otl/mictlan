@@ -1,4 +1,4 @@
 export * from "./entities";
 export * from "./app";
-export * from "./adapters";
+export * from "./interfaces";
 export * from "./jupyter";

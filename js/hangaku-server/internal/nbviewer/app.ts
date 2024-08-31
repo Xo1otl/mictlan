@@ -1,5 +1,5 @@
 import type { Name } from "./entities";
-import type { Library, Presenter } from "./adapters";
+import type { Library, Presenter } from "./interfaces";
 
 export class App<Notebook, RenderResult> {
 	constructor(
