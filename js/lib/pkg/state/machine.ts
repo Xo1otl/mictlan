@@ -7,17 +7,13 @@ type OrthognalState = {
 export type State = SimpleState | OrthognalState;
 export type Event = string;
 
-type Subscription = {
-	unsubscribe: () => void;
-};
-
 export interface Machine<T extends State, U extends Event> {
 	/**
 	 * 状態変更の観察者（オブザーバー）を登録する
 	 * @param listener 状態遷移が完了し、新しい状態に入った際に呼び出されるコールバック関数
 	 * @returns 登録解除のためのメソッドを含むSubscriptionオブジェクト
 	 */
-	subscribe(listener: (state: T) => void): Subscription;
+	subscribe(listener: (state: T) => void): () => void;
 
 	/**
 	 * イベントをディスパッチする。オプションでエフェクトを実行する。

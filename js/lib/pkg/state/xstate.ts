@@ -21,7 +21,7 @@ export class XState<T extends State, U extends Event> implements Machine<T, U> {
 	}
 
 	subscribe(listener: (state: T) => void) {
-		return this.actor.subscribe((state) => listener(state.value));
+		return this.actor.subscribe((state) => listener(state.value)).unsubscribe;
 	}
 
 	dispatch<T>(event: U, effect?: () => T): T;

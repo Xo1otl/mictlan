@@ -8,7 +8,7 @@
 		"test": "bun test",
 		"build": "tsc -b && vite build",
 		"lint": "biome lint",
-		"preview": "vite preview"
+		"preview": "vite preview --host 0.0.0.0"
 	},
 	"dependencies": {
 		"@radix-ui/react-dialog": "^1.1.1",
