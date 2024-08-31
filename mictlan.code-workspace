@@ -24,8 +24,8 @@
 			"path": "go/lib"
 		},
 		{
-			"name": "ossekaiserver",
-			"path": "go/ossekaiserver"
+			"name": "ossekai",
+			"path": "go/ossekai"
 		},
 		{
 			"name": "hangakuai",
