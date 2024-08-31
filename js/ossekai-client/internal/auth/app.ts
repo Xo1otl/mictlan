@@ -25,25 +25,25 @@ export class App {
 	}
 
 	async signIn(username: Username, password: Password) {
-		await this.stateMachine.transition("signIn", async () => {
+		await this.stateMachine.dispatch("signIn", async () => {
 			await this.iamService.signIn(username, password);
 		});
 	}
 
 	async signOut() {
-		await this.stateMachine.transition("signOut", async () => {
+		await this.stateMachine.dispatch("signOut", async () => {
 			await this.iamService.signOut();
 		});
 	}
 
 	async signUp(username: Username, password: Password) {
-		await this.stateMachine.transition("signUp", async () => {
+		await this.stateMachine.dispatch("signUp", async () => {
 			await this.iamService.signUp(username, password);
 		});
 	}
 
 	async confirm(code: Code) {
-		await this.stateMachine.transition("confirm", async () => {
+		await this.stateMachine.dispatch("confirm", async () => {
 			await this.iamService.confirm(code);
 		});
 	}

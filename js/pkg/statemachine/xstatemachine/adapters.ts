@@ -1,7 +1,7 @@
 import type * as statemachine from "..";
 import { createActor, type AnyStateMachine } from "xstate";
 
-export class Adapter<State extends string, Event extends string>
+export class Adapter<State extends statemachine.StateBase, Event extends string>
 	implements statemachine.InterfaceAdapter<State, Event>
 {
 	private actor;
@@ -21,14 +21,14 @@ export class Adapter<State extends string, Event extends string>
 		return subscription.unsubscribe;
 	}
 
-	transition<T>(event: Event, action: () => T): T;
-	transition<T>(event: Event, action: () => Promise<T>): Promise<T>;
-	transition<T>(event: Event, action: () => T | Promise<T>): T | Promise<T> {
+	dispatch<T>(event: Event, effect: () => T): T;
+	dispatch<T>(event: Event, effect: () => Promise<T>): Promise<T>;
+	dispatch<T>(event: Event, effect: () => T | Promise<T>): T | Promise<T> {
 		if (!this.actor.getSnapshot().can({ type: event })) {
 			throw new Error(`event '${event}' is not allowed`);
 		}
 
-		const result = action();
+		const result = effect();
 		if (result instanceof Promise) {
 			return result.then((value) => {
 				this.actor.send({ type: event });

@@ -1,18 +1,27 @@
-export interface InterfaceAdapter<State extends string, Event extends string> {
+type OrthognalState = {
+	[region: string]: string | OrthognalState;
+};
+
+export type StateBase = string | OrthognalState
+
+export interface InterfaceAdapter<
+	State extends StateBase,
+	Event extends string,
+> {
 	/**
-	 * コールバック処理を渡すことができる状態遷移
-	 * 処理に成功すると事後状態になる
-	 * @param event 処理の事前イベント
-	 * @param action イベントと対応した処理
-	 * @throws {Error} 未定義のイベントを受け取った時
-	 * @returns イベントに対応する処理の結果
+	 * イベントをディスパッチし、関連するエフェクトを実行する
+	 * Run-to-Completion (RTC) セマンティクスに従い、エフェクトの実行が完了するまで次のイベントは処理されない
+	 * @param event ディスパッチするイベント
+	 * @param effect イベントに関連付けられたエフェクト（遷移のアクション）
+	 * @throws {Error} イベントプールに存在しない、または現在の状態で処理できないイベントを受け取った場合
+	 * @returns エフェクトの実行結果
 	 */
-	transition<T>(event: Event, action: () => T): T;
+	dispatch<T>(event: Event, effect: () => T): T;
 
 	/**
-	 * 状態の変更を監視するリスナーを登録する
-	 * @param listener 状態が変更されたときに呼び出されるコールバック関数
-	 * @returns 登録したリスナーの購読を解除する関数
+	 * 状態変更の観察者（オブザーバー）を登録する
+	 * @param listener 状態遷移が完了し、新しい状態に入った際に呼び出されるコールバック関数
+	 * @returns 登録した観察者の購読を解除する関数
 	 */
 	subscribe(listener: (state: State) => void): () => void;
 }
