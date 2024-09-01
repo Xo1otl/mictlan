@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+templates:
+  - name: Bug report
+    about: Report a bug
+    title: "bug/"
+  - name: Feature request
+    about: Suggest a new feature
+    title: "feature/"
