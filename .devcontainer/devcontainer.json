@@ -31,6 +31,7 @@
 	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
 	"features": {
 		"ghcr.io/devcontainers/features/go:1": {},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers/features/php:1": {}
 	}
 }
