@@ -1,12 +1,18 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug ossekai-client",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}/js/ossekai-client"
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug ossekai-client",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}/js/ossekai-client"
+		},
+		{
+			"name": "Debug koemade",
+			"type": "php",
+			"request": "launch",
+			"port": 9003
+		}
+	]
 }

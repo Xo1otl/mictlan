@@ -42,6 +42,10 @@
 		{
 			"name": "LeanTutorial",
 			"path": "lean/LeanTutorial"
+		},
+		{
+			"name": "koemade",
+			"path": "php/koemade"
 		}
 	],
 	"settings": {
@@ -67,7 +71,6 @@
 		"notebook.formatOnSave.enabled": true,
 		/* js/ts */
 		"typescript.updateImportsOnFileMove.enabled": "always",
-		"svelte.enable-ts-plugin": true,
 		"[typescript]": {
 			"editor.defaultFormatter": "biomejs.biome"
 		},
@@ -83,8 +86,8 @@
 		"[json]": {
 			"editor.defaultFormatter": "biomejs.biome"
 		},
-		"[svelte]": {
-			"editor.defaultFormatter": "svelte.svelte-vscode"
+		"[php]": {
+			"editor.defaultFormatter": "DEVSENSE.phptools-vscode"
 		}
 	}
 }
