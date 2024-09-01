@@ -1,6 +1,8 @@
 blank_issues_enabled: false
-issue_templates:
-  - name: Bug Report
+templates:
+  - name: Bug report
+    about: Report a bug
     title: "bug/"
-  - name: Feature Request
+  - name: Feature request
+    about: Suggest a new feature
     title: "feature/"
