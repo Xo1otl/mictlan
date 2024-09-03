@@ -3,3 +3,4 @@
 /.idea/dataSources/
 composer.phar
 composer.lock
+config.php

@@ -5,7 +5,7 @@
 		"lint": "biome lint"
 	},
 	"exports": {
-		"./email": "./pkg/email/index.ts",
+		"./common": "./pkg/common/index.ts",
 		"./state": "./pkg/state/index.ts",
 		"./utilitytypes": "./pkg/utilitytypes/index.ts"
 	},

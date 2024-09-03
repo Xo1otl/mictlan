@@ -12,7 +12,7 @@
 			"name": "Debug koemade",
 			"type": "php",
 			"request": "launch",
-			"port": 9003
+			"port": 7003
 		}
 	]
 }
