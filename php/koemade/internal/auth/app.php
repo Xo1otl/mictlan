@@ -45,7 +45,6 @@ class App
 
     public function editPassword(EditPasswordInput $input)
     {
-        new \logger\Debug("editing password for username: " . $input->username);
         $this->accountRepo->editPassword($input);
     }
 
