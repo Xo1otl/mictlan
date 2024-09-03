@@ -20,28 +20,22 @@ class App
 
     public function signin(SignInInput $signInInput): ?Account
     {
-        try {
-            $account = $this->accountRepo->findByUsername($signInInput->username);
-        } catch (\Exception $e) {
-            new \logger\Imp("account not found for username: " . $signInInput->username);
-            return null;
+        $account = $this->accountRepo->findByUsername($signInInput->username);
+        if (!$account->password->verify($signInInput->passwordText)) {
+            throw new \Exception("password is not correct");
         }
-        if ($account->password->verify($signInInput->passwordText)) {
-            $session = new Session($account->id, $account->username, $account->role);
-            $this->sessionRepo->set($session);
-        } else {
-            new \logger\Imp("password is not correct");
-            return null;
-        }
+        $session = new Session($account->id, $account->username, $account->role);
+        $this->sessionRepo->set($session);
         return $account;
     }
 
     public function deleteAccount(SignInInput $signInInput)
     {
-        $account = $this->signin($signInInput);
-        if ($account !== null) {
-            $this->accountRepo->deleteById($account->id);
+        $account = $this->accountRepo->findByUsername($signInInput->username);
+        if (!$account->password->verify($signInInput->passwordText)) {
+            throw new \Exception("password is not correct");
         }
+        $this->accountRepo->deleteById($account->id);
     }
 
     public function deleteAccountByUsername(Username $username)
