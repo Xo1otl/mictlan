@@ -1,3 +1,5 @@
+name: mictlan
+
 services:
   devcontainer:
     build:
@@ -7,3 +9,14 @@ services:
       - ..:/workspaces/mictlan:cached
     command: >
       /bin/bash -c "sudo chown -R vscode:vscode /workspaces/mictlan && sleep infinity"
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./koemade/initmysql.sql:/docker-entrypoint-initdb.d/init.sql

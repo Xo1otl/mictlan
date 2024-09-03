@@ -58,7 +58,9 @@ aws sdk go を見習って internal を外部 package にするかも
 7. パッケージ公開:
    - package.json で適切にパスを公開する
 
-固有名詞でなければinterface、固有名詞ならば実装
+8. その他: 
+   - 固有名詞でなければinterface、固有名詞ならば実装
+   - エラーメッセージは小文字から初めてピリオド不要
 
 # TODO
 
@@ -82,3 +84,8 @@ aws sdk go を見習って internal を外部 package にするかも
 jupyter で python パッケージ利用できるようにするくだりかなり雑な設定になっているので注意がいる
 
 poetry installとbun installは手動でやる、leanのダウンロードはエディタに言われてやる
+
+# Note
+
+- docker compose up(select services)はdevcontainerからできない、volumeマウントができない、ホストマシンから実行すべし
+- Oracle.mysql-shell-for-vs-codeもバリ便利やけどdevcontainerから動かない、new windowしてホストからは見れる

@@ -1,6 +1,7 @@
 alias c="clear"
 alias e="exit"
 alias phs="python3 -m http.server"
+alias phpd="php -dxdebug.mode=debug -dxdebug.start_with_request=yes -dxdebug.client_port=7003"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
