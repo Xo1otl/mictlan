@@ -1,8 +1,8 @@
-import * as email from "lib/email";
+import * as common from "lib/common";
 import type { Brand } from "lib/utilitytypes";
 
 // emailであることを表すバリデーション等
-export class Username extends email.ValueObject {}
+export class Username extends common.Email {}
 export type Token = Brand<string, "Token">;
 export type Password = Brand<string, "Password">;
 export type Code = Brand<string, "Code">;
