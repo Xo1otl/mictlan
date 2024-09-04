@@ -14,6 +14,8 @@ useMemo は関数を実行せず戻り値を再利用したい場合だけ、そ
 
 state actor の初期状態について、session の値が実体なので、state actor の snapshot を保存するのではなく、初期状態は必ず session の値から導出する
 
+pythonのhttp serverだとindex.htmlへのリダイレクトがない、phpでdistをサーブしとけばおｋ
+
 # TODO
 
 画面から auth を呼び出す時は必ず同期が取れるがロジック上で state が変わった時に画面がそれについていかない問題がある

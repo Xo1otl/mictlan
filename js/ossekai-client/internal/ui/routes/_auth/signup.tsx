@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { useAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/useAuth";
 import * as auth from "../../../auth";
 import * as utils from "lib/utilitytypes";
 import { Navigate } from "@tanstack/react-router";
