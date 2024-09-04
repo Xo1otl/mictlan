@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { AuthContext } from "../hooks/auth";
+import { AuthContext } from "../hooks/useAuth";
 import * as auth from "../../auth";
 import * as libstate from "lib/state";
 

@@ -1,5 +1,5 @@
 import { User, LogOut, Settings, HelpCircle } from "lucide-react";
-import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/useAuth";
 import {
 	DropdownMenu,
 	DropdownMenuContent,

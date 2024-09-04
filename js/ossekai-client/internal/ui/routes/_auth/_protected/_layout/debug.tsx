@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useAuth, useAuthenticatedFetch } from "@/internal/ui/hooks/auth";
 import { Button } from "@/vendor/shadcn/components/ui/button";
 import {
 	Card,
@@ -8,58 +7,26 @@ import {
 	CardContent,
 } from "@/vendor/shadcn/components/ui/card";
 import { useState } from "react";
+import { useApi } from "@/internal/ui/hooks/useApi";
 
-export const Route = createFileRoute(
-	"/_auth/_protected/_layout/debug",
-)({
+export const Route = createFileRoute("/_auth/_protected/_layout/debug")({
 	component: () => {
-		const [, app] = useAuth();
-		const authenticatedFetch = useAuthenticatedFetch();
 		const [pressedButton, setPressedButton] = useState<string | null>(null);
 		const [response, setResponse] = useState<string | null>(null);
+		const fetchApi = useApi();
 
 		const handleButtonClick = async (buttonName: string) => {
 			setPressedButton(buttonName);
 
-			if (buttonName === "ShowUser") {
-				try {
-					setResponse(`${(await app.user())?.username}`);
-				} catch (error) {
-					console.error("Error:", error);
-					setResponse(`Error: ${error}`);
-				}
-			}
-			if (buttonName === "ShowToken") {
-				try {
-					setResponse(`${await app.token()}`);
-				} catch (error) {
-					console.error("Error:", error);
-					setResponse(`Error: ${error}`);
-				}
-			}
 			if (buttonName === "Fetch") {
 				setResponse("Fetching data...");
 				try {
-					const response = await authenticatedFetch(
-						"http://localhost:3000/qa/answers",
-						{
-							method: "POST",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({
-								// ここに送信したいデータを追加します
-								// 例: question: 'What is the meaning of life?'
-							}),
-						},
-					);
-
-					if (!response.ok) {
-						throw new Error(`HTTP error! status: ${response.status}`);
-					}
-
-					const data = await response.json();
-					setResponse(JSON.stringify(data, null, 2));
+					const response = await fetchApi({
+						method: "POST",
+						path: "/qa/answers",
+						body: { question: "What is the meaning of life?" },
+					});
+					setResponse(JSON.stringify(response, null, 2));
 				} catch (error) {
 					console.error("Error:", error);
 					setResponse(`Error: ${error}`);
@@ -74,12 +41,6 @@ export const Route = createFileRoute(
 				</CardHeader>
 				<CardContent>
 					<div className="flex space-x-2 mb-4">
-						<Button onClick={() => handleButtonClick("ShowUser")}>
-							ShowUser
-						</Button>
-						<Button onClick={() => handleButtonClick("ShowToken")}>
-							ShowToken
-						</Button>
 						<Button onClick={() => handleButtonClick("Fetch")}>Fetch</Button>
 					</div>
 					{pressedButton && <p>Last pressed button: {pressedButton}</p>}
