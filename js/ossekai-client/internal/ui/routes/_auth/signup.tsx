@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useAuth } from "../../hooks/auth";
 import * as auth from "../../../auth";
@@ -103,7 +103,7 @@ export function SignUp() {
 				</CardContent>
 				<CardFooter className="flex justify-center">
 					<Button variant="link" asChild>
-						<a href="/signin">既にアカウントをお持ちの方はこちら</a>
+						<Link to="/signin">既にアカウントをお持ちの方はこちら</Link>
 					</Button>
 				</CardFooter>
 			</Card>
