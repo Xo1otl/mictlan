@@ -14,8 +14,9 @@ numpy = "^2.0.1"
 notebook = "^7.2.1"
 
 
-[tool.poetry.group.handai.dependencies]
+[tool.poetry.group.syuron.dependencies]
 pycryptodome = "^3.20.0"
+numpy = "^2.1.1"
 
 [tool.poetry.dependencies]
 python = "^3.10"
