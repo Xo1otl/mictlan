@@ -25,7 +25,8 @@
 				"ms-vscode.live-server",
 				"statelyai.stately-vscode",
 				"biomejs.biome",
-				"DEVSENSE.phptools-vscode"
+				"DEVSENSE.phptools-vscode",
+				"github.copilot"
 			]
 		}
 	},
