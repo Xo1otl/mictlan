@@ -10,6 +10,7 @@ RUN sudo apt update \
     git-lfs \
     php \
     php-xdebug \
+    php-mbstring \
     php-mysql \
     && pipx install poetry \
     && curl -fsSL https://bun.sh/install | bash \
