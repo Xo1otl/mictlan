@@ -3,7 +3,7 @@
 	"description": "koemade",
 	"require": {
 		"ext-pdo": "*",
-		"ext-pdo_sqlite": "*",
+		"ext-pdo_mysql": "*",
 		"ext-mbstring": "*",
 		"monolog/monolog": "^3.7",
 		"phpmailer/phpmailer": "^6.9"
