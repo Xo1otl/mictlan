@@ -93,3 +93,12 @@ poetry installとbun installは手動でやる、leanのダウンロードはエ
 
 - docker compose up(select services)はdevcontainerからできない、volumeマウントができない、ホストマシンから実行すべし
 - Oracle.mysql-shell-for-vs-codeもバリ便利やけどdevcontainerから動かない、new windowしてホストからは見れる
+- keybindindgs.jsonはdevcontainerではなくホストマシンの設定
+
+```json
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.quickchat.launchInlineChat",
+        "when": "editorTextFocus"
+    }
+```
