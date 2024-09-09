@@ -2,10 +2,11 @@ package qa
 
 type App struct {
 	Repo
+	Storage
 }
 
-func NewApp(repo Repo) *App {
-	return &App{repo}
+func NewApp(repo Repo, storage Storage) *App {
+	return &App{repo, storage}
 }
 
 func (a *App) AskQuestion(q Question) {

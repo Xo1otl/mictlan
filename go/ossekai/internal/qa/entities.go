@@ -31,14 +31,13 @@ type PlaceHolder string
 
 type QuestionId string
 type Question struct {
-	Sub          auth.Sub
-	Id           QuestionId
-	Title        string
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
-	BestAnswerId AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
-	Tags         []Tag
-
+	Sub           auth.Sub
+	Id            QuestionId
+	Title         string
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
+	BestAnswerId  AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
+	Tags          []Tag
 	ContentBlocks []ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
 	Attachments   map[PlaceHolder]Attachment
 }

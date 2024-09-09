@@ -10,7 +10,8 @@ import (
 
 func AddGinRoutes(r *gin.Engine) {
 	repo := NewDynamoDb()
-	app := NewApp(repo)
+	storage := NewMockStorage()
+	app := NewApp(repo, storage)
 
 	route := r.Group("/qa")
 
