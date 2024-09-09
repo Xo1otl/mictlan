@@ -19,13 +19,13 @@ func AddGinRoutes(r *gin.Engine) {
 	route.POST("/ask-questions", func(c *gin.Context) {
 		claims, _ := c.Get("claims")
 		log.Printf("claims: %v", claims)
-		q := NewQuestion("")
+		q := Question{}
 		app.AskQuestion(q)
 	})
 	route.POST("/answers", func(c *gin.Context) {
 		claims, _ := c.Get("claims")
 		log.Printf("claims: %v", claims)
-		q := NewQuestion("")
+		q := Question{}
 		qaAnswers := app.Answers(q)
 
 		answers := make([]gin.H, len(qaAnswers))
