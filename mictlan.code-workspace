@@ -49,6 +49,10 @@
 		}
 	],
 	"settings": {
+		"remote.extensionKind": {
+			"asvetliakov.vscode-neovim": ["workspace"]
+		},
+		"vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
 		"files.autoSave": "afterDelay",
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
 		"terminal.integrated.defaultProfile.linux": "fish",

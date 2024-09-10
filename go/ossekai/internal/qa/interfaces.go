@@ -6,4 +6,6 @@ type Repo interface {
 }
 
 type Storage interface {
+	// storageKeyを返す
+	Put(date []byte) (string, error)
 }
