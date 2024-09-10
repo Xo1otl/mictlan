@@ -9,7 +9,7 @@ import (
 )
 
 func AddGinRoutes(r *gin.Engine) {
-	repo := NewDynamoDb()
+	repo := NewMockDb()
 	storage := NewMockStorage()
 	app := NewApp(repo, storage)
 

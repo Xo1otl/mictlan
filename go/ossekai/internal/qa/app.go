@@ -10,7 +10,7 @@ func NewApp(repo Repo, storage Storage) *App {
 }
 
 func (a *App) AskQuestion(q Question) {
-	a.Repo.AskQuestion(q)
+	a.Repo.AddQuestion(q)
 }
 
 func (a *App) Answers(q Question) []Answer {
