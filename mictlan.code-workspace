@@ -25,11 +25,6 @@
 	},
 	"settings": {
 		"editor.codeLens": true,
-		// なぜかremote extensionKindをworkspaceに設定するとlaunch.jsonのchromeと競合する
-		// "remote.extensionKind": {
-		// 	"asvetliakov.vscode-neovim": ["workspace"]
-		// },
-		// "vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
 		"vscode-neovim.neovimExecutablePaths.linux": "/home/john/Tools/nvim",
 		"files.autoSave": "afterDelay",
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
@@ -41,6 +36,7 @@
 		"git.autofetch": true,
 		"git.enableSmartCommit": true,
 		/* python */
+		"python.defaultInterpreterPath": "/vscode/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない
 		],
