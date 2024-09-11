@@ -2,8 +2,8 @@
   "name": "hangaku-server",
   "type": "module",
   "scripts": {
-    "build": "bun build --compile --minify --sourcemap cmd/nbviewer/main.ts --outfile out/nbviewer",
-    "dev": "bun run cmd/nbviewer/main.ts",
+    "build": "bun build --compile --minify --sourcemap cmd/server/main.ts --outfile out/server",
+    "dev": "bun run cmd/server/main.ts",
     "lint": "biome lint",
     "test": "bun test"
   },
