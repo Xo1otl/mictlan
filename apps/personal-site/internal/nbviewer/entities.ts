@@ -1,4 +1,4 @@
-import type { Brand } from "lib/utilitytypes";
+import type { Brand } from "../../../../packages/lib/ts/pkg/utilitytypes";
 
 // これはentity
 

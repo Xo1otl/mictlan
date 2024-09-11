@@ -1,0 +1,16 @@
+{
+	"name": "mictlan/util",
+	"type": "library",
+	"authors": [
+		{
+			"name": "Xo1otl",
+			"email": "xolotl.mictl4n@gmail.com"
+		}
+	],
+	"require": {
+		"monolog/monolog": "^3.7"
+	},
+	"autoload": {
+		"classmap": ["pkg"]
+	}
+}

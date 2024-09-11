@@ -1,6 +1,6 @@
 import Elysia from "elysia";
 import * as nbviewer from "../nbviewer";
-import * as utilitytypes from "lib/utilitytypes";
+import * as utilitytypes from "../../../../packages/lib/ts/pkg/utilitytypes";
 
 // コマンドライン引数からポート番号を取得する関数
 function getPortFromArgs(): number {

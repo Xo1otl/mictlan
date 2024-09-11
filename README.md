@@ -31,9 +31,11 @@ monorepo
 
 ## 3. 将来的なカテゴライゼーション
 
-- 現状では`lib`以外のパッケージは全て`apps`ディレクトリに配置している。
+- 現在のプロジェクト構造は、npmのturborepoの慣例に倣って以下のように整理されています：
+  - `apps/`: 完全なアプリケーション
+  - `packages/`: 他のアプリケーションから呼び出される共有ライブラリ等
 - プロジェクトの成長に応じて、より適切なカテゴライゼーションを検討する。
-  （例：`platforms`, `sdks`, `services`, `frameworks`など）
+  （例：`packages/platforms`, `packages/sdks`, `services`, `frameworks`など）
 
 ## 注意事項
 
