@@ -2,65 +2,70 @@
 
 monorepo
 
-import 可能な package 同士を言語やランタイム毎にカテゴライズしてみた
-
-python はワークスペースの概念ないけど**init**おけばどこでも package になって相対パスで import できるので mictlan のルートで設定しとけば多分問題ない
-
-jupyter はプロジェクトで使うというよりスクリプトとして使うのでどこかの workspace に所属するというより mictlan のルートから参照を行う
-
-aws sdk go を見習って internal を外部 package にするかも
-
 [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 なんか subpackage に manifest がないとか言われるが動いてるので問題なし
 
-パッケージの規模感がでかいので、hashicorp のリポジトリにありがちな名前を付けたほうが良い気がする
+# パッケージ配置ルール
 
-そこで ptrlib のようにニックネームを付けることにする
+## 1. 柔軟なカテゴライゼーション
 
-だからニックネーム考える
+- 理解しやすさを重視し、自由度の高いカテゴライゼーションを許容する。
+- 抽象的すぎる概念でのカテゴライゼーションは避ける。
+- パッケージの入れ子構造を許可する（例：バックエンドパッケージ内にフロントエンドを含む）。
 
-# Coding Style
+## 2. マルチ言語対応
 
-1. 基本構造:
+- 同一機能を異なる言語で実装する可能性を考慮する。
+- 言語別のサブディレクトリを使用し、共通のパッケージ名を維持する。
+  例：
+  ```
+  my-package/
+  ├── go/
+  │   └── (Goの実装)
+  ├── python/
+  │   └── (Pythonの実装)
+  └── ts/
+      └── (TypeScriptの実装)
+  ```
+- フォルダ名は必ずしもパッケージ名を反映しない。
 
-   - `pkg`: 再利用可能なコード
-      - みんなlibにしてるけど、再利用可能なコードはinternalかpkgにしか書かない、libのコードはすべて、外部に公開され再利用可能なコード、だからpkgを露出させた。aws sdk go v2のinternal的な感じにしたつもり、あれ確かmodがネストした構造になってたはず
-   - `internal`: アプリケーション固有のコード
-   - `cmd`: メイン関数
-   - `web`: 公開される Web コード
+## 3. 将来的なカテゴライゼーション
 
-2. モジュール化:
+- 現在のプロジェクト構造は、npmのturborepoの慣例に倣って以下のように整理されています：
+  - `apps/`: 完全なアプリケーション
+  - `packages/`: 他のアプリケーションから呼び出される共有ライブラリ等
+- プロジェクトの成長に応じて、より適切なカテゴライゼーションを検討する。
+  （例：`packages/platforms`, `packages/sdks`, `services`, `frameworks`など）
 
-   - 機能ごとにモジュールを分ける（例：`js/pkg/auth`）
-   - インフラ層のコードは機能とインフラ名がわかるパッケージ名にする（例：`js/pkg/auth/awscognito`）
+## 注意事項
 
-3. 命名規則:
+- カテゴライゼーションは定期的に見直し、必要に応じて調整する。
+- 新しいパッケージを追加する際は、これらのルールに従いつつ、プロジェクト全体の一貫性を保つ。
+- ドメイン駆動の分類を優先し、技術的な分類（言語やUIフレームワークなど）は二次的に考慮する。
 
-   - モジュール名は機能がわかるものにする、一部機能に分けにくいもの(複雑な presenter レイヤ等)だけ例外
-   - インフラ層では機能とインフラ両方がわかる名前にする
-   - 機能が明確なインフラ（例：mnist は手書き文字, elysia はサーバー）の場合は機能名を省略可能
+# パッケージのルール
 
-4. レイヤー分離:
+## 1. モジュールに分ける
 
-   - アプリケーション層とインフラ層は必ず別フォルダ（モジュール）に分ける
-   - インフラ層はアプリケーション層で定義されたインターフェースに合わせて実装
+- フロントエンドはレイヤー別
+- バックエンドはドメイン別
+- ライブラリやフレームワークやsdkは機能別等
 
-5. import 構造:
+## 2. Clean Architecture
 
-   - インフラ層がモジュールを import する形
-   - アプリケーション層は index.ts を使って、フォルダ単位で import 可能にする
+- インフラ層はアプリケーション層で定義されたインターフェースに合わせて実装
+- インフラ層がモジュールを import する形
+- アプリケーション層は index.ts を使って、フォルダ単位で import 可能にする
 
-6. 柔軟性:
+## 3. パッケージ公開
 
-   - 階層構造は状況に応じて柔軟に構成可能
-   - ただし、基本的なレイヤー分離（アプリケーションとインフラ）は維持する
+- package.json で適切にパスを公開する
+- project rootにある言語ごとのworkspaceファイルにpackageを登録
 
-7. パッケージ公開:
-   - package.json で適切にパスを公開する
+## 4. その他
 
-8. その他: 
-   - 固有名詞でなければinterface、固有名詞ならば実装
-   - エラーメッセージは小文字から初めてピリオド不要
+- 固有名詞でなければinterface、固有名詞ならば実装
+- エラーメッセージは小文字から初めてピリオド不要
 
 # TODO
 
@@ -75,22 +80,32 @@ aws sdk go を見習って internal を外部 package にするかも
    2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
    3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
 
-ターミナルからAI呼び出せる機能を作る
-一つのターミナルにつき一つの会話
-AIはAPI KeyではなくPlaywrightを使って行い無限に話せるようにする
+- ターミナルからAI呼び出せる機能を作る、一つのターミナルにつき一つの会話
+- AIはAPI KeyではなくPlaywrightを使って行い無限に話せるようにする
+- ねずっちの謎掛けがAIで普通にできそうだからそれを行うサイト作ってみたい
 
 # Memo
 
-どんな設定しても vscode のターミナル上の venv がコマンドパレットからしか有効化できなかったので、ワークスペースで python を使う場合 terminal の venv の有効化はコマンドパレットから行う
-
-なぜか mictlan から terminal を開かないと通知がでても venv は有効化されない
-
-jupyter で python パッケージ利用できるようにするくだりかなり雑な設定になっているので注意がいる
-
-poetry installとbun installは手動でやる、leanのダウンロードはエディタに言われてやる
+- leanのダウンロードとcomposerはエディタの通知に従ってやる
 
 # Note
 
 - docker compose up(select services)はdevcontainerからできない、volumeマウントができない、ホストマシンから実行すべし
 - Oracle.mysql-shell-for-vs-codeもバリ便利やけどdevcontainerから動かない、new windowしてホストからは見れる
-- keybindindgs.jsonはdevcontainerではなくホストマシンの設定
+- システムのクリップボードも使えるようにする(keybindindgs.jsonはdevcontainerではなくホストマシンの設定)
+- neovimとOracleのmysql shellはlocalで入れるべし
+- システムのクリップボードを別で使うための設定
+```json
+[
+    {
+        "key": "ctrl+c",
+        "command": "-vscode-neovim.escape",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.c && neovim.init && !dirtyDiffVisible && !findWidgetVisible && !inReferenceSearchEditor && !markersNavigationVisible && !notebookCellFocused && !notificationCenterVisible && !parameterHintsVisible && !referenceSearchVisible && neovim.mode == 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    },
+    {
+        "key": "ctrl+c",
+        "command": "-vscode-neovim.escape",
+        "when": "editorTextFocus && neovim.ctrlKeysInsert.c && neovim.init && neovim.mode != 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    }
+]
+```

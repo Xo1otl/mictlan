@@ -17,7 +17,6 @@ set -g fish_greeting
 
 fish_add_path $HOME/.elan/bin
 fish_add_path $HOME/.bun/bin
-fish_add_path $HOME/sdk/go/bin
-fish_add_path $HOME/.local/bin # for pipx packages
+fish_add_path $HOME/.local/bin # user installed binaries
 
 fish_vi_key_bindings

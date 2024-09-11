@@ -1,8 +1,8 @@
 #!/bin/bash
 
 (
-  (/home/vscode/.bun/bin/bun install --cwd /workspaces/mictlan/js) &
-  (/home/vscode/.local/bin/poetry install --directory /workspaces/mictlan/python --no-root) &
+  (/home/vscode/.bun/bin/bun install --cwd /workspaces/mictlan) &
+  (/home/vscode/.local/bin/poetry install --directory /workspaces/mictlan) &
   (
     git lfs install --skip-repo &&
     git -C /workspaces/mictlan remote set-url origin git@mictlan:Xo1otl/mictlan.git && 
