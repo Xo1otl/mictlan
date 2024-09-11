@@ -1,0 +1,5 @@
+# lib
+
+通常、moduleはpackageに所属する
+
+汎用性が高い機能を思いついたがpackageにするボリュームがないもの、所属するpackage名が思いつかないmoduleはlibに放り込む

@@ -140,20 +140,112 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  AuthRoute: AuthRoute.addChildren({
-    AuthProtectedRoute: AuthProtectedRoute.addChildren({
-      AuthProtectedLayoutRoute: AuthProtectedLayoutRoute.addChildren({
-        AuthProtectedLayoutDebugRoute,
-        AuthProtectedLayoutHomeRoute,
-      }),
-    }),
-    AuthConfirmRoute,
-    AuthSigninRoute,
-    AuthSignupRoute,
-  }),
-})
+interface AuthProtectedLayoutRouteChildren {
+  AuthProtectedLayoutDebugRoute: typeof AuthProtectedLayoutDebugRoute
+  AuthProtectedLayoutHomeRoute: typeof AuthProtectedLayoutHomeRoute
+}
+
+const AuthProtectedLayoutRouteChildren: AuthProtectedLayoutRouteChildren = {
+  AuthProtectedLayoutDebugRoute: AuthProtectedLayoutDebugRoute,
+  AuthProtectedLayoutHomeRoute: AuthProtectedLayoutHomeRoute,
+}
+
+const AuthProtectedLayoutRouteWithChildren =
+  AuthProtectedLayoutRoute._addFileChildren(AuthProtectedLayoutRouteChildren)
+
+interface AuthProtectedRouteChildren {
+  AuthProtectedLayoutRoute: typeof AuthProtectedLayoutRouteWithChildren
+}
+
+const AuthProtectedRouteChildren: AuthProtectedRouteChildren = {
+  AuthProtectedLayoutRoute: AuthProtectedLayoutRouteWithChildren,
+}
+
+const AuthProtectedRouteWithChildren = AuthProtectedRoute._addFileChildren(
+  AuthProtectedRouteChildren,
+)
+
+interface AuthRouteChildren {
+  AuthProtectedRoute: typeof AuthProtectedRouteWithChildren
+  AuthConfirmRoute: typeof AuthConfirmRoute
+  AuthSigninRoute: typeof AuthSigninRoute
+  AuthSignupRoute: typeof AuthSignupRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthProtectedRoute: AuthProtectedRouteWithChildren,
+  AuthConfirmRoute: AuthConfirmRoute,
+  AuthSigninRoute: AuthSigninRoute,
+  AuthSignupRoute: AuthSignupRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '': typeof AuthProtectedLayoutRouteWithChildren
+  '/confirm': typeof AuthConfirmRoute
+  '/signin': typeof AuthSigninRoute
+  '/signup': typeof AuthSignupRoute
+  '/debug': typeof AuthProtectedLayoutDebugRoute
+  '/home': typeof AuthProtectedLayoutHomeRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '': typeof AuthProtectedLayoutRouteWithChildren
+  '/confirm': typeof AuthConfirmRoute
+  '/signin': typeof AuthSigninRoute
+  '/signup': typeof AuthSignupRoute
+  '/debug': typeof AuthProtectedLayoutDebugRoute
+  '/home': typeof AuthProtectedLayoutHomeRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/_auth/_protected': typeof AuthProtectedRouteWithChildren
+  '/_auth/confirm': typeof AuthConfirmRoute
+  '/_auth/signin': typeof AuthSigninRoute
+  '/_auth/signup': typeof AuthSignupRoute
+  '/_auth/_protected/_layout': typeof AuthProtectedLayoutRouteWithChildren
+  '/_auth/_protected/_layout/debug': typeof AuthProtectedLayoutDebugRoute
+  '/_auth/_protected/_layout/home': typeof AuthProtectedLayoutHomeRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '' | '/confirm' | '/signin' | '/signup' | '/debug' | '/home'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '' | '/confirm' | '/signin' | '/signup' | '/debug' | '/home'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_auth/_protected'
+    | '/_auth/confirm'
+    | '/_auth/signin'
+    | '/_auth/signup'
+    | '/_auth/_protected/_layout'
+    | '/_auth/_protected/_layout/debug'
+    | '/_auth/_protected/_layout/home'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 

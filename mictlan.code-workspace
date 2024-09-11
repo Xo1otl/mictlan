@@ -5,6 +5,24 @@
 			"path": "."
 		}
 	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug ossekai-client",
+				"type": "chrome",
+				"request": "launch",
+				"url": "http://localhost:5173",
+				"webRoot": "${workspaceFolder:mictlan}/packages/ossekai/web"
+			},
+			{
+				"name": "Debug koemade",
+				"type": "php",
+				"request": "launch",
+				"port": 7003
+			}	
+		],
+	},
 	"settings": {
 		"editor.codeLens": true,
 		"remote.extensionKind": {
@@ -27,9 +45,6 @@
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.autopep8"
 		},
-		"python.autoComplete.extraPaths": ["${workspaceFolder:mictlan}/python"],
-		"python.analysis.extraPaths": ["${workspaceFolder:mictlan}/python"],
-		"python.envFile": "${workspaceFolder:mictlan}/build/devcontainer/.env.python",
 		"notebook.formatOnSave.enabled": true,
 		/* js/ts */
 		"typescript.updateImportsOnFileMove.enabled": "always",
