@@ -1,0 +1,6 @@
+/vendor/
+/uploads/
+/.idea/dataSources/
+composer.phar
+composer.lock
+config.php
