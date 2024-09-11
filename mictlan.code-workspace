@@ -25,7 +25,6 @@
 	},
 	"settings": {
 		"editor.codeLens": true,
-		"vscode-neovim.neovimExecutablePaths.linux": "/home/john/Tools/nvim",
 		"files.autoSave": "afterDelay",
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
 		"terminal.integrated.defaultProfile.linux": "fish",

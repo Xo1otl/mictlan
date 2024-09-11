@@ -25,8 +25,7 @@
 				"statelyai.stately-vscode",
 				"biomejs.biome",
 				"DEVSENSE.phptools-vscode",
-				"github.copilot",
-				"asvetliakov.vscode-neovim"
+				"github.copilot"
 			]
 		}
 	},
