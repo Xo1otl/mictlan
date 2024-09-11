@@ -3,52 +3,10 @@
 		{
 			"name": "mictlan",
 			"path": "."
-		},
-		{
-			"name": "js/lib",
-			"path": "js/lib"
-		},
-		{
-			"name": "ossekai-client",
-			"path": "js/ossekai-client",
-			"settings": {
-				"editor.codeLens": true
-			}
-		},
-		{
-			"name": "hangaku-server",
-			"path": "js/hangaku-server"
-		},
-		{
-			"name": "go/lib",
-			"path": "go/lib"
-		},
-		{
-			"name": "ossekai",
-			"path": "go/ossekai"
-		},
-		{
-			"name": "hangakuai",
-			"path": "go/hangakuai"
-		},
-		{
-			"name": "python/lib",
-			"path": "python/lib"
-		},
-		{
-			"name": "syuron",
-			"path": "python/syuron"
-		},
-		{
-			"name": "LeanTutorial",
-			"path": "lean/LeanTutorial"
-		},
-		{
-			"name": "koemade",
-			"path": "php/koemade"
 		}
 	],
 	"settings": {
+		"editor.codeLens": true,
 		"remote.extensionKind": {
 			"asvetliakov.vscode-neovim": ["workspace"]
 		},

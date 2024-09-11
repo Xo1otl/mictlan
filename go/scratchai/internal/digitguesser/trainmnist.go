@@ -2,9 +2,9 @@ package digitguesser
 
 import (
 	"fmt"
-	"hangauai/internal/mnist"
 	"lib/pkg/ann"
 	"log"
+	"scratchai/internal/mnist"
 )
 
 // maxIndex は与えられたスライスの中で最大値のインデックスを返す
@@ -21,7 +21,7 @@ func maxIndex(slice []ann.Number) int {
 }
 
 func TrainMnist() {
-	dataset, labels, err := mnist.LoadData("/workspaces/mictlan/go/hangakuai/internal/mnist/data/")
+	dataset, labels, err := mnist.LoadData("/workspaces/mictlan/go/scratchai/internal/mnist/data/")
 	if err != nil {
 		log.Fatalf("Failed to load MNIST data: %v", err)
 	}

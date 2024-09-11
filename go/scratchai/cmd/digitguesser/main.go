@@ -1,6 +1,6 @@
 package main
 
-import "hangauai/internal/digitguesser"
+import "scratchai/internal/digitguesser"
 
 func main() {
 	digitguesser.TrainMnist()

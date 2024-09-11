@@ -1,4 +1,4 @@
-# hangaku-server
+# personal-site
 
 ViewModel は View が表示に使用するデータで、画面自体のことではないので、jupyter が presenter というのは間違い
 

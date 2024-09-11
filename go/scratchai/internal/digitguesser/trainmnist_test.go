@@ -1,7 +1,7 @@
 package digitguesser_test
 
 import (
-	"hangauai/internal/digitguesser"
+	"scratchai/internal/digitguesser"
 	"testing"
 )
 

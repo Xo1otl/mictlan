@@ -1,4 +1,4 @@
-module hangauai
+module scratchai
 
 go 1.23.0
 
