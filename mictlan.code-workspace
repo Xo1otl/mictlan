@@ -25,10 +25,12 @@
 	},
 	"settings": {
 		"editor.codeLens": true,
-		"remote.extensionKind": {
-			"asvetliakov.vscode-neovim": ["workspace"]
-		},
-		"vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
+		// なぜかremote extensionKindをworkspaceに設定するとlaunch.jsonのchromeと競合する
+		// "remote.extensionKind": {
+		// 	"asvetliakov.vscode-neovim": ["workspace"]
+		// },
+		// "vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
+		"vscode-neovim.neovimExecutablePaths.linux": "/home/john/Tools/nvim",
 		"files.autoSave": "afterDelay",
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
 		"terminal.integrated.defaultProfile.linux": "fish",
