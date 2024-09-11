@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "mictlan"
+version = "0.1.0"
+description = ""
+authors = ["Xolotl <xolotl.mictl4n@gmail.com>"]
+package-mode = false
+
+[tool.poetry.group.personal-site.dependencies]
+notebook = "^7.2.1"
+
+[tool.poetry.group.syuron.dependencies]
+pycryptodome = "^3.20.0"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+util = {path = "./packages/util/python", develop = true}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,20 @@
+{
+	"name": "mictlan/koemade",
+	"description": "koemade",
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../../packages/util/php"
+		}
+	],
+	"require": {
+		"ext-pdo": "*",
+		"ext-pdo_mysql": "*",
+		"ext-mbstring": "*",
+		"mictlan/util": "dev-main",
+		"phpmailer/phpmailer": "^6.9"
+	},
+	"autoload": {
+		"classmap": ["internal"]
+	}
+}
