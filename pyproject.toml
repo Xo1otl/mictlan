@@ -13,7 +13,7 @@ pycryptodome = "^3.20.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-lib = {path = "./packages/lib/python", develop = true}
+lib = {path = "./lib/python", develop = true}
 
 [build-system]
 requires = ["poetry-core"]
