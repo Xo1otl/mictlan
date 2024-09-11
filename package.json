@@ -7,7 +7,11 @@
 		"test": "bun --filter '*' test",
 		"build": "bun --filter '*' build"
 	},
-	"workspaces": ["./*"],
+	"workspaces": [
+		"packages/lib/ts",
+		"packages/personal-site",
+		"packages/ossekai/web"
+	],
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3"
 	}

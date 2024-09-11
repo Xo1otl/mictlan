@@ -3,24 +3,17 @@ name = "mictlan"
 version = "0.1.0"
 description = ""
 authors = ["Xolotl <xolotl.mictl4n@gmail.com>"]
+package-mode = false
 
-
-[tool.poetry.group.lib.dependencies]
-ipython = "^8.26.0"
-numpy = "^2.0.1"
-
-
-[tool.poetry.group.scratchai.dependencies]
+[tool.poetry.group.personal-site.dependencies]
 notebook = "^7.2.1"
-
 
 [tool.poetry.group.syuron.dependencies]
 pycryptodome = "^3.20.0"
-numpy = "^2.1.1"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
+lib = {path = "./packages/lib/python", develop = true}
 
 [build-system]
 requires = ["poetry-core"]

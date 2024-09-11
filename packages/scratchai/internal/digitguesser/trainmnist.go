@@ -21,7 +21,7 @@ func maxIndex(slice []ann.Number) int {
 }
 
 func TrainMnist() {
-	dataset, labels, err := mnist.LoadData("/workspaces/mictlan/go/scratchai/internal/mnist/data/")
+	dataset, labels, err := mnist.LoadData("/workspaces/mictlan/packages/scratchai/internal/mnist/data/")
 	if err != nil {
 		log.Fatalf("Failed to load MNIST data: %v", err)
 	}
