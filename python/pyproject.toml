@@ -10,7 +10,7 @@ ipython = "^8.26.0"
 numpy = "^2.0.1"
 
 
-[tool.poetry.group.hangaku-server.dependencies]
+[tool.poetry.group.scratchai.dependencies]
 notebook = "^7.2.1"
 
 
