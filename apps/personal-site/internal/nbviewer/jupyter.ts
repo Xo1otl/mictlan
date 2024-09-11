@@ -1,5 +1,5 @@
 import type * as nbviewer from ".";
-import { type Brand, make } from "lib/utilitytypes";
+import { type Brand, make } from "../../../../packages/lib/ts/pkg/utilitytypes";
 import { join } from "node:path";
 
 // NotebookがviewModel

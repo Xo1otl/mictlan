@@ -1,6 +1,6 @@
 import { test } from "bun:test";
 import { JupyterPresenter, type JupyterNotebook } from "./jupyter";
-import { make } from "lib/utilitytypes";
+import { make } from "../../../../packages/lib/ts/pkg/utilitytypes";
 
 test("jupyter render", async () => {
 	const presenter = new JupyterPresenter();

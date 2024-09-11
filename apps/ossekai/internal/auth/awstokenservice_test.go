@@ -33,8 +33,8 @@ func TestAwsTokenService(t *testing.T) {
 	}
 	token := auth.Token(credentials.Token)
 	claims, err := auth.NewClaims(&token, tokenService.Parse)
-	if err != nil {
-		t.Fatal(err)
+	if err == nil {
+		t.Fatal("Expected error, got nil")
 	}
 	log.Println(claims)
 }

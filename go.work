@@ -1,7 +1,7 @@
 go 1.23.0
 
 use (
-	lib/go
+	packages/lib/go
 	apps/scratchai
 	apps/ossekai
 )

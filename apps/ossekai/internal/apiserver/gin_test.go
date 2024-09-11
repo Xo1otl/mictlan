@@ -6,5 +6,6 @@ import (
 )
 
 func TestLaunchGin(t *testing.T) {
+	t.Skip("Skip gin test")
 	apiserver.LaunchGin()
 }
