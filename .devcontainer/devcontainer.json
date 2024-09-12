@@ -9,7 +9,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-azuretools.vscode-docker",
 				"golang.go",
 				"leanprover.lean4",
 				"ms-python.autopep8",
@@ -25,13 +24,13 @@
 				"statelyai.stately-vscode",
 				"biomejs.biome",
 				"DEVSENSE.phptools-vscode",
-				"github.copilot"
+				"github.copilot",
+				"asvetliakov.vscode-neovim"
 			]
 		}
 	},
 	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
 	"features": {
-		"ghcr.io/devcontainers/features/go:1": {},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		"ghcr.io/devcontainers/features/go:1": {}
 	}
 }
