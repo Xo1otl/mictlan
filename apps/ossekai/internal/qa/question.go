@@ -6,6 +6,13 @@ import (
 	"time"
 )
 
+type QuestionInput struct {
+	Sub           auth.Sub
+	Title         string
+	Tags          []Tag
+	ContentBlocks []ContentBlock
+}
+
 // ContentBlockはテキストやマークダウンやlatexをサポートする予定
 // 個々のタイプはDomainレイヤで定義する内容ではないし、ハードコードするのではなくデータベースに動的に追加できるようにする
 type ContentBlock struct {
@@ -20,26 +27,17 @@ type Tag struct {
 	Name string
 }
 
-// StorageKeyがファイル追加後に生成されるためバックエンドロジックでプレースホルダーと実際のファイルとの紐付けを行う必要がある
-type Attachment struct {
-	Name       string
-	Type       string
-	Size       int64
-	StorageKey string
-}
-type PlaceHolder string
-
 type QuestionId string
 type Question struct {
-	Sub           auth.Sub
-	Id            QuestionId
-	Title         string
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
-	BestAnswerId  AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
-	Tags          []Tag
-	ContentBlocks []ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
-	Attachments   map[PlaceHolder]Attachment
+	Sub             auth.Sub
+	Id              QuestionId
+	Title           string
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	BestAnswerId    AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
+	Tags            []Tag
+	ContentBlocks   []ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
+	AttachmentsMeta Attachments
 }
 
 var (
@@ -77,24 +75,14 @@ func NewQuestion(
 	}
 
 	return Question{
-		Sub:           sub,
-		Id:            id,
-		Title:         title,
-		CreatedAt:     createdAt,
-		UpdatedAt:     updatedAt,
-		BestAnswerId:  bestAnswerId,
-		Tags:          tags,
-		ContentBlocks: contentBlocks,
-		Attachments:   attachments,
+		Sub:             sub,
+		Id:              id,
+		Title:           title,
+		CreatedAt:       createdAt,
+		UpdatedAt:       updatedAt,
+		BestAnswerId:    bestAnswerId,
+		Tags:            tags,
+		ContentBlocks:   contentBlocks,
+		AttachmentsMeta: attachments,
 	}, nil
-}
-
-type AnswerId string
-type Answer struct {
-	Sub auth.Sub
-	Id  AnswerId
-}
-
-func NewAnswer(sub auth.Sub) Answer {
-	return Answer{Sub: sub}
 }
