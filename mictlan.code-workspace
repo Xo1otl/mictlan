@@ -6,7 +6,7 @@
 		}
 	],
 	"extensions": {
-		"recommendations": ["Oracle.mysql-shell-for-vs-code", "ms-azuretools.vscode-docker"]
+		"recommendations": ["Oracle.mysql-shell-for-vs-code"]
 	},
 	"launch": {
 		"version": "0.2.0",
@@ -30,7 +30,6 @@
 		"remote.extensionKind": {
 			"asvetliakov.vscode-neovim": ["workspace"],
 			"Oracle.mysql-shell-for-vs-code": ["ui"],
-			"ms-azuretools.vscode-docker": ["ui"]
 		},
 		"vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
 		"extensions.experimental.affinity": {
