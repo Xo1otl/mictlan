@@ -9,7 +9,7 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "Debug ossekai-client",
+				"name": "Debug ossekai-web",
 				"type": "chrome",
 				"request": "launch",
 				"url": "http://localhost:5173",

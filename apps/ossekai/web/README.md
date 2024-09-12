@@ -1,4 +1,4 @@
-# ossekai-client
+# ossekai-web
 
 authApp は stateMachine で state 管理をする
 authApp はただのオブジェクトなので react で使用できるように useStateMachine で wrap する
