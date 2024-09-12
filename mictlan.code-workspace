@@ -24,6 +24,13 @@
 		]
 	},
 	"settings": {
+		"remote.extensionKind": {
+			"asvetliakov.vscode-neovim": ["workspace"]
+		},
+		"vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
+		"extensions.experimental.affinity": {
+			"asvetliakov.vscode-neovim": 1
+		},
 		"editor.codeLens": true,
 		"files.autoSave": "afterDelay",
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする

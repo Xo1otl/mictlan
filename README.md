@@ -1,6 +1,6 @@
 # mictlan
 
-monorepo
+monorepoは人生
 
 [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 なんか subpackage に manifest がないとか言われるが動いてるので問題なし
@@ -97,6 +97,7 @@ monorepo
 - neovimとOracleのmysql shellはlocalで入れるべし
 - システムのクリップボードを別で使うための設定
 ```json
+// Place your key bindings in this file to override the defaults
 [
     {
         "key": "ctrl+c",
@@ -107,6 +108,10 @@ monorepo
         "key": "ctrl+c",
         "command": "-vscode-neovim.escape",
         "when": "editorTextFocus && neovim.ctrlKeysInsert.c && neovim.init && neovim.mode != 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.quickchat.launchInlineChat"
     }
 ]
 ```

@@ -3,7 +3,7 @@ package qa
 type MockStorage struct{}
 
 // Put implements Storage.
-func (m *MockStorage) Put(date []byte) (string, error) {
+func (m *MockStorage) Put(date Object) (ObjectKey, error) {
 	panic("unimplemented")
 }
 
