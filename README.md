@@ -87,6 +87,7 @@ monorepo
 # Memo
 
 - leanのダウンロードとcomposerはエディタの通知に従ってやる
+- 基本framework,driver層は自分で書かないけどuiは自作する唯一のinfraな気がする
 
 # Note
 
