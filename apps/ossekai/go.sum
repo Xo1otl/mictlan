@@ -26,6 +26,7 @@ github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.2 h1:DolLrk9u
 github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.2/go.mod h1:PUxIbGvs00Dw/BBqPPxqDpE5k2DvFHPVlNMXgChv0Co=
 github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.3/go.mod h1:hsciKQ2xFfOPEuebyKmFo7wOSVNoLuzmCi6Qtol4UDc=
 github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.4/go.mod h1:hsciKQ2xFfOPEuebyKmFo7wOSVNoLuzmCi6Qtol4UDc=
+github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.44.0/go.mod h1:hsciKQ2xFfOPEuebyKmFo7wOSVNoLuzmCi6Qtol4UDc=
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.4 h1:KypMCbLPPHEmf9DgMGw51jMj77VfGPAN2Kv4cfhlfgI=
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.4/go.mod h1:Vz1JQXliGcQktFTN/LN6uGppAIRoLBR2bMvIMP0gOjc=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.18 h1:tJ5RnkHCiSH0jyd6gROjlJtNwov0eGYNz8s8nFcR0jQ=
