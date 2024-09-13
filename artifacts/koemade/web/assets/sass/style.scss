@@ -1,0 +1,175 @@
+@import "elements";
+@import "form";
+@import "mypage";
+:root {
+
+    --accent-color-1: #DF0067;
+    --accent-color-2: #00C79E;
+    --accent-color-3: #333;
+    --disabled-color: #888;
+
+}
+
+body.has-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.notice {
+    max-width: 1000px;
+    width: calc( 90% - 2em );
+    margin: 1em auto;
+    padding: 0.5em 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 5px;
+    &.error {
+        border: 1px solid #f66;
+        color: #a00;
+    }
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+
+    &.register {
+        max-width: 600px;
+        .terms-warning {
+            color: red;
+            font-weight: bold;
+        }
+
+        .bank-info {
+            border: 1px solid #ccc;
+            padding: 1em;
+            border-radius: 0.5em;
+        }        
+    }
+
+    &.form {
+        text-align: center;
+
+    }
+
+    &.profile {
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        div {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #555;
+            flex: 0 0 180px; /* ラベルの固定幅 */
+        }
+
+        .field-value {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            flex: 1;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        &.edit {
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+    
+            label {
+                margin-bottom: 5px;
+                color: #555;
+            }
+    
+            input[type="text"],
+            input[type="number"],
+            textarea {
+                flex: 1;
+            }
+    
+            input[type="checkbox"] {
+                margin-right: 10px;
+            }
+    
+            button {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                background-color: #007BFF;
+                color: #fff;
+                border: none;
+                border-radius: 100%;
+                cursor: pointer;
+            }
+    
+            button:hover {
+                background-color: #0056b3;
+            }
+    
+            .checkbox-group label {
+                display: flex;
+                align-items: center;
+            }
+    
+            label {
+                flex: 0 0 180px; /* ラベルの固定幅 */
+            }
+        }
+    }
+    .items {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        .item {
+            padding: 20px;
+            width: calc( ( 100% - 40px ) / 3 );
+            box-sizing: border-box;
+
+        }
+        .tag {
+            margin: 1rem 0;
+            font-size: 0.8rem;
+            b {
+                padding: 0.25rem 0.75rem;
+                display: inline-block;
+                background-color: #555;
+                border-radius: 1em;
+                color: #fff;
+                font-size: 0.75rem;
+                font-weight: bold;
+                line-height: 1;
+                &.error {
+                    background-color: #a00;
+                }
+            }
+        }
+    }
+
+}

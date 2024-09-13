@@ -1,0 +1,7 @@
+<?php
+return [
+    'db_host' => 'mysql',
+    'db_user' => 'mysql_user',
+    'db_password' => 'mysql_password',
+    'db_database' => 'mysql_database',
+];
