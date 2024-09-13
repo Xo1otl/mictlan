@@ -9,7 +9,7 @@ import (
 type MockDb struct{}
 
 // AddQuestion implements Repo.
-func (m *MockDb) AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []ContentBlock, attachments Attachments) (*QuestionId, error) {
+func (m *MockDb) AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments Attachments) (*QuestionId, error) {
 	panic("unimplemented")
 }
 

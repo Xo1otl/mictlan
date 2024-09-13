@@ -18,14 +18,14 @@ var (
 	ErrEmptyContentBlock = errors.New("content block content cannot be empty")
 )
 
-func NewContentBlock(t string, c string) (ContentBlock, error) {
+func NewContentBlock(t string, c string) (*ContentBlock, error) {
 	if t == "" {
-		return ContentBlock{}, ErrEmptyContentType
+		return nil, ErrEmptyContentType
 	}
 	if c == "" {
-		return ContentBlock{}, ErrEmptyContentBlock
+		return nil, ErrEmptyContentBlock
 	}
-	return ContentBlock{Type: t, Content: c}, nil
+	return &ContentBlock{Type: t, Content: c}, nil
 }
 
 // TagもContentBlockと同様に動的に追加する

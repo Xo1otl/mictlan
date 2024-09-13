@@ -9,7 +9,7 @@ import (
 
 type Repo interface {
 	// id, createdAt, updatedAtはadapterで生成する
-	AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []ContentBlock, attachments Attachments) (*QuestionId, error)
+	AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments Attachments) (*QuestionId, error)
 	// TODO: Question単体で取得するより、検索等によって複数取得する場合が多い気がするので考えなおす
 	Question(questionId QuestionId) Question
 	Answers(questionId QuestionId) []Answer

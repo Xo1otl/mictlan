@@ -44,7 +44,7 @@ func (h *Handler) AskQuestions(c echo.Context) error {
 		tagIds = append(tagIds, TagId(tagId))
 	}
 	log.Printf("tagIds: %v", tagIds)
-	var contentBlocks []ContentBlock
+	var contentBlocks []*ContentBlock
 	for i := 0; ; i++ {
 		typeKey := fmt.Sprintf("contentBlocks[%d][type]", i)
 		contentKey := fmt.Sprintf("contentBlocks[%d][content]", i)
