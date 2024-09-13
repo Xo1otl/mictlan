@@ -1,6 +1,6 @@
 <?php
 return [
-    'db_host' => '127.0.0.1',
+    'db_host' => 'mysql',
     'db_user' => 'user',
     'db_password' => 'pass',
     'db_database' => 'db',
