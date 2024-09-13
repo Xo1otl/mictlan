@@ -17,21 +17,25 @@ type Repo interface {
 
 var (
 	ErrEmptyObjectPlaceholder = errors.New("object placeholder cannot be empty")
+	ErrNilObjectSrc           = errors.New("object src cannot be nil")
 )
 
-type ObjectData io.Reader
+type ObjectSrc io.Reader
 type Object struct {
 	Placeholder string
-	Data        ObjectData
+	Src         ObjectSrc
 }
 
-func NewObject(placeholder string, data ObjectData) (*Object, error) {
+func NewObject(placeholder string, src ObjectSrc) (*Object, error) {
 	if placeholder == "" {
 		return nil, ErrEmptyObjectPlaceholder
 	}
+	if src == nil {
+		return nil, ErrNilObjectSrc
+	}
 	return &Object{
 		Placeholder: placeholder,
-		Data:        data,
+		Src:         src,
 	}, nil
 }
 
@@ -42,5 +46,5 @@ type Storage interface {
 	// これはめんどくさすぎるけど、ストレージの実装はinfraを使用できるレイヤのためそこで行えば抽象化は不用
 	// そのため、Storageはuuidを引数で受け取らない。これはawsのs3のPutObjectとは仕様が異なる
 	// 同様にしてobjectからattachmentへの変換も過程でファイルタイプの判定などが存在するが、このインターフェースではその実装を暗に要求する
-	Put(ctx context.Context, object *Object) (Attachment, error)
+	Put(ctx context.Context, object *Object) (*Attachment, error)
 }

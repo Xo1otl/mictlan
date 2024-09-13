@@ -12,7 +12,7 @@ import (
 // 	Title         string   `form:"title" binding:"required"`
 // 	TagIds        []string `form:"tag_ids"`
 // 	ContentBlocks []struct {
-// 		Type    string `form:"type"`
+// 		Kind    string `form:"kind"`
 // 		Content string `form:"content"`
 // 	} `form:"content_blocks"`
 // }

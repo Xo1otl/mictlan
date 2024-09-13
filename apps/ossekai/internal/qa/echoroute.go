@@ -13,7 +13,7 @@ type AskQuestionInput struct {
 	Title         string   `form:"title" binding:"required"`
 	TagIds        []string `form:"tag_ids"`
 	ContentBlocks []struct {
-		Type    string `form:"type"`
+		Kind    string `form:"kind"`
 		Content string `form:"content"`
 	} `form:"content_blocks"`
 }
@@ -43,17 +43,16 @@ func (h *Handler) AskQuestions(c echo.Context) error {
 	for _, tagId := range form.Value["tag_ids"] {
 		tagIds = append(tagIds, TagId(tagId))
 	}
-	log.Printf("tagIds: %v", tagIds)
 	var contentBlocks []*ContentBlock
 	for i := 0; ; i++ {
-		typeKey := fmt.Sprintf("contentBlocks[%d][type]", i)
+		kindKey := fmt.Sprintf("contentBlocks[%d][kind]", i)
 		contentKey := fmt.Sprintf("contentBlocks[%d][content]", i)
-		blockType := c.FormValue(typeKey)
+		blockKind := c.FormValue(kindKey)
 		content := c.FormValue(contentKey)
-		if blockType == "" && content == "" {
+		if blockKind == "" && content == "" {
 			break // これ以上のブロックがない場合
 		}
-		contentBlock, err := NewContentBlock(blockType, content)
+		contentBlock, err := NewContentBlock(blockKind, content)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		}
