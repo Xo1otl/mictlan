@@ -6,18 +6,26 @@ import (
 	"time"
 )
 
-type QuestionInput struct {
-	Sub           auth.Sub
-	Title         string
-	Tags          []Tag
-	ContentBlocks []ContentBlock
-}
-
 // ContentBlockはテキストやマークダウンやlatexをサポートする予定
 // 個々のタイプはDomainレイヤで定義する内容ではないし、ハードコードするのではなくデータベースに動的に追加できるようにする
 type ContentBlock struct {
 	Type    string
 	Content string
+}
+
+var (
+	ErrEmptyContentType  = errors.New("content block type cannot be empty")
+	ErrEmptyContentBlock = errors.New("content block content cannot be empty")
+)
+
+func NewContentBlock(t string, c string) (ContentBlock, error) {
+	if t == "" {
+		return ContentBlock{}, ErrEmptyContentType
+	}
+	if c == "" {
+		return ContentBlock{}, ErrEmptyContentBlock
+	}
+	return ContentBlock{Type: t, Content: c}, nil
 }
 
 // TagもContentBlockと同様に動的に追加する
@@ -29,15 +37,15 @@ type Tag struct {
 
 type QuestionId string
 type Question struct {
-	Sub             auth.Sub
-	Id              QuestionId
-	Title           string
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
-	BestAnswerId    AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
-	Tags            []Tag
-	ContentBlocks   []ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
-	AttachmentsMeta Attachments
+	Sub           auth.Sub
+	Id            QuestionId
+	Title         string
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
+	BestAnswerId  AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
+	Tags          []Tag
+	ContentBlocks []ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
+	Attachments   Attachments
 }
 
 var (
@@ -54,7 +62,7 @@ func NewQuestion(
 	bestAnswerId AnswerId,
 	tags []Tag,
 	contentBlocks []ContentBlock,
-	attachments map[PlaceHolder]Attachment,
+	attachments []Attachment,
 ) (Question, error) {
 	// Check for nil required fields
 	if sub == "" || id == "" || title == "" || createdAt.IsZero() || updatedAt.IsZero() {
@@ -71,18 +79,18 @@ func NewQuestion(
 		tags = []Tag{}
 	}
 	if attachments == nil {
-		attachments = map[PlaceHolder]Attachment{}
+		attachments = []Attachment{}
 	}
 
 	return Question{
-		Sub:             sub,
-		Id:              id,
-		Title:           title,
-		CreatedAt:       createdAt,
-		UpdatedAt:       updatedAt,
-		BestAnswerId:    bestAnswerId,
-		Tags:            tags,
-		ContentBlocks:   contentBlocks,
-		AttachmentsMeta: attachments,
+		Sub:           sub,
+		Id:            id,
+		Title:         title,
+		CreatedAt:     createdAt,
+		UpdatedAt:     updatedAt,
+		BestAnswerId:  bestAnswerId,
+		Tags:          tags,
+		ContentBlocks: contentBlocks,
+		Attachments:   attachments,
 	}, nil
 }

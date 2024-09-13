@@ -1,27 +1,36 @@
 package qa
 
-import "context"
+import (
+	"context"
+	"ossekaiserver/internal/auth"
+)
 
 type App struct {
-	Repo
-	Storage
+	repo    Repo
+	storage Storage
 }
 
 func NewApp(repo Repo, storage Storage) *App {
 	return &App{repo, storage}
 }
 
-// FIXME: 受け取るのはQuestionではない
-// AttachmentDataとObjectKey以外のサーバーで検証/生成しないデータを受け取る
-func (a *App) AskQuestion(q QuestionInput, objects Objects) {
-	a.Storage.PutObjects(context.TODO(), objects)
-	// TODO: Attachmentの処理
-	// 1. ObjectKeyを使ってStorageにPut
-	// 2. ObjectKeyをAttachmentにセット
-	// 3. データをrepoで保存
-	// a.Repo.AddQuestion(q)
+func (a *App) AskQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []ContentBlock, objects []*Object) (*QuestionId, error) {
+	// TODO: ContentBlockの中身を解析して不正なplaceholderがないかチェックする
+	attachments := make(Attachments, len(objects))
+	for placeholder, object := range objects {
+		attachment, err := a.storage.Put(context.TODO(), object)
+		if err != nil {
+			return nil, err
+		}
+		attachments[placeholder] = attachment
+	}
+	questionId, err := a.repo.AddQuestion(sub, title, tagIds, contentBlocks, attachments)
+	if err != nil {
+		return nil, err
+	}
+	return questionId, nil
 }
 
-func (a *App) Answers(q Question) []Answer {
-	return a.Repo.Answers(q)
+func (a *App) Answers(questionId QuestionId) []Answer {
+	return a.repo.Answers(questionId)
 }

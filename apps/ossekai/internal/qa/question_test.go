@@ -25,7 +25,7 @@ func TestNewQuestion(t *testing.T) {
 		bestAnswerId  qa.AnswerId
 		tags          []qa.Tag
 		contentBlocks []qa.ContentBlock
-		attachments   map[qa.PlaceHolder]qa.Attachment
+		attachments   []qa.Attachment
 		wantErr       error
 	}{
 		{
