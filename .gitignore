@@ -3,6 +3,8 @@ node_modules/
 .venv/
 poetry.lock
 bun.lockb
+vendor/
+composer.lock
 
 # build outputs
 dist/
