@@ -3,7 +3,6 @@ package qa_test
 import (
 	"bytes"
 	"fmt"
-	"log"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
@@ -16,6 +15,11 @@ import (
 )
 
 func TestEchoRoute(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Errorf("Test panicked: %v", r)
+		}
+	}()
 	e := echo.New()
 	body, contentType, err := generateMultipartBody()
 	if err != nil {
@@ -31,8 +35,8 @@ func TestEchoRoute(t *testing.T) {
 
 	h := qa.NewHandler()
 	err = h.AskQuestions(c)
-	log.Print(rec.Body.String())
-	log.Print(err)
+	t.Log(rec.Body.String())
+	t.Log(err)
 }
 
 func generateMultipartBody() (*bytes.Buffer, string, error) {
@@ -56,7 +60,7 @@ func generateMultipartBody() (*bytes.Buffer, string, error) {
 
 	// Add multiple contentBlocks with type and content
 	contentBlocks := []struct {
-		Type    string
+		Kind    string
 		Content string
 	}{
 		{"text", "This is a text block"},
@@ -65,7 +69,7 @@ func generateMultipartBody() (*bytes.Buffer, string, error) {
 	}
 
 	for i, block := range contentBlocks {
-		err := writer.WriteField(fmt.Sprintf("contentBlocks[%d][type]", i), block.Type)
+		err := writer.WriteField(fmt.Sprintf("contentBlocks[%d][kind]", i), block.Kind)
 		if err != nil {
 			return nil, "", err
 		}

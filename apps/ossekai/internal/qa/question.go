@@ -9,23 +9,23 @@ import (
 // ContentBlockはテキストやマークダウンやlatexをサポートする予定
 // 個々のタイプはDomainレイヤで定義する内容ではないし、ハードコードするのではなくデータベースに動的に追加できるようにする
 type ContentBlock struct {
-	Type    string
+	Kind    string
 	Content string
 }
 
 var (
-	ErrEmptyContentType  = errors.New("content block type cannot be empty")
+	ErrEmptyContentKind  = errors.New("content block type cannot be empty")
 	ErrEmptyContentBlock = errors.New("content block content cannot be empty")
 )
 
-func NewContentBlock(t string, c string) (*ContentBlock, error) {
-	if t == "" {
-		return nil, ErrEmptyContentType
+func NewContentBlock(kind string, content string) (*ContentBlock, error) {
+	if kind == "" {
+		return nil, ErrEmptyContentKind
 	}
-	if c == "" {
+	if content == "" {
 		return nil, ErrEmptyContentBlock
 	}
-	return &ContentBlock{Type: t, Content: c}, nil
+	return &ContentBlock{Kind: kind, Content: content}, nil
 }
 
 // TagもContentBlockと同様に動的に追加する
@@ -62,16 +62,16 @@ func NewQuestion(
 	bestAnswerId AnswerId,
 	tags []Tag,
 	contentBlocks []ContentBlock,
-	attachments []Attachment,
-) (Question, error) {
+	attachments []*Attachment,
+) (*Question, error) {
 	// Check for nil required fields
 	if sub == "" || id == "" || title == "" || createdAt.IsZero() || updatedAt.IsZero() {
-		return Question{}, ErrMissingRequiredFields
+		return nil, ErrMissingRequiredFields
 	}
 
 	// Check if contentBlocks is empty
 	if len(contentBlocks) == 0 {
-		return Question{}, ErrEmptyContentBlocks
+		return nil, ErrEmptyContentBlocks
 	}
 
 	// Initialize empty slices/maps if nil
@@ -79,10 +79,10 @@ func NewQuestion(
 		tags = []Tag{}
 	}
 	if attachments == nil {
-		attachments = []Attachment{}
+		attachments = []*Attachment{}
 	}
 
-	return Question{
+	return &Question{
 		Sub:           sub,
 		Id:            id,
 		Title:         title,
