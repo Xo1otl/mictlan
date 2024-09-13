@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポイススタジアム・コエメイド／登録フォーム (コエメイド)</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../assets/css/brands.min.css">
+    <link rel="stylesheet" href="../assets/css/solid.min.css">
+</head>
+<body>
+<div class="container form register">
+    <h1>ポイススタジアム・コエメイド／登録フォーム (コエメイド)</h1>
+    <!--TODO: jsでfetchするからいらん気がする-->
+    <form id="myForm" action="handle-signup.php" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">氏名:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="furigana">ふりがな:</label>
+            <input type="text" id="furigana" name="furigana" required>
+        </div>
+        <div>
+            <label for="address">住所:</label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <div>
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="tel">電話番号:</label>
+            <input type="tel" id="tel" name="tel" required>
+        </div>
+        <div>
+            <label for="id_image">身分証画像:</label>
+            <input type="file" id="id_image" name="id_image" accept="image/*" required>
+        </div>
+        <div>
+            <label for="selfPromotion">自己PR(500文字以内):</label>
+            <textarea id="selfPromotion" name="selfPromotion" required></textarea>
+        </div>
+        <div class="bank-info">
+            <h3>出演料振込口座</h3>
+            <div>
+                <label for="bankName">金融機関名:</label>
+                <input type="text" id="bankName" name="bankName" required>
+            </div>
+            <div>
+                <label for="branchName">支店名:</label>
+                <input type="text" id="branchName" name="branchName" required>
+            </div>
+            <div>
+                <label for="accountNumber">口座番号:</label>
+                <input type="text" id="accountNumber" name="accountNumber" required>
+            </div>
+        </div>
+        <h2>登録における著約事項</h2>
+        <div class="terms">
+            <p class="terms-warning">必ず全項目を熟読し、了承の上、下のボタンをクリックしてください</p>
+            <ol>
+                <li>案件、登録サイトに関する守秘事項は一切漏洩しません。</li>
+                <li>和弊社指定のスタジオ以外 (自宅での収録等) で収録し音源を納品する場合、指定された納期限を厳守します。</li>
+                <li>和弊社指定でのスタジオでの収録の場合、その収録日時の失意はしません。</li>
+                <li>合同会社アルトノイエスからの案件以来に際して、所属事務所等とのトラブルの一切は自身の責任で対応し、貴社に迷惑、損害をかけません。</li>
+                <li>上記規約内容を遵守し、また、自身の行動が原因で合同会社アルトノイエスの信用を毀損した場合は、相当額の損害賠償の支払いに応じます。</li>
+            </ol>
+        </div>
+        <button type="submit">上記著約事項のすべてを承諾することを確認し、申込します</button>
+    </form>
+</div>
+<script>
+    document.getElementById("myForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        setTimeout(() => {
+            window.location.href = 'thankyou.html';
+        }, 1000);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "handle-signup.php", true);
+        xhr.send(formData);
+    });
+</script>
+</body>
+</html>

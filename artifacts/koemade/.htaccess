@@ -1,0 +1,13 @@
+# $PROJECT_ROOT/.htaccess
+
+# RewriteEngineを有効にする
+RewriteEngine On
+
+# $PROJECT_ROOT/web/以外の全てのアクセスを拒否
+RewriteCond %{REQUEST_URI} !^/web/
+RewriteCond %{REQUEST_URI} !^/uploads/
+RewriteRule ^ - [F,L]
+
+# uploads/submission/の下を閲覧不可にする
+RewriteCond %{REQUEST_URI} ^/uploads/submission/
+RewriteRule ^ - [F,L]

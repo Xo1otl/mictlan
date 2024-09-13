@@ -1,0 +1,1 @@
+O:4:"User":3:{s:2:"id";i:1;s:4:"name";s:8:"John Doe";s:5:"email";s:20:"john.doe@example.com";}

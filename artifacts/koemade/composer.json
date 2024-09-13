@@ -1,0 +1,28 @@
+{
+  "name": "spicyisland/koemade",
+  "description": "koemade prototype",
+  "require": {
+    "ext-mysqli": "*",
+    "monolog/monolog": "*",
+    "ext-mbstring": "*",
+    "phpmailer/phpmailer": "*"
+  },
+  "autoload": {
+    "files": [
+      "pkg/logger/logger.php",
+      "pkg/utils/utils.php"
+    ],
+    "psr-4": {
+      "submission\\": "internal/submission",
+      "auth\\": "internal/auth",
+      "common\\": "internal/common",
+      "voice\\": "internal/voice",
+      "filesystem\\": "filesystem",
+      "actor\\": "internal/actor",
+      "mail\\": "mail",
+      "mysql\\": "mysql",
+      "mock\\": "mock",
+      "bcrypt\\": "bcrypt"
+    }
+  }
+}
