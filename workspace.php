@@ -2,6 +2,7 @@
 
 $workspaces = [
     "apps/koemade",
+    "artifacts/koemade"
 ];
 
 $dependencies = [
