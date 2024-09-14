@@ -44,7 +44,7 @@ CREATE TABLE if not exists profiles
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-CREATE TABLE roptions
+CREATE TABLE actors_r
 (
     ok             BOOLEAN                     NOT NULL,
     price          INT                         NOT NULL,

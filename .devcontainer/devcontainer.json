@@ -23,11 +23,11 @@
 				"ms-vscode.live-server",
 				"statelyai.stately-vscode",
 				"biomejs.biome",
-				"DEVSENSE.phptools-vscode",
 				"github.copilot",
 				"ms-azuretools.vscode-docker",
 				"asvetliakov.vscode-neovim",
-				"tamasfe.even-better-toml"
+				"tamasfe.even-better-toml",
+				"xdebug.php-pack"
 			]
 		}
 	},

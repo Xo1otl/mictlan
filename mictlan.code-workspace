@@ -70,9 +70,6 @@
 		},
 		"[json]": {
 			"editor.defaultFormatter": "biomejs.biome"
-		},
-		"[php]": {
-			"editor.defaultFormatter": "DEVSENSE.phptools-vscode"
 		}
 	}
 }
