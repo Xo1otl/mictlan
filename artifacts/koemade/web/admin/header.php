@@ -53,7 +53,7 @@ $profile = getProfileController()->handleGetOrInitProfile($id);
             <li><b>ボイスサンプル</b>
                 <ul>
                     <li><a href="<?php echo "actor_profile.php?mode=add-voice&id=" . $id;?>">新規追加</a></li>
-                    <li><a href="<?php echo "actor_list_voice.php?id=" . $id;?>">サンプル一覧</a></li>
+                    <li><a href="<?php echo "list_voice.php?actor_id=" . $id;?>">サンプル一覧</a></li>
                 </ul>
             </li>
             <li><a href="../auth/signin.php?signout">ログアウト</a></li>

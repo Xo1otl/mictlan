@@ -4,18 +4,20 @@ require __DIR__ . '/middleware.php';
 
 authenticateAdmin();
 
+# 管理者として認証できているのでクエリパラメータの情報を信用する
+
 try {
-    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-        throw new Exception('Invalid id');
+    if (!isset($_GET['actor_id']) || !is_numeric($_GET['actor_id'])) {
+        throw new Exception('Invalid actorId');
     }
-    $id = new \common\Id($_GET['id']);
+    $actorId = new \common\Id($_GET['actor_id']);
     # sessionではなく、クエリパラメータを使ってprofileオブジェクトを取得
-    $profile = getProfileController()->handleGetOrInitProfile($id);
+    $profile = getProfileController()->handleGetOrInitProfile($actorId);
 } catch (Exception $e) {
-    $message = '<p class="error">プロフィールの取得に失敗しました</p>';
+    exit("actor_idが不正です");
 }
 
-$allVoices = getVoiceController()->getAll($id);
+$allVoices = getVoiceController()->getAll($actorId);
 
 
 /**
@@ -59,6 +61,7 @@ function get_tag( $terms, $name ) {
         <audio controls src="../../uploads/voices/<?= htmlspecialchars($voice->getFullname()) ?>"></audio>
         <form method="POST" action="edit_tag.php">
             <input type="hidden" id="voice_id" name="voice_id" value="<?= htmlspecialchars($voice->voiceId->value) ?>"><br>
+            <input type="hidden" id="actor_id" name="actor_id" value="<?= htmlspecialchars("$actorId") ?>"><br>
             <label for="voice_title">Voice Title:</label>
             <input class="width-100" type="text" id="voice_title" name="voice_title" value="<?= htmlspecialchars($voice->title) ?>"><br>
             <label for="age_tag">Age Tag:</label>
@@ -142,7 +145,7 @@ function get_tag( $terms, $name ) {
                 <?= ( $selected_character_tag ? '<b><i class="fa-solid fa-tag"></i> ' . $selected_character_tag . '</b>' : '<b class="error"><i class="fa-solid fa-circle-exclamation"></i> タグを登録してください</b>' ) ?>
             </div>
             <div class="edit">
-                <a href="./list_voice.php?mode=edit&id=<?= $id ?>" class="button secondary"><i class="fa-solid fa-pen"></i> 編集</a>
+                <a href="./list_voice.php?mode=edit&id=<?= $id . "&actor_id=" . $actorId ?>" class="button secondary"><i class="fa-solid fa-pen"></i> 編集</a>
             </div>
         </div>
 <?php

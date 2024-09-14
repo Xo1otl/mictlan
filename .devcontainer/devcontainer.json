@@ -27,7 +27,7 @@
 				"ms-azuretools.vscode-docker",
 				"asvetliakov.vscode-neovim",
 				"tamasfe.even-better-toml",
-				"xdebug.php-pack"
+				"devsense.phptools-vscode"
 			]
 		}
 	},

@@ -70,6 +70,8 @@
 		},
 		"[json]": {
 			"editor.defaultFormatter": "biomejs.biome"
-		}
+		},
+		/* php */
+		"php.completion.autoimport": "fqn"
 	}
 }
