@@ -2,7 +2,17 @@
 
 codegen等のスクリプトを置くところ
 
-# 一般に難しいとされる概念を理解する方法
+devcontainerではパスを通してあるため直接実行可能
+
+## Package Manager
+
+- scriptの規模が大きい時は普通にpackageにする
+- workspaceを管理するためのscriptがpackage化した場合、package managerになる
+- パッケージマネージャーもパッケージであるが、自分自身をmanageすることは不可能なので、package managerの管理外に存在し手動でmanagingを行う必要がある
+- devcontainerを起動する時は、package managerのコンパイル→package managerによるmictlan全体のコンパイルという流れで行う
+- 依存が必要でpackage manager自体がpackageになっている場合、scriptsフォルダにpackage managerのentry pointへのパスを通す
+
+## 一般に難しいとされる概念を理解する方法
 
 圏論っぽく考えれば、それぞれの概念は様々な具体を、性質や法則でカテゴライズしたもの
 

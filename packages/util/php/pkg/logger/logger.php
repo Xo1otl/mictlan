@@ -32,54 +32,54 @@ function getCallerInfo()
 
 class Info
 {
-    public function __construct(string|\Stringable $message)
+    public function __construct(...$msgs)
     {
         global $log;
-        $log->Info(ANSI_GREEN . "Info: " . $message . getCallerInfo());
+        $log->Info(ANSI_GREEN . "Info: " . implode(' ', array_map('json_encode', $msgs)) . getCallerInfo());
     }
 }
 
 class Debug
 {
-    public function __construct(string|\Stringable $message)
+    public function __construct(...$msgs)
     {
         global $log;
-        $log->Debug(ANSI_BLUE . "Debug: " . $message . getCallerInfo());
+        $log->Debug(ANSI_BLUE . "Debug: " . implode(' ', array_map('json_encode', $msgs)) . getCallerInfo());
     }
 }
 
 class Imp
 {
-    public function __construct(string|\Stringable $message)
+    public function __construct(...$msgs)
     {
         global $log;
-        $log->Info(ANSI_MAGENTA . "Important: " . $message . getCallerInfo());
+        $log->Info(ANSI_MAGENTA . "Important: " . implode(' ', array_map('json_encode', $msgs)) . getCallerInfo());
     }
 }
 
 class Warn
 {
-    public function __construct(string|\Stringable $message)
+    public function __construct(...$msgs)
     {
         global $log;
-        $log->Warning(ANSI_YELLOW . "Warning: " . $message . getCallerInfo());
+        $log->Warning(ANSI_YELLOW . "Warning: " . implode(' ', array_map('json_encode', $msgs)) . getCallerInfo());
     }
 }
 
 class Err
 {
-    public function __construct(string|\Stringable $message)
+    public function __construct(...$msgs)
     {
         global $log;
-        $log->Error(ANSI_RED . "Error: " . $message . getCallerInfo());
+        $log->Error(ANSI_RED . "Error: " . implode(' ', array_map('json_encode', $msgs)) . getCallerInfo());
     }
 }
 
 class Fatal
 {
-    public function __construct(string|\Stringable $message)
+    public function __construct(...$msgs)
     {
         global $log;
-        $log->Critical(ANSI_WHITE_ON_RED . "Fatal: " . $message . getCallerInfo());
+        $log->Critical(ANSI_WHITE_ON_RED . "Fatal: " . implode(' ', array_map('json_encode', $msgs)) . getCallerInfo());
     }
 }

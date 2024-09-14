@@ -26,7 +26,8 @@
 				"DEVSENSE.phptools-vscode",
 				"github.copilot",
 				"ms-azuretools.vscode-docker",
-				"asvetliakov.vscode-neovim"
+				"asvetliakov.vscode-neovim",
+				"tamasfe.even-better-toml"
 			]
 		}
 	},

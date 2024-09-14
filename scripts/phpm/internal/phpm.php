@@ -1,12 +1,14 @@
 <?php
 
-const workspaceFolder = __DIR__ . "/..";
+// コマンドを実行しているバスをworkspaceFolderとして認識したい
+$workspaceFolder = getcwd();
 
-require workspaceFolder . "/workspace.php";
+require $workspaceFolder . "/workspace.php";
 
 function runComposerInstall($directory)
 {
-    $directory = workspaceFolder . "/" . $directory;
+    global $workspaceFolder;
+    $directory = $workspaceFolder . "/" . $directory;
     if (!file_exists("$directory/composer.json")) {
         echo "Error: composer.json not found in {$directory}. Skipping.\n";
         return;
@@ -19,7 +21,8 @@ function runComposerInstall($directory)
 
 function runTests($directory)
 {
-    $directory = workspaceFolder . "/" . $directory;
+    global $workspaceFolder;
+    $directory = $workspaceFolder . "/" . $directory;
     if (!file_exists("$directory/composer.json")) {
         echo "Error: composer.json not found in {$directory}. Skipping.\n";
         return;
@@ -50,7 +53,7 @@ switch ($command) {
         }
         break;
     case 'test':
-        foreach ($workspaces + $dependencies as $workspace) {
+        foreach ($workspaces as $workspace) {
             runTests($workspace);
         }
         break;

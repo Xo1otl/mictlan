@@ -16,7 +16,7 @@ for package in $packages; do
     if [ -d "$package" ]; then
         (
             echo "Running tests for $package"
-            cd "$package" && go test ./...
+            cd "$package" && go test ./... $@ || exit 1
         ) &
     else
         echo "Warning: Directory $package not found. Skipping..." >&2
