@@ -37,7 +37,6 @@ class VoiceRepo implements \voice\Repo
         }
 
         $stmt->close();
-        $this->mysqli->close();
     }
 
     /**
@@ -105,7 +104,6 @@ class VoiceRepo implements \voice\Repo
         }
 
         $stmt->close();
-        $this->mysqli->close();
 
         return $voices;
     }
@@ -174,8 +172,6 @@ class VoiceRepo implements \voice\Repo
         } catch (\Exception $e) {
             $this->mysqli->rollback();
             \logger\fatal("Transaction failed: " . $e->getMessage());
-        } finally {
-            $this->mysqli->close();
         }
     }
 
