@@ -12,6 +12,10 @@ devcontainerではパスを通してあるため直接実行可能
 - devcontainerを起動する時は、package managerのコンパイル→package managerによるmictlan全体のコンパイルという流れで行う
 - 依存が必要でpackage manager自体がpackageになっている場合、scriptsフォルダにpackage managerのentry pointへのパスを通す
 
+## TODO
+
+- gotest packageをちゃんと作る、packageを指定してまとめてテストを走らせたりしたい
+
 ## 一般に難しいとされる概念を理解する方法
 
 圏論っぽく考えれば、それぞれの概念は様々な具体を、性質や法則でカテゴライズしたもの
