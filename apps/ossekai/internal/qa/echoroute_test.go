@@ -14,7 +14,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func TestEchoRoute(t *testing.T) {
+func TestAskQuestion(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
 			t.Errorf("Test panicked: %v", r)
@@ -31,9 +31,9 @@ func TestEchoRoute(t *testing.T) {
 	req.Header.Set("Content-Type", contentType)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
-	c.Set("claims", auth.Claims{Sub: "sub"})
+	c.Set("claims", auth.Claims{Sub: auth.Sub(gofakeit.UUID())})
 
-	h := qa.NewHandler()
+	h := qa.NewMutationHandler()
 	err = h.AskQuestions(c)
 	t.Log(rec.Body.String())
 	t.Log(err)
@@ -44,57 +44,53 @@ func generateMultipartBody() (*bytes.Buffer, string, error) {
 	writer := multipart.NewWriter(body)
 
 	// Add title
-	err := writer.WriteField("title", "Sample Title")
+	err := writer.WriteField("title", gofakeit.Sentence(5))
 	if err != nil {
 		return nil, "", err
 	}
 
 	// Add multiple tag_ids
-	tagIDs := []string{"1", "2", "3"}
-	for _, id := range tagIDs {
-		err := writer.WriteField("tag_ids", id)
+	tagCount := gofakeit.Number(1, 5)
+	for i := 0; i < tagCount; i++ {
+		err := writer.WriteField("tag_ids", gofakeit.ProgrammingLanguage())
 		if err != nil {
 			return nil, "", err
 		}
 	}
 
 	// Add multiple contentBlocks with type and content
-	contentBlocks := []struct {
-		Kind    string
-		Content string
-	}{
-		{"text", "This is a text block"},
-		{"image", "path/to/image.jpg"},
-		{"code", "fmt.Println(\"Hello, World!\")"},
-	}
+	contentBlockCount := gofakeit.Number(1, 5)
+	for i := 0; i < contentBlockCount; i++ {
+		kind := gofakeit.RandomString([]string{"text", "latex", "markdown"})
+		var content string
+		switch kind {
+		case "text":
+			content = gofakeit.Paragraph(1, 3, 10, "\n")
+		case "latex":
+			content = gofakeit.LoremIpsumSentence(50)
+		case "markdown":
+			content = gofakeit.LoremIpsumSentence(50)
+		}
 
-	for i, block := range contentBlocks {
-		err := writer.WriteField(fmt.Sprintf("contentBlocks[%d][kind]", i), block.Kind)
+		err := writer.WriteField(fmt.Sprintf("contentBlocks[%d][kind]", i), kind)
 		if err != nil {
 			return nil, "", err
 		}
-		err = writer.WriteField(fmt.Sprintf("contentBlocks[%d][content]", i), block.Content)
+		err = writer.WriteField(fmt.Sprintf("contentBlocks[%d][content]", i), content)
 		if err != nil {
 			return nil, "", err
 		}
 	}
 
 	// Add multiple files
-	fileContents := []struct {
-		name    string
-		content string
-	}{
-		{"test1.txt", "This is the first test file"},
-		{"test2.txt", "This is the second test file"},
-		{"test3.txt", "This is the third test file"},
-	}
-
-	for _, file := range fileContents {
-		part, err := writer.CreateFormFile("files", file.name)
+	fileCount := gofakeit.Number(1, 3)
+	for i := 0; i < fileCount; i++ {
+		fileName := gofakeit.AppName()
+		part, err := writer.CreateFormFile("files", fileName)
 		if err != nil {
 			return nil, "", err
 		}
-		_, err = part.Write([]byte(file.content))
+		_, err = part.Write([]byte(gofakeit.LoremIpsumParagraph(1, 5, 10, "\n")))
 		if err != nil {
 			return nil, "", err
 		}
