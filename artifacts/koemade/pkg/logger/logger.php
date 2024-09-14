@@ -27,7 +27,7 @@ function initLogger(): \Monolog\Logger
             $this->levels = $levels;
         }
 
-        public function format(array $record): string
+        public function format(\Monolog\LogRecord $record): string
         {
             $output = parent::format($record);
             $level = $record['level'];
