@@ -1,24 +1,30 @@
 <?php
-require_once __DIR__ . '/../auth/middleware.php';
 
-$session = getSession();
-if ($session->role == \auth\Role::ADMIN) {
+require_once __DIR__ . '/middleware.php';
+
+try {
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        throw new Exception('Invalid id');
+    }
+    $id = new \common\Id($_GET['id']);
+    # sessionではなく、クエリパラメータを使ってprofileオブジェクトを取得
+    $profile = getProfileController()->handleGetOrInitProfile($id);
+} catch (Exception $e) {
+    $message = '<p class="error">プロフィールの取得に失敗しました</p>';
+}
+
+$profile = getProfileController()->handleGetOrInitProfile($id);
 ?>
+
 <header>
     <nav>
         <ul>
-            <li><a href="../auth/list_accounts.php">アカウント一覧</a></li>
+            <li><a href="list_accounts.php">アカウント一覧</a></li>
             <li><a href="../auth/signup.php">アカウント作成</a></li>
             <li><a href="../auth/ban.php">アカウントBAN</a></li>
             <li><a href="../auth/signin.php?signout">ログアウト</a></li>
         </ul>
     </nav>
-</header>
-<?php
-} else if ($session->role == \auth\Role::ACTOR) {
-    $profile = getProfileController()->handleGetOrInitProfile($session->accountId);
-?>
-<header>
     <figure class="avator">
         <?php
             $profileImage = $profile->profileImage;
@@ -39,21 +45,18 @@ if ($session->role == \auth\Role::ADMIN) {
         <ul>
             <li><b>マイページ</b>
             <ul>
-                <li><a href="../actor/profile.php">基本情報</a></li>
-                <li><a href="../actor/profile.php?mode=avator">プロフィール画像</a></li>
-                <li><a href="../actor/profile.php?mode=r-option">Rオプション設定</a></li>
+                <li><a href="<?php echo "actor_profile.php?id=" . $id;?>">基本情報</a></li>
+                <li><a href="<?php echo "actor_profile.php?mode=avator&id=" . $id;?>">プロフィール画像</a></li>
+                <li><a href="<?php echo "actor_profile.php?mode=r-option&id=" . $id;?>">Rオプション設定</a></li>
             </ul>
             </li>
             <li><b>ボイスサンプル</b>
                 <ul>
-                    <li><a href="../actor/profile.php?mode=add-voice">新規追加</a></li>
-                    <li><a href="../actor/list_voice.php">サンプル一覧</a></li>
+                    <li><a href="<?php echo "actor_profile.php?mode=add-voice&id=" . $id;?>">新規追加</a></li>
+                    <li><a href="<?php echo "actor_list_voice.php?id=" . $id;?>">サンプル一覧</a></li>
                 </ul>
             </li>
             <li><a href="../auth/signin.php?signout">ログアウト</a></li>
         </ul>
     </nav>
 </header>
-<?php
-} 
-

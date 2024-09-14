@@ -49,9 +49,6 @@ class Controller
     public function handleUpdateProfile(array $postData, \common\Id $accountId)
     {
         \logger\imp($postData, $accountId);
-        \logger\imp($postData, $accountId);
-        \logger\imp($postData, $accountId);
-        \logger\imp($postData, $accountId);
         $displayName = $postData['displayName'] ?? false;
         $category = $postData['category'] ?? 0;
         $selfPromotion = $postData['selfPromotion'] ?? false;
