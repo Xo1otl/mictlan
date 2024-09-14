@@ -95,6 +95,7 @@ monorepoは人生
 
 - leanのダウンロードとcomposerはエディタの通知に従ってやる
 - 基本framework,driver層は自分で書かないけどuiは自作する唯一のinfraな気がする
+- phpの拡張機能がポンコツすぎてpackage分かれていてもnamespaceを共有するためmulti package workspaceのlintが不可能、エラーでるのどうしようもない
 
 # Note
 

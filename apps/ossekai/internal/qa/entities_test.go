@@ -13,7 +13,7 @@ func TestNewQuestion(t *testing.T) {
 	validId := qa.QuestionId("q1")
 	validTitle := "How to write Go tests?"
 	validTime := time.Now()
-	validContentBlocks := []qa.ContentBlock{{"text", "This is a test question"}}
+	validContentBlocks := []*qa.ContentBlock{{"text", "This is a test question"}}
 
 	tests := []struct {
 		name          string
@@ -24,7 +24,7 @@ func TestNewQuestion(t *testing.T) {
 		updatedAt     time.Time
 		bestAnswerId  qa.AnswerId
 		tags          []qa.Tag
-		contentBlocks []qa.ContentBlock
+		contentBlocks []*qa.ContentBlock
 		attachments   []*qa.Attachment
 		wantErr       error
 	}{
@@ -88,7 +88,7 @@ func TestNewQuestion(t *testing.T) {
 			title:         validTitle,
 			createdAt:     validTime,
 			updatedAt:     validTime,
-			contentBlocks: []qa.ContentBlock{},
+			contentBlocks: make([]*qa.ContentBlock, 0),
 			wantErr:       qa.ErrEmptyContentBlocks,
 		},
 	}

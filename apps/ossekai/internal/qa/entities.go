@@ -2,6 +2,7 @@ package qa
 
 import (
 	"errors"
+	"io"
 	"ossekaiserver/internal/auth"
 	"time"
 )
@@ -28,13 +29,6 @@ func NewContentBlock(kind string, content string) (*ContentBlock, error) {
 	return &ContentBlock{Kind: kind, Content: content}, nil
 }
 
-// TagもContentBlockと同様に動的に追加する
-type TagId string
-type Tag struct {
-	Id   TagId
-	Name string
-}
-
 type QuestionId string
 type Question struct {
 	Sub           auth.Sub
@@ -44,8 +38,8 @@ type Question struct {
 	UpdatedAt     time.Time
 	BestAnswerId  AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
 	Tags          []Tag
-	ContentBlocks []ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
-	Attachments   Attachments
+	ContentBlocks []*ContentBlock // ContentBlocksにはplaceholderを含んだテキストが入る
+	Attachments   []*Attachment
 }
 
 var (
@@ -61,7 +55,7 @@ func NewQuestion(
 	updatedAt time.Time,
 	bestAnswerId AnswerId,
 	tags []Tag,
-	contentBlocks []ContentBlock,
+	contentBlocks []*ContentBlock,
 	attachments []*Attachment,
 ) (*Question, error) {
 	// Check for nil required fields
@@ -76,10 +70,10 @@ func NewQuestion(
 
 	// Initialize empty slices/maps if nil
 	if tags == nil {
-		tags = []Tag{}
+		tags = make([]Tag, 0)
 	}
 	if attachments == nil {
-		attachments = []*Attachment{}
+		attachments = make([]*Attachment, 0)
 	}
 
 	return &Question{
@@ -93,4 +87,66 @@ func NewQuestion(
 		ContentBlocks: contentBlocks,
 		Attachments:   attachments,
 	}, nil
+}
+
+// stack overflowの場合、タグはDBに登録されている
+// 信頼あるユーザーのみタグの作成が可能になっている
+// タグの作成は質問をする時に行われる
+// それまで存在しないタグを書いても検証はされない
+// だからAskQuestionの時にTagNameを受け取ってそのNameのタグが存在するか確かめれば良い
+// TagにはNameとIdがあるが、どちらもユニークである
+
+// TagもContentBlockと同様に動的に追加する
+type TagId string
+type TagName string
+type Tag struct {
+	Id   TagId
+	Name TagName
+}
+
+type AnswerId string
+type Answer struct {
+	Sub auth.Sub
+	Id  AnswerId
+}
+
+func NewAnswer(sub auth.Sub) Answer {
+	return Answer{Sub: sub}
+}
+
+type ObjectSrc io.Reader
+type Object struct {
+	Placeholder string
+	Src         ObjectSrc
+}
+
+func NewObject(placeholder string, src ObjectSrc) (*Object, error) {
+	if placeholder == "" {
+		return nil, ErrEmptyObjectPlaceholder
+	}
+	if src == nil {
+		return nil, ErrNilObjectSrc
+	}
+	return &Object{
+		Placeholder: placeholder,
+		Src:         src,
+	}, nil
+}
+
+type ObjectKey string
+
+type Attachment struct {
+	Placeholder string
+	Kind        string
+	Size        int64
+	ObjectKey   ObjectKey
+}
+
+func NewAttachment(placeholder string, kind string, size int64, objectKey ObjectKey) *Attachment {
+	return &Attachment{
+		Placeholder: placeholder,
+		Kind:        kind,
+		Size:        size,
+		ObjectKey:   objectKey,
+	}
 }

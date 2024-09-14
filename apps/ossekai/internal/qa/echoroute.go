@@ -9,27 +9,18 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type AskQuestionInput struct {
-	Title         string   `form:"title" binding:"required"`
-	TagIds        []string `form:"tag_ids"`
-	ContentBlocks []struct {
-		Kind    string `form:"kind"`
-		Content string `form:"content"`
-	} `form:"content_blocks"`
+type MutationHandler struct {
+	mutation *Mutation
 }
 
-type Handler struct {
-	app *App
-}
-
-func NewHandler() *Handler {
+func NewMutationHandler() *MutationHandler {
 	repo := NewMockDb()
 	storage := NewMockStorage()
-	app := NewApp(repo, storage)
-	return &Handler{app}
+	mutation := NewMutation(repo, storage)
+	return &MutationHandler{mutation}
 }
 
-func (h *Handler) AskQuestions(c echo.Context) error {
+func (h *MutationHandler) AskQuestions(c echo.Context) error {
 	claims := c.Get("claims")
 	if claims == nil {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
@@ -39,9 +30,9 @@ func (h *Handler) AskQuestions(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
-	var tagIds []TagId
+	var tagNames []TagName
 	for _, tagId := range form.Value["tag_ids"] {
-		tagIds = append(tagIds, TagId(tagId))
+		tagNames = append(tagNames, TagName(tagId))
 	}
 	var contentBlocks []*ContentBlock
 	for i := 0; ; i++ {
@@ -72,39 +63,17 @@ func (h *Handler) AskQuestions(c echo.Context) error {
 		objects[i] = object
 	}
 	log.Printf("files: %v", files)
-	questionId, err := h.app.AskQuestion(claims.(auth.Claims).Sub, title, tagIds, contentBlocks, objects)
+	questionId, err := h.mutation.AskQuestion(claims.(auth.Claims).Sub, title, tagNames, contentBlocks, objects)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
 	return c.JSON(http.StatusOK, map[string]string{"questionId": string(*questionId)})
 }
 
-func (h *Handler) Answers(c echo.Context) error {
-	claims := c.Get("claims")
-	if claims == nil {
-		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
-	}
-	log.Printf("claims: %v", claims)
-	q := Question{}
-	qaAnswers := h.app.Answers(q.Id)
-
-	answers := make([]map[string]string, len(qaAnswers))
-	for i, qaAnswer := range qaAnswers {
-		answers[i] = map[string]string{
-			"sub": string(qaAnswer.Sub),
-		}
-	}
-
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"answers": answers,
-	})
-}
-
 func AddEchoRoutes(e *echo.Echo) {
-	h := NewHandler()
+	mh := NewMutationHandler()
 
 	route := e.Group("/qa")
 	route.Use(auth.EchoMiddleware())
-	route.POST("/ask-questions", h.AskQuestions)
-	route.POST("/answers", h.Answers)
+	route.POST("/ask-questions", mh.AskQuestions)
 }
