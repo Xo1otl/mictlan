@@ -30,6 +30,7 @@ interface FormState {
 	files: { id: string; file: File }[];
 }
 
+// TODO: content blockの削除機能が必要
 type FormAction =
 	| { type: "SET_TITLE"; payload: string }
 	| { type: "ADD_TAG" }
