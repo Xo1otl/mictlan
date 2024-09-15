@@ -7,13 +7,14 @@ import {
 	CardContent,
 } from "@/vendor/shadcn/components/ui/card";
 import { useState } from "react";
-import { useApi } from "@/internal/ui/hooks/useApi";
+import { useJsonApi } from "@/internal/ui/hooks/useApi";
+import { AskQuestionForm } from "@/internal/ui/components/AskQuestionForm";
 
 export const Route = createFileRoute("/_auth/_protected/_layout/debug")({
 	component: () => {
 		const [pressedButton, setPressedButton] = useState<string | null>(null);
 		const [response, setResponse] = useState<string | null>(null);
-		const fetchApi = useApi();
+		const fetchApi = useJsonApi();
 
 		const handleButtonClick = async (buttonName: string) => {
 			setPressedButton(buttonName);
@@ -42,6 +43,9 @@ export const Route = createFileRoute("/_auth/_protected/_layout/debug")({
 				<CardContent>
 					<div className="flex space-x-2 mb-4">
 						<Button onClick={() => handleButtonClick("Fetch")}>Fetch</Button>
+					</div>
+					<div className="flex space-x-2 mb-4">
+						<AskQuestionForm />
 					</div>
 					{pressedButton && <p>Last pressed button: {pressedButton}</p>}
 					{response && (

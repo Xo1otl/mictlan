@@ -7,7 +7,7 @@ interface ApiRequestConfig extends Omit<RequestInit, "body"> {
 	body: unknown;
 }
 
-export function useApi() {
+export function useJsonApi() {
 	const [state, app] = useAuth();
 
 	return async ({ path, body, ...customConfig }: ApiRequestConfig) => {
@@ -40,6 +40,47 @@ export function useApi() {
 				return await respose.json();
 			}
 			throw new Error(respose.statusText);
+		} catch (err) {
+			return Promise.reject(err);
+		}
+	};
+}
+
+interface FormApiRequestConfig extends Omit<RequestInit, "body"> {
+	path: string;
+	body: FormData;
+}
+
+export function useFormApi() {
+	const [state, app] = useAuth();
+
+	return async ({ path, body, ...customConfig }: FormApiRequestConfig) => {
+		const baseHeaders: Record<string, string> = {};
+		if (state === "authenticated") {
+			const token = await app.token();
+			if (token) {
+				baseHeaders.Authorization = `Bearer ${token}`;
+			}
+		}
+
+		const url = `${API_BASE_URL}${path}`;
+		const config: RequestInit = {
+			method: "POST", // FormDataは通常POSTで送信されるため、デフォルトをPOSTに設定
+			...customConfig,
+			headers: {
+				...baseHeaders,
+				...customConfig.headers,
+			},
+		};
+
+		config.body = body;
+
+		try {
+			const response = await fetch(url, config);
+			if (response.ok) {
+				return await response.json();
+			}
+			throw new Error(response.statusText);
 		} catch (err) {
 			return Promise.reject(err);
 		}

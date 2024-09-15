@@ -21,7 +21,7 @@ func NewCommandHandler() *CommandHandler {
 	return &CommandHandler{command}
 }
 
-func (h *CommandHandler) AskQuestions(c echo.Context) error {
+func (h *CommandHandler) AskQuestion(c echo.Context) error {
 	claims := c.Get("claims")
 	if claims == nil {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
@@ -88,7 +88,7 @@ func (h *CommandHandler) AskQuestions(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
-	questionId, err := h.command.AskQuestion(claims.(auth.Claims).Sub, title, tagNames, content)
+	questionId, err := h.command.AskQuestion(claims.(*auth.Claims).Sub, title, tagNames, content)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
@@ -100,5 +100,5 @@ func AddEchoRoutes(e *echo.Echo) {
 
 	route := e.Group("/qa")
 	route.Use(auth.EchoMiddleware())
-	route.POST("/ask-questions", mh.AskQuestions)
+	route.POST("/ask-question", mh.AskQuestion)
 }

@@ -35,7 +35,7 @@ func TestAskQuestion(t *testing.T) {
 	c.Set("claims", auth.Claims{Sub: auth.Sub(gofakeit.UUID())})
 
 	h := qa.NewCommandHandler()
-	err = h.AskQuestions(c)
+	err = h.AskQuestion(c)
 	if err != nil {
 		t.Errorf("Failed to ask questions: %v", err)
 	}
