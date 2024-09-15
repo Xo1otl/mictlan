@@ -14,7 +14,7 @@ Clean Architectureの中核を成す層で、ビジネスロジックとルー�
 
 ### 1.2 Use Cases (Application Business Rules)
 
-- ファイル: `mutation.go`, `query.go`
+- ファイル: `command.go`, `query.go`
 - 説明: アプリケーション固有のビジネスルールを実装します。エンティティを操作し、ビジネスロジックを実行します。
 - 例: AskQuestion, SearchQuestions など
 
@@ -70,3 +70,117 @@ Clean Architectureの重要な原則である「依存関係の方向」を遵�
 3. Frameworks & Drivers: 実際の外部サービスを使用した統合テスト
 
 このClean Architecture実装により、コードの責務が明確に分離され、長期的なプロジェクトの保守性と拡張性が確保されます。
+
+## データの形式
+
+```json
+{
+	"Questions": [
+		{
+			"Sub": "238bf3a2-0bc2-41db-abdb-e880558589f1",
+			"Id": "d4dcf735-6783-487b-ae29-0ffaf1c84206",
+			"Title": "Your these failure with she.",
+			"CreatedAt": "2024-09-15T07:55:30.324534036Z",
+			"UpdatedAt": "2024-09-15T07:55:30.324534097Z",
+			"BestAnswerId": "",
+			"Tags": [
+				{ "Id": "7613b687-48c1-48bf-9309-802e946603e8", "Name": "SiMPLE" }
+			],
+			"ContentBlocks": [
+				{
+					"Kind": "latex",
+					"Content": "Brother consequently which her lately app speed huh product time. At throughout mine empty animal quarterly apart you it either. Weep gee itself frequently everything all one whose this recently. ![Tripdoes] ![Coveycould]"
+				},
+				{
+					"Kind": "latex",
+					"Content": "Book generosity why clumsy of they huh roll another appetite. These tonight shall these been when Burkinese horse since across. Of does yesterday anyone hers school twist besides life next. ![LawnGreengirl] ![Libraryhas] ![Violetair]"
+				},
+				{
+					"Kind": "markdown",
+					"Content": "It yourself publicity she below work hmm hourly them staff. Block monthly Beninese us these win wash her anger annually. Truth despite even that tonight of Turkmen on it muster."
+				}
+			],
+			"Attachments": [
+				{
+					"Placeholder": "Tripdoes",
+					"Kind": "application/octet-stream",
+					"Size": 27,
+					"ObjectKey": "858845e7-aca0-48f5-9a56-a4f9a8e8e494"
+				},
+				{
+					"Placeholder": "Coveycould",
+					"Kind": "application/octet-stream",
+					"Size": 30,
+					"ObjectKey": "6739d24b-5049-46da-9e62-26ba551a8a67"
+				},
+				{
+					"Placeholder": "LawnGreengirl",
+					"Kind": "application/octet-stream",
+					"Size": 37,
+					"ObjectKey": "4443d8a2-f78f-4df2-affb-b7bcea205251"
+				},
+				{
+					"Placeholder": "Libraryhas",
+					"Kind": "application/octet-stream",
+					"Size": 30,
+					"ObjectKey": "a13f2216-71af-42d9-8aba-48c066dc4469"
+				},
+				{
+					"Placeholder": "Violetair",
+					"Kind": "application/octet-stream",
+					"Size": 32,
+					"ObjectKey": "5a7069af-ece5-49b5-aef9-3ecdc9a6d184"
+				}
+			]
+		},
+		{
+			"Sub": "4c5e69d9-0e98-43ae-b06f-1774e372ea82",
+			"Id": "1b55a316-9f51-4881-8d24-1a4bf04d62d3",
+			"Title": "Child where still yearly previously.",
+			"CreatedAt": "2024-09-15T07:55:50.558655318Z",
+			"UpdatedAt": "2024-09-15T07:55:50.558655368Z",
+			"BestAnswerId": "",
+			"Tags": [
+				{ "Id": "22e7cf8b-0f4a-4d9c-a39d-c4b469a25466", "Name": "A++" },
+				{ "Id": "55ca9fa0-7646-45b2-a062-f3d23a3929c6", "Name": "Reia" }
+			],
+			"ContentBlocks": [
+				{
+					"Kind": "markdown",
+					"Content": "These single those information alternatively sedge somebody spin behalf his. This fact since where its bravo many why dynasty of. Above whose should Hindu deskpath firstly Intelligent our what brilliance."
+				},
+				{
+					"Kind": "text",
+					"Content": "Yesterday crew long horse weekly nap i.e. wealth few whenever. Previously yikes alternatively who that what give close those bow. Daily anyway enough that until in yoga gently deer weekly."
+				},
+				{
+					"Kind": "latex",
+					"Content": "Moreover which still where wake that place many speed nobody. Straightaway freezer brass then soon their instead since to whose. Fragile stand say Polish firstly case crawl these his finally. ![Orangefrailty]"
+				},
+				{
+					"Kind": "markdown",
+					"Content": "Below occasionally heavy neither packet those could often sometimes suit. Island that that its whoever for were these towards elsewhere. Jittery even completely stand without yet backwards us this hand. ![Goldfishshall]"
+				},
+				{
+					"Kind": "latex",
+					"Content": "Normally nevertheless other consequently now time say swallow path that. Why Gaussian remain secondly him constantly childhood aggravate to those. Till my crew virtually yours earlier what backwards envy generally."
+				}
+			],
+			"Attachments": [
+				{
+					"Placeholder": "Orangefrailty",
+					"Kind": "application/octet-stream",
+					"Size": 22,
+					"ObjectKey": "4556182d-a688-46cc-8633-6154bbd08574"
+				},
+				{
+					"Placeholder": "Goldfishshall",
+					"Kind": "application/octet-stream",
+					"Size": 27,
+					"ObjectKey": "8944cb3d-dbc7-4344-b1ce-2baa47363fe7"
+				}
+			]
+		}
+	]
+}
+```

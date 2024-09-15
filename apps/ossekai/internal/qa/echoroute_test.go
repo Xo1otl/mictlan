@@ -2,6 +2,7 @@ package qa_test
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"mime/multipart"
 	"net/http"
@@ -33,10 +34,21 @@ func TestAskQuestion(t *testing.T) {
 	c := e.NewContext(req, rec)
 	c.Set("claims", auth.Claims{Sub: auth.Sub(gofakeit.UUID())})
 
-	h := qa.NewMutationHandler()
+	h := qa.NewCommandHandler()
 	err = h.AskQuestions(c)
-	t.Log(rec.Body.String())
-	t.Log(err)
+	if err != nil {
+		t.Errorf("Failed to ask questions: %v", err)
+	}
+	var responseBody struct {
+		Error string `json:"error"`
+	}
+	err = json.Unmarshal(rec.Body.Bytes(), &responseBody)
+	if err != nil {
+		t.Errorf("Failed to unmarshal response body: %v", err)
+	}
+	if responseBody.Error != "" {
+		t.Errorf("test failed: %v", responseBody.Error)
+	}
 }
 
 func generateMultipartBody() (*bytes.Buffer, string, error) {
@@ -44,62 +56,50 @@ func generateMultipartBody() (*bytes.Buffer, string, error) {
 	writer := multipart.NewWriter(body)
 
 	// Add title
-	err := writer.WriteField("title", gofakeit.Sentence(5))
-	if err != nil {
-		return nil, "", err
+	writer.WriteField("title", gofakeit.Sentence(5))
+
+	// Add tag_ids
+	for i := 0; i < gofakeit.Number(1, 5); i++ {
+		writer.WriteField("tag_ids", gofakeit.ProgrammingLanguage())
 	}
 
-	// Add multiple tag_ids
-	tagCount := gofakeit.Number(1, 5)
-	for i := 0; i < tagCount; i++ {
-		err := writer.WriteField("tag_ids", gofakeit.ProgrammingLanguage())
-		if err != nil {
-			return nil, "", err
-		}
+	// Generate file names
+	fileNames := make([]string, gofakeit.Number(1, 5))
+	for i := range fileNames {
+		fileNames[i] = gofakeit.AppName()
 	}
 
-	// Add multiple contentBlocks with type and content
+	// Prepare contentBlocks
 	contentBlockCount := gofakeit.Number(1, 5)
+	contentBlocks := make([]struct {
+		kind    string
+		content string
+	}, contentBlockCount)
+
+	// Generate initial content for contentBlocks
 	for i := 0; i < contentBlockCount; i++ {
-		kind := gofakeit.RandomString([]string{"text", "latex", "markdown"})
-		var content string
-		switch kind {
-		case "text":
-			content = gofakeit.Paragraph(1, 3, 10, "\n")
-		case "latex":
-			content = gofakeit.LoremIpsumSentence(50)
-		case "markdown":
-			content = gofakeit.LoremIpsumSentence(50)
-		}
-
-		err := writer.WriteField(fmt.Sprintf("contentBlocks[%d][kind]", i), kind)
-		if err != nil {
-			return nil, "", err
-		}
-		err = writer.WriteField(fmt.Sprintf("contentBlocks[%d][content]", i), content)
-		if err != nil {
-			return nil, "", err
-		}
+		contentBlocks[i].kind = gofakeit.RandomString([]string{"text", "latex", "markdown"})
+		contentBlocks[i].content = gofakeit.Paragraph(1, 3, 10, "\n")
 	}
 
-	// Add multiple files
-	fileCount := gofakeit.Number(1, 3)
-	for i := 0; i < fileCount; i++ {
-		fileName := gofakeit.AppName()
-		part, err := writer.CreateFormFile("files", fileName)
-		if err != nil {
-			return nil, "", err
-		}
-		_, err = part.Write([]byte(gofakeit.LoremIpsumParagraph(1, 5, 10, "\n")))
-		if err != nil {
-			return nil, "", err
-		}
+	// Add placeholders randomly
+	for _, fileName := range fileNames {
+		randomIndex := gofakeit.Number(0, contentBlockCount-1)
+		placeholder := fmt.Sprintf("![%s]", fileName)
+		contentBlocks[randomIndex].content += " " + placeholder
 	}
 
-	err = writer.Close()
-	if err != nil {
-		return nil, "", err
+	// Write contentBlocks to multipart writer
+	for i, block := range contentBlocks {
+		writer.WriteField(fmt.Sprintf("contentBlocks[%d][kind]", i), block.kind)
+		writer.WriteField(fmt.Sprintf("contentBlocks[%d][content]", i), block.content)
 	}
 
-	return body, writer.FormDataContentType(), nil
+	// Add files
+	for _, fileName := range fileNames {
+		part, _ := writer.CreateFormFile("files", fileName)
+		part.Write([]byte(gofakeit.Paragraph(1, 1, 5, "")))
+	}
+
+	return body, writer.FormDataContentType(), writer.Close()
 }
