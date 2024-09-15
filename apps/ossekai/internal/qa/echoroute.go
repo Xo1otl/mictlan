@@ -5,22 +5,23 @@ import (
 	"log"
 	"net/http"
 	"ossekaiserver/internal/auth"
+	"regexp"
 
 	"github.com/labstack/echo/v4"
 )
 
-type MutationHandler struct {
-	mutation *Mutation
+type CommandHandler struct {
+	command *Command
 }
 
-func NewMutationHandler() *MutationHandler {
+func NewCommandHandler() *CommandHandler {
 	repo := NewMockDb()
 	storage := NewMockStorage()
-	mutation := NewMutation(repo, storage)
-	return &MutationHandler{mutation}
+	command := NewCommand(repo, storage)
+	return &CommandHandler{command}
 }
 
-func (h *MutationHandler) AskQuestions(c echo.Context) error {
+func (h *CommandHandler) AskQuestions(c echo.Context) error {
 	claims := c.Get("claims")
 	if claims == nil {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
@@ -63,7 +64,31 @@ func (h *MutationHandler) AskQuestions(c echo.Context) error {
 		objects[i] = object
 	}
 	log.Printf("files: %v", files)
-	questionId, err := h.mutation.AskQuestion(claims.(auth.Claims).Sub, title, tagNames, contentBlocks, objects)
+	parse := func(s string) ([]string, error) {
+		// Define the regular expression to match placeholders
+		re, err := regexp.Compile(`!\[([^\]]+)\]`)
+		if err != nil {
+			return nil, err
+		}
+
+		// Find all matches in the input string
+		matches := re.FindAllStringSubmatch(s, -1)
+
+		// Extract the placeholders from the matches
+		var placeholders []string
+		for _, match := range matches {
+			if len(match) > 1 {
+				placeholders = append(placeholders, match[1])
+			}
+		}
+
+		return placeholders, nil
+	}
+	content, err := NewContent(contentBlocks, objects, parse)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
+	}
+	questionId, err := h.command.AskQuestion(claims.(auth.Claims).Sub, title, tagNames, content)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
@@ -71,7 +96,7 @@ func (h *MutationHandler) AskQuestions(c echo.Context) error {
 }
 
 func AddEchoRoutes(e *echo.Echo) {
-	mh := NewMutationHandler()
+	mh := NewCommandHandler()
 
 	route := e.Group("/qa")
 	route.Use(auth.EchoMiddleware())

@@ -23,7 +23,7 @@ type MockDb struct {
 	filePath string
 }
 
-func NewMockDb() MutationRepo {
+func NewMockDb() CommandRepo {
 	filePath := filepath.Join(os.TempDir(), "mockdb.json")
 	db := &MockDb{
 		tables:   Tables{},

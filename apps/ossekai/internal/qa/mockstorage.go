@@ -14,7 +14,7 @@ type MockStorage struct {
 	basePath string
 }
 
-func NewMockStorage() MutationStorage {
+func NewMockStorage() CommandStorage {
 	return &MockStorage{
 		basePath: filepath.Join(os.TempDir(), "mock_storage"),
 	}
