@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"lib/pkg/transaction"
+	"log"
 	"os"
 	"ossekaiserver/internal/auth"
 	"path/filepath"
@@ -60,7 +62,7 @@ func (m *MockDb) FindTagByName(name string) (*Tag, error) {
 }
 
 // DefineTags implements CommandRepo.
-func (m *MockDb) DefineTags(customTags []CustomTag) ([]TagId, error) {
+func (m *MockDb) DefineTags(tx transaction.Transaction, customTags []CustomTag) ([]TagId, error) {
 	id := TagId(gofakeit.UUID())
 	tags := make([]Tag, 0, len(customTags))
 	tagIds := make([]TagId, 0, len(customTags))
@@ -73,13 +75,24 @@ func (m *MockDb) DefineTags(customTags []CustomTag) ([]TagId, error) {
 		tags = append(tags, NewTag(id, ct.Name))
 		tagIds = append(tagIds, id)
 	}
+	// 現在のタグの状態を保存しておく
+	originalTags := make([]Tag, len(m.tables.Tags))
+	copy(originalTags, m.tables.Tags)
+
+	// 新しいタグを追加
 	m.tables.Tags = append(m.tables.Tags, tags...)
-	m.save()
+
+	transaction.WithRollback(tx, func() {
+		// 何か問題があればロールバックし、元の状態に戻す
+		m.tables.Tags = originalTags
+		log.Println("Transaction rolled back, restored original tags")
+	})
+	transaction.WithCommit(tx, func() { m.save() })
 	return tagIds, nil
 }
 
 // AddQuestion implements Repo.
-func (m *MockDb) AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error) {
+func (m *MockDb) AddQuestion(tx transaction.Transaction, sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error) {
 	id := QuestionId(gofakeit.UUID())
 	tags := make([]Tag, 0, len(tagIds))
 	for _, tagId := range tagIds {
@@ -90,12 +103,27 @@ func (m *MockDb) AddQuestion(sub auth.Sub, title string, tagIds []TagId, content
 			}
 		}
 	}
+	if len(tags) != len(tagIds) {
+		return nil, errors.New("tag not found")
+	}
 	question, err := NewQuestion(sub, id, title, time.Now(), time.Now(), "", tags, contentBlocks, attachments)
 	if err != nil {
 		return nil, err
 	}
+	// 現在の質問の状態を保存しておく
+	originalQuestions := make([]*Question, len(m.tables.Questions))
+	copy(originalQuestions, m.tables.Questions)
+
+	// 新しい質問を追加
 	m.tables.Questions = append(m.tables.Questions, question)
-	m.save()
+
+	transaction.WithRollback(tx, func() {
+		// 何か問題があればロールバックし、元の状態に戻す
+		m.tables.Questions = originalQuestions
+		log.Println("Transaction rolled back, restored original questions")
+	})
+
+	transaction.WithCommit(tx, func() { m.save() })
 	return &id, nil
 }
 

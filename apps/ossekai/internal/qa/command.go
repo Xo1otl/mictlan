@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"io"
+	"lib/pkg/transaction"
 	"maps"
 	"ossekaiserver/internal/auth"
 )
@@ -18,11 +19,13 @@ func NewCommand(repo CommandRepo, storage CommandStorage) *Command {
 }
 
 // TODO: subだけでなくclaimsからtagの追加が許可されたユーザーかどうかの判定が必要
-// transaction patternのためのライブラリを作る
+// titleのバリデーションが必用、contentとくっつけてもいいのかもしれない
 func (a *Command) AskQuestion(sub auth.Sub, title string, tagSet *TagSet, content *Content) (*QuestionId, error) {
+	tx := transaction.Begin(context.TODO())
+	defer tx.Rollback()
 	attachments := make([]*Attachment, 0, len(content.Objects))
 	for _, object := range content.Objects {
-		attachment, err := a.storage.Put(context.TODO(), object)
+		attachment, err := a.storage.Put(tx, object)
 		if err != nil {
 			return nil, err
 		}
@@ -30,22 +33,25 @@ func (a *Command) AskQuestion(sub auth.Sub, title string, tagSet *TagSet, conten
 	}
 	// TODO: stachoverflowみたいにタグの定義の許可の仕組みを作る
 	// primary keyの重複等はrepositoryの責務
-	definedTagIds, err := a.repo.DefineTags(tagSet.Custom)
+	definedTagIds, err := a.repo.DefineTags(tx, tagSet.Custom)
 	if err != nil {
 		return nil, err
 	}
 	tagIds := tagSet.Predefined
 	tagIds = append(tagIds, definedTagIds...)
-	questionId, err := a.repo.AddQuestion(sub, title, tagIds, content.Blocks, attachments)
+	questionId, err := a.repo.AddQuestion(tx, sub, title, tagIds, content.Blocks, attachments)
 	if err != nil {
+		return nil, err
+	}
+	if err = tx.Commit(); err != nil {
 		return nil, err
 	}
 	return questionId, nil
 }
 
 type CommandRepo interface {
-	AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error)
-	DefineTags(tags []CustomTag) ([]TagId, error)
+	AddQuestion(tx transaction.Transaction, sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error)
+	DefineTags(tx transaction.Transaction, tags []CustomTag) ([]TagId, error)
 }
 
 type CommandStorage interface {
@@ -53,7 +59,7 @@ type CommandStorage interface {
 	// これはめんどくさすぎるけど、ストレージの実装はinfraを使用できるレイヤのためそこで行えば抽象化は不用
 	// そのため、Storageはuuidを引数で受け取らない。これはawsのs3のPutObjectとは仕様が異なる
 	// 同様にしてobjectからattachmentへの変換も過程でファイルタイプの判定などが存在するが、このインターフェースではその実装を暗に要求する
-	Put(ctx context.Context, object *Object) (*Attachment, error)
+	Put(tx transaction.Transaction, object *Object) (*Attachment, error)
 }
 
 type TagSet struct {
