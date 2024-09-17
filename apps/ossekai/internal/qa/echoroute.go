@@ -31,9 +31,9 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
-	var tagNames []TagName
-	for _, tagId := range form.Value["tag_ids"] {
-		tagNames = append(tagNames, TagName(tagId))
+	tagSet, err := NewTagSet(form.Value["tag_ids"], form.Value["tag_names"])
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
 	var contentBlocks []*ContentBlock
 	for i := 0; ; i++ {
@@ -50,9 +50,9 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 		}
 		contentBlocks = append(contentBlocks, contentBlock)
 	}
-	objects := make([]*Object, len(form.File["files"]))
+	objects := make([]*Object, 0, len(form.File["files"]))
 	files := form.File["files"]
-	for i, file := range files {
+	for _, file := range files {
 		src, err := file.Open()
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
@@ -61,7 +61,7 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		}
-		objects[i] = object
+		objects = append(objects, object)
 	}
 	log.Printf("files: %v", files)
 	parse := func(s string) ([]string, error) {
@@ -88,7 +88,7 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
-	questionId, err := h.command.AskQuestion(claims.(*auth.Claims).Sub, title, tagNames, content)
+	questionId, err := h.command.AskQuestion(claims.(*auth.Claims).Sub, title, tagSet, content)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}

@@ -2,6 +2,15 @@
 
 このプロジェクトは、Robert C. Martin氏が提唱するClean Architectureの原則に従って構築されています。以下に、各レイヤーとその実装の詳細を示します。
 
+## CQRS
+
+- AskQuestion等のCommandと読み取りを分離している
+- 分離ができるているかの検証方法
+	- 外側のレイヤのコードをすべてコメントアウト
+	- エラーがないことを確認
+	- query.goかcommand.goをすべてコメントアウト
+	- どちらの場合でもエラーがないことを確認
+
 ## 1. Domain Layer (Enterprise Business Rules)
 
 Clean Architectureの中核を成す層で、ビジネスロジックとルールを含みます。

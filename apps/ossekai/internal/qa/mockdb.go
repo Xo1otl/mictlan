@@ -15,6 +15,7 @@ import (
 
 type Tables struct {
 	Questions []*Question
+	Tags      []Tag
 }
 
 type MockDb struct {
@@ -31,6 +32,59 @@ func NewMockDb() CommandRepo {
 	}
 	db.load()
 	return db
+}
+
+// DefineTags implements CommandRepo.
+func (m *MockDb) DefineTags(customTags []CustomTag) ([]TagId, error) {
+	id := TagId(gofakeit.UUID())
+	tags := make([]Tag, 0, len(customTags))
+	tagIds := make([]TagId, 0, len(customTags))
+	for _, ct := range customTags {
+		tags = append(tags, NewTag(id, ct.Name))
+		tagIds = append(tagIds, id)
+	}
+	m.tables.Tags = append(m.tables.Tags, tags...)
+	m.save()
+	return tagIds, nil
+}
+
+// AddQuestion implements Repo.
+func (m *MockDb) AddQuestion(sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error) {
+	id := QuestionId(gofakeit.UUID())
+	tags := make([]Tag, 0, len(tagIds))
+	for _, tagId := range tagIds {
+		for _, tag := range m.tables.Tags {
+			if tag.Id == tagId {
+				tags = append(tags, tag)
+				break
+			}
+		}
+	}
+	question, err := NewQuestion(sub, id, title, time.Now(), time.Now(), "", tags, contentBlocks, attachments)
+	if err != nil {
+		return nil, err
+	}
+	m.tables.Questions = append(m.tables.Questions, question)
+	m.save()
+	return &id, nil
+}
+
+// Answers implements Repo.
+func (m *MockDb) Answers(questionId QuestionId) []Answer {
+	count := 10
+	answers := make([]Answer, count)
+	gofakeit.Slice(&answers)
+	return answers
+}
+
+// Question implements Repo.
+func (m *MockDb) Question(questionId QuestionId) (*Question, error) {
+	for _, question := range m.tables.Questions {
+		if question.Id == questionId {
+			return question, nil
+		}
+	}
+	return nil, errors.New("question not found")
 }
 
 func (m *MockDb) load() {
@@ -72,43 +126,4 @@ func (m *MockDb) save() {
 	if err != nil {
 		fmt.Println("Error encoding JSON:", err)
 	}
-}
-
-// AddQuestion implements Repo.
-func (m *MockDb) AddQuestion(sub auth.Sub, title string, tagNames []TagName, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error) {
-	id := QuestionId(gofakeit.UUID())
-	// 実際はtagNamesを使ってTagをDBから取得し、そのIDを含めてtagのEntityを作成する
-	// 存在しないtagについてはDBに登録するが、定期的に不適切なtagを削除したり等のバッチ処理が必要
-	tags := make([]Tag, len(tagNames))
-	for i, tagName := range tagNames {
-		tags[i] = Tag{
-			Id:   TagId(gofakeit.UUID()),
-			Name: tagName,
-		}
-	}
-	question, err := NewQuestion(sub, id, title, time.Now(), time.Now(), "", tags, contentBlocks, attachments)
-	if err != nil {
-		return nil, err
-	}
-	m.tables.Questions = append(m.tables.Questions, question)
-	m.save()
-	return &id, nil
-}
-
-// Answers implements Repo.
-func (m *MockDb) Answers(questionId QuestionId) []Answer {
-	count := 10
-	answers := make([]Answer, count)
-	gofakeit.Slice(&answers)
-	return answers
-}
-
-// Question implements Repo.
-func (m *MockDb) Question(questionId QuestionId) (*Question, error) {
-	for _, question := range m.tables.Questions {
-		if question.Id == questionId {
-			return question, nil
-		}
-	}
-	return nil, errors.New("question not found")
 }

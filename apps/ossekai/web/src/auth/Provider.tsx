@@ -1,18 +1,17 @@
 import { useState, useEffect, type ReactNode } from "react";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { AuthContext } from "../hooks/useAuth";
-import * as auth from "../../auth";
+import { Outlet } from "@tanstack/react-router";
+import { type State, Context, App, AwsCognito, machine } from ".";
 import * as libstate from "lib/state";
 
-interface AuthProviderProps {
+interface ProviderProps {
 	fallback: ReactNode;
 }
 
 // Suspendで書きたい
-export function AuthProvider({ fallback }: AuthProviderProps) {
-	const [app, setApp] = useState<auth.App | undefined>(undefined);
+export function Provider({ fallback }: ProviderProps) {
+	const [app, setApp] = useState<App | undefined>(undefined);
 	const [isLoading, setIsLoading] = useState(true);
-	const [state, setState] = useState<auth.State>("unauthenticated");
+	const [state, setState] = useState<State>("unauthenticated");
 
 	console.log("Providerをレンダリングしますよ");
 
@@ -20,14 +19,14 @@ export function AuthProvider({ fallback }: AuthProviderProps) {
 		console.log("Appを生成しますよ");
 		const initializeAuth = async () => {
 			// initial stateはsessionをaggregateして導出しよう、applicationの状態を保存すると不整合の元になる
-			const iamService = new auth.AwsCognito();
+			const iamService = new AwsCognito();
 
-			let initialState: auth.State = "unauthenticated";
+			let initialState: State = "unauthenticated";
 			if (await iamService.user()) {
 				initialState = "authenticated";
 			}
-			const stateMachine = new libstate.XState(auth.machine, initialState);
-			const newApp = new auth.App(iamService, stateMachine);
+			const stateMachine = new libstate.XState(machine, initialState);
+			const newApp = new App(iamService, stateMachine);
 			setState(initialState);
 			newApp.subscribe((state) => setState(state));
 			setApp(newApp);
@@ -41,12 +40,8 @@ export function AuthProvider({ fallback }: AuthProviderProps) {
 	}
 
 	return (
-		<AuthContext.Provider value={[state, app]}>
+		<Context.Provider value={[state, app]}>
 			<Outlet />
-		</AuthContext.Provider>
+		</Context.Provider>
 	);
 }
-
-export const Route = createFileRoute("/_auth")({
-	component: () => <AuthProvider fallback={<p>Loading...</p>} />,
-});

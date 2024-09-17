@@ -7,14 +7,14 @@ import {
 	CardContent,
 } from "@/vendor/shadcn/components/ui/card";
 import { useState } from "react";
-import { useJsonApi } from "@/internal/ui/hooks/useApi";
-import { AskQuestionForm } from "@/internal/ui/components/AskQuestionForm";
+import * as api from "@/src/api";
+import * as askquestion from "@/src/askquestion";
 
 export const Route = createFileRoute("/_auth/_protected/_layout/debug")({
 	component: () => {
 		const [pressedButton, setPressedButton] = useState<string | null>(null);
 		const [response, setResponse] = useState<string | null>(null);
-		const fetchApi = useJsonApi();
+		const fetchJson = api.useFetchJson();
 
 		const handleButtonClick = async (buttonName: string) => {
 			setPressedButton(buttonName);
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_auth/_protected/_layout/debug")({
 			if (buttonName === "Fetch") {
 				setResponse("Fetching data...");
 				try {
-					const response = await fetchApi({
+					const response = await fetchJson({
 						method: "POST",
 						path: "/qa/answers",
 						body: { question: "What is the meaning of life?" },
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/_auth/_protected/_layout/debug")({
 						<Button onClick={() => handleButtonClick("Fetch")}>Fetch</Button>
 					</div>
 					<div className="flex space-x-2 mb-4">
-						<AskQuestionForm />
+						<askquestion.Form />
 					</div>
 					{pressedButton && <p>Last pressed button: {pressedButton}</p>}
 					{response && (
