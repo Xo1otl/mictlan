@@ -4,7 +4,7 @@ const API_BASE_URL = "http://localhost:3000";
 
 interface ApiRequestConfig extends Omit<RequestInit, "body"> {
 	path: string;
-	body: unknown;
+	body?: unknown;
 }
 
 export function useFetchJson() {
