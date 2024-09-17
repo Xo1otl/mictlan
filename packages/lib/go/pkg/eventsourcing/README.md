@@ -1,0 +1,7 @@
+# eventsourcing
+
+昔作ったの持ってきたけど、idの扱いとか多分間違いありそうなので修正考える
+
+DDDのid型はentity毎につくるので、AggregateIdとEventId型がそれぞれ必要だと思う
+
+現に、EventRepoのEventsの第一引数のidがどれのidなのかわからない状態
