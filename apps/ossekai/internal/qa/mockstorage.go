@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"lib/pkg/transaction"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -22,6 +23,17 @@ func NewMockStorage() CommandStorage {
 
 // Put implements Storage.
 func (m *MockStorage) Put(tx transaction.Transaction, object *Object) (*Attachment, error) {
+	// 元のファイルパスを保存
+	var originalFilePath string
+
+	// ロールバック処理を定義
+	transaction.WithRollback(tx, func() {
+		if originalFilePath != "" {
+			os.Remove(originalFilePath)
+			log.Println("Transaction rolled back, removed file:", originalFilePath)
+		}
+	})
+
 	// Ensure the base directory exists
 	if err := os.MkdirAll(m.basePath, 0755); err != nil {
 		return nil, fmt.Errorf("failed to create base directory: %w", err)
@@ -30,6 +42,7 @@ func (m *MockStorage) Put(tx transaction.Transaction, object *Object) (*Attachme
 	// Generate a UUID for the filename
 	filename := gofakeit.UUID()
 	filePath := filepath.Join(m.basePath, filename)
+	originalFilePath = filePath
 
 	// Create the file
 	file, err := os.Create(filePath)
@@ -47,5 +60,7 @@ func (m *MockStorage) Put(tx transaction.Transaction, object *Object) (*Attachme
 	// Determine the MIME type (in a real implementation, you'd use a proper MIME type detection)
 	mimeType := "application/octet-stream"
 
-	return NewAttachment(object.Placeholder, mimeType, size, ObjectKey(filename)), nil
+	attachment := NewAttachment(object.Placeholder, mimeType, size, ObjectKey(filename))
+
+	return attachment, nil
 }
