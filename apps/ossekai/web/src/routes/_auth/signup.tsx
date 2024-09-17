@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import * as auth from "../../../auth";
+import * as auth from "../../auth";
 import * as utils from "lib/utilitytypes";
 import { Navigate } from "@tanstack/react-router";
 import {
@@ -23,7 +22,7 @@ export function SignUp() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState<string | null>(null);
 
-	const [state, app] = useAuth();
+	const [state, app] = auth.use();
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();

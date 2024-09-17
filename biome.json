@@ -4,9 +4,13 @@
 		"enabled": true
 	},
 	"linter": {
+		"ignore": ["**/*.gen.ts", "**/vendor/**"],
 		"enabled": true,
 		"rules": {
 			"recommended": true
 		}
+	},
+	"files": {
+		"ignore": ["**/*.gen.ts", "**/vendor/**"]
 	}
 }

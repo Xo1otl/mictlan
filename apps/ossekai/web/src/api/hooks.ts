@@ -1,4 +1,4 @@
-import { useAuth } from "./useAuth";
+import * as auth from "../auth";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -7,8 +7,8 @@ interface ApiRequestConfig extends Omit<RequestInit, "body"> {
 	body: unknown;
 }
 
-export function useJsonApi() {
-	const [state, app] = useAuth();
+export function useFetchJson() {
+	const [state, app] = auth.use();
 
 	return async ({ path, body, ...customConfig }: ApiRequestConfig) => {
 		const baseHeaders: Record<string, string> = {
@@ -51,8 +51,8 @@ interface FormApiRequestConfig extends Omit<RequestInit, "body"> {
 	body: FormData;
 }
 
-export function useFormApi() {
-	const [state, app] = useAuth();
+export function usePostForm() {
+	const [state, app] = auth.use();
 
 	return async ({ path, body, ...customConfig }: FormApiRequestConfig) => {
 		const baseHeaders: Record<string, string> = {};

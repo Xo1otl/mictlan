@@ -1,13 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { FileText, Home, Menu, MessageCircle } from "lucide-react";
 import { Button } from "@/vendor/shadcn/components/ui/button";
 import {
-	Sheet,
-	SheetContent,
 	SheetTrigger,
+	SheetContent,
+	Sheet,
+	SheetTitle,
+	SheetHeader,
+	SheetDescription,
 } from "@/vendor/shadcn/components/ui/sheet";
-import { Menu, Home, FileText, MessageCircle } from "lucide-react";
-import { UserMenu } from "../../../components/UserMenu";
 import { Link, Outlet } from "@tanstack/react-router";
+import { UserMenu } from ".";
 
 export const Layout = () => {
 	const NavLinks = () => (
@@ -59,6 +61,11 @@ export const Layout = () => {
 									</Button>
 								</SheetTrigger>
 								<SheetContent side="left" className="w-64 p-0">
+									{/* このヘッダーが無いとエラーやwarningが出る */}
+									<SheetHeader>
+										<SheetTitle />
+										<SheetDescription />
+									</SheetHeader>
 									<nav className="flex flex-col space-y-2 p-4">
 										<NavLinks />
 									</nav>
@@ -81,7 +88,3 @@ export const Layout = () => {
 		</div>
 	);
 };
-
-export const Route = createFileRoute("/_auth/_protected/_layout")({
-	component: () => <Layout />,
-});

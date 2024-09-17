@@ -32,7 +32,7 @@ func TestAskQuestion(t *testing.T) {
 	req.Header.Set("Content-Type", contentType)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
-	c.Set("claims", auth.Claims{Sub: auth.Sub(gofakeit.UUID())})
+	c.Set("claims", &auth.Claims{Sub: auth.Sub(gofakeit.UUID())})
 
 	h := qa.NewCommandHandler()
 	err = h.AskQuestion(c)
@@ -60,7 +60,7 @@ func generateMultipartBody() (*bytes.Buffer, string, error) {
 
 	// Add tag_ids
 	for i := 0; i < gofakeit.Number(1, 5); i++ {
-		writer.WriteField("tag_ids", gofakeit.ProgrammingLanguage())
+		writer.WriteField("tag_names", gofakeit.ProgrammingLanguage())
 	}
 
 	// Generate file names

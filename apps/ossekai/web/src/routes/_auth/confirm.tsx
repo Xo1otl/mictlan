@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import type * as auth from "../../../auth";
 import { make } from "lib/utilitytypes";
 import { Navigate } from "@tanstack/react-router";
 import {
@@ -15,12 +13,13 @@ import { Input } from "@/vendor/shadcn/components/ui/input";
 import { Button } from "@/vendor/shadcn/components/ui/button";
 import { Alert, AlertDescription } from "@/vendor/shadcn/components/ui/alert";
 import { Label } from "@/vendor/shadcn/components/ui/label";
+import * as auth from "@/src/auth";
 
 export function Confirm() {
 	const [code, setCode] = useState("");
 	const [error, setError] = useState<string | null>(null);
 
-	const [state, app] = useAuth();
+	const [state, app] = auth.use();
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();

@@ -20,5 +20,5 @@
 			"@/*": ["./*"]
 		}
 	},
-	"include": ["internal", "vendor", "vite-env.d.ts"]
+	"include": ["src", "vendor", "vite-env.d.ts"]
 }

@@ -1,5 +1,4 @@
 import { User, LogOut, Settings, HelpCircle } from "lucide-react";
-import { useAuth } from "../hooks/useAuth";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -7,9 +6,10 @@ import {
 	DropdownMenuTrigger,
 } from "@/vendor/shadcn/components/ui/dropdown-menu";
 import { Button } from "@/vendor/shadcn/components/ui/button";
+import * as auth from "@/src/auth";
 
 export const UserMenu = () => {
-	const [, app] = useAuth();
+	const [, app] = auth.use();
 
 	const handleLogout = (): void => {
 		app.signOut();
