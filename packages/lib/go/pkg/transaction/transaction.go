@@ -1,4 +1,5 @@
 // 雑に実装したけどリファクタリング必要だと思う
+// TODO: goroutineでも使えるようにする
 package transaction
 
 import (
@@ -10,9 +11,7 @@ type Transaction interface {
 	context.Context
 	Commit() error
 	Rollback() error
-	setCommit(func())
-	setRollback(func())
-	appendChild(Transaction)
+	Propagate(Transaction)
 }
 
 type transaction struct {
@@ -31,16 +30,8 @@ func Begin(ctx context.Context) Transaction {
 	}
 }
 
-func (t *transaction) appendChild(child Transaction) {
+func (t *transaction) Propagate(child Transaction) {
 	t.children = append(t.children, child)
-}
-
-func (t *transaction) setCommit(f func()) {
-	t.commit = f
-}
-
-func (t *transaction) setRollback(f func()) {
-	t.rollback = f
 }
 
 func (t *transaction) Rollback() error {
@@ -60,7 +51,7 @@ func (t *transaction) Commit() error {
 		child.Commit()
 	}
 	t.commit()
-	// rollbackが呼ばれてもなにもしない
+	// rollbackが呼ばれてもなにもしないようにする
 	t.rollback = func() {}
 	t.committed = true
 	return nil
@@ -73,12 +64,12 @@ var (
 func WithCommit(parent Transaction, commit func()) Transaction {
 	// Contextの値を引き継ぎこれであってるかわからん
 	tx := &transaction{Context: parent, commit: commit, rollback: func() {}}
-	parent.appendChild(tx)
+	parent.Propagate(tx)
 	return tx
 }
 
 func WithRollback(parent Transaction, rollback func()) Transaction {
 	tx := &transaction{Context: parent, commit: func() {}, rollback: rollback}
-	parent.appendChild(tx)
+	parent.Propagate(tx)
 	return tx
 }
