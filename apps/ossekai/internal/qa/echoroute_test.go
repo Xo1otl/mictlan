@@ -15,6 +15,28 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+func TestFindTagByName(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Errorf("Test panicked: %v", r)
+		}
+	}()
+	e := echo.New()
+	req := httptest.NewRequest(http.MethodGet, "/qa/find-tag?name=AAAAAAAAAAAAAAAAAAAAA", nil)
+	randomAuth := make([]byte, 32)
+	gofakeit.Slice(&randomAuth)
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	c.Set("claims", &auth.Claims{Sub: auth.Sub(gofakeit.UUID())})
+
+	h := qa.NewQueryHandler()
+	err := h.FindTag(c)
+	if err != nil {
+		t.Errorf("Failed to ask questions: %v", err)
+	}
+	t.Log(rec.Body.String())
+}
+
 func TestAskQuestion(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -26,7 +48,7 @@ func TestAskQuestion(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to generate multipart body: %v", err)
 	}
-	req := httptest.NewRequest(http.MethodPost, "/qa/answers", body)
+	req := httptest.NewRequest(http.MethodPost, "/qa/ask-question", body)
 	randomAuth := make([]byte, 32)
 	gofakeit.Slice(&randomAuth)
 	req.Header.Set("Content-Type", contentType)

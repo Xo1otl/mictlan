@@ -34,12 +34,42 @@ func NewMockDb() CommandRepo {
 	return db
 }
 
+func NewMockDbAsQueryRepo() QueryRepo {
+	filePath := filepath.Join(os.TempDir(), "mockdb.json")
+	db := &MockDb{
+		tables:   Tables{},
+		filePath: filePath,
+	}
+	db.load()
+	return db
+}
+
+// FindQuestionByTitle implements QueryRepo.
+func (m *MockDb) FindQuestionByTitle(title string) ([]*Question, error) {
+	panic("unimplemented")
+}
+
+// FindTagByName implements QueryRepo.
+func (m *MockDb) FindTagByName(name string) (*Tag, error) {
+	for _, tag := range m.tables.Tags {
+		if tag.Name == name {
+			return &tag, nil
+		}
+	}
+	return nil, errors.New("tag not found")
+}
+
 // DefineTags implements CommandRepo.
 func (m *MockDb) DefineTags(customTags []CustomTag) ([]TagId, error) {
 	id := TagId(gofakeit.UUID())
 	tags := make([]Tag, 0, len(customTags))
 	tagIds := make([]TagId, 0, len(customTags))
 	for _, ct := range customTags {
+		for _, tag := range m.tables.Tags {
+			if tag.Name == ct.Name {
+				return nil, errors.New("tag already exists")
+			}
+		}
 		tags = append(tags, NewTag(id, ct.Name))
 		tagIds = append(tagIds, id)
 	}

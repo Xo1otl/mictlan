@@ -10,6 +10,16 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+func AddEchoRoutes(e *echo.Echo) {
+	ch := NewCommandHandler()
+	qh := NewQueryHandler()
+
+	route := e.Group("/qa")
+	route.Use(auth.EchoMiddleware())
+	route.POST("/ask-question", ch.AskQuestion)
+	route.GET("/find-tag", qh.FindTag)
+}
+
 type CommandHandler struct {
 	command *Command
 }
@@ -95,10 +105,33 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]string{"questionId": string(*questionId)})
 }
 
-func AddEchoRoutes(e *echo.Echo) {
-	mh := NewCommandHandler()
+type QueryHandler struct {
+	query *Query
+}
 
-	route := e.Group("/qa")
-	route.Use(auth.EchoMiddleware())
-	route.POST("/ask-question", mh.AskQuestion)
+func NewQueryHandler() *QueryHandler {
+	repo := NewMockDbAsQueryRepo()
+	query := NewQuery(repo)
+	return &QueryHandler{query}
+}
+
+func (h *QueryHandler) FindTag(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	name := c.QueryParam("name")
+	if name != "" {
+		tag, err := h.query.FindTagByName(name)
+		if err != nil {
+			return c.JSON(http.StatusOK, "{}")
+		}
+		return c.JSON(http.StatusOK, &TagDTO{Id: string(tag.Id), Name: tag.Name})
+	}
+	return c.JSON(http.StatusBadRequest, map[string]string{"error": "invalid query"})
+}
+
+type TagDTO struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
 }

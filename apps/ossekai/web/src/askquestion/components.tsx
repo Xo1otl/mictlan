@@ -18,6 +18,7 @@ import {
 import { type FormState, useForm, type FormAction } from ".";
 import { Plus, X } from "lucide-react";
 import { AutosizeTextarea } from "../../vendor/shadcn/components/ui/autosize-textarea";
+import * as api from "@/src/api";
 
 const TagSection = ({
 	tagNames,
@@ -27,10 +28,21 @@ const TagSection = ({
 	dispatch: React.Dispatch<FormAction>;
 }) => {
 	const inputRef = React.useRef<HTMLInputElement>(null);
+	const fetchJson = api.useFetchJson();
 
-	const handleAddTag = (tagValue: string) => {
+	const handleAddTag = async (tagValue: string) => {
 		// TODO: apiを使用して存在するタグかどうか検証する
 		// 既存のタグがある場合、そのidを使用する
+		let tag: unknown;
+		try {
+			tag = await fetchJson({
+				method: "GET",
+				path: `/qa/find-tag?name=${tagValue}`,
+			});
+		} catch (e) {
+			console.log(e);
+		}
+		console.log(tag);
 		const trimmedTag = tagValue.trim();
 		if (trimmedTag !== "") {
 			dispatch({

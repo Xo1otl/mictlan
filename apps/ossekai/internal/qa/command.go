@@ -17,6 +17,8 @@ func NewCommand(repo CommandRepo, storage CommandStorage) *Command {
 	return &Command{repo, storage}
 }
 
+// TODO: subだけでなくclaimsからtagの追加が許可されたユーザーかどうかの判定が必要
+// transaction patternのためのライブラリを作る
 func (a *Command) AskQuestion(sub auth.Sub, title string, tagSet *TagSet, content *Content) (*QuestionId, error) {
 	attachments := make([]*Attachment, 0, len(content.Objects))
 	for _, object := range content.Objects {

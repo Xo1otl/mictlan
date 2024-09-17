@@ -7,15 +7,12 @@ import (
 )
 
 type Query struct {
-	repo QueryRepo
+	// Read側のアプリケーションではRepositoryを呼び出すだけの処理が多いため埋め込む
+	QueryRepo
 }
 
 func NewQuery(repo QueryRepo) *Query {
-	return &Query{repo: repo}
-}
-
-func (q *Query) FindQuestionByTitle(title string) ([]*Question, error) {
-	return q.repo.FindByTitle(title)
+	return &Query{QueryRepo: repo}
 }
 
 func (q *Query) SearchQuestion(id QuestionId) ([]*Question, error) {
@@ -24,7 +21,8 @@ func (q *Query) SearchQuestion(id QuestionId) ([]*Question, error) {
 }
 
 type QueryRepo interface {
-	FindByTitle(title string) ([]*Question, error)
+	FindTagByName(name string) (*Tag, error)
+	FindQuestionByTitle(title string) ([]*Question, error)
 }
 
 type Question struct {
