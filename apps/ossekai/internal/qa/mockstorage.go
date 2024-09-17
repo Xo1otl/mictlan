@@ -1,9 +1,9 @@
 package qa
 
 import (
-	"context"
 	"fmt"
 	"io"
+	"lib/pkg/transaction"
 	"os"
 	"path/filepath"
 
@@ -21,7 +21,7 @@ func NewMockStorage() CommandStorage {
 }
 
 // Put implements Storage.
-func (m *MockStorage) Put(ctx context.Context, object *Object) (*Attachment, error) {
+func (m *MockStorage) Put(tx transaction.Transaction, object *Object) (*Attachment, error) {
 	// Ensure the base directory exists
 	if err := os.MkdirAll(m.basePath, 0755); err != nil {
 		return nil, fmt.Errorf("failed to create base directory: %w", err)
