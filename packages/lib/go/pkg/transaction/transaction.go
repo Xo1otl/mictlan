@@ -1,3 +1,4 @@
+// 雑に実装したけどリファクタリング必要だと思う
 package transaction
 
 import (
@@ -70,13 +71,14 @@ var (
 )
 
 func WithCommit(parent Transaction, commit func()) Transaction {
-	tx := &transaction{commit: commit, rollback: func() {}}
+	// Contextの値を引き継ぎこれであってるかわからん
+	tx := &transaction{Context: parent, commit: commit, rollback: func() {}}
 	parent.appendChild(tx)
 	return tx
 }
 
 func WithRollback(parent Transaction, rollback func()) Transaction {
-	tx := &transaction{commit: func() {}, rollback: rollback}
+	tx := &transaction{Context: parent, commit: func() {}, rollback: rollback}
 	parent.appendChild(tx)
 	return tx
 }
