@@ -16,8 +16,8 @@ python = "^3.10"
 util = { path = "./packages/util/python", develop = true }
 
 
-# pythonファイルやjuptyer notebookのファイルがある場所やpythonパッケージの場所を指定
 [tool.pyright]
+# pythonファイルやjuptyer notebookのファイルがある場所やpythonパッケージの場所を指定
 include = [
     "packages/util/python",
     "build",
