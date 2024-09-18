@@ -21,6 +21,7 @@ awsconfig.json
 .env
 id_rsa*
 id_ed25519*
+credentials
 
 # temporary files
 playground/

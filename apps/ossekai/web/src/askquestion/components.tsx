@@ -235,12 +235,12 @@ export const Form = () => {
 						/>
 					</div>
 
-					<TagSection tags={state.tags} dispatch={dispatch} />
-
 					<ContentBlockSection
 						contentBlocks={state.contentBlocks}
 						dispatch={dispatch}
 					/>
+
+					<TagSection tags={state.tags} dispatch={dispatch} />
 
 					<FileSection files={state.files} dispatch={dispatch} />
 
