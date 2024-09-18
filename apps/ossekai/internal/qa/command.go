@@ -7,6 +7,8 @@ import (
 	"lib/pkg/transaction"
 	"maps"
 	"ossekaiserver/internal/auth"
+	"strings"
+	"util/pkg/validator"
 )
 
 type Command struct {
@@ -19,8 +21,7 @@ func NewCommand(repo CommandRepo, storage CommandStorage) *Command {
 }
 
 // TODO: subだけでなくclaimsからtagの追加が許可されたユーザーかどうかの判定が必要
-// titleのバリデーションが必用、contentとくっつけてもいいのかもしれない
-func (a *Command) AskQuestion(sub auth.Sub, title string, tagSet *TagSet, content *Content) (*QuestionId, error) {
+func (a *Command) AskQuestion(sub auth.Sub, title Title, tagSet *TagSet, content *Content) (*QuestionId, error) {
 	tx := transaction.Begin(context.TODO())
 	defer tx.Rollback()
 	attachments := make([]*Attachment, 0, len(content.Objects))
@@ -50,7 +51,7 @@ func (a *Command) AskQuestion(sub auth.Sub, title string, tagSet *TagSet, conten
 }
 
 type CommandRepo interface {
-	AddQuestion(tx transaction.Transaction, sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error)
+	AddQuestion(tx transaction.Transaction, sub auth.Sub, title Title, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error)
 	DefineTags(tx transaction.Transaction, tags []CustomTag) ([]TagId, error)
 }
 
@@ -62,18 +63,33 @@ type CommandStorage interface {
 	Put(tx transaction.Transaction, object *Object) (*Attachment, error)
 }
 
+type Title string
+
+func NewTitle(title string) (*Title, error) {
+	v := validator.ShortText(validator.New(title))
+	if err := v.Validate(); err != nil {
+		return nil, err
+	}
+	t := Title(title)
+	return &t, nil
+}
+
 type TagSet struct {
 	Predefined []TagId
 	Custom     []CustomTag
 }
 
-func NewTagSet(ids []string, names []string) (*TagSet, error) {
+func NewTagSet(predefinedIds []string, customNames []string) (*TagSet, error) {
 	var custom []CustomTag
-	for _, name := range names {
-		custom = append(custom, CustomTag{name})
+	for _, name := range customNames {
+		if ct, err := NewCustomTag(name); err != nil {
+			return nil, err
+		} else {
+			custom = append(custom, *ct)
+		}
 	}
 	var predefined []TagId
-	for _, id := range ids {
+	for _, id := range predefinedIds {
 		predefined = append(predefined, TagId(id))
 	}
 	seenPredefined := make(map[TagId]struct{})
@@ -94,30 +110,22 @@ func NewTagSet(ids []string, names []string) (*TagSet, error) {
 	return &tagSet, nil
 }
 
-type CustomTag struct {
-	Name string
-}
-
 var (
 	ErrTagIdConflict         = errors.New("tag conflict")
 	ErrCustomTagNameConflict = errors.New("custom tag conflict")
 )
 
-type Attachment struct {
-	Placeholder string
-	Kind        string
-	Size        int64
-	ObjectKey   ObjectKey
+type CustomTag struct {
+	Name string
 }
 
-func NewAttachment(placeholder string, kind string, size int64, objectKey ObjectKey) *Attachment {
-	// 引数でnilを防いでいる以外に特にvalidationは必要ない...
-	return &Attachment{
-		Placeholder: placeholder,
-		Kind:        kind,
-		Size:        size,
-		ObjectKey:   objectKey,
+func NewCustomTag(name string) (*CustomTag, error) {
+	name = strings.TrimSpace(name)
+	v := validator.VerySimple(validator.New(name))
+	if err := v.Validate(); err != nil {
+		return nil, err
 	}
+	return &CustomTag{Name: name}, nil
 }
 
 // Content Aggregateは質問の内容のバリデーションをカプセル化している
@@ -164,28 +172,6 @@ func (c *ContentBlocks) Placeholders(parse func(string) ([]string, error)) (map[
 	}
 	return placeholderMap, nil
 }
-
-// ContentBlockはテキストやマークダウンやlatexをサポートする予定
-// 個々のタイプはDomainレイヤで定義する内容ではないし、ハードコードするのではなくデータベースに動的に追加できるようにする
-type ContentBlock struct {
-	Kind    string
-	Content string
-}
-
-func NewContentBlock(kind string, content string) (*ContentBlock, error) {
-	if kind == "" {
-		return nil, ErrEmptyContentKind
-	}
-	if content == "" {
-		return nil, ErrEmptyContentBlock
-	}
-	return &ContentBlock{Kind: kind, Content: content}, nil
-}
-
-var (
-	ErrEmptyContentKind  = errors.New("content block type cannot be empty")
-	ErrEmptyContentBlock = errors.New("content block content cannot be empty")
-)
 
 type Objects []*Object
 

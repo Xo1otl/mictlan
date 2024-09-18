@@ -64,7 +64,6 @@ func (m *MockDb) FindTagByName(name string) (*Tag, error) {
 
 // DefineTags implements CommandRepo.
 func (m *MockDb) DefineTags(tx transaction.Transaction, customTags []CustomTag) ([]TagId, error) {
-	id := TagId(gofakeit.UUID())
 	tags := make([]Tag, 0, len(customTags))
 	tagIds := make([]TagId, 0, len(customTags))
 	for _, ct := range customTags {
@@ -73,6 +72,7 @@ func (m *MockDb) DefineTags(tx transaction.Transaction, customTags []CustomTag) 
 				return nil, errors.New("tag already exists")
 			}
 		}
+		id := TagId(gofakeit.UUID())
 		tags = append(tags, NewTag(id, ct.Name))
 		tagIds = append(tagIds, id)
 		log.Print("Defined tag: ", ct.Name)
@@ -94,7 +94,7 @@ func (m *MockDb) DefineTags(tx transaction.Transaction, customTags []CustomTag) 
 }
 
 // AddQuestion implements Repo.
-func (m *MockDb) AddQuestion(tx transaction.Transaction, sub auth.Sub, title string, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error) {
+func (m *MockDb) AddQuestion(tx transaction.Transaction, sub auth.Sub, title Title, tagIds []TagId, contentBlocks []*ContentBlock, attachments []*Attachment) (*QuestionId, error) {
 	id := QuestionId(gofakeit.UUID())
 	tags := make([]Tag, 0, len(tagIds))
 	for _, tagId := range tagIds {
@@ -109,7 +109,7 @@ func (m *MockDb) AddQuestion(tx transaction.Transaction, sub auth.Sub, title str
 	if len(tags) != len(tagIds) {
 		return nil, errors.New("tag not found")
 	}
-	question, err := NewQuestion(sub, id, title, time.Now(), time.Now(), "", tags, contentBlocks, attachments)
+	question, err := NewQuestion(sub, id, string(title), time.Now(), time.Now(), "", tags, contentBlocks, attachments)
 	if err != nil {
 		return nil, err
 	}

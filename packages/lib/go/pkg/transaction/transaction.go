@@ -1,5 +1,3 @@
-// 雑に実装したけどリファクタリング必要だと思う
-// TODO: goroutineでも使えるようにする
 package transaction
 
 import (
@@ -24,9 +22,7 @@ type transaction struct {
 
 func Begin(ctx context.Context) Transaction {
 	return &transaction{
-		Context:  ctx,
-		commit:   func() {},
-		rollback: func() {},
+		Context: ctx,
 	}
 }
 
@@ -39,7 +35,9 @@ func (t *transaction) Rollback() error {
 	for i := len(t.children) - 1; i >= 0; i-- {
 		t.children[i].Rollback()
 	}
-	t.rollback()
+	if t.rollback != nil {
+		t.rollback()
+	}
 	return nil
 }
 
@@ -50,9 +48,10 @@ func (t *transaction) Commit() error {
 	for _, child := range t.children {
 		child.Commit()
 	}
-	t.commit()
-	// rollbackが呼ばれてもなにもしないようにする
-	t.rollback = func() {}
+	if t.commit != nil {
+		t.commit()
+	}
+	t.rollback = nil
 	t.committed = true
 	return nil
 }
@@ -63,13 +62,13 @@ var (
 
 func WithCommit(parent Transaction, commit func()) Transaction {
 	// Contextの値を引き継ぎこれであってるかわからん
-	tx := &transaction{Context: parent, commit: commit, rollback: func() {}}
+	tx := &transaction{Context: parent, commit: commit}
 	parent.Propagate(tx)
 	return tx
 }
 
 func WithRollback(parent Transaction, rollback func()) Transaction {
-	tx := &transaction{Context: parent, commit: func() {}, rollback: rollback}
+	tx := &transaction{Context: parent, rollback: rollback}
 	parent.Propagate(tx)
 	return tx
 }
