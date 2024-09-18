@@ -53,6 +53,7 @@ func (m *MockDb) FindQuestionByTitle(title string) ([]*Question, error) {
 
 // FindTagByName implements QueryRepo.
 func (m *MockDb) FindTagByName(name string) (*Tag, error) {
+	m.load()
 	for _, tag := range m.tables.Tags {
 		if tag.Name == name {
 			return &tag, nil
@@ -74,6 +75,7 @@ func (m *MockDb) DefineTags(tx transaction.Transaction, customTags []CustomTag) 
 		}
 		tags = append(tags, NewTag(id, ct.Name))
 		tagIds = append(tagIds, id)
+		log.Print("Defined tag: ", ct.Name)
 	}
 	// 現在のタグの状態を保存しておく
 	originalTags := make([]Tag, len(m.tables.Tags))
@@ -99,6 +101,7 @@ func (m *MockDb) AddQuestion(tx transaction.Transaction, sub auth.Sub, title str
 		for _, tag := range m.tables.Tags {
 			if tag.Id == tagId {
 				tags = append(tags, tag)
+				log.Print("Added predefined tag: ", tag.Name)
 				break
 			}
 		}

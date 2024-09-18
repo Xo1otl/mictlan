@@ -67,13 +67,13 @@ type TagSet struct {
 	Custom     []CustomTag
 }
 
-func NewTagSet(predefinedIds []string, names []string) (*TagSet, error) {
+func NewTagSet(ids []string, names []string) (*TagSet, error) {
 	var custom []CustomTag
 	for _, name := range names {
 		custom = append(custom, CustomTag{name})
 	}
 	var predefined []TagId
-	for _, id := range predefinedIds {
+	for _, id := range ids {
 		predefined = append(predefined, TagId(id))
 	}
 	seenPredefined := make(map[TagId]struct{})
