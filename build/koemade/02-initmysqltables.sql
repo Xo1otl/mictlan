@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS koemade;
+
+USE koemade;
+
 CREATE TABLE if not exists signup_requests
 (
     id             SERIAL PRIMARY KEY,

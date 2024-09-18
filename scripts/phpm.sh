@@ -1,1 +1,1 @@
-phpm/cmd/phpm.sh
+./phpm/cmd/phpm.sh
