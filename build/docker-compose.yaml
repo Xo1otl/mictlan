@@ -11,12 +11,12 @@ services:
       /bin/bash -c "sudo chown -R vscode:vscode /workspaces/mictlan && sleep infinity"
   mysql:
     image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./koemade/initmysql.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./koemade/01-initmysqluser.sql:/docker-entrypoint-initdb.d/01-koemade-initmysqluser.sql
+      - ./koemade/02-initmysqltables.sql:/docker-entrypoint-initdb.d/02-koemade-initmysqltables.sql
+      - ./ossekai/01-initmysqluser.sql:/docker-entrypoint-initdb.d/01-ossekai-initmysqluser.sql
+      - ./ossekai/02-initmysqltables.sql:/docker-entrypoint-initdb.d/02-ossekai-initmysqltables.sql
