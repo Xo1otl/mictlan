@@ -16,10 +16,10 @@ RUN sudo apt update \
     && curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer \
     && curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | tar xzf - -C ~/.local \
     && ln -s ~/.local/nvim-linux64/bin/nvim ~/.local/bin/nvim \
-    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
+    && sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && sudo unzip awscliv2.zip \
     && sudo ./aws/install \
-    && rm -rf aws/ awscliv2.zip
+    && sudo rm -rf aws/ awscliv2.zip
 
 COPY --chown=vscode:vscode dotfiles/ /home/vscode
 
