@@ -1,7 +1,6 @@
 package qa
 
 import (
-	"errors"
 	"ossekaiserver/internal/auth"
 	"time"
 )
@@ -28,7 +27,7 @@ type QueryRepo interface {
 type Question struct {
 	Sub           auth.Sub
 	Id            QuestionId
-	Title         string
+	Title         string // CommandにTitle型あるけど、Query側で二重に検証は不要
 	CreatedAt     time.Time
 	UpdatedAt     time.Time
 	BestAnswerId  AnswerId // Solvedの場合はBestAnswerIdに解答IDが入る
@@ -48,17 +47,8 @@ func NewQuestion(
 	contentBlocks []*ContentBlock,
 	attachments []*Attachment,
 ) (*Question, error) {
-	// Check for nil required fields
-	if sub == "" || id == "" || title == "" || createdAt.IsZero() || updatedAt.IsZero() {
-		return nil, ErrMissingRequiredFields
-	}
-
-	// Check if contentBlocks is empty
-	if len(contentBlocks) == 0 {
-		return nil, ErrEmptyContentBlocks
-	}
-
-	// Initialize empty slices/maps if nil
+	// Query側では不必要なvalidationは行わない
+	// zero valueの設定等をおこなう
 	if tags == nil {
 		tags = make([]Tag, 0)
 	}
@@ -79,11 +69,6 @@ func NewQuestion(
 		Attachments:   attachments,
 	}, nil
 }
-
-var (
-	ErrMissingRequiredFields = errors.New("missing required fields")
-	ErrEmptyContentBlocks    = errors.New("content blocks cannot be empty")
-)
 
 type Answer struct {
 	Sub auth.Sub

@@ -19,7 +19,9 @@ export const useForm = () => {
 		formData.append("title", state.title);
 		for (const item of state.tags) {
 			// idがわかっていればtagIdを、わからなければtagNameを送信
-			// なんか美しくないなぁ
+			// なんか微妙
+			// itemの型変えてcustomTagとpredefinedTagに分けてもいい
+			// そしたら画面でmapする時めんどい
 			if (item.tagId) {
 				formData.append("tag_ids", item.tagId);
 			} else {

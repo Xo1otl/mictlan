@@ -36,7 +36,10 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 	if claims == nil {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
 	}
-	title := c.FormValue("title")
+	title, err := NewTitle(c.FormValue("title"))
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
+	}
 	form, err := c.MultipartForm()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
@@ -98,7 +101,7 @@ func (h *CommandHandler) AskQuestion(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
-	questionId, err := h.command.AskQuestion(claims.(*auth.Claims).Sub, title, tagSet, content)
+	questionId, err := h.command.AskQuestion(claims.(*auth.Claims).Sub, *title, tagSet, content)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}

@@ -21,17 +21,15 @@ import * as api from "@/src/api";
 import { Badge } from "@/vendor/shadcn/components/ui/badge";
 
 const TagSection = ({
-	tagNames,
+	tags,
 	dispatch,
 }: {
-	tagNames: FormState["tags"];
+	tags: FormState["tags"];
 	dispatch: React.Dispatch<FormAction>;
 }) => {
 	const fetchJson = api.useFetchJson();
 
 	const handleAddTag = async (tagValue: string) => {
-		// TODO: apiを使用して存在するタグかどうか検証する
-		// 既存のタグがある場合、そのidを使用する
 		let tag: { id: string; name: string } = { id: "", name: "" };
 		try {
 			tag = await fetchJson({
@@ -43,10 +41,6 @@ const TagSection = ({
 			console.log(e);
 		}
 		const trimmedTag = tagValue.trim();
-		if (trimmedTag === "") {
-			console.log("空文字やぞ");
-			return;
-		}
 		if (tag.id) {
 			dispatch({
 				type: "ADD_PREDEFINED_TAG",
@@ -71,10 +65,10 @@ const TagSection = ({
 			target.value = "";
 		} else if (key === "Backspace" && value === "") {
 			e.preventDefault();
-			if (tagNames.length > 0) {
+			if (tags.length > 0) {
 				dispatch({
 					type: "REMOVE_TAG",
-					payload: { id: tagNames[tagNames.length - 1].id },
+					payload: { id: tags[tags.length - 1].id },
 				});
 			}
 		}
@@ -83,7 +77,7 @@ const TagSection = ({
 	return (
 		<div className="flex items-center pl-2 border rounded-md overflow-x-auto">
 			<div className="flex items-center gap-2 flex-nowrap">
-				{tagNames.map((item) => (
+				{tags.map((item) => (
 					<Badge
 						key={item.id}
 						variant="secondary"
@@ -241,7 +235,7 @@ export const Form = () => {
 						/>
 					</div>
 
-					<TagSection tagNames={state.tags} dispatch={dispatch} />
+					<TagSection tags={state.tags} dispatch={dispatch} />
 
 					<ContentBlockSection
 						contentBlocks={state.contentBlocks}
