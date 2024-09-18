@@ -1,4 +1,3 @@
-import React from "react";
 import { Input } from "@/vendor/shadcn/components/ui/input";
 import { Button } from "@/vendor/shadcn/components/ui/button";
 import {
@@ -19,37 +18,46 @@ import { type FormState, useForm, type FormAction } from ".";
 import { Plus, X } from "lucide-react";
 import { AutosizeTextarea } from "../../vendor/shadcn/components/ui/autosize-textarea";
 import * as api from "@/src/api";
+import { Badge } from "@/vendor/shadcn/components/ui/badge";
 
 const TagSection = ({
 	tagNames,
 	dispatch,
 }: {
-	tagNames: FormState["tagNames"];
+	tagNames: FormState["tags"];
 	dispatch: React.Dispatch<FormAction>;
 }) => {
-	const inputRef = React.useRef<HTMLInputElement>(null);
 	const fetchJson = api.useFetchJson();
 
 	const handleAddTag = async (tagValue: string) => {
 		// TODO: apiを使用して存在するタグかどうか検証する
 		// 既存のタグがある場合、そのidを使用する
-		let tag: unknown;
+		let tag: { id: string; name: string } = { id: "", name: "" };
 		try {
 			tag = await fetchJson({
 				method: "GET",
 				path: `/qa/find-tag?name=${tagValue}`,
 			});
+			console.log(tag.id);
 		} catch (e) {
 			console.log(e);
 		}
-		console.log(tag);
 		const trimmedTag = tagValue.trim();
-		if (trimmedTag !== "") {
-			dispatch({
-				type: "ADD_TAG",
-				payload: { id: crypto.randomUUID(), tagName: trimmedTag },
-			});
+		if (trimmedTag === "") {
+			console.log("空文字やぞ");
+			return;
 		}
+		if (tag.id) {
+			dispatch({
+				type: "ADD_PREDEFINED_TAG",
+				payload: { id: tag.id, tagId: tag.id, tagName: tag.name },
+			});
+			return;
+		}
+		dispatch({
+			type: "ADD_CUSTOM_TAG",
+			payload: { id: crypto.randomUUID(), tagName: trimmedTag },
+		});
 	};
 
 	const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -73,35 +81,31 @@ const TagSection = ({
 	};
 
 	return (
-		<div className="flex items-center">
-			<div
-				className="flex items-center flex-wrap overflow-x-auto hide-scrollbar py-1"
-				style={{ maxWidth: "100%" }}
-			>
+		<div className="flex items-center pl-2 border rounded-md overflow-x-auto">
+			<div className="flex items-center gap-2 flex-nowrap">
 				{tagNames.map((item) => (
-					<div
+					<Badge
 						key={item.id}
-						className="flex items-center bg-gray-200 rounded-full px-2 py-1 mr-1 mb-1 text-sm"
+						variant="secondary"
+						className="gap-1 flex-shrink-0"
 					>
-						<span className="mr-1">{item.tagName}</span>
-						<button
-							type="button"
+						{item.tagName}
+						<Button
+							variant="ghost"
+							size="sm"
+							className="h-4 w-4 p-0"
 							onClick={() =>
 								dispatch({ type: "REMOVE_TAG", payload: { id: item.id } })
 							}
-							className="text-gray-500 hover:text-gray-700 focus:outline-none"
 						>
 							<X size={14} />
-						</button>
-					</div>
+						</Button>
+					</Badge>
 				))}
-				<input
-					type="text"
-					ref={inputRef}
+				<Input
 					onKeyDown={handleInputKeyDown}
-					placeholder="Add tags"
-					className="border-none outline-none text-sm flex-grow min-w-[100px] py-1"
-					style={{ flexBasis: "100px" }}
+					placeholder="タグを追加"
+					className="min-w-[100px] border-none shadow-none outline-none focus:border-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
 				/>
 			</div>
 		</div>
@@ -237,7 +241,7 @@ export const Form = () => {
 						/>
 					</div>
 
-					<TagSection tagNames={state.tagNames} dispatch={dispatch} />
+					<TagSection tagNames={state.tags} dispatch={dispatch} />
 
 					<ContentBlockSection
 						contentBlocks={state.contentBlocks}

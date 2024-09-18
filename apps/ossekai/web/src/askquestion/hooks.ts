@@ -5,7 +5,7 @@ export const useForm = () => {
 	const [state, dispatch] = useReducer(formReducer, {
 		isValid: false,
 		title: "",
-		tagNames: [],
+		tags: [],
 		contentBlocks: [{ id: crypto.randomUUID(), kind: "text", content: "" }],
 		files: [],
 	});
@@ -17,8 +17,14 @@ export const useForm = () => {
 		const formData = new FormData();
 
 		formData.append("title", state.title);
-		for (const item of state.tagNames) {
-			formData.append("tag_names", item.tagName);
+		for (const item of state.tags) {
+			// idがわかっていればtagIdを、わからなければtagNameを送信
+			// なんか美しくないなぁ
+			if (item.tagId) {
+				formData.append("tag_ids", item.tagId);
+			} else {
+				formData.append("tag_names", item.tagName);
+			}
 		}
 
 		state.contentBlocks.forEach((block, index) => {
@@ -51,7 +57,7 @@ export const useForm = () => {
 export interface FormState {
 	isValid: boolean;
 	title: string;
-	tagNames: { id: string; tagName: string }[];
+	tags: { id: string; tagId: string; tagName: string }[];
 	contentBlocks: {
 		id: string;
 		kind: "text" | "latex" | "markdown";
@@ -62,12 +68,12 @@ export interface FormState {
 
 export type FormAction =
 	| { type: "SET_TITLE"; payload: { title: string } }
-	| { type: "ADD_TAG"; payload: { id: string; tagName: string } }
-	| { type: "REMOVE_TAG"; payload: { id: string } }
+	| { type: "ADD_CUSTOM_TAG"; payload: { id: string; tagName: string } }
 	| {
-			type: "UPDATE_TAG";
-			payload: { index: number; value: { id: string; tagName: string } };
+			type: "ADD_PREDEFINED_TAG";
+			payload: { id: string; tagId: string; tagName: string };
 	  }
+	| { type: "REMOVE_TAG"; payload: { id: string } }
 	| { type: "ADD_CONTENT_BLOCK" }
 	| { type: "REMOVE_CONTENT_BLOCK"; payload: { id: string } }
 	| {
@@ -83,27 +89,32 @@ const formReducer = (state: FormState, action: FormAction): FormState => {
 		case "SET_TITLE":
 			newState = { ...state, title: action.payload.title };
 			break;
-		case "ADD_TAG":
+		case "ADD_CUSTOM_TAG":
 			newState = {
 				...state,
-				tagNames: [
-					...state.tagNames,
-					{ id: action.payload.id, tagName: action.payload.tagName },
+				tags: [
+					...state.tags,
+					{ id: action.payload.id, tagId: "", tagName: action.payload.tagName },
+				],
+			};
+			break;
+		case "ADD_PREDEFINED_TAG":
+			newState = {
+				...state,
+				tags: [
+					...state.tags,
+					{
+						id: action.payload.id,
+						tagId: action.payload.tagId,
+						tagName: action.payload.tagName,
+					},
 				],
 			};
 			break;
 		case "REMOVE_TAG":
 			newState = {
 				...state,
-				tagNames: state.tagNames.filter((tag) => tag.id !== action.payload.id),
-			};
-			break;
-		case "UPDATE_TAG":
-			newState = {
-				...state,
-				tagNames: state.tagNames.map((tag, index) =>
-					index === action.payload.index ? action.payload.value : tag,
-				),
+				tags: state.tags.filter((tag) => tag.id !== action.payload.id),
 			};
 			break;
 		case "ADD_CONTENT_BLOCK":
