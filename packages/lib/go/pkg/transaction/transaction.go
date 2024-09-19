@@ -21,9 +21,7 @@ type transaction struct {
 }
 
 func Begin(ctx context.Context) Transaction {
-	return &transaction{
-		Context: ctx,
-	}
+	return &transaction{Context: ctx}
 }
 
 func (t *transaction) Propagate(child Transaction) {

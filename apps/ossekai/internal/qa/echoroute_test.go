@@ -82,7 +82,7 @@ func generateMultipartBody() (*bytes.Buffer, string, error) {
 
 	// Add tag_ids
 	for i := 0; i < gofakeit.Number(1, 5); i++ {
-		writer.WriteField("tag_names", gofakeit.ProgrammingLanguage())
+		writer.WriteField("tag_names", gofakeit.Regex(`^(?:[a-z0-9]+[-+])*[a-z0-9]+$`))
 	}
 
 	// Generate file names

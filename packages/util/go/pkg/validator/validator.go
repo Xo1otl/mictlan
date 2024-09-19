@@ -1,43 +1,46 @@
 package validator
 
-import (
-	"errors"
-	"regexp"
-	"strings"
-)
+type Validatable any
 
-type Validator interface {
+type Validator[T Validatable] interface {
 	Validate() error
-	Value() string
-	Propagate(Validator)
+	Value() (T, error)
+	Propagate(Validator[T])
 }
 
-type validator struct {
-	parent   Validator
-	children []Validator
-	validate func() error
-	reduce   func(s string) string
-}
-
-func New(s string) Validator {
-	return &validator{
+func New[T Validatable](o T) Validator[T] {
+	return &validator[T]{
 		validate: func() error { return nil },
-		reduce:   func(_ string) string { return s },
+		reduce:   func(T) (T, error) { return o, nil },
 	}
 }
 
-func (v *validator) Value() string {
-	pv := ""
+type validator[T Validatable] struct {
+	parent   Validator[T]
+	children []Validator[T]
+	validate func() error
+	reduce   func(T) (T, error)
+}
+
+func new[T Validatable](v Validator[T]) *validator[T] {
+	return &validator[T]{parent: v}
+}
+
+func (v *validator[T]) Value() (T, error) {
+	var pv T
+	var err error
 	if v.parent != nil {
-		pv = v.parent.Value()
+		if pv, err = v.parent.Value(); err != nil {
+			return pv, err
+		}
 	}
 	if v.reduce != nil {
 		return v.reduce(pv)
 	}
-	return pv
+	return pv, nil
 }
 
-func (v *validator) Validate() error {
+func (v *validator[T]) Validate() error {
 	for _, child := range v.children {
 		if err := child.Validate(); err != nil {
 			return err
@@ -52,49 +55,6 @@ func (v *validator) Validate() error {
 	return nil
 }
 
-func (v *validator) Propagate(child Validator) {
+func (v *validator[T]) Propagate(child Validator[T]) {
 	v.children = append(v.children, child)
-}
-
-func VerySimple(parent Validator) Validator {
-	child := &validator{parent: parent}
-	child.validate = func() error {
-		if !verySimpleRegex.MatchString(parent.Value()) {
-			return ErrNotVerySimple
-		}
-		return nil
-	}
-	parent.Propagate(child)
-	return child
-}
-
-var (
-	ErrNotVerySimple = errors.New("not very simple")
-	verySimpleRegex  = regexp.MustCompile(`^[a-zA-Z0-9-]{3,20}$`)
-)
-
-func ShortText(parent Validator) Validator {
-	child := &validator{parent: parent}
-	child.validate = func() error {
-		s := parent.Value()
-		if len(s) < 5 || len(s) > 100 {
-			return ErrNotShortText
-		}
-		return nil
-	}
-	parent.Propagate(child)
-	return child
-}
-
-var (
-	ErrNotShortText = errors.New("not short title")
-)
-
-func Filename(parent Validator) Validator {
-	child := &validator{parent: parent}
-	child.reduce = func(s string) string {
-		return strings.Split(s, ".")[0]
-	}
-	parent.Propagate(child)
-	return child
 }
