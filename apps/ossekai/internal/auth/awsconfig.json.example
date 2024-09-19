@@ -1,0 +1,4 @@
+{
+	"aws_cognito_region": "ap-northeas-1",
+	"aws_user_pools_id": "aws_user_pools_id"
+}

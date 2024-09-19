@@ -19,8 +19,7 @@ __debug_bin*
 testcredentials.json
 awsconfig.json
 .env
-id_rsa*
-id_ed25519*
+id_ed25519_Xo1otl
 credentials
 
 # temporary files

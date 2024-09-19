@@ -1,0 +1,6 @@
+{
+	"aws_project_region": "ap-northeast-100",
+	"aws_cognito_region": "ap-northeast-100",
+	"aws_user_pools_id": "",
+	"aws_user_pools_web_client_id": ""
+}
