@@ -24,14 +24,7 @@ func NewCommand(repo CommandRepo, storage CommandStorage) *Command {
 func (a *Command) AskQuestion(sub auth.Sub, title Title, tagSet *TagSet, content *Content) (*QuestionId, error) {
 	tx := transaction.Begin(context.TODO())
 	defer tx.Rollback()
-	attachments := make([]*Attachment, 0, len(content.Objects))
-	for _, object := range content.Objects {
-		attachment, err := a.storage.Put(tx, object)
-		if err != nil {
-			return nil, err
-		}
-		attachments = append(attachments, attachment)
-	}
+
 	// TODO: stachoverflowみたいにタグの定義の許可の仕組みを作る
 	// primary keyの重複等はrepositoryの責務
 	definedTagIds, err := a.repo.DefineTags(tx, tagSet.Custom)
@@ -40,6 +33,16 @@ func (a *Command) AskQuestion(sub auth.Sub, title Title, tagSet *TagSet, content
 	}
 	tagIds := tagSet.Predefined
 	tagIds = append(tagIds, definedTagIds...)
+
+	attachments := make([]*Attachment, 0, len(content.Objects))
+	for _, object := range content.Objects {
+		attachment, err := a.storage.Put(tx, object)
+		if err != nil {
+			return nil, err
+		}
+		attachments = append(attachments, attachment)
+	}
+
 	questionId, err := a.repo.AddQuestion(tx, sub, title, tagIds, content.Blocks, attachments)
 	if err != nil {
 		return nil, err
@@ -66,8 +69,7 @@ type CommandStorage interface {
 type Title string
 
 func NewTitle(title string) (*Title, error) {
-	v := validator.ShortText(validator.New(title))
-	if err := v.Validate(); err != nil {
+	if err := validator.ShortLine(validator.New(title)).Validate(); err != nil {
 		return nil, err
 	}
 	t := Title(title)
@@ -121,8 +123,7 @@ type CustomTag struct {
 
 func NewCustomTag(name string) (*CustomTag, error) {
 	name = strings.TrimSpace(name)
-	v := validator.VerySimple(validator.New(name))
-	if err := v.Validate(); err != nil {
+	if err := validator.Tag(validator.New(name)).Validate(); err != nil {
 		return nil, err
 	}
 	return &CustomTag{Name: name}, nil
@@ -145,6 +146,9 @@ func NewContent(blocks ContentBlocks, objects Objects, parse func(string) ([]str
 	}
 	if !maps.Equal(op, bp) {
 		return nil, ErrContentObjectMismatch
+	}
+	if err = validator.AllKeysAreVerySimple(validator.FilenameFromKeys(validator.New(op))).Validate(); err != nil {
+		return nil, err
 	}
 	return &Content{
 		Blocks:  blocks,
