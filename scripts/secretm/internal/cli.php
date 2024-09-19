@@ -12,7 +12,7 @@ function workspaceFolder()
     throw new Exception("Workspace root (containing workspace.php) not found.");
 }
 
-class Cli implements Git, PathRepo, Tar
+class Cli implements VCS, PathRepo, Packer
 {
     private $secretsRegFile;
     private $rootGitignore;
@@ -38,7 +38,7 @@ class Cli implements Git, PathRepo, Tar
 
         if ($return_var !== 0) {
             // The file is not ignored, so add it to .gitignore
-            file_put_contents($this->rootGitignore, $filepath . PHP_EOL, FILE_APPEND | LOCK_EX);
+            file_put_contents($this->rootGitignore, "\n" . $filepath . PHP_EOL, FILE_APPEND | LOCK_EX);
             echo "Added $filepath to .gitignore\n";
         } else {
             echo "$filepath is already ignored.\n";
@@ -90,7 +90,7 @@ class Cli implements Git, PathRepo, Tar
     }
 
     // compress and decompress are executed in workspaceFolder to properly preserve path information
-    public function compress(array $filepaths, string $archivePath)
+    public function pack(array $filepaths, string $archivePath)
     {
         $currentDir = getcwd();
         chdir($this->workspaceFolder);
@@ -124,7 +124,7 @@ class Cli implements Git, PathRepo, Tar
         chdir($currentDir);
     }
 
-    public function decompress(string $archivePath)
+    public function unpack(string $archivePath)
     {
         $currentDir = getcwd();
         chdir($this->workspaceFolder);
