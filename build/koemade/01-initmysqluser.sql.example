@@ -1,3 +1,0 @@
-CREATE USER 'koemade_user'@'%' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON koemade.* TO 'koemade_user'@'%';
-FLUSH PRIVILEGES;

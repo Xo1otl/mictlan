@@ -1,7 +1,0 @@
-<?php
-return [
-    'db_host' => 'mysql',
-    'db_user' => 'user',
-    'db_password' => 'pass',
-    'db_database' => 'db',
-];

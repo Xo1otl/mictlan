@@ -73,5 +73,35 @@ if (array_key_exists($command, $handlers)) {
         exit(1);
     }
 } else {
-    echo "Available commands: " . implode(', ', array_keys($handlers)) . "\n";
+    echo "Usage: php " . basename(__FILE__) . " <command> [options]\n\n";
+    echo "Available commands:\n";
+    echo "  add <path>    : Add a secret file or directory to the manager\n";
+    echo "  pack [dir]    : Pack all secrets into an archive\n";
+    echo "  unpack [file] : Unpack secrets from an archive\n\n";
+    echo "Detailed usage:\n\n";
+    echo "1. Project setup:\n";
+    echo "   - Place a 'workspace.php' file in your project's root directory.\n";
+    echo "   - This file is used to identify the workspace root.\n\n";
+    echo "2. Path specifications:\n";
+    echo "   - Use absolute paths or paths relative to the workspace root.\n";
+    echo "   - The workspace root is the directory containing 'workspace.php'.\n\n";
+    echo "3. Adding secrets (add command):\n";
+    echo "   - Use: php " . basename(__FILE__) . " add <path>\n";
+    echo "   - <path> can be a file or directory.\n";
+    echo "   - Added secrets are listed in 'build/secrets.json'.\n\n";
+    echo "4. Packing secrets (pack command):\n";
+    echo "   - Use: php " . basename(__FILE__) . " pack [dir]\n";
+    echo "   - [dir] is optional. If omitted, packs to the workspace root.\n";
+    echo "   - Creates 'secrets.tar.gz' in the specified directory.\n";
+    echo "   - Run this after adding all desired secrets.\n\n";
+    echo "5. Unpacking secrets (unpack command):\n";
+    echo "   - Use: php " . basename(__FILE__) . " unpack [file]\n";
+    echo "   - [file] is optional. Default is 'secrets.tar.gz' in the workspace root.\n";
+    echo "   - Extracts secrets to their original locations within the workspace.\n\n";
+    echo "6. Workflow:\n";
+    echo "   1) Add secrets:    php " . basename(__FILE__) . " add path/to/secret\n";
+    echo "   2) Repeat step 1 for all secrets\n";
+    echo "   3) Pack secrets:   php " . basename(__FILE__) . " pack [output_dir]\n";
+    echo "   4) (Later) Unpack: php " . basename(__FILE__) . " unpack [secrets_file]\n\n";
+    echo "Note: Always ensure you're running the script from within the workspace.\n";
 }
