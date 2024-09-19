@@ -2,24 +2,24 @@
 
 class Manager
 {
-    public function __construct(public Git $git, public PathRepo $repo, public Tar $tar)
+    public function __construct(public VCS $vcs, public PathRepo $repo, public Packer $packer)
     {
     }
 
     public function add(string $path)
     {
-        $this->git->ignoreIfNot($path);
+        $this->vcs->ignoreIfNot($path);
         $this->repo->register($path);
     }
 
-    public function pack(string $archivepath)
+    public function export(string $archivepath)
     {
         $files = $this->repo->listAll();
-        $this->tar->compress($files, "$archivepath");
+        $this->packer->pack($files, "$archivepath");
     }
 }
 
-interface Git
+interface VCS
 {
     public function ignoreIfNot(string $filepath);
 }
@@ -30,8 +30,8 @@ interface PathRepo
     public function listAll(): array;
 }
 
-interface Tar
+interface Packer
 {
-    public function compress(array $filepaths, string $archivepath);
-    public function decompress(string $archivepath);
+    public function pack(array $filepaths, string $archivepath);
+    public function unpack(string $archivepath);
 }
