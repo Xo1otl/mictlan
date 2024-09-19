@@ -21,6 +21,7 @@ awsconfig.json
 .env
 id_ed25519_Xo1otl
 credentials
+credentials.tar.gz
 
 # temporary files
 playground/
