@@ -19,7 +19,7 @@
 				"webRoot": "${workspaceFolder:mictlan}/apps/ossekai/web"
 			},
 			{
-				"name": "Debug koemade",
+				"name": "Debug php",
 				"type": "php",
 				"request": "launch",
 				"port": 7003
