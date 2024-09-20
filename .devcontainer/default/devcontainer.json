@@ -3,9 +3,10 @@
 {
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"dockerComposeFile": "../build/docker-compose.yaml",
+	"dockerComposeFile": "../../build/docker-compose.yaml",
 	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"shutdownAction": "none",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -31,9 +32,9 @@
 			]
 		}
 	},
-	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
 	"features": {
 		"ghcr.io/devcontainers/features/go:1": {},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-	}
+	},
+	"postCreateCommand": "/bin/sh .devcontainer/default/postCreateCommand.sh"
 }

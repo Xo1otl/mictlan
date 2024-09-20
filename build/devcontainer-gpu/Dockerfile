@@ -1,0 +1,1 @@
+FROM mictlan-devcontainer:latest

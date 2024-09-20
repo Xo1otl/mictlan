@@ -5,10 +5,21 @@ services:
     build:
       context: devcontainer
       dockerfile: Dockerfile
+    image: mictlan-devcontainer:latest
     volumes:
       - ..:/workspaces/mictlan:cached
     command: >
       /bin/bash -c "sudo chown -R vscode:vscode /workspaces/mictlan && sleep infinity"
+
+  devcontainer-gpu:
+    build:
+      context: devcontainer-gpu
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspaces/mictlan:cached
+    command: >
+      /bin/bash -c "sudo chown -R vscode:vscode /workspaces/mictlan && sleep infinity"
+
   mysql:
     image: mysql:latest
     ports:
