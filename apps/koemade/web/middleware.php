@@ -2,15 +2,17 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use koemade\auth;
+
 function NewApp()
 {
-    $userRepo = new \auth\PdoAccountRepo();
-    $sessionRepo = new \auth\FileSessionRepo();
-    return new \auth\App($userRepo, $sessionRepo);
+    $userRepo = new auth\PdoAccountRepo();
+    $sessionRepo = new auth\FileSessionRepo();
+    return new auth\App($userRepo, $sessionRepo);
 }
 
-function Session(): ?\auth\Session
+function Session(): ?auth\Session
 {
-    $sessionRepo = new \auth\FileSessionRepo();
+    $sessionRepo = new auth\FileSessionRepo();
     return $sessionRepo->get();
 }
