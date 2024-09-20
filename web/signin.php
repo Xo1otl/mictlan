@@ -1,10 +1,13 @@
 <?php
+
+use koemade\auth;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require __DIR__ . '/middleware.php';
 
-    $username = new \auth\Username($_POST["username"]);
+    $username = new auth\Username($_POST["username"]);
     $passwordText = $_POST["password"];
-    $signUpInput = new \auth\SignInInput($username, $passwordText);
+    $signUpInput = new auth\SignInInput($username, $passwordText);
 
     $app = NewApp();
     try {

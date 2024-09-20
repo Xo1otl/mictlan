@@ -1,7 +1,8 @@
 <?php
 
-namespace auth;
+namespace koemade\auth;
 
+use koemade\common;
 use PDO;
 
 class PdoAccountRepo implements AccountRepo
@@ -10,7 +11,7 @@ class PdoAccountRepo implements AccountRepo
 
     public function __construct()
     {
-        $this->pdo = \common\MySql::connection();
+        $this->pdo = common\MySql::connection();
     }
 
     public function add(SignUpInput $signUpInput): AccountId
