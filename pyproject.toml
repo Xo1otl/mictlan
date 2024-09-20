@@ -17,7 +17,7 @@ util = { path = "./packages/util/python", develop = true }
 
 
 [tool.pyright]
-# pythonファイルやjuptyer notebookのファイルがある場所やpythonパッケージの場所を指定
+# pylanceはここで指定したフォルダ内のファイルのみ検出する
 include = [
     "packages/util/python",
     "build",
