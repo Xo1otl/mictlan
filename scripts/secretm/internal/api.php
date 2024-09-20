@@ -5,7 +5,7 @@ require __DIR__ . "/cli.php";
 
 function relativePath($path, $allowNonExistent = false)
 {
-    $workspaceRoot = workspaceFolder();
+    $workspaceRoot = workspace\folder();
 
     // 絶対パスの場合
     if (strpos($path, '/') === 0 || (strlen($path) > 1 && $path[1] === ':')) {
@@ -46,7 +46,7 @@ $handlers = [
     },
     'export' => function ($options) use ($manager) {
         if (empty($options)) {
-            $outputPath = workspaceFolder();
+            $outputPath = workspace\folder();
         } elseif (count($options) == 1) {
             $outputPath = $options[0];
         }
@@ -56,7 +56,7 @@ $handlers = [
     },
     'import' => function ($options) use ($manager) {
         if (empty($options)) {
-            $archivepath = workspaceFolder() . DIRECTORY_SEPARATOR . "secrets.tar.gz";
+            $archivepath = workspace\folder() . DIRECTORY_SEPARATOR . "secrets.tar.gz";
         } elseif (count($options) == 1) {
             $archivepath = $options[0];
         }

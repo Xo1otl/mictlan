@@ -1,16 +1,6 @@
 <?php
 
-function workspaceFolder()
-{
-    $path = __DIR__;
-    while ($path !== '/' && $path !== '') {
-        if (file_exists($path . DIRECTORY_SEPARATOR . 'workspace.php')) {
-            return $path;
-        }
-        $path = dirname($path);
-    }
-    throw new Exception("Workspace root (containing workspace.php) not found.");
-}
+require __DIR__ . "/../../../packages/util/php/pkg/workspace/folder.php";
 
 class Cli implements VCS, PathRepo, Packer
 {
@@ -20,7 +10,7 @@ class Cli implements VCS, PathRepo, Packer
 
     public function __construct()
     {
-        $this->workspaceFolder = workspaceFolder();
+        $this->workspaceFolder = workspace\folder();
         $this->secretsRegFile = $this->workspaceFolder . DIRECTORY_SEPARATOR . "build" . DIRECTORY_SEPARATOR . "secrets.json";
         $this->rootGitignore = $this->workspaceFolder . DIRECTORY_SEPARATOR . ".gitignore";
     }
@@ -104,12 +94,6 @@ class Cli implements VCS, PathRepo, Packer
         // Build the tar command
         $files = implode(' ', array_map('escapeshellarg', $filepaths));
         $archivePath = escapeshellarg($archivePath);
-
-        // Create the directory for the archive if it doesn't exist
-        $archiveDir = dirname($archivePath);
-        if (!is_dir($archiveDir)) {
-            mkdir($archiveDir, 0777, true);
-        }
 
         $cmd = "tar -czf $archivePath $files";
 
