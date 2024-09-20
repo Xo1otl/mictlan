@@ -1,16 +1,14 @@
 <?php
 
-require __DIR__ . "/../../../packages/util/php/pkg/workspace/folder.php";
-
 class Cli implements VCS, PathRepo, Packer
 {
     private $secretsRegFile;
     private $rootGitignore;
     private $workspaceFolder;
 
-    public function __construct()
+    public function __construct(\workspace\Instance $workspace)
     {
-        $this->workspaceFolder = workspace\folder();
+        $this->workspaceFolder = $workspace->rootDir;
         $this->secretsRegFile = $this->workspaceFolder . DIRECTORY_SEPARATOR . "build" . DIRECTORY_SEPARATOR . "secrets.json";
         $this->rootGitignore = $this->workspaceFolder . DIRECTORY_SEPARATOR . ".gitignore";
     }
