@@ -1,8 +1,10 @@
 <?php
 
-require __DIR__ . "/../../../packages/util/php/pkg/workspace/workspace.php";
+require __DIR__ . "/../vendor/autoload.php";
 
-$workspaceFolder = (new \workspace\Instance())->rootDir;
+use util\workspace;
+
+$workspaceFolder = (new workspace\PHP())->root;
 
 require "$workspaceFolder/workspace.php";
 

@@ -3,5 +3,6 @@
 $workspaces = [
     "apps/koemade",
     "artifacts/koemade",
-    "packages/util/php"
+    "packages/util/php",
+    "scripts/secretm"
 ];

@@ -1,20 +1,22 @@
 <?php
 
-require __DIR__ . "/../../../packages/util/php/pkg/workspace/workspace.php";
-require __DIR__ . "/secretm.php";
-require __DIR__ . "/cli.php";
+namespace secretm;
+
+require __DIR__ . "/../vendor/autoload.php";
+
+use util\workspace;
 
 $command = $argv[1] ?? null;
 $options = array_slice($argv, 2);
 
-$workspace = new \workspace\Instance();
+$workspace = new workspace\PHP();
 $cli = new Cli($workspace);
 $manager = new Manager($cli, $cli, $cli);
 
 $handlers = [
     'add' => function ($options) use ($manager, $workspace) {
         if (empty($options[0])) {
-            throw new Exception("Path must be specified for the 'add' command.");
+            throw new \Exception("Path must be specified for the 'add' command.");
         }
         $relativePath = $workspace->locate($options[0]);
         $manager->add($relativePath);
@@ -43,7 +45,7 @@ $handlers = [
 if (array_key_exists($command, $handlers)) {
     try {
         $handlers[$command]($options);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
         echo "Error: " . $e->getMessage() . "\n";
         exit(1);
     }
