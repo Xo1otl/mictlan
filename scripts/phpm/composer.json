@@ -1,0 +1,21 @@
+{
+	"name": "mictlan/phpm",
+	"authors": [
+		{
+			"name": "Xo1otl",
+			"email": "xolotl.mictl4n@gmail.com"
+		}
+	],
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../../packages/util/php"
+		}
+	],
+	"require": {
+		"mictlan/util": "dev-main"
+	},
+	"autoload": {
+		"classmap": ["internal"]
+	}
+}

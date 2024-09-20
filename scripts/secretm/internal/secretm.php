@@ -1,5 +1,7 @@
 <?php
 
+namespace secretm;
+
 class Manager
 {
     public function __construct(public VCS $vcs, public PathRepo $repo, public Packer $packer)

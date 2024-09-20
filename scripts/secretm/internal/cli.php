@@ -1,14 +1,18 @@
 <?php
 
+namespace secretm;
+
+use util\workspace;
+
 class Cli implements VCS, PathRepo, Packer
 {
     private $secretsRegFile;
     private $rootGitignore;
     private $workspaceFolder;
 
-    public function __construct(\workspace\Instance $workspace)
+    public function __construct(workspace\Workspace $workspace)
     {
-        $this->workspaceFolder = $workspace->rootDir;
+        $this->workspaceFolder = $workspace->root();
         $this->secretsRegFile = $this->workspaceFolder . DIRECTORY_SEPARATOR . "build" . DIRECTORY_SEPARATOR . "secrets.json";
         $this->rootGitignore = $this->workspaceFolder . DIRECTORY_SEPARATOR . ".gitignore";
     }
