@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__ . "/../../../packages/util/php/pkg/workspace/folder.php";
+require __DIR__ . "/../../../packages/util/php/pkg/workspace/workspace.php";
 
-$workspaceFolder = workspace\folder();
+$workspaceFolder = (new \workspace\Instance())->rootDir;
 
 require "$workspaceFolder/workspace.php";
 
