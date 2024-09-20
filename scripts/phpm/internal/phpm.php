@@ -1,14 +1,15 @@
 <?php
 
-// コマンドを実行しているバスをworkspaceFolderとして認識したい
-$workspaceFolder = getcwd();
+require __DIR__ . "/../../../packages/util/php/pkg/workspace/folder.php";
 
-require $workspaceFolder . "/workspace.php";
+$workspaceFolder = workspace\folder();
+
+require "$workspaceFolder/workspace.php";
 
 function runComposerInstall($directory)
 {
     global $workspaceFolder;
-    $directory = $workspaceFolder . "/" . $directory;
+    $directory = $workspaceFolder . DIRECTORY_SEPARATOR . $directory;
     if (!file_exists("$directory/composer.json")) {
         echo "Error: composer.json not found in {$directory}. Skipping.\n";
         return;
