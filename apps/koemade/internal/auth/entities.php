@@ -1,6 +1,8 @@
 <?php
 
-namespace auth;
+namespace koemade\auth;
+
+use koemade\common;
 
 class Role
 {
@@ -24,7 +26,7 @@ class Role
     }
 }
 
-class Username extends \common\Email
+class Username extends common\Email
 {
     public function __construct(string $value)
     {

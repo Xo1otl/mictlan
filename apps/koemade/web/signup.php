@@ -2,9 +2,11 @@
 
 require __DIR__ . '/middleware.php';
 
+use koemade\auth;
+
 $session = Session();
 
-if ($session->role != \auth\Role::ADMIN) {
+if ($session->role != auth\Role::ADMIN) {
     http_response_code(400);
     echo "Access Denied";
     exit();
@@ -12,9 +14,9 @@ if ($session->role != \auth\Role::ADMIN) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $username = new \auth\Username($_POST["email"]);
-    $password = new \auth\Password($_POST["password"]);
-    $signUpInput = new \auth\SignUpInput($username, $password);
+    $username = new auth\Username($_POST["email"]);
+    $password = new auth\Password($_POST["password"]);
+    $signUpInput = new auth\SignUpInput($username, $password);
 
     $app = NewApp();
     try {

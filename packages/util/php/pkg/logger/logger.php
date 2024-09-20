@@ -1,5 +1,5 @@
 <?php
-namespace logger;
+namespace util\logger;
 
 const ANSI_RESET = "\033[0m";
 const ANSI_GREEN = "\033[32m";

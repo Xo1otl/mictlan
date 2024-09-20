@@ -1,6 +1,6 @@
 <?php
 
-namespace common;
+namespace koemade\common;
 
 class Email
 {
