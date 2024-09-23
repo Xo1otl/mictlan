@@ -41,19 +41,42 @@ services:
 
   wg-easy:
     image: ghcr.io/wg-easy/wg-easy:latest
-    container_name: wg-easy
     environment:
-      - WG_HOST=${WG_EASY_HOST}
-      - PASSWORD_HASH=${WG_EASY_PASSWORD_HASH}
+      - WG_HOST=${WG_HOST}
+      - PASSWORD_HASH=${WG_WEBUI_PASSWORD_HASH}
       - WG_PORT=${WG_PORT}
       - PORT=${WG_WEBUI_PORT}
+      - WG_ALLOWED_IPS=${WG_ALLOWED_IPS}
+      - UI_TRAFFIC_STATS=true
+      - WG_PERSISTENT_KEEPALIVE=25
     ports:
       - ${WG_PORT}:${WG_PORT}/udp
-      - ${WG_WEBUI_PORT}:${WG_WEBUI_PORT}/tcp
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv4.ip_forward=1
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: proxy
+      dockerfile: Dockerfile
+    volumes:
+      - ./vpn/wg-easy.conf.template:/etc/nginx/templates/wg-easy.conf.template
+    environment:
+      - WG_HOST=${WG_HOST}
+      - WG_WEBUI_PORT=${WG_WEBUI_PORT}
+    entrypoint: >
+      /bin/sh -c "
+        envsubst '$$WG_HOST $$WG_WEBUI_PORT' < /etc/nginx/templates/wg-easy.conf.template > /etc/nginx/conf.d/wg-easy.conf &&
+        certbot --nginx --non-interactive --agree-tos -m ${CERTBOT_EMAIL} -d ${WG_HOST} &&
+        crond &&
+        nginx -s stop &&
+        exec nginx -g 'daemon off;'
+      "
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
     restart: unless-stopped
