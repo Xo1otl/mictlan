@@ -15,7 +15,6 @@ func Tag(parent Validator[string]) Validator[string] {
 			return err
 		}
 
-		// 長さチェック（1-35文字）とタグの形式チェックを1つの正規表現で行う
 		if !regexp.MustCompile(`^(?:[a-z0-9]+[-+])*[a-z0-9]+$`).MatchString(value) {
 			return ErrBadTag
 		}
@@ -35,7 +34,7 @@ func ShortLine(parent Validator[string]) Validator[string] {
 		if err != nil {
 			return err
 		}
-		if len(value) < 5 || len(value) > 100 || strings.Contains(value, "\n") {
+		if len(value) < 1 || len(value) > 100 || strings.Contains(value, "\n") {
 			return ErrNotShortLine
 		}
 		return nil
