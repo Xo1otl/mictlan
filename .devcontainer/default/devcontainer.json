@@ -7,6 +7,7 @@
 	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"shutdownAction": "none",
+	"runServices": ["devcontainer"],
 	"customizations": {
 		"vscode": {
 			"extensions": [
