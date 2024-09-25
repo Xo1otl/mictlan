@@ -1,3 +1,3 @@
-from lib.pkg import localfile
+from util import localfile
 
 localfile.print_source(".", ".py")

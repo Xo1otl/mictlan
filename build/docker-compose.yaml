@@ -47,8 +47,8 @@ services:
       - WG_PORT=${WG_PORT}
       - PORT=${WG_WEBUI_PORT}
       - WG_ALLOWED_IPS=${WG_ALLOWED_IPS}
-      - UI_TRAFFIC_STATS=true
       - WG_PERSISTENT_KEEPALIVE=25
+      - WG_DEFAULT_DNS= # don't use DNS
     ports:
       - ${WG_PORT}:${WG_PORT}/udp
     cap_add:
