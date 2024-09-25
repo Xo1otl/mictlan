@@ -1,4 +1,4 @@
-from .. import waveguide
+from syuron import waveguide
 
 a = waveguide.Simulator()
 
