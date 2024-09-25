@@ -37,5 +37,5 @@
 		"ghcr.io/devcontainers/features/go:1": {},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
-	"postCreateCommand": "/bin/sh .devcontainer/default/postCreateCommand.sh"
+	"postCreateCommand": "/bin/sh .devcontainer/default/postCreateCommand.sh && /home/vscode/.local/bin/poetry install --directory /workspaces/mictlan --extras gpu"
 }

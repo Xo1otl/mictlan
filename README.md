@@ -23,21 +23,8 @@ monorepoは人生
    3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
 4. poetryどうしようか考える
    
-- 以下のようなsecretsが現在存在しているが、これらを一か所にまとめる仕組みが欲しい
-- scriptを書いて、一か所にまとめたこれらのsecrets.exampleファイルからsecretsを一斉に自動生成するなどしたい
-- ちょうど最近やってるtree構造で処理を実行する仕組みでいい感じにできないかなぁ
-```
-/workspaces/mictlan/artifacts/koemade/mysql/config.php
-/workspaces/mictlan/apps/koemade/internal/common/config.php
-/workspaces/mictlan/apps/ossekai/internal/auth/awsconfig.json
-/workspaces/mictlan/apps/ossekai/internal/auth/testcredentials.json
-/workspaces/mictlan/apps/ossekai/web/src/auth/awsconfig.json
-/workspaces/mictlan/apps/ossekai/web/src/auth/testcredentials.json
-/workspaces/mictlan/build/koemade/01-initmysqluser.sql
-/workspaces/mictlan/build/ossekai/01-initmysqluser.sql
-/workspaces/mictlan/build/devcontainer/dotfiles/.ssh/id_ed25519_Xo1otl
-/workspaces/mictlan/build/devcontainer/dotfiles/.aws/credentials
-```
+- docker sockのforward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
+- GPUがないと動かないパッケージをどう分けるか考える
 
 # Memo
 
@@ -45,6 +32,7 @@ monorepoは人生
 - 基本framework,driver層は自分で書かないけどuiは自作する唯一のinfraな気がする
 - phpの拡張機能がポンコツすぎてpackage分かれていてもnamespaceを共有するためmulti package workspaceのlintが不可能、エラーでるのどうしようもない
 - EntityでValidation等をDIしたい場合にBuilder Patternするのありだと思う
+- pythonでもinternalとかpkgとか書きたかったけど、PYTHONパスに追加されてフォルダ名が強制的にimportで使用されるので、package名でフォルダ作ることにした。詳しくはpackageを参照して確認
 
 # Note
 
