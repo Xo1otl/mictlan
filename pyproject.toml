@@ -9,7 +9,7 @@ package-mode = false
 notebook = "^7.2.1"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 # 共有するパッケージはPEPに準拠してインストール可能にしdependencesに追加する
 util = { path = "./packages/util/python", develop = true }
 syuron = { path = "./apps/syuron", develop = true, optional = true }
