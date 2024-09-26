@@ -1,3 +1,6 @@
-# handai
+# syuron
 
-handai で書かされるけど汎用性がないコードはここに置く
+機械学習で逆設計
+meepでシミュレーションしようかと思ったけど、古いし使いにくいのでやめた
+matlabでやってpythonではそれをimportしてつかう
+shgのシミュレーションはpythonで行う

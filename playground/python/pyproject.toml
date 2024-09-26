@@ -6,7 +6,7 @@ authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 huggingface-hub = "^0.25.0"
 transformers = "^4.44.2"
 torch = "^2.4.1"
@@ -20,7 +20,6 @@ openpyxl = "^3.1.5"
 
 [tool.poetry.extras]
 gpu = ["torch", "accelerate", "huggingface-hub", "bitsandbytes", "transformers"]
-
 
 [build-system]
 requires = ["poetry-core"]
