@@ -1,5 +1,5 @@
 {
-  description = "meepがcondaかこれでしかインストールできない";
+  description = "Dockerfileでコピーしてnix profile installする用";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -11,10 +11,10 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      devShell.${system} = pkgs.mkShell {
-        name = "mictlan";
-        buildInputs = [
-          pkgs.python312Packages.meep
+      packages.${system}.default = pkgs.buildEnv {
+        name = "mictlan-devcontainer";
+        paths = [
+          pkgs.nix-direnv
         ];
       };
     };

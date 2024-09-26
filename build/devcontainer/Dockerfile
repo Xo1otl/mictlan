@@ -2,8 +2,14 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 USER vscode
 
+RUN curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux \
+    --init none \
+    --no-confirm && \
+    sudo chown -R vscode:vscode /nix
+
 RUN sudo apt update \
     && sudo apt install -y \
+    direnv \
     fish \
     pipx \
     git-lfs \
@@ -23,4 +29,4 @@ RUN sudo apt update \
 
 COPY --chown=vscode:vscode dotfiles/ /home/vscode
 
-RUN echo "\nif [[ \$(ps -o comm= -p \$PPID) != \"fish\" ]]; then\n    exec fish\nfi" >> /home/vscode/.bashrc
+RUN /nix/var/nix/profiles/default/bin/nix profile install /home/vscode/.config/nix

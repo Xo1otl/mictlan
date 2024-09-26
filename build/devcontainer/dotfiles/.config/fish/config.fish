@@ -21,3 +21,5 @@ fish_add_path $HOME/.local/bin # user installed binaries
 fish_add_path /workspaces/mictlan/scripts # workspace scripts
 
 fish_vi_key_bindings
+
+direnv hook fish | source
