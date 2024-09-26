@@ -3,7 +3,7 @@
 # fishのpathは適用されないのでフルパスで実行
 (
   (/home/vscode/.bun/bin/bun install --cwd /workspaces/mictlan) &
-  (/home/vscode/.local/bin/poetry install --directory /workspaces/mictlan) &
+  (/nix/var/nix/profiles/default/bin/nix develop /workspaces/mictlan --command /home/vscode/.local/bin/poetry install --directory /workspaces/mictlan) &
   (
     # workspace managerを先にインストール
     /usr/local/bin/composer install --working-dir=/workspaces/mictlan/scripts/phpm &&
