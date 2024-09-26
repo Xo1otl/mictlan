@@ -1,5 +1,5 @@
 {
-  description = "meepがcondaかこれでしかインストールできない";
+  description = "mictlan devshell";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,7 +14,7 @@
       devShell.${system} = pkgs.mkShell {
         name = "mictlan";
         buildInputs = [
-          pkgs.python312Packages.meep
+          pkgs.cowsay
         ];
       };
     };

@@ -40,17 +40,12 @@
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
 		"bun.runtime": "/home/john/.bun/bin/bun",
 		"bun.debugTerminal.stopOnEntry": false,
+		"terminal.integrated.defaultProfile.linux": "fish",
 		/* git */
 		"git.confirmSync": false,
 		"git.autofetch": true,
 		"git.enableSmartCommit": true,
 		/* python */
-		"python.autoComplete.extraPaths": [
-			"/nix/store/ax6jpa6mckd9n9kymwka1gxss9a1wkk6-python3.12-meep-1.29.0/lib/python3.12/site-packages"
-		],
-		"python.analysis.extraPaths": [
-			"/nix/store/ax6jpa6mckd9n9kymwka1gxss9a1wkk6-python3.12-meep-1.29.0/lib/python3.12/site-packages"
-		],
 		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない
