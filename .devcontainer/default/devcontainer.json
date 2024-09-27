@@ -11,7 +11,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"mkhl.direnv",
 				"golang.go",
 				"leanprover.lean4",
 				"ms-python.autopep8",

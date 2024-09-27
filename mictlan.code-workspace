@@ -13,7 +13,7 @@
 		"configurations": [
 			{
 				"name": "Debug ossekai-web",
-				"type": "chrome",
+				"type": "msedge",
 				"request": "launch",
 				"url": "http://localhost:5173",
 				"webRoot": "${workspaceFolder:mictlan}/apps/ossekai/web"
@@ -72,6 +72,8 @@
 			"editor.defaultFormatter": "biomejs.biome"
 		},
 		/* php */
-		"php.completion.autoimport": "fqn"
+		"php.completion.autoimport": "fqn",
+		/* julia */
+		"julia.executablePath": "/home/vscode/.juliaup/bin/julia"
 	}
 }

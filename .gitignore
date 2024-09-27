@@ -1,6 +1,7 @@
 # dependencies
 node_modules/
 .venv/
+.juliaup/
 poetry.lock
 bun.lockb
 vendor/

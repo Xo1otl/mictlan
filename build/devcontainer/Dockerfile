@@ -29,6 +29,7 @@ RUN sudo apt update \
 
 COPY --chown=vscode:vscode dotfiles/ /home/vscode
 
-RUN echo "\nif [[ \$(ps -o comm= -p \$PPID) != \"fish\" ]]; then\n    exec fish\nfi" >> /home/vscode/.bashrc
-
 RUN /nix/var/nix/profiles/default/bin/nix profile install /home/vscode/.config/nix
+
+# fishのパスに対応してないので手動でパスを通している
+RUN curl -fsSL https://install.julialang.org | sh -s -- -y --add-to-path=no
