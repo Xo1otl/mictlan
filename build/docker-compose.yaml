@@ -64,18 +64,12 @@ services:
       context: proxy
       dockerfile: Dockerfile
     volumes:
+      - ./proxy/entrypoint.sh:/entrypoint.sh
       - ./vpn/wg-easy.conf.template:/etc/nginx/templates/wg-easy.conf.template
     environment:
       - WG_HOST=${WG_HOST}
       - WG_WEBUI_PORT=${WG_WEBUI_PORT}
-    entrypoint: >
-      /bin/sh -c "
-        envsubst '$$WG_HOST $$WG_WEBUI_PORT' < /etc/nginx/templates/wg-easy.conf.template > /etc/nginx/conf.d/wg-easy.conf &&
-        certbot --nginx --non-interactive --agree-tos -m ${CERTBOT_EMAIL} -d ${WG_HOST} &&
-        crond &&
-        nginx -s stop &&
-        exec nginx -g 'daemon off;'
-      "
+    entrypoint: [ "/entrypoint.sh" ]
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
