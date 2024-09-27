@@ -14,6 +14,7 @@ set -g fish_greeting
 fish_add_path $HOME/.elan/bin
 fish_add_path $HOME/.bun/bin
 fish_add_path $HOME/.local/bin # user installed binaries
+fish_add_path $HOME/.juliaup/bin # user installed binaries
 fish_add_path /workspaces/mictlan/scripts # workspace scripts
 
 if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
