@@ -2,6 +2,7 @@ FROM mictlan-devcontainer:latest
 
 USER vscode
 
+# 機械学習関連
 RUN curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey \
     | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list \
