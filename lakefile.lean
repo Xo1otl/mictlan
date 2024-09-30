@@ -3,4 +3,4 @@ open Lake DSL
 
 package «mictlan»
 
-require leantutorial from "./apps/LeanTutorial"
+require leantutorial from "./research/LeanTutorial"
