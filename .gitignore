@@ -11,6 +11,7 @@ composer.lock
 dist/
 out/
 __pycache__/
+.initialized
 
 # ide and development tools
 .lake/

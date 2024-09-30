@@ -17,7 +17,7 @@
           pkgs.cowsay
         ];
         shellHook = ''
-          echo Enabled mictlan devShell
+          echo Entered mictlan devShell
         '';
       };
     };
