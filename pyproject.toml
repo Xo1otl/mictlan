@@ -19,13 +19,7 @@ gpu = [
 
 [tool.pyright]
 # pylanceはここで指定したフォルダ内のファイルのみ検出する
-include = [
-    "**/python",
-    "scripts",
-    "build",
-    "apps/personal-site/web/notebook",
-    "apps/syuron",
-]
+include = ["**/python", "scripts", "build", "apps/personal-site/web/notebook"]
 
 [build-system]
 requires = ["poetry-core"]
