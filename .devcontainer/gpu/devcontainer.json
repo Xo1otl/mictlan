@@ -20,7 +20,6 @@
 				"ms-python.vscode-pylance",
 				"ms-toolsai.jupyter",
 				"oven.bun-vscode",
-				"tomoki1207.pdf",
 				"bierner.markdown-mermaid",
 				"ms-vscode.live-server",
 				"statelyai.stately-vscode",
@@ -29,7 +28,8 @@
 				"ms-azuretools.vscode-docker",
 				"asvetliakov.vscode-neovim",
 				"tamasfe.even-better-toml",
-				"devsense.phptools-vscode"
+				"devsense.phptools-vscode",
+				"julialang.language-julia"
 			]
 		}
 	},

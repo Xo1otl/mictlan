@@ -35,6 +35,8 @@ monorepoは人生
 - phpの拡張機能がポンコツすぎてpackage分かれていてもnamespaceを共有するためmulti package workspaceのlintが不可能、エラーでるのどうしようもない
 - EntityでValidation等をDIしたい場合にBuilder Patternするのありだと思う
 - pythonでもinternalとかpkgとか書きたかったけど、PYTHONパスに追加されてフォルダ名が強制的にimportで使用されるので、package名でフォルダ作ることにした。詳しくはpackageを参照して確認
+- direnvが動かん時やターミナルがfishにならない時があるけどcode-workspaceファイルでなんどか書き直すと戻る
+- juliaでは、pkgでadd IJuliaするとjupyter kernelがインストールでき、vscodeでjuliaのカーネル選択するとjupyter notebookで使える
 
 # Note
 

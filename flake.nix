@@ -16,6 +16,9 @@
         buildInputs = [
           pkgs.cowsay
         ];
+        shellHook = ''
+          echo Enabled mictlan devShell
+        '';
       };
     };
 }

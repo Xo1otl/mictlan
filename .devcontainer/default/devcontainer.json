@@ -28,7 +28,8 @@
 				"ms-azuretools.vscode-docker",
 				"asvetliakov.vscode-neovim",
 				"tamasfe.even-better-toml",
-				"devsense.phptools-vscode"
+				"devsense.phptools-vscode",
+				"julialang.language-julia"
 			]
 		}
 	},
