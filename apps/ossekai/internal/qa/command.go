@@ -209,7 +209,7 @@ func NewObject(placeholder string, src ObjectSrc) (*Object, error) {
 	}, nil
 }
 
-type ObjectSrc io.Reader
+type ObjectSrc io.ReadSeeker
 
 var (
 	ErrEmptyObjectPlaceholder = errors.New("object placeholder cannot be empty")

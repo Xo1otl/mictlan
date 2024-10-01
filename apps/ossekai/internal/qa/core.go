@@ -8,6 +8,7 @@ type TagId string
 type AnswerId string
 type ObjectKey string
 
+// 中間テーブル的な感じだけど、編集を考えることがないstatelessなのでvalueObjectとみなせる
 // valueObjectはCQRSの文脈でも使い回せる
 type Attachment struct {
 	Placeholder string
