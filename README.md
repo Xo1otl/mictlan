@@ -12,6 +12,7 @@ monorepoは人生
 - ターミナルからAI呼び出せる機能を作る、一つのターミナルにつき一つの会話
   - AIはAPI KeyではなくPlaywrightを使って行い無限に話せるようにする
 - ねずっちの謎掛けがAIで普通にできそうだからそれを行うサイト作ってみたい
+- juliaでworkspaceやりたい時、direnvにjuliaのalias書いてworkspaceファイルに追加したjuliaのパッケージを全部activateすればいい説
 
 # TODO
 

@@ -1,6 +1,6 @@
 <?php
 
-$workspaces = [
+$use = [
     "apps/koemade",
     "artifacts/koemade",
     "packages/util/php",
