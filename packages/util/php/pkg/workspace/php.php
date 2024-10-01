@@ -4,18 +4,22 @@ namespace util\workspace;
 
 class PHP implements Workspace
 {
+    public $workFile = 'workspace.php';
     public $root = "";
+    public $use = [];
     function __construct()
     {
         $path = getcwd();
         while ($path !== '/' && $path !== '') {
-            if (file_exists($path . DIRECTORY_SEPARATOR . 'workspace.php')) {
+            if (file_exists($path . DIRECTORY_SEPARATOR . $this->workFile)) {
                 $this->root = $path;
+                require $path . DIRECTORY_SEPARATOR . $this->workFile;
+                $this->use = $use;
                 return;
             }
             $path = dirname($path);
         }
-        throw new \Exception("Workspace root (containing workspace.php) not found.");
+        throw new \Exception("Workspace root (containing php.work) not found.");
     }
 
     function root(): string
@@ -46,5 +50,10 @@ class PHP implements Workspace
             return substr($absolutePath, strlen($this->root) + 1);
         }
         throw new \Exception("The specified path is outside the workspace: $path");
+    }
+
+    function packages(): array
+    {
+        return $this->use;
     }
 }

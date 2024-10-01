@@ -17,10 +17,6 @@ fish_add_path $HOME/.local/bin # user installed binaries
 fish_add_path $HOME/.juliaup/bin # user installed binaries
 fish_add_path /workspaces/mictlan/scripts # workspace scripts
 
-if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-    source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-end
-
 direnv hook fish | source
 direnv export fish | source
 

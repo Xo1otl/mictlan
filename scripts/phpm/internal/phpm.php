@@ -4,9 +4,9 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use util\workspace;
 
-$workspaceFolder = (new workspace\PHP())->root;
-
-require "$workspaceFolder/workspace.php";
+$workspace = new workspace\PHP();
+$workspaceFolder = $workspace->root();
+$packages = $workspace->packages();
 
 function runComposerInstall($directory)
 {
@@ -51,13 +51,13 @@ $command = $argv[1];
 
 switch ($command) {
     case 'install':
-        foreach ($workspaces as $workspace) {
-            runComposerInstall($workspace);
+        foreach ($packages as $package) {
+            runComposerInstall($package);
         }
         break;
     case 'test':
-        foreach ($workspaces as $workspace) {
-            runTests($workspace);
+        foreach ($packages as $package) {
+            runTests($package);
         }
         break;
     default:
