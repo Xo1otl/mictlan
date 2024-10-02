@@ -1,0 +1,15 @@
+services:
+  devcontainer-gpu:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces/mictlan:cached
+    command: >
+      /bin/bash -c "sudo chown -R vscode:vscode /workspaces/mictlan && sleep infinity"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]

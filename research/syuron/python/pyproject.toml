@@ -8,6 +8,8 @@ packages = [{ include = "syuron", from = "." }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+pandas = "^2.2.3"
+scipy = "^1.14.1"
 
 [build-system]
 requires = ["poetry-core"]
