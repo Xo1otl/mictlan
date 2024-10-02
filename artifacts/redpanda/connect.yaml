@@ -1,0 +1,25 @@
+input:
+  generate:
+    interval: 1s
+    mapping: |
+      root.id = uuid_v4()
+      root.user.name = fake("name")
+      root.user.email = fake("email")
+      root.content = fake("paragraph")
+
+pipeline:
+  processors:
+    - mutation: |
+        root.hash = content().hash("sha256").encode("hex")
+
+output:
+  kafka_franz:
+    seed_brokers:
+        - redpanda
+    topic: demo
+
+redpanda:
+  seed_brokers:
+    - redpanda
+  logs_topic: __redpanda.connect.logs
+  logs_level: info

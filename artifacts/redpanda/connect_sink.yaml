@@ -1,0 +1,36 @@
+input:
+  label: ""
+  kafka:
+    addresses:
+      - redpanda:9092
+    topics:
+      - demo
+    consumer_group: "A"
+    checkpoint_limit: 1024
+    auto_replay_nacks: true
+
+pipeline:
+  processors:
+    - mutation: |
+        root.hash = content().hash("sha256").encode("hex")
+
+output:
+  label: ""
+  elasticsearch:
+    urls: 
+      - http://elasticsearch:9200
+    index: "index"
+    id: ${!count("elastic_ids")}-${!timestamp_unix()}
+    type: ""
+    max_in_flight: 64
+    batching:
+      count: 0
+      byte_size: 0
+      period: ""
+      check: ""
+
+redpanda:
+  seed_brokers:
+    - redpanda
+  logs_topic: __redpanda.connect.logs
+  logs_level: info
