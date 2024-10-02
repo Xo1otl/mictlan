@@ -1,3 +1,5 @@
+name: mictlan
+
 services:
   devcontainer-gpu:
     build:

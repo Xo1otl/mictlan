@@ -1,7 +1,6 @@
 services:
   mysql:
     image: mysql:latest
-    command: sleep infinity
     ports:
       - 3306:3306
     environment:

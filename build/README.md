@@ -1,5 +1,7 @@
 # build
 
+nameがあるのでcompose upは基本buildから行う
+
 ## secrets.json
 
 - すべてのシークレットファイルの参照を持っている

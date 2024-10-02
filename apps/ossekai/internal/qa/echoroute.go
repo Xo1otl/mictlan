@@ -26,7 +26,7 @@ type CommandHandler struct {
 
 func NewCommandHandler() *CommandHandler {
 	repo := NewMockDb()
-	storage := NewMockStorage()
+	storage := NewS3Storage()
 	command := NewCommand(repo, storage)
 	return &CommandHandler{command}
 }
