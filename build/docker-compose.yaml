@@ -1,6 +1,7 @@
 name: mictlan
 
 include:
+  - searchengine/docker-compose.yaml
   - broker/docker-compose.yaml
   - sqldb/docker-compose.yaml
   - proxy/docker-compose.yaml
