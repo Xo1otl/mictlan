@@ -1,1 +1,3 @@
 01-initmysqluser.sql
+env.py
+docker-compose.yaml
