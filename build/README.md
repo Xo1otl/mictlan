@@ -2,7 +2,8 @@
 
 - nameがあるのでcompose upは基本buildから行う
 - gen.pyはgen_build.shで全部実行できる
-- docker composeで変数は変数使いたいのでdocker-compose.gen.pyにすると
+- docker composeで変数は変数使いたいのでdocker-compose.gen.pyにしてimportできるようにする
+- ライブラリでできたりしないかなぁ
 
 ## secrets.json
 
