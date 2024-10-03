@@ -23,7 +23,7 @@ echo "プロジェクトルート: $project_root"
 export PYTHONPATH="$project_root/build:${PYTHONPATH}"
 
 # ../build ディレクトリ内のすべての *.gen.py ファイルを探して実行
-find "$project_root/build" -type f -name "*.gen.py" | while read -r file; do
+find "$project_root/build" -type f -name "*.tpl.py" | while read -r file; do
   # ファイルが存在するディレクトリに移動
   dir=$(dirname "$file")
   echo "Executing $file in $dir..."

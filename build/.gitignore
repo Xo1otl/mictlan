@@ -1,4 +1,11 @@
+# credentialsj
 01-initmysqluser.sql
 env.py
-**/docker-compose.yaml
+
+# 自動生成されるファイル
+**/docker-compose.yaml 
 nginx.conf
+
+# この二つは自作
+!devcontainer/docker-compose.yaml
+!devcontainer-gpu/docker-compose.yaml
