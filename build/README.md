@@ -1,6 +1,7 @@
 # build
 
 nameがあるのでcompose upは基本buildから行う
+gen.pyはgen_build.shで全部実行できる
 
 ## secrets.json
 

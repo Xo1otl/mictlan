@@ -16,4 +16,5 @@ services:
       - ../ossekai/02-initmysqltables.sql:/docker-entrypoint-initdb.d/02-ossekai-initmysqltables.sql
 """
 
-print(compose)
+with open('docker-compose.yaml', 'w') as file:
+    file.write(compose)
