@@ -1,3 +1,4 @@
+compose = f"""\
 services:
   redpanda:
     command:
@@ -56,3 +57,6 @@ services:
 
 volumes:
   redpanda: null
+"""
+
+print(compose)

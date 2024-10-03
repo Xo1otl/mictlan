@@ -19,4 +19,5 @@ services:
     restart: unless-stopped
 """
 
-print(compose)
+with open('docker-compose.yaml', 'w') as file:
+    file.write(compose)
