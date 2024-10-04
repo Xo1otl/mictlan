@@ -1,3 +1,3 @@
 from .env import *
 
-NGINX_CONF_FILENAME = 'nginx.conf'
+NGINX_CONF_FILE = 'nginx.conf'
