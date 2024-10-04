@@ -28,8 +28,9 @@ export class JupyterPresenter
 	async render(notebook: JupyterNotebook): Promise<HTML> {
 		try {
 			const respose = new Response(notebook);
+			// notebookが自分のパスを基準にして外部ファイルを参照することがあるためnotebookが置かれる場所に移動して実行する
 			const output =
-				await Bun.$`jupyter nbconvert --to html --execute --stdin --stdout < ${respose}`.text();
+				await Bun.$`cd web/notebook && jupyter nbconvert --to html --execute --stdin --stdout < ${respose}`.text();
 			const html = make<HTML>();
 			return html(output);
 		} catch (error) {

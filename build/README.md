@@ -1,20 +1,13 @@
 # build
 
-- nameがあるのでcompose upは基本buildから行う
-- gen.pyはgen_build.shで全部実行できる
-- docker composeで変数は変数使いたいのでdocker-compose.gen.pyにしてimportできるようにする
-- ライブラリでできたりしないかなぁ
+- 複雑だったり依存のあるyamlはpythonで書いてシリアライズする
+- scriptsのgen_tpl.py
 
 ## secrets.json
 
 - すべてのシークレットファイルの参照を持っている
 - secretmが作ったファイルで、ここを追記したり消したりすると管理するシークレットを編集できる
 - 自動追加されるのでgitignoreからも消すこと推奨
-
-## vpn
-
-- vpnサーバーの管理コンソールのssl化のためのnginxの設定ファイルがある
-- envファイルにあわせてサーバーを建てる場所やポートを調節する必要がある
 
 ## Memo
 
