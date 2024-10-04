@@ -42,6 +42,7 @@ monorepoは人生
 
 # Note
 
+- docker composeファイルはdevcontainerに入ってからscripts/tplgen.shを実行して生成する
 - docker compose up(select services)はdevcontainerからできない、volumeマウントができない、ホストマシンから実行すべし
 - Oracle.mysql-shell-for-vs-codeもバリ便利やけどdevcontainerから動かない、new windowしてホストからは見れる
 - システムのクリップボードも使えるようにする(keybindindgs.jsonはdevcontainerではなくホストマシンの設定)

@@ -4,17 +4,18 @@
 	"scripts": {
 		"build": "bun build --compile --minify --sourcemap cmd/server/main.ts --outfile out/server",
 		"dev": "bun run cmd/server/main.ts",
+		"debug": "bun --inspect cmd/server/main.ts",
 		"lint": "biome lint",
 		"test": "bun test"
 	},
 	"dependencies": {
-		"elysia": "^1.1.9",
+		"elysia": "^1.1.17",
 		"lib": "workspace:*"
 	},
 	"devDependencies": {
-		"@types/bun": "^1.1.8"
+		"@types/bun": "^1.1.10"
 	},
 	"peerDependencies": {
-		"typescript": "^5.5.4"
+		"typescript": "^5.6.2"
 	}
 }

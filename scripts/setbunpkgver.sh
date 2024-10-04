@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # package.jsonからdependenciesとdevDependenciesを抽出
-dependencies=$(jq -r '.dependencies | keys[]' package.json)
-devDependencies=$(jq -r '.devDependencies | keys[]' package.json)
+dependencies=$(jq -r '.dependencies | to_entries[] | select(.value != "workspace:*") | .key' package.json)
+devDependencies=$(jq -r '.devDependencies | to_entries[] | select(.value != "workspace:*") | .key' package.json)
 
 # dependenciesの更新
 for dep in $dependencies
@@ -20,7 +20,7 @@ done
 
 # peerDependenciesの更新（存在する場合）
 if jq -e '.peerDependencies' package.json > /dev/null; then
-  peerDependencies=$(jq -r '.peerDependencies | keys[]' package.json)
+  peerDependencies=$(jq -r '.peerDependencies | to_entries[] | select(.value != "workspace:*") | .key' package.json)
   for dep in $peerDependencies
   do
     bun install --save-peer $dep@latest
