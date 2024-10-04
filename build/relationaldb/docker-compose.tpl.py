@@ -1,13 +1,13 @@
 import yaml
-import glob
 import os
 from relationaldb import *
+from util import workspace
 
 # Variable to store the volume mappings for MySQL initialization scripts
 mysql_init_script_volumes = []
 
-# Find all .mysql.sql files in folders under ../
-for filepath in glob.glob('../*/[0-9]*-*.mysql.sql'):
+# Find all .mysql.sql files in folders under build
+for filepath in workspace.findrelpaths(__file__, 'build/*/[0-9]*-*.mysql.sql'):
     folder_name = os.path.basename(os.path.dirname(filepath))
     filename = os.path.basename(filepath)
     # Split the filename to insert folder name

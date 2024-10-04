@@ -22,32 +22,27 @@ monorepoは人生
    1. 事前イベントを発火して中間状態への遷移を試みる、無理だったら処理しないでエラーを返す
    2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
    3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
-4. poetryどうしようか考える
-   
 - docker sockのforward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
-- GPUがないと動かないパッケージをどう分けるか考える
-- meepがpoetryからインストール不可能だけど、nixでpoetryとmeepをインストールするとどっちも使える
 - `docker context create workstation --docker "host=tcp://10.8.0.2:2375"`
 - https://www.elastic.co/jp/blog/getting-started-with-the-elastic-stack-and-docker-compose
 
 # Memo
 
-- leanのダウンロードとcomposerはエディタの通知に従ってやる
+- leanのダウンロードはエディタの通知に従ってやる
 - 基本framework,driver層は自分で書かないけどuiは自作する唯一のinfraな気がする
-- phpの拡張機能がポンコツすぎてpackage分かれていてもnamespaceを共有するためmulti package workspaceのlintが不可能、エラーでるのどうしようもない
-- EntityでValidation等をDIしたい場合にBuilder Patternするのありだと思う
+- phpの拡張機能はpackage分かれていてもnamespaceを共有する。namespaceを必ずpkg/moduleにすれば大丈夫、artifactsに置いてるやつは直すのめんどいので無視
+- EntityでValidation等をDIしたい場合にBuilder Patternするのありだと思った。goのcontextの書き方もあり
 - pythonでもinternalとかpkgとか書きたかったけど、PYTHONパスに追加されてフォルダ名が強制的にimportで使用されるので、package名でフォルダ作ることにした。詳しくはpackageを参照して確認
 - direnvが動かん時やターミナルがfishにならない時があるけどcode-workspaceファイルでなんどか書き直すと戻る
 - juliaでは、pkgでadd IJuliaするとjupyter kernelがインストールでき、vscodeでjuliaのカーネル選択するとjupyter notebookで使える
+- secretsがなくてもdevcontainerのビルドは正常にできるけど、ssh keyだけ手動で移動する必要がある
+- workspace rootで`tar -xvf secrets.tar.gz`してからビルドしたら万事解決する
 
 # Note
 
 - docker composeファイルはdevcontainerに入ってからscripts/tplgen.shを実行して生成する
-- docker compose up(select services)はdevcontainerからできない、volumeマウントができない、ホストマシンから実行すべし
-- Oracle.mysql-shell-for-vs-codeもバリ便利やけどdevcontainerから動かない、new windowしてホストからは見れる
-- システムのクリップボードも使えるようにする(keybindindgs.jsonはdevcontainerではなくホストマシンの設定)
-- neovimとOracleのmysql shellはlocalで入れるべし
-- システムのクリップボードを別で使うための設定
+- docker compose up(select services)はdevcontainerからvolumeマウントができない、mountある場合ホストマシンから実行すべし
+- システムのクリップボードも使えるようにする設定(keybindindgs.jsonはdevcontainerではなくホストマシンの設定)
 ```json
 // Place your key bindings in this file to override the defaults
 [
