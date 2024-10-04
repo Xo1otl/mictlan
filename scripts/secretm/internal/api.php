@@ -25,10 +25,10 @@ $handlers = [
         if (empty($options)) {
             $outputPath = $workspace->locate("");
         } elseif (count($options) == 1) {
-            $outputPath = $options[0];
+            $outputPath = $workspace->locate($options[0]);
         }
-        $relativePath = $workspace->locate($outputPath);
-        $archivePath = ($relativePath === '') ? 'secrets.tar.gz' : $relativePath . DIRECTORY_SEPARATOR . 'secrets.tar.gz';
+        # この条件分岐がないと、$outputPathが空の場合`/secrets.tar.gz`となりpermission deniedエラーが発生する
+        $archivePath = ($outputPath === '') ? 'secrets.tar.gz' : $outputPath . DIRECTORY_SEPARATOR . 'secrets.tar.gz';
         $manager->export($archivePath);
     },
     'import' => function ($options) use ($manager, $workspace) {
