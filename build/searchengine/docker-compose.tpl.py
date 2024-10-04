@@ -11,7 +11,7 @@ config = {
             ]
         },
         'kibana': {
-            'image': 'docker.elastic.co/kibana/kibana:8.14.0',
+            'image': 'docker.elastic.co/kibana/kibana:8.15.2',
             'environment': {
                 'ELASTICSEARCH_HOSTS': 'http://elasticsearch:9200'
             },
