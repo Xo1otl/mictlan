@@ -1,5 +1,5 @@
 # credentialsj
-01-initmysqluser.sql
+01-inituser.mysql.sql
 env.py
 
 # 自動生成されるファイル

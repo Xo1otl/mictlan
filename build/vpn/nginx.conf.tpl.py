@@ -1,6 +1,6 @@
 from vpn import *
 
-conf = f"""\
+config = f"""\
 server {{
     server_name {HOST};
 
@@ -15,4 +15,4 @@ server {{
 """
 
 with open('nginx.conf', 'w') as file:
-    file.write(conf)
+    file.write(config)
