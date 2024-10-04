@@ -15,7 +15,7 @@ config = {
                 'WG_DEFAULT_DNS': ''  # 空でDNSを使用しない
             },
             'ports': [
-                f'{UDP_PORT}:{UDP_PORT}/udp'  # 既存の変数を使用
+                f'{UDP_PORT}:{UDP_PORT}/udp'
             ],
             'cap_add': [
                 'NET_ADMIN',
@@ -30,6 +30,5 @@ config = {
     }
 }
 
-# YAMLファイルに出力します
 with open('docker-compose.yaml', 'w') as file:
     yaml.dump(config, file, default_flow_style=False)

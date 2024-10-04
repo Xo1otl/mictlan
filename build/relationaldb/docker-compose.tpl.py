@@ -1,17 +1,27 @@
 import yaml
+import glob
+import os
 from relationaldb import *
 
-# List of SQL scripts to map
-volume_mappings = [
-    ('../koemade/01-initmysqluser.sql',
-     '/docker-entrypoint-initdb.d/01-koemade-initmysqluser.sql'),
-    ('../koemade/02-initmysqltables.sql',
-     '/docker-entrypoint-initdb.d/02-koemade-initmysqltables.sql'),
-    ('../ossekai/01-initmysqluser.sql',
-     '/docker-entrypoint-initdb.d/01-ossekai-initmysqluser.sql'),
-    ('../ossekai/02-initmysqltables.sql',
-     '/docker-entrypoint-initdb.d/02-ossekai-initmysqltables.sql')
-]
+# Variable to store the volume mappings for MySQL initialization scripts
+mysql_init_script_volumes = []
+
+# Find all .mysql.sql files in folders under ../
+for filepath in glob.glob('../*/[0-9]*-*.mysql.sql'):
+    folder_name = os.path.basename(os.path.dirname(filepath))
+    filename = os.path.basename(filepath)
+    # Split the filename to insert folder name
+    num_and_description = filename.split('-', 1)
+    if len(num_and_description) != 2:
+        continue  # Skip files that don't match the pattern
+    num = num_and_description[0]
+    description = num_and_description[1]
+    # Build the destination filename
+    dest_filename = f'{num}-{folder_name}-{description}'
+    # Build the volume mapping
+    src = filepath
+    dst = f'/docker-entrypoint-initdb.d/{dest_filename}'
+    mysql_init_script_volumes.append(f'{src}:{dst}')
 
 # Build the config object
 config = {
@@ -23,7 +33,7 @@ config = {
                 'MYSQL_ROOT_PASSWORD': MYSQL_ROOT_PASSWORD
             },
             # Automate volume creation
-            'volumes': [f'{src}:{dst}' for src, dst in volume_mappings]
+            'volumes': mysql_init_script_volumes
         }
     }
 }
