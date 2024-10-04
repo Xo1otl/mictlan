@@ -14,5 +14,5 @@ server {{
 }}
 """
 
-with open('nginx.conf', 'w') as file:
+with open(NGINX_CONF_FILENAME, 'w') as file:
     file.write(config)

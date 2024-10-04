@@ -3,7 +3,7 @@ import glob
 from typing import List
 
 
-def find_workspace_root(start_dir: str) -> str:
+def findroot(start_dir: str) -> str:
     """
     ワークスペースのルートを探し、見つかったルートを返す関数。
     'workspace.php' が存在するディレクトリをルートとする。
@@ -21,10 +21,10 @@ def find_workspace_root(start_dir: str) -> str:
         current_dir = parent_dir
 
 
-root_dir = find_workspace_root(os.path.dirname(os.path.abspath(__file__)))
+root_dir = findroot(os.path.dirname(os.path.abspath(__file__)))
 
 
-def findrelpaths(base: str, pattern: str) -> List[str]:
+def globrelpaths(base: str, pattern: str) -> List[str]:
     """
     グローバル変数 root_dir を使用して、指定パターンにマッチするファイルのリストを
     開始ファイルの場所からの最短相対パスで返す。

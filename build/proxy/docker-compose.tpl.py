@@ -15,7 +15,7 @@ config = {
             ],
             'volumes': [
                 './entrypoint.sh:/entrypoint.sh',
-                '../vpn/nginx.conf:/etc/nginx/conf.d/vpn.conf'
+                f'../vpn/{vpn.NGINX_CONF_FILENAME}:/etc/nginx/conf.d/vpn.conf'
             ],
             'entrypoint': ["/entrypoint.sh"],
             'ports': [
