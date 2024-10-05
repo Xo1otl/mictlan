@@ -22,8 +22,6 @@ monorepoは人生
    1. 事前イベントを発火して中間状態への遷移を試みる、無理だったら処理しないでエラーを返す
    2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
    3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
-- docker sockのforward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
-- `docker context create workstation --docker "host=tcp://10.8.0.2:2375"`
 - https://www.elastic.co/jp/blog/getting-started-with-the-elastic-stack-and-docker-compose
 
 # Memo
@@ -40,6 +38,10 @@ monorepoは人生
 
 # Note
 
+- devcontainerを閉じる時毎回close connectionをしないと永久にconnectionが溜まっていく、リセットしたい時は下のコマンドで接続を貼り直す
+- docker sockを閉じる`netsh interface portproxy delete v4tov4 listenport=2375 listenaddress=10.8.0.2`
+- docker sockのforward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
+- `docker context create workstation --docker "host=tcp://10.8.0.2:2375"`
 - docker composeファイルはdevcontainerに入ってからscripts/tplgen.shを実行して生成する
 - docker compose up(select services)はdevcontainerからvolumeマウントができない、mountある場合ホストマシンから実行すべし
 - システムのクリップボードも使えるようにする設定(keybindindgs.jsonはdevcontainerではなくホストマシンの設定)
