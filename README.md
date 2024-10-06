@@ -39,6 +39,8 @@ monorepoは人生
 # Note
 
 - devcontainerを閉じる時毎回close connectionをしないと永久にconnectionが溜まっていく、リセットしたい時は下のコマンドで接続を貼り直す
+    - X転送のsocketが消えずに/tmp/.x11-unixが増殖していくから定期的に消さなあかんのかもしれない
+    - 開いてる最中にバグるなどしたらコネクションが遺ってしまうのかもしれない
 - docker sockを閉じる`netsh interface portproxy delete v4tov4 listenport=2375 listenaddress=10.8.0.2`
 - docker sockのforward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
 - `docker context create workstation --docker "host=tcp://10.8.0.2:2375"`
