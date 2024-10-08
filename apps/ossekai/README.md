@@ -1,6 +1,6 @@
 # ossekaiserver
 
-gin で作る
+echo で作る
 
 # Coding Style
 
@@ -24,9 +24,10 @@ gin で作る
 
 # Memo
 
-GetUser 関数で JWT の検証やってくれるらしい
-
-jwt だと少し高速化するらしい
+- GetUser 関数で JWT の検証やってくれるらしい
+- jwt だと少し高速化するらしい
+- go run cmd/echoapiserver/main.goで行けるっぽい
+- kafkaのtopicはrdbのtableみたいなもん
 
 # TODO
 

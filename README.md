@@ -1,6 +1,6 @@
 # mictlan
 
-monorepo は人生
+個人的なコードを書くモノレポ
 
 [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 なんか subpackage に manifest がないとか言われるが動いてるので問題なし

@@ -6,7 +6,7 @@
 		}
 	],
 	"extensions": {
-		"recommendations": ["Oracle.mysql-shell-for-vs-code"]
+		"recommendations": ["ms-vsliveshare.vsliveshare"]
 	},
 	"launch": {
 		"version": "0.2.0",

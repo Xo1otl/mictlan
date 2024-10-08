@@ -26,8 +26,8 @@ func LaunchEcho() {
 	// Add routes from qa package
 	qa.AddEchoRoutes(e)
 
-	log.Println("🚀 Server listening at: http://localhost:3000")
-	err := e.Start("localhost:3000")
+	log.Println("🚀 Server listening at: http://localhost:3030")
+	err := e.Start("localhost:3030")
 	if err != nil {
 		log.Fatal(err)
 	}

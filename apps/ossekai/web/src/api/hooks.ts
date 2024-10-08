@@ -1,6 +1,6 @@
 import * as auth from "../auth";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "http://localhost:3030";
 
 interface ApiRequestConfig extends Omit<RequestInit, "body"> {
 	path: string;
