@@ -4,7 +4,7 @@
     "customManagers": [
         {
             "customType": "regex",
-            "fileMatch": ["docker-compose.tpl.py"],
+            "fileMatch": ["docker_compose.py"],
             "matchStrings": [
                 "'image':\\s*'(?<depName>[\\w./-]+):(?<currentValue>[\\w.-]+)'"
             ],
