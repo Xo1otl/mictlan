@@ -10,6 +10,8 @@ packages = [{ include = "syuron", from = "." }]
 python = "^3.10"
 pandas = "^2.2.3"
 scipy = "^1.14.1"
+numpy = "^2.1.2"
+matplotlib = "^3.9.2"
 
 [build-system]
 requires = ["poetry-core"]

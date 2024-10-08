@@ -6,3 +6,4 @@ include:
   - broker/docker-compose.yaml
   - searchengine/docker-compose.yaml
   - relationaldb/docker-compose.yaml
+  - observability/docker-compose.yaml

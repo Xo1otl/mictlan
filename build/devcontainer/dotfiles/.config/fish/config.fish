@@ -20,8 +20,6 @@ fish_add_path /workspaces/mictlan/scripts # workspace scripts
 direnv hook fish | source
 direnv export fish | source
 
-functions --copy cd standard_cd
-
 function cd
-  standard_cd $argv; and ls -a
+  builtin cd $argv; and ls -a
 end
