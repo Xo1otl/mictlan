@@ -121,16 +121,49 @@ class Cli implements VCS, PathRepo, Packer
             return;
         }
 
-        $archivePath = escapeshellarg($archivePath);
+        // アーカイブ内のファイルリストを取得
+        $archiveFiles = [];
+        $cmdList = "tar -tzf " . escapeshellarg($archivePath);
+        exec($cmdList, $archiveFiles, $return_var);
 
-        $cmd = "tar -xzf $archivePath";
+        if ($return_var !== 0) {
+            echo "Error listing archive contents. Command: $cmdList\n";
+            chdir($currentDir);
+            return;
+        }
 
-        exec($cmd, $output, $return_var);
+        // 登録されたシークレットのパスを取得
+        $registeredSecrets = $this->listAll();
+
+        // パスを正規化（相対パスや絶対パスの違いを吸収）
+        $normalizedArchiveFiles = array_map(function ($path) {
+            return ltrim($path, './'); // './'を削除
+        }, $archiveFiles);
+
+        $normalizedRegisteredSecrets = array_map(function ($path) {
+            return ltrim($path, './'); // './'を削除
+        }, $registeredSecrets);
+
+        // リストをソートして比較
+        sort($normalizedArchiveFiles);
+        sort($normalizedRegisteredSecrets);
+
+        if ($normalizedArchiveFiles !== $normalizedRegisteredSecrets) {
+            echo "The contents of the archive do not match the registered secrets.\n";
+            chdir($currentDir);
+            return;
+        }
+
+        // アーカイブを解凍
+        $archivePathEscaped = escapeshellarg($archivePath);
+        $cmdExtract = "tar -xzf $archivePathEscaped";
+
+        exec($cmdExtract, $output, $return_var);
 
         if ($return_var === 0) {
             echo "Decompressed archive $archivePath\n";
         } else {
-            echo "Error decompressing archive. Command: $cmd\n";
+            echo "Error decompressing archive. Command: $cmdExtract\n";
         }
 
         chdir($currentDir);

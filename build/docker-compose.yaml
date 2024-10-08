@@ -1,9 +1,0 @@
-name: mictlan
-
-include:
-  - proxy/docker-compose.yaml
-  - vpn/docker-compose.yaml
-  - broker/docker-compose.yaml
-  - searchengine/docker-compose.yaml
-  - relationaldb/docker-compose.yaml
-  - observability/docker-compose.yaml
