@@ -1,6 +1,6 @@
 from vpn import *
 
-config = f"""\
+docker_compose = f"""\
 server {{
     server_name {HOST};
 
@@ -15,4 +15,4 @@ server {{
 """
 
 with open(NGINX_CONF_FILE, 'w') as file:
-    file.write(config)
+    file.write(docker_compose)
