@@ -7,7 +7,6 @@ import proxy
 import observability
 import broker
 
-# モジュールとそれぞれのdocker_composeを対応付けたリスト
 modules = [vpn, searchengine, relationaldb, proxy, observability, broker]
 
 # includeするパスを保持するリスト
@@ -26,7 +25,7 @@ for module in modules:
         yaml.dump(module.docker_compose, file, default_flow_style=False)
 
     print(f'docker-compose.yaml has been written to: {output_file}')
-    
+
     # 生成したdocker-compose.yamlのパスをincludeリストに追加
     includes.append(output_file)
 

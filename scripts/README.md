@@ -1,6 +1,6 @@
 # scripts
 
-codegen等のスクリプトを置くところ
+codegen等のスクリプトを置くところ、buildとは違って直接ビルドの設定を含まない
 
 devcontainerではパスを通してあるため直接実行可能
 

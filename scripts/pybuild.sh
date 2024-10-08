@@ -28,6 +28,8 @@ set_pythonpath() {
 
 # 指定したパターンのPythonファイルを実行する関数
 execute_python_files() {
+  find_project_root
+  set_pythonpath
   local pattern="$1"
   find "$project_root/build" -type f -name "$pattern" | while read -r file; do
     dir=$(dirname "$file")
