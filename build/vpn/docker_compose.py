@@ -24,7 +24,10 @@ docker_compose = {
                 'net.ipv4.conf.all.src_valid_mark=1',
                 'net.ipv4.ip_forward=1'
             ],
-            'restart': 'unless-stopped'
+            'restart': 'unless-stopped',
+            'volumes': [
+                '~/.wg-easy:/etc/wireguard'
+            ]
         }
     }
 }

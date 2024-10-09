@@ -28,7 +28,8 @@ for module in modules:
     print(f'docker-compose.yaml has been written to: {output_file}')
 
     # 生成したdocker-compose.yamlのパスをincludeリストに追加
-    includes.append(output_file)
+    # 相対パスで生成するのでそのままほかのpcに持ってって使える
+    includes.append(os.path.relpath(output_file, os.path.dirname(__file__)))
 
 # mictlan用のdocker compose構造を作成
 mictlan_compose = {
