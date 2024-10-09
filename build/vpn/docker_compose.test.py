@@ -4,5 +4,6 @@ from vpn import *
 
 # docker composeが正しく書けているかについてコンポーネントテストを行う
 # シンプルにファイル出力してから目視で検証する
+# テスト用のdocker-compose.yamlはnameが設定されてないので直で使うべきじゃない
 with open('docker-compose.yaml', 'w') as file:
     yaml.dump(docker_compose, file, default_flow_style=False)
