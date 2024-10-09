@@ -21,15 +21,10 @@ find_project_root() {
   echo "プロジェクトルート: $project_root"
 }
 
-# PYTHONPATHを設定する関数
-set_pythonpath() {
-  export PYTHONPATH="$project_root/build:${PYTHONPATH}"
-}
+find_project_root
 
 # 指定したパターンのPythonファイルを実行する関数
 execute_python_files() {
-  find_project_root
-  set_pythonpath
   local pattern="$1"
   find "$project_root/build" -type f -name "$pattern" | while read -r file; do
     dir=$(dirname "$file")

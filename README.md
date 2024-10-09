@@ -37,7 +37,8 @@
 - julia では、pkg で add IJulia すると jupyter kernel がインストールでき、vscode で julia のカーネル選択すると jupyter notebook で使える
 - secrets がなくても devcontainer のビルドは正常にできるけど、ssh key だけ手動で移動する必要がある
 - workspace root で`tar -xvf secrets.tar.gz`してからビルドしたら万事解決する
-- (これでいいやん感があるサイト)[https://github.com/apache/incubator-answer?tab=readme-ov-file]
+- [これでいいやん](https://github.com/apache/incubator-answer?tab=readme-ov-file)
+- nginxなくてもcloudflareで同じことできる
 
 # Note
 

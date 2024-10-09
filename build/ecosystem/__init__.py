@@ -1,1 +1,1 @@
-DOMAIN_NAME = 'mictlan'
+DOMAIN = 'mictlan.site'
