@@ -6,8 +6,9 @@ import relationaldb
 import proxy
 import observability
 import broker
+import mail
 
-modules = [vpn, searchengine, relationaldb, proxy, observability, broker]
+modules = [vpn, searchengine, relationaldb, proxy, observability, broker, mail]
 
 # includeするパスを保持するリスト
 includes = []

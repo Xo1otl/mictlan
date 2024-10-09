@@ -4,7 +4,10 @@ echo で作る
 
 # Coding Style
 
-機能毎に module 作った後、interface adapter の実装はその module の中に作る
+- 機能毎に module 作った後、interface adapter の実装はその module の中に作る
+- infrastructure layerは自分のディレクトリを作ってそこに書く
+  - ライブラリのコードを使用する様々な処理はほとんどinterface adapterでありinfraのコードではない
+  - インフラのコードというのは主に、ui, driver, framework等で、もしも自作する機会があるならrootにディレクトリを切って作る
 
 # Note
 
