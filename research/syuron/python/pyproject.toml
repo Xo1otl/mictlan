@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "syuron", from = "." }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
