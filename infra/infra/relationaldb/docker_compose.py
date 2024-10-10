@@ -1,5 +1,4 @@
 import os
-from relationaldb import *
 from util import workspace
 from .env import *
 
@@ -7,7 +6,7 @@ from .env import *
 mysql_init_script_volumes = []
 
 # Find all .mysql.sql files in folders under build
-for filepath in workspace.globrelpaths(__file__, 'build/*/[0-9]*-*.mysql.sql'):
+for filepath in workspace.globrelpaths(__file__, 'infra/infra/*/[0-9]*-*.mysql.sql'):
     folder_name = os.path.basename(os.path.dirname(filepath))
     filename = os.path.basename(filepath)
     # Split the filename to insert folder name

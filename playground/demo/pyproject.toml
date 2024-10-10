@@ -1,14 +1,12 @@
 [tool.poetry]
-name = "util"
+name = "demo"
 version = "0.1.0"
 description = ""
 authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
 
-
 [tool.poetry.dependencies]
 python = "^3.10"
-ipython = "^8.26.0"
 
 
 [build-system]

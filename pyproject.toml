@@ -8,6 +8,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.10"
 # 共有するパッケージはPEPに準拠してインストール可能にしdependencesに追加する
+infra = { path = "./infra", develop = true }
 util = { path = "./packages/util/python", develop = true }
 syuron = { path = "./research/syuron/python", develop = true, optional = true }
 notebook = "^7.2.2"
@@ -19,7 +20,13 @@ gpu = [
 
 [tool.pyright]
 # pylanceはここで指定したフォルダ内のファイルのみ検出する
-include = ["**/python", "scripts", "build", "apps/personal-site/web/notebook"]
+include = [
+    "infra",
+    "**/python",
+    "scripts",
+    "build",
+    "apps/personal-site/web/notebook",
+]
 
 [build-system]
 requires = ["poetry-core"]

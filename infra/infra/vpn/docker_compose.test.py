@@ -1,9 +1,9 @@
 import yaml
+import sys
 # テストファイルでは相対インポートはできないのでモジュール名を指定してimportを行う
-from vpn import *
+from infra import vpn
 
 # docker composeが正しく書けているかについてコンポーネントテストを行う
-# シンプルにファイル出力してから目視で検証する
+# シンプルにコマンドラインに出力して目視で検証する
 # テスト用のdocker-compose.yamlはnameが設定されてないので直で使うべきじゃない
-with open('docker-compose.yaml', 'w') as file:
-    yaml.dump(docker_compose, file, default_flow_style=False)
+yaml.dump(vpn.docker_compose, sys.stdout, default_flow_style=False)

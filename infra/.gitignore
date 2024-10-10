@@ -1,0 +1,7 @@
+# credentials
+01-inituser.mysql.sql
+env.py
+
+# 自動生成されるファイル
+docker-compose.yaml 
+nginx.conf

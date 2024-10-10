@@ -1,5 +1,4 @@
-import vpn
-from proxy import *
+from infra import vpn
 from .env import *
 
 # Configuration as a Python object

@@ -1,4 +1,4 @@
-import ecosystem
+from infra import ecosystem
 
 docker_compose = {
     "services": {
@@ -6,7 +6,6 @@ docker_compose = {
             "image": "ghcr.io/docker-mailserver/docker-mailserver:latest",
             "container_name": "mailserver",
             "hostname": f"mail.{ecosystem.DOMAIN}",
-            "domainname"
             "ports": [
                 # SMTP (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
                 "25:25",
