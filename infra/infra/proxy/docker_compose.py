@@ -29,8 +29,8 @@ docker_compose = {
                 'dockerfile': 'Dockerfile'
             },
             'environment': [
-                f'VPN_HOST={vpn.HOSTNAME}',
-                f'MAIL_HOST={mail.HOSTNAME}',
+                f'VPN_HOST={vpn.FQDN}',
+                f'MAIL_HOST={mail.FQDN}',
                 f'CERTBOT_EMAIL={CERTBOT_EMAIL}'
             ],
             'volumes': volumes,

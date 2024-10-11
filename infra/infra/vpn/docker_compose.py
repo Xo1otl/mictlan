@@ -5,7 +5,7 @@ docker_compose = {
         'wg-easy': {
             'image': 'ghcr.io/wg-easy/wg-easy:latest',
             'environment': {
-                'WG_HOST': HOSTNAME,
+                'WG_HOST': FQDN,
                 'PASSWORD_HASH': WEBUI_PASSWORD_HASH,
                 'WG_PORT': UDP_PORT,
                 'PORT': WEBUI_PORT,
