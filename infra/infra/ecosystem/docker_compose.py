@@ -7,13 +7,14 @@ from infra import proxy
 from infra import observability
 from infra import broker
 from infra import mail
+from infra import ossekai
 
 
 # docker composeはまとめてやりたい処理とかが考えられるからここでまとめて生成する
 # すべての設定にまとめてnetworksを追加するなどの共通処理が考えられる
 def generate_docker_compose():
     modules = [
-        vpn, searchengine, relationaldb, proxy, observability, broker, mail
+        vpn, searchengine, relationaldb, proxy, observability, broker, mail, ossekai
     ]
 
     # includeするパスを保持するリスト
@@ -29,7 +30,7 @@ def generate_docker_compose():
 
         # yamlファイルに書き込み
         with open(output_file, 'w') as file:
-            yaml.dump(module.docker_compose, file, default_flow_style=False)
+            yaml.dump(module.docker_compose(), file, default_flow_style=False)
 
         print(f'docker-compose.yaml has been written to: {output_file}')
 
@@ -53,3 +54,4 @@ def generate_docker_compose():
         yaml.dump(docker_compose, file, default_flow_style=False)
 
     print(f'ecosystem docker-compose.yaml has been written to: {output_path}')
+    print('proxy/docker-compose.yamlから使ってないサービスに対するvolumeを削除してください')

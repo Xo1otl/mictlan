@@ -1,6 +1,6 @@
 import os
 from util import workspace
-from .env import *
+from . import *
 
 # Variable to store the volume mappings for MySQL initialization scripts
 mysql_init_script_volumes = []

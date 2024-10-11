@@ -1,4 +1,4 @@
-PORT = "3000"
+from . import *
 
 # prometheus使うとnode exporter一緒に使う
 docker_compose = {
