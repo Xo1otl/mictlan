@@ -1,7 +1,9 @@
 from infra import ecosystem
+from .env import *
 
-HOSTNAME = f'mail.{ecosystem.DOMAIN}'
+FQDN = f'mail.{ecosystem.DOMAIN}'
 CONTAINER_NAME = 'mailserver'
+
 
 def docker_compose():
     from .docker_compose import docker_compose

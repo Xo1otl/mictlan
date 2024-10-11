@@ -7,7 +7,7 @@ docker_compose = {
         "mailserver": {
             "image": "ghcr.io/docker-mailserver/docker-mailserver:latest",
             "container_name": CONTAINER_NAME,
-            "hostname": HOSTNAME,
+            "hostname": FQDN,
             "ports": [
                 # SMTP (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
                 "25:25",
@@ -26,7 +26,12 @@ docker_compose = {
             ],
             "environment": [
                 "ENABLE_RSPAMD=1",
+                "ENABLE_OPENDKIM=0",
+                "ENABLE_OPENDMARC=0",
                 "SSL_TYPE=letsencrypt",
+                "DEFAULT_RELAY_HOST=[smtp.gmail.com]:587",
+                f"RELAY_USER={RELAY_USER}",
+                f"RELAY_PASSWORD={RELAY_PASSWORD}"
             ],
             'restart': 'no'  # このコンテナのせいでsshすらできなくなることがあるからnoにしておく
         }

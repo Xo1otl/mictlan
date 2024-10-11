@@ -4,7 +4,7 @@ from infra import proxy
 
 config = f"""\
 server {{
-    server_name {vpn.HOSTNAME};
+    server_name {vpn.FQDN};
 
     location / {{
         proxy_pass http://wg-easy:{vpn.WEBUI_PORT}/;
