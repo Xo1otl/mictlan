@@ -9,10 +9,7 @@ docker_compose = {
             "container_name": CONTAINER_NAME,
             "hostname": FQDN,
             "ports": [
-                # SMTP (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
-                "25:25",
-                "143:143",  # IMAP4 (explicit TLS => STARTTLS)
-                "465:465",  # ESMTP (implicit TLS)
+                "25:25", # SMTP (explicit TLS => STARTTLS)
                 "587:587",  # ESMTP (explicit TLS => STARTTLS)
                 "993:993",  # IMAP4 (implicit TLS)
             ],
@@ -26,8 +23,13 @@ docker_compose = {
             ],
             "environment": [
                 "ENABLE_RSPAMD=1",
+                "RSPAMD_GREYLISTING=1",
                 "ENABLE_OPENDKIM=0",
                 "ENABLE_OPENDMARC=0",
+                "ENABLE_POLICYD_SPF=0",
+                "ENABLE_AMAVIS=0",
+                "ENABLE_SPAMASSASSIN=0",
+                "ENABLE_POSTGREY=0",
                 "SSL_TYPE=letsencrypt",
                 "DEFAULT_RELAY_HOST=[smtp.gmail.com]:587",
                 f"RELAY_USER={RELAY_USER}",
