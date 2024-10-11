@@ -28,7 +28,7 @@ docker_compose = {
                 "ENABLE_RSPAMD=1",
                 "SSL_TYPE=letsencrypt",
             ],
-            'restart': 'no'
+            'restart': 'no'  # このコンテナのせいでsshすらできなくなることがあるからnoにしておく
         }
     }
 }
