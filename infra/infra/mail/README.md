@@ -96,3 +96,6 @@ mail.mictlan.site.      623     IN      A       150.230.62.123
 - リレーのgmailでのFromの反映方法
     - gmailのsee all settingsからAccounts and Importを選んでsend mail asを追加
     - defaultにmictlan.siteのメールアドレスを指定してtreat as an aliasを指定した状態で設定
+- rspamdの設定について
+    - `rspamadm configwizard`でパスワードを設定
+    - `kill -HUP $(pgrep rspamd | head -n 1)`でリロードしたらログインできるようになる
