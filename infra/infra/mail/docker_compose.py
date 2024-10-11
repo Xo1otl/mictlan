@@ -33,7 +33,7 @@ docker_compose = {
                 f"RELAY_USER={RELAY_USER}",
                 f"RELAY_PASSWORD={RELAY_PASSWORD}"
             ],
-            'restart': 'no'  # このコンテナのせいでsshすらできなくなることがあるからnoにしておく
+            'restart': 'no'  # このコンテナのせいでsshすらできなくなることがあるからnoにしておく、多分clamAVのせい
         }
     }
 }
