@@ -20,6 +20,11 @@ for conf_file in conf_files:
     target_path = f'/etc/nginx/conf.d/{folder}.conf'
     # マッピングをvolumesに追加
     volumes.append(f'{conf_file}:{target_path}')
+    print(
+        f'[proxy] Added nginx configuration mapping: {conf_file} -> {target_path}'
+    )
+
+print('[proxy] docker-compose.yamlから使ってないサービスに対するvolumeを削除してください')
 
 # docker_compose設定を作成
 docker_compose = {
