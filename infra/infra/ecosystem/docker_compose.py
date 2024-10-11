@@ -32,7 +32,9 @@ def generate_docker_compose():
         with open(output_file, 'w') as file:
             yaml.dump(module.docker_compose(), file, default_flow_style=False)
 
-        print(f'docker-compose.yaml has been written to: {output_file}')
+        print(
+            f'[ecosystem] docker-compose.yaml has been written to: {output_file}'
+        )
 
         # 生成したdocker-compose.yamlのパスをincludeリストに追加
         # 相対パスで生成するのでそのままほかのpcに持ってって使える
@@ -53,5 +55,6 @@ def generate_docker_compose():
     with open(output_path, 'w') as file:
         yaml.dump(docker_compose, file, default_flow_style=False)
 
-    print(f'ecosystem docker-compose.yaml has been written to: {output_path}')
-    print('proxy/docker-compose.yamlから使ってないサービスに対するvolumeを削除してください')
+    print(
+        f'[ecosystem] docker-compose.yaml has been written to: {output_path}'
+    )
