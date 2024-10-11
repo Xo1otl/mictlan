@@ -1,11 +1,11 @@
-from .env import *
+from . import *
 
 docker_compose = {
     'services': {
         'wg-easy': {
             'image': 'ghcr.io/wg-easy/wg-easy:latest',
             'environment': {
-                'WG_HOST': HOST,
+                'WG_HOST': HOSTNAME,
                 'PASSWORD_HASH': WEBUI_PASSWORD_HASH,
                 'WG_PORT': UDP_PORT,
                 'PORT': WEBUI_PORT,

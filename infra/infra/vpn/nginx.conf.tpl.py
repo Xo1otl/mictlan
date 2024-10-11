@@ -1,9 +1,10 @@
 import os
 from infra import vpn
+from infra import proxy
 
 config = f"""\
 server {{
-    server_name {vpn.HOST};
+    server_name {vpn.HOSTNAME};
 
     location / {{
         proxy_pass http://wg-easy:{vpn.WEBUI_PORT}/;
@@ -16,7 +17,7 @@ server {{
 """
 
 # 実行しているコンテキストによらずtplと同じ場所に出力
-target = os.path.join(os.path.dirname(__file__), vpn.NGINX_CONF_FILE)
+target = os.path.join(os.path.dirname(__file__), proxy.CONF_FILENAME)
 
 with open(target, 'w') as file:
     file.write(config)

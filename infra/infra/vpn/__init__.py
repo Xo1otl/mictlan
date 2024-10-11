@@ -1,3 +1,6 @@
-from .docker_compose import *
+from .env import *
 
-NGINX_CONF_FILE = 'nginx.conf'
+
+def docker_compose():
+    from .docker_compose import docker_compose
+    return docker_compose
