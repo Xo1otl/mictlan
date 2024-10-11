@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import subprocess
 from infra import ecosystem
 from util import workspace
