@@ -22,4 +22,4 @@ target = os.path.join(os.path.dirname(__file__), proxy.CONF_FILENAME)
 with open(target, 'w') as file:
     file.write(config)
 
-print(f"nginx.conf has been written to {target}.")
+print(f"[vpn] nginx.conf has been written to {target}.")
