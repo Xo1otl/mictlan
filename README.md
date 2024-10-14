@@ -43,7 +43,7 @@
 # Note
 
 - vpn用のfirewall設定
-  - vpnネットワークをprivateに追加`Set-NetConnectionProfile -InterfaceAlias "desktop" -NetworkCategory Private`
+  - vpnネットワークをprivateに追加`Set-NetConnectionProfile -InterfaceAlias "<config>" -NetworkCategory Private`
   - 10.8.0.0/24を許可`New-NetFirewallRule -DisplayName "Allow VPN Traffic" -Direction Inbound -Action Allow -Profile Private -RemoteAddress 10.8.0.0/24`
 - devcontainer を閉じる時毎回 close connection をしないと永久に connection が溜まっていく、リセットしたい時は下のコマンドで接続を貼り直す
   - X 転送の socket が消えずに/tmp/.x11-unix が増殖していくから定期的に消さなあかんのかもしれない
