@@ -3,7 +3,7 @@ from scipy.sparse.linalg import eigs
 from scipy.sparse import coo_matrix, bmat
 
 
-def wgmodes(lambda_, guess, nmodes, dx, dy, *args):
+def neff_Hxy(lambda_, guess, nmodes, dx, dy, *args):
     '''
     This function computes the two transverse magnetic field
     components of a dielectric waveguide, using the finite
@@ -500,4 +500,4 @@ def wgmodes(lambda_, guess, nmodes, dx, dy, *args):
         phiy[:, :, kk] = temp[:, 1].reshape((nx, ny))
 
     # Return the mode fields and effective indices
-    return phix, phiy, neff
+    return neff, phix, phiy

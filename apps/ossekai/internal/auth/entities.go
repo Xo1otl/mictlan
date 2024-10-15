@@ -8,6 +8,6 @@ type Claims struct {
 	Sub
 }
 
-func NewClaims(token *Token, parse ParseToken) (*Claims, error) {
-	return parse(token)
+func NewClaims(token *Token, service TokenService) (*Claims, error) {
+	return service.Parse(token)
 }

@@ -31,7 +31,7 @@ func GinMiddleware() gin.HandlerFunc {
 		if err != nil {
 			log.Fatal(err)
 		}
-		claims, err := NewClaims(&token, tokenService.Parse)
+		claims, err := NewClaims(&token, tokenService)
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "invalid token format"})
 			c.Abort()

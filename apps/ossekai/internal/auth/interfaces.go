@@ -1,3 +1,5 @@
 package auth
 
-type ParseToken func(token *Token) (*Claims, error)
+type TokenService interface {
+	Parse(token *Token) (*Claims, error)
+}

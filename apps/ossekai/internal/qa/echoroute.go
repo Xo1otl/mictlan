@@ -15,7 +15,14 @@ func AddEchoRoutes(e *echo.Echo) {
 	qh := NewQueryHandler()
 
 	route := e.Group("/qa")
-	route.Use(auth.EchoMiddleware())
+
+	// Use custom authentication middleware
+	tokenService, err := auth.NewAwsTokenService()
+	if err != nil {
+		log.Fatal(tokenService)
+	}
+	route.Use(auth.EchoMiddleware(tokenService))
+
 	route.POST("/ask-question", ch.AskQuestion)
 	route.GET("/find-tag", qh.FindTag)
 }

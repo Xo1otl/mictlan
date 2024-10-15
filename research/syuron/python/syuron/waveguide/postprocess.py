@@ -2,7 +2,7 @@ import numpy as np
 from scipy.sparse import csr_matrix, hstack
 
 
-def postprocess(lambda_, neff, Hx, Hy, dx, dy, *args):
+def Hz_Exyz(lambda_, neff, Hx, Hy, dx, dy, *args):
     nargin = 6 + len(args)
     if nargin == 12:
         epsxx = args[0]
@@ -125,7 +125,6 @@ def postprocess(lambda_, neff, Hx, Hy, dx, dy, *args):
              1 / 2 * (ezz4 / exx1 * ezz1 * w + ezz1 / exx4 * ezz4 * e) *
              (1 - exx2 / ezz2) / (w * exx3 + e * exx2) / ezz4 / ezz1 /
              (w * exx4 + e * exx1) / (n + s) * exx3 * n * exx1 * exx4) / b
-
     bzxn = ((1 / 2 * (-n * ezz4 * ezz3 / eyy4 - s * ezz3 * ezz4 / eyy3) * n * ezz1 * ezz2 / eyy1 *
              (2 * eyy1 / ezz1 / n**2 + eyx1 / ezz1 / n / w) +
              1 / 2 * (n * ezz1 * ezz2 / eyy1 + s * ezz2 * ezz1 / eyy2) * n * ezz4 * ezz3 / eyy4 *
@@ -452,10 +451,6 @@ def postprocess(lambda_, neff, Hx, Hy, dx, dy, *args):
     i3_rows, i3_cols = np.unravel_index(i3, Hz.shape)
     i4_rows, i4_cols = np.unravel_index(i4, Hz.shape)
 
-    print(Hy.shape)
-    print(i1.shape, i2.shape, i3.shape, i4.shape)
-    print(Hy[i1_rows, i1_cols])
-
     # Dx = (+neff * (Hy[i1] + Hy[i2] + Hy[i3] + Hy[i4]) / 4 +
     #       (Hz[i1] + Hz[i4] - Hz[i2] - Hz[i3]) / (1j * 2 * k * v))
     # Dy = (-neff * (Hx[i1] + Hx[i2] + Hx[i3] + Hx[i4]) / 4 -
@@ -468,22 +463,21 @@ def postprocess(lambda_, neff, Hx, Hy, dx, dy, *args):
     # Ez = Dz / ezz
 
     # return Hz, Ex, Ey, Ez
-    
+
     # 各フィールドの計算
     Dx = (+neff * (Hy[i1_rows, i1_cols] + Hy[i2_rows, i2_cols] + Hy[i3_rows, i3_cols] + Hy[i4_rows, i4_cols]) / 4 +
           (Hz[i1_rows, i1_cols] + Hz[i4_rows, i4_cols] - Hz[i2_rows, i2_cols] - Hz[i3_rows, i3_cols]) / (1j * 2 * k * v))
-    
+
     Dy = (-neff * (Hx[i1_rows, i1_cols] + Hx[i2_rows, i2_cols] + Hx[i3_rows, i3_cols] + Hx[i4_rows, i4_cols]) / 4 -
           (Hz[i3_rows, i3_cols] + Hz[i4_rows, i4_cols] - Hz[i1_rows, i1_cols] - Hz[i2_rows, i2_cols]) / (1j * 2 * k * h))
-    
+
     Dz = ((Hy[i3_rows, i3_cols] + Hy[i4_rows, i4_cols] - Hy[i1_rows, i1_cols] - Hy[i2_rows, i2_cols]) / (2 * h) -
           (Hx[i1_rows, i1_cols] + Hx[i4_rows, i4_cols] - Hx[i2_rows, i2_cols] - Hx[i3_rows, i3_cols]) / (2 * v)) / (1j * k)
-    
+
     # 電場の計算
     Ex = (eyy * Dx - exy * Dy) / edet
     Ey = (exx * Dy - eyx * Dx) / edet
     Ez = Dz / ezz
-    
+
     # 結果を返す
     return Hz, Ex, Ey, Ez
-    

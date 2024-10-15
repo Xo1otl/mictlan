@@ -1,3 +1,3 @@
-from .wgmodes import *
+from .modes import *
 from .postprocess import *
 from .normalize import *

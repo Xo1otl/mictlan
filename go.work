@@ -1,8 +1,9 @@
-go 1.23.1
+go 1.23.2
 
 use (
 	apps/ossekai
 	apps/scratchai
+	apps/zaiko
 	packages/lib/go
 	packages/util/go
 )

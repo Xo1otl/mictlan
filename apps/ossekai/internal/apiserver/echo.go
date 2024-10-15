@@ -2,7 +2,6 @@ package apiserver
 
 import (
 	"log"
-	"ossekaiserver/internal/auth"
 	"ossekaiserver/internal/qa"
 
 	"github.com/labstack/echo/v4"
@@ -19,9 +18,6 @@ func LaunchEcho() {
 		AllowMethods:     []string{echo.GET, echo.POST, echo.PUT, echo.PATCH, echo.DELETE, echo.HEAD, echo.OPTIONS},
 		AllowCredentials: true,
 	}))
-
-	// Use custom authentication middleware
-	e.Use(auth.EchoMiddleware())
 
 	// Add routes from qa package
 	qa.AddEchoRoutes(e)
