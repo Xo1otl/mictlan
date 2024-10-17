@@ -5,7 +5,7 @@ from typing import Callable, Tuple, List
 
 
 class NMCE:
-    def __init__(self, kappa: Callable[[float], complex], twodelta: Callable[[], float]):
+    def __init__(self, kappa: Callable[[float], complex], twodelta: Callable[[float], float]):
         """
         Nonlinear Medium Conversion Efficiency (NMCE) class for SHG.
 
@@ -32,9 +32,10 @@ class NMCE:
         def equations(z: float, y: List[complex]) -> List[complex]:
             A, B = y[0], y[1]
             dA_dz = -1j * np.conj(self.kappa(z)) * np.conj(A) * B * \
-                np.exp(1j * self.twodelta() * z)
+                np.exp(1j * self.twodelta(z) * z)
+            # dA_dz = 0
             dB_dz = -1j * self.kappa(z) * A**2 * \
-                np.exp(1j * self.twodelta() * z)
+                np.exp(1j * self.twodelta(z) * z)
             return [dA_dz, dB_dz]
 
         # Initial conditions
