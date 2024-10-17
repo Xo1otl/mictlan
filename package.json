@@ -9,6 +9,6 @@
 	},
 	"workspaces": ["packages/lib/ts", "apps/personal-site", "apps/ossekai/web"],
 	"devDependencies": {
-		"@biomejs/biome": "1.9.3"
+		"@biomejs/biome": "1.9.4"
 	}
 }
