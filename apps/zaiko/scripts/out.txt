@@ -1,0 +1,2167 @@
+Command: curl http://localhost:3030/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   4347      0 --:--:-- --:--:-- --:--:--  3000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   6224      0 --:--:-- --:--:-- --:--:--  3000
+
+==================================================
+Command: curl -d '{"name": "bvd", "amount": 382}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "bvd", "amount": 382}
+Actual: {"name":"bvd","amount":382}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  48027  51457 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "mfd", "amount": 510}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "mfd", "amount": 510}
+Actual: {"name":"mfd","amount":510}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  52532  56285 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "mfd", "amount": 289, "price": 8195.158731}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "mfd", "amount": 289, "price": 8195.158731}
+Actual: {"name":"mfd","amount":289,"price":8195.158731}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  75235  81504 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "mfd", "amount": 193, "price": 4554.155977}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "mfd", "amount": 193, "price": 4554.155977}
+Actual: {"name":"mfd","amount":193,"price":4554.155977}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   100k   108k --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "GAQ", "amount": 173}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "GAQ", "amount": 173}
+Actual: {"name":"GAQ","amount":173}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  57851  61983 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "bvd", "amount": 86, "price": 7134.93691}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "bvd", "amount": 86, "price": 7134.93691}
+Actual: {"name":"bvd","amount":86,"price":7134.93691}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50    99k   108k --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"bvd": 296, "mfd": 28, "GAQ": 173}
+Actual: {"GAQ":173,"bvd":296,"mfd":28}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    31  100    31    0     0  72769      0 --:--:-- --:--:-- --:--:-- 31000
+
+==================================================
+Command: curl -d '{"name": "bvd", "amount": 134, "price": 3985.060319}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "bvd", "amount": 134, "price": 3985.060319}
+Actual: {"name":"bvd","amount":134,"price":3985.060319}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  92130  99808 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "mfd", "amount": 13, "price": 4301.874643}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "mfd", "amount": 13, "price": 4301.874643}
+Actual: {"name":"mfd","amount":13,"price":4301.874643}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  67919  73699 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "bvd", "amount": 131, "price": 4877.512886}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "bvd", "amount": 131, "price": 4877.512886}
+Actual: {"name":"bvd","amount":131,"price":4877.512886}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   102k   110k --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "mfd", "amount": 5, "price": 5653.774901}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "mfd", "amount": 5, "price": 5653.774901}
+Actual: {"name":"mfd","amount":5,"price":5653.774901}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  91633  99601 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "xcl", "amount": 273}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "xcl", "amount": 273}
+Actual: {"name":"xcl","amount":273}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  52141  55865 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "xcl", "amount": 8}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "xcl", "amount": 8}
+Actual: {"name":"xcl","amount":8}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    54  100    26  100    28  46931  50541 --:--:-- --:--:-- --:--:-- 54000
+
+==================================================
+Command: curl -d '{"name": "xcl", "amount": 3, "price": 6391.270075}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "xcl", "amount": 3, "price": 6391.270075}
+Actual: {"name":"xcl","amount":3,"price":6391.270075}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  74433  80906 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -d '{"name": "xcl", "amount": 619}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "xcl", "amount": 619}
+Actual: {"name":"xcl","amount":619}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  58333  62500 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "xcl", "amount": 315, "price": 4316.761536}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "xcl", "amount": 315, "price": 4316.761536}
+Actual: {"name":"xcl","amount":315,"price":4316.761536}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  82901  89810 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 81}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZKK", "amount": 81}
+Actual: {"name":"ZKK","amount":81}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  58568  62906 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 45, "price": 4906.808028}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ZKK", "amount": 45, "price": 4906.808028}
+Actual: {"name":"ZKK","amount":45,"price":4906.808028}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  82024  89005 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 562}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "WXM", "amount": 562}
+Actual: {"name":"WXM","amount":562}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  61403  65789 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 1599760.1}
+Actual: {"sales":1599760.1}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  36697      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 921}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZKK", "amount": 921}
+Actual: {"name":"ZKK","amount":921}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55445  59405 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 961}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZKK", "amount": 961}
+Actual: {"name":"ZKK","amount":961}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  53639  57471 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "xcl", "amount": 474, "price": 8542.379095}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "xcl", "amount": 474, "price": 8542.379095}
+Actual: {"name":"xcl","amount":474,"price":8542.379095}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  90225  97744 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 325}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZKK", "amount": 325}
+Actual: {"name":"ZKK","amount":325}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  51094  54744 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 1220, "price": 7741.018573}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ZKK", "amount": 1220, "price": 7741.018573}
+Actual: {"name":"ZKK","amount":1220,"price":7741.018573}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   102  100    49  100    53  74923  81039 --:--:-- --:--:-- --:--:--   99k
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"xcl": 108, "ZKK": 1023, "WXM": 562}
+Actual: {"WXM":562,"ZKK":1023,"xcl":108}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    33  100    33    0     0  82706      0 --:--:-- --:--:-- --:--:-- 33000
+
+==================================================
+Command: curl -d '{"name": "nke", "amount": 1000}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "nke", "amount": 1000}
+Actual: {"name":"nke","amount":1000}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    60  100    29  100    31  52727  56363 --:--:-- --:--:-- --:--:-- 60000
+
+==================================================
+Command: curl -d '{"name": "BDF", "amount": 972}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "BDF", "amount": 972}
+Actual: {"name":"BDF","amount":972}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  62639  67114 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "nke", "amount": 241}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "nke", "amount": 241}
+Actual: {"name":"nke","amount":241}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55888  59880 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 920}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "WXM", "amount": 920}
+Actual: {"name":"WXM","amount":920}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  52044  55762 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "BDF", "amount": 443, "price": 6626.5733}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "BDF", "amount": 443, "price": 6626.5733}
+Actual: {"name":"BDF","amount":443,"price":6626.5733}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  75533  82101 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 18028462.5}
+Actual: {"sales":18028462.4}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    21  100    21    0     0  37769      0 --:--:-- --:--:-- --:--:-- 21000
+
+==================================================
+Command: curl -d '{"name": "nke", "amount": 652, "price": 6614.36927}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "nke", "amount": 652, "price": 6614.36927}
+Actual: {"name":"nke","amount":652,"price":6614.36927}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51   107k   116k --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "nke", "amount": 395, "price": 1652.138607}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "nke", "amount": 395, "price": 1652.138607}
+Actual: {"name":"nke","amount":395,"price":1652.138607}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  86956  94202 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "mob", "amount": 0}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  36363  50909 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 58}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "WXM", "amount": 58}
+Actual: {"name":"WXM","amount":58}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  53359  57312 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 1090, "price": 1.123456789}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    73  100    20  100    53  31347  83072 --:--:-- --:--:-- --:--:-- 73000
+
+==================================================
+Command: curl -d '{"name": "apr", "amount": 642}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "apr", "amount": 642}
+Actual: {"name":"apr","amount":642}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  41853  44843 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "apr", "amount": 600, "price": 9762.709299}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "apr", "amount": 600, "price": 9762.709299}
+Actual: {"name":"apr","amount":600,"price":9762.709299}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  81494  88285 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 380}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "WXM", "amount": 380}
+Actual: {"name":"WXM","amount":380}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  59071  63291 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 1014, "price": 6752.053581}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "WXM", "amount": 1014, "price": 6752.053581}
+Actual: {"name":"WXM","amount":1014,"price":6752.053581}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   102  100    49  100    53  82352  89075 --:--:-- --:--:-- --:--:--   99k
+
+==================================================
+Command: curl -d '{"name": "apr", "amount": 15, "price": 7881.302526}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "apr", "amount": 15, "price": 7881.302526}
+Actual: {"name":"apr","amount":15,"price":7881.302526}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  87198  94619 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "YGF", "amount": 393}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "YGF", "amount": 393}
+Actual: {"name":"YGF","amount":393}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  59574  63829 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "IKE", "amount": 482}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "IKE", "amount": 482}
+Actual: {"name":"IKE","amount":482}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55009  58939 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "YGF", "amount": 91, "price": 6504.2574}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "YGF", "amount": 91, "price": 6504.2574}
+Actual: {"name":"YGF","amount":91,"price":6504.2574}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    94  100    45  100    49  92783    98k --:--:-- --:--:-- --:--:-- 94000
+
+==================================================
+Command: curl -d '{"name": "SVJ", "amount": 952}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "SVJ", "amount": 952}
+Actual: {"name":"SVJ","amount":952}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55776  59760 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "IKE", "amount": 97, "price": 1393.921955}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "IKE", "amount": 97, "price": 1393.921955}
+Actual: {"name":"IKE","amount":97,"price":1393.921955}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  83333  90425 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "ZKK", "amount": 463, "price": 8466.68393}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ZKK", "amount": 463, "price": 8466.68393}
+Actual: {"name":"ZKK","amount":463,"price":8466.68393}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  83333  90425 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "BDF", "amount": 190, "price": 7319.013469}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "BDF", "amount": 190, "price": 7319.013469}
+Actual: {"name":"BDF","amount":190,"price":7319.013469}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  82474  89347 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "nke", "amount": 101, "price": 9416.067839}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "nke", "amount": 101, "price": 9416.067839}
+Actual: {"name":"nke","amount":101,"price":9416.067839}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  88560  95940 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "ayn", "amount": 496}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ayn", "amount": 496}
+Actual: {"name":"ayn","amount":496}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  56680  60728 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "ayn", "amount": 760}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ayn", "amount": 760}
+Actual: {"name":"ayn","amount":760}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  50179  53763 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "WXM", "amount": 828, "price": 8202.077619}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "WXM", "amount": 828, "price": 8202.077619}
+Actual: {"name":"WXM","amount":828,"price":8202.077619}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  78817  85385 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "jne", "amount": 290}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "jne", "amount": 290}
+Actual: {"name":"jne","amount":290}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55555  59523 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "myc", "amount": 656}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "myc", "amount": 656}
+Actual: {"name":"myc","amount":656}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  39829  42674 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "myc", "amount": 629, "price": 7091.782381}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "myc", "amount": 629, "price": 7091.782381}
+Actual: {"name":"myc","amount":629,"price":7091.782381}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  90737  98298 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 4460731.1}
+Actual: {"sales":4460731.1}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  37523      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "APA", "amount": 729}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "APA", "amount": 729}
+Actual: {"name":"APA","amount":729}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  49822  53380 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"myc": 27, "APA": 729}
+Actual: {"APA":729,"myc":27}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    21  100    21    0     0  55851      0 --:--:-- --:--:-- --:--:-- 21000
+
+==================================================
+Command: curl -d '{"name": "APA", "amount": 51, "price": 6579.670373}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "APA", "amount": 51, "price": 6579.670373}
+Actual: {"name":"APA","amount":51,"price":6579.670373}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  92519    98k --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "myc", "amount": 25, "price": 3719.311593}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "myc", "amount": 25, "price": 3719.311593}
+Actual: {"name":"myc","amount":25,"price":3719.311593}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  92885    98k --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "APA", "amount": 656, "price": 8243.593537}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "APA", "amount": 656, "price": 8243.593537}
+Actual: {"name":"APA","amount":656,"price":8243.593537}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  90909  98484 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "lpb", "amount": 296}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "lpb", "amount": 296}
+Actual: {"name":"lpb","amount":296}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  58823  63025 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "APA", "amount": 4, "price": 3672.434632}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "APA", "amount": 4, "price": 3672.434632}
+Actual: {"name":"APA","amount":4,"price":3672.434632}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  77181  83892 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "FXJ", "amount": 666}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "FXJ", "amount": 666}
+Actual: {"name":"FXJ","amount":666}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  54054  57915 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"FXJ": 666}
+Actual: {"FXJ":666}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  23715      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"FXJ": 666}
+Actual: {"FXJ":666}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  29339      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl -d '{"name": "FXJ", "amount": 393, "price": 9945.51909}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "FXJ", "amount": 393, "price": 9945.51909}
+Actual: {"name":"FXJ","amount":393,"price":9945.51909}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51    99k   108k --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "FXJ", "amount": 231, "price": 9206.877772}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "FXJ", "amount": 231, "price": 9206.877772}
+Actual: {"name":"FXJ","amount":231,"price":9206.877772}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  90566  98113 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "ZFI", "amount": 638}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZFI", "amount": 638}
+Actual: {"name":"ZFI","amount":638}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  48359  51813 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 6035377.8}
+Actual: {"sales":6035377.8}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  43290      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "ZFI", "amount": 143}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZFI", "amount": 143}
+Actual: {"name":"ZFI","amount":143}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  46901  50251 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "ZFI", "amount": 13}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ZFI", "amount": 13}
+Actual: {"name":"ZFI","amount":13}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  47038  50522 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "ZFI", "amount": 153, "price": 9798.999056}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ZFI", "amount": 153, "price": 9798.999056}
+Actual: {"name":"ZFI","amount":153,"price":9798.999056}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  88888  96296 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "kkq", "amount": 0}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  37593  52631 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "ubh", "amount": 435}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ubh", "amount": 435}
+Actual: {"name":"ubh","amount":435}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55335  59288 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 7534624.7}
+Actual: {"sales":7534624.6}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  41928      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "FXJ", "amount": 6, "price": 5203.831621}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "FXJ", "amount": 6, "price": 5203.831621}
+Actual: {"name":"FXJ","amount":6,"price":5203.831621}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  66187  71942 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -d '{"name": "FXJ", "amount": 21, "price": 6724.936986}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "FXJ", "amount": 21, "price": 6724.936986}
+Actual: {"name":"FXJ","amount":21,"price":6724.936986}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  79124  85858 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "ubh", "amount": 430, "price": 4083.556412}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ubh", "amount": 430, "price": 4083.556412}
+Actual: {"name":"ubh","amount":430,"price":4083.556412}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  88073  95412 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "ZFI", "amount": 32, "price": 2403.497193}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ZFI", "amount": 32, "price": 2403.497193}
+Actual: {"name":"ZFI","amount":32,"price":2403.497193}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  86080  93406 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "ubh", "amount": 2, "price": 5411.955257}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "ubh", "amount": 2, "price": 5411.955257}
+Actual: {"name":"ubh","amount":2,"price":5411.955257}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50    98k   107k --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -d '{"name": "gzc", "amount": 105}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "gzc", "amount": 105}
+Actual: {"name":"gzc","amount":105}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  57851  61983 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "hfn", "amount": 159}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "hfn", "amount": 159}
+Actual: {"name":"hfn","amount":159}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  53742  57581 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "AGY", "amount": 531}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "AGY", "amount": 531}
+Actual: {"name":"AGY","amount":531}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  65116  69767 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "rjr", "amount": 644}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "rjr", "amount": 644}
+Actual: {"name":"rjr","amount":644}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  54158  58027 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 9550736.5}
+Actual: {"sales":9550736.4}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  44052      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "vty", "amount": 445}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "vty", "amount": 445}
+Actual: {"name":"vty","amount":445}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  30701  32894 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "gzc", "amount": 51, "price": 2100.806346}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "gzc", "amount": 51, "price": 2100.806346}
+Actual: {"name":"gzc","amount":51,"price":2100.806346}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  76547  83061 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "VNG", "amount": 561}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "VNG", "amount": 561}
+Actual: {"name":"VNG","amount":561}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  50000  53571 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "AGY", "amount": -10}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  32051  48076 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl -d '{"name": "OZG", "amount": 586}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "OZG", "amount": 586}
+Actual: {"name":"OZG","amount":586}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  45161  48387 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "crs", "amount": 247}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "crs", "amount": 247}
+Actual: {"name":"crs","amount":247}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  53130  56925 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"FXJ": 15, "ZFI": 609, "ubh": 3, "gzc": 54, "hfn": 159, "AGY": 531, "rjr": 644, "vty": 445, "VNG": 561, "OZG": 586, "crs": 247}
+Actual: {"AGY":531,"FXJ":15,"OZG":586,"VNG":561,"ZFI":609,"crs":247,"gzc":54,"hfn":159,"rjr":644,"ubh":3,"vty":445}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   108  100   108    0     0   249k      0 --:--:-- --:--:-- --:--:--  105k
+
+==================================================
+Command: curl -d '{"name": "OZG", "amount": 173, "price": 9217.18483}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "OZG", "amount": 173, "price": 9217.18483}
+Actual: {"name":"OZG","amount":173,"price":9217.18483}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  83185  90265 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "nonexistent_gzc", "amount": 2, "price": 81.98}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    76  100    20  100    56  35523  99467 --:--:-- --:--:-- --:--:-- 76000
+
+==================================================
+Command: curl -d '{"name": "gzc", "amount": 92}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "gzc", "amount": 92}
+Actual: {"name":"gzc","amount":92}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  48042  51601 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "crs", "amount": 979}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "crs", "amount": 979}
+Actual: {"name":"crs","amount":979}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  57142  61224 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "crs", "amount": 677, "price": 9969.8361}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "crs", "amount": 677, "price": 9969.8361}
+Actual: {"name":"crs","amount":677,"price":9969.8361}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  80139  87108 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"FXJ": 15, "ZFI": 609, "ubh": 3, "gzc": 146, "hfn": 159, "AGY": 531, "rjr": 644, "vty": 445, "VNG": 561, "OZG": 413, "crs": 549}
+Actual: {"AGY":531,"FXJ":15,"OZG":413,"VNG":561,"ZFI":609,"crs":549,"gzc":146,"hfn":159,"rjr":644,"ubh":3,"vty":445}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   109  100   109    0     0   236k      0 --:--:-- --:--:-- --:--:--  106k
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 18002029.6}
+Actual: {"sales":18002029.5}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    21  100    21    0     0  36842      0 --:--:-- --:--:-- --:--:-- 21000
+
+==================================================
+Command: curl -d '{"name": "crs", "amount": 358, "price": 6918.491378}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "crs", "amount": 358, "price": 6918.491378}
+Actual: {"name":"crs","amount":358,"price":6918.491378}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  82758  89655 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "crs", "amount": 31, "price": 2125.719087}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "crs", "amount": 31, "price": 2125.719087}
+Actual: {"name":"crs","amount":31,"price":2125.719087}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  84532  91726 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "zpc", "amount": 3}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "zpc", "amount": 3}
+Actual: {"name":"zpc","amount":3}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    54  100    26  100    28  42139  45380 --:--:-- --:--:-- --:--:-- 54000
+
+==================================================
+Command: curl -d '{"name": "dcd", "amount": 258}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "dcd", "amount": 258}
+Actual: {"name":"dcd","amount":258}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  46589  49916 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "gzc", "amount": 9, "price": 3079.759852}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "gzc", "amount": 9, "price": 3079.759852}
+Actual: {"name":"gzc","amount":9,"price":3079.759852}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  96436   102k --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -d '{"name": "OZG", "amount": 119, "price": 454.548496}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "OZG", "amount": 119, "price": 454.548496}
+Actual: {"name":"OZG","amount":119,"price":454.548496}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  86556  93922 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "rjr", "amount": 229, "price": 4423.431073}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "rjr", "amount": 229, "price": 4423.431073}
+Actual: {"name":"rjr","amount":229,"price":4423.431073}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  82051  88888 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "OZG", "amount": 137, "price": 698.473727}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "OZG", "amount": 137, "price": 698.473727}
+Actual: {"name":"OZG","amount":137,"price":698.473727}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  85923  93235 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "ZVX", "amount": 0}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  44150  61810 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "AGY", "amount": 15, "price": 1555.364653}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "AGY", "amount": 15, "price": 1555.364653}
+Actual: {"name":"AGY","amount":15,"price":1555.364653}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  90909  98646 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "AXS", "amount": 684}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "AXS", "amount": 684}
+Actual: {"name":"AXS","amount":684}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  56451  60483 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "AXS", "amount": 347}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "AXS", "amount": 347}
+Actual: {"name":"AXS","amount":347}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  48951  52447 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"AXS": 1031}
+Actual: {"AXS":1031}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    13  100    13    0     0  28384      0 --:--:-- --:--:-- --:--:-- 13000
+
+==================================================
+Command: curl -d '{"name": "AXS", "amount": 365, "price": 2180.820162}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "AXS", "amount": 365, "price": 2180.820162}
+Actual: {"name":"AXS","amount":365,"price":2180.820162}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  87272  94545 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 371}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "wrx", "amount": 371}
+Actual: {"name":"wrx","amount":371}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  52730  56497 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"wrx": 371}
+Actual: {"wrx":371}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  30075      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 235, "price": 5629.319815}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 235, "price": 5629.319815}
+Actual: {"name":"wrx","amount":235,"price":5629.319815}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  66666  72222 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 32, "price": 9646.058854}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 32, "price": 9646.058854}
+Actual: {"name":"wrx","amount":32,"price":9646.058854}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  69016  74889 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 81, "price": 1019.747235}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 81, "price": 1019.747235}
+Actual: {"name":"wrx","amount":81,"price":1019.747235}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  69940  75892 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "UKH", "amount": "abc"}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    52  100    20  100    32  35398  56637 --:--:-- --:--:-- --:--:-- 52000
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 14, "price": 2012.991326}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 14, "price": 2012.991326}
+Actual: {"name":"wrx","amount":14,"price":2012.991326}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  89523  97142 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 4, "price": 6675.315715}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 4, "price": 6675.315715}
+Actual: {"name":"wrx","amount":4,"price":6675.315715}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  67746  73637 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"wrx": 5}
+Actual: {"wrx":5}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    10  100    10    0     0  16181      0 --:--:-- --:--:-- --:--:-- 10000
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 550}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "wrx", "amount": 550}
+Actual: {"name":"wrx","amount":550}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  41728  44709 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 493, "price": 6136.106275}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 493, "price": 6136.106275}
+Actual: {"name":"wrx","amount":493,"price":6136.106275}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  72289  78313 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "wrx", "amount": 7, "price": 3763.474351}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "wrx", "amount": 7, "price": 3763.474351}
+Actual: {"name":"wrx","amount":7,"price":3763.474351}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  83032  90252 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"wrx": 55}
+Actual: {"wrx":55}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    11  100    11    0     0  30470      0 --:--:-- --:--:-- --:--:-- 11000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   7575      0 --:--:-- --:--:-- --:--:--  3000
+
+==================================================
+Command: curl -d '{"name": "akl", "amount": 351}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "akl", "amount": 351}
+Actual: {"name":"akl","amount":351}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  51660  55350 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "MHU", "amount": 493}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "MHU", "amount": 493}
+Actual: {"name":"MHU","amount":493}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  52631  56390 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "MHU", "amount": 933}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "MHU", "amount": 933}
+Actual: {"name":"MHU","amount":933}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  53231  57034 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "qpr", "amount": 988}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "qpr", "amount": 988}
+Actual: {"name":"qpr","amount":988}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  50632  54249 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "MHU", "amount": 470, "price": 546.93386}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "MHU", "amount": 470, "price": 546.93386}
+Actual: {"name":"MHU","amount":470,"price":546.93386}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  69908  75987 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -d '{"name": "MHU", "amount": 294}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "MHU", "amount": 294}
+Actual: {"name":"MHU","amount":294}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  46979  50335 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "MHU", "amount": 641, "price": 6157.878825}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "MHU", "amount": 641, "price": 6157.878825}
+Actual: {"name":"MHU","amount":641,"price":6157.878825}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  89219  96654 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "IVR", "amount": 581}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "IVR", "amount": 581}
+Actual: {"name":"IVR","amount":581}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  50269  53859 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "akl", "amount": 271, "price": 7568.60491}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "akl", "amount": 271, "price": 7568.60491}
+Actual: {"name":"akl","amount":271,"price":7568.60491}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  72419  78582 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "akl", "amount": 107, "price": 22.76}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    66  100    20  100    46  11730  26979 --:--:-- --:--:-- --:--:-- 66000
+
+==================================================
+Command: curl -d '{"name": "IVR", "amount": 387, "price": 4820.39022}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "IVR", "amount": 387, "price": 4820.39022}
+Actual: {"name":"IVR","amount":387,"price":4820.39022}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  61923  67193 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl -d '{"name": "YHC", "amount": 58}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "YHC", "amount": 58}
+Actual: {"name":"YHC","amount":58}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  42654  45813 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "YHC", "amount": 66}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "YHC", "amount": 66}
+Actual: {"name":"YHC","amount":66}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  47451  50966 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 8120842.1}
+Actual: {"sales":8120842.2}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  37313      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "IVR", "amount": 51}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "IVR", "amount": 51}
+Actual: {"name":"IVR","amount":51}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  39647  42584 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "YML", "amount": 173}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "YML", "amount": 173}
+Actual: {"name":"YML","amount":173}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  55555  59523 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "QOW", "amount": 612}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "QOW", "amount": 612}
+Actual: {"name":"QOW","amount":612}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  52830  56603 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "QOW", "amount": 432, "price": 2788.663931}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "QOW", "amount": 432, "price": 2788.663931}
+Actual: {"name":"QOW","amount":432,"price":2788.663931}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  69868  75691 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 1204702.8}
+Actual: {"sales":1204702.8}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  32573      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "QOW", "amount": 710}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "QOW", "amount": 710}
+Actual: {"name":"QOW","amount":710}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  47377  50761 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 1204702.8}
+Actual: {"sales":1204702.8}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  41928      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "QOW", "amount": 500, "price": 2303.79281}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "QOW", "amount": 500, "price": 2303.79281}
+Actual: {"name":"QOW","amount":500,"price":2303.79281}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  84229  91397 --:--:-- --:--:-- --:--:-- 98000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"QOW": 390}
+Actual: {"QOW":390}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  30690      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl -d '{"name": "QOW", "amount": 180}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "QOW", "amount": 180}
+Actual: {"name":"QOW","amount":180}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  51376  55045 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 2356599.2}
+Actual: {"sales":2356599.2}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  35273      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"QOW": 570}
+Actual: {"QOW":570}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  25917      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl -d '{"name": "QKN", "amount": 342}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "QKN", "amount": 342}
+Actual: {"name":"QKN","amount":342}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  44374  47543 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "QOW", "amount": 392, "price": 94.673466}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "QOW", "amount": 392, "price": 94.673466}
+Actual: {"name":"QOW","amount":392,"price":94.673466}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  74074  80515 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"QOW": 178, "QKN": 342}
+Actual: {"QKN":342,"QOW":178}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    22  100    22    0     0  59782      0 --:--:-- --:--:-- --:--:-- 22000
+
+==================================================
+Command: curl -d '{"name": "pcl", "amount": 997}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "pcl", "amount": 997}
+Actual: {"name":"pcl","amount":997}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  45161  48387 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "DGH", "amount": 757}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "DGH", "amount": 757}
+Actual: {"name":"DGH","amount":757}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  45977  49261 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "otl", "amount": 315}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "otl", "amount": 315}
+Actual: {"name":"otl","amount":315}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  38781  41551 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "IHL", "amount": 843}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "IHL", "amount": 843}
+Actual: {"name":"IHL","amount":843}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  48359  51813 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "otl", "amount": 0}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  36101  50541 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "otl", "amount": 11}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "otl", "amount": 11}
+Actual: {"name":"otl","amount":11}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  43130  46325 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "VFO", "amount": 121}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "VFO", "amount": 121}
+Actual: {"name":"VFO","amount":121}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  43887  47021 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "VFO", "amount": 103, "price": 7674.607251}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "VFO", "amount": 103, "price": 7674.607251}
+Actual: {"name":"VFO","amount":103,"price":7674.607251}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  81355  88135 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"VFO": 18}
+Actual: {"VFO":18}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    11  100    11    0     0  28571      0 --:--:-- --:--:-- --:--:-- 11000
+
+==================================================
+Command: curl -d '{"name": "VFO", "amount": 1, "price": 1108.776569}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "VFO", "amount": 1, "price": 1108.776569}
+Actual: {"name":"VFO","amount":1,"price":1108.776569}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  73131  79491 --:--:-- --:--:-- --:--:-- 96000
+
+==================================================
+Command: curl -d '{"name": "VFO", "amount": 594}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "VFO", "amount": 594}
+Actual: {"name":"VFO","amount":594}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  48780  52264 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "VFO", "amount": 126}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "VFO", "amount": 126}
+Actual: {"name":"VFO","amount":126}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  48951  52447 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "MKN", "amount": 359}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "MKN", "amount": 359}
+Actual: {"name":"MKN","amount":359}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  54687  58593 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "VFO", "amount": 412, "price": 1407.872685}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "VFO", "amount": 412, "price": 1407.872685}
+Actual: {"name":"VFO","amount":412,"price":1407.872685}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  76800  83200 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "phb", "amount": 656}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "phb", "amount": 656}
+Actual: {"name":"phb","amount":656}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  49910  53475 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl http://localhost:3030/v1/stocks
+Expected: {"phb": 656}
+Actual: {"phb":656}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0  25104      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl -d '{"name": "ACW", "amount": 852}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "ACW", "amount": 852}
+Actual: {"name":"ACW","amount":852}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  46979  50335 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -X DELETE http://localhost:3030/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "pkn", "amount": 773}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "pkn", "amount": 773}
+Actual: {"name":"pkn","amount":773}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  40875  43795 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "pkn", "amount": 726, "price": 8094.348413}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "pkn", "amount": 726, "price": 8094.348413}
+Actual: {"name":"pkn","amount":726,"price":8094.348413}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  71005  76923 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl -d '{"name": "agy", "amount": 255}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "agy", "amount": 255}
+Actual: {"name":"agy","amount":255}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  45234  48465 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
+Command: curl -d '{"name": "agy", "amount": 124, "price": 2534.507961}' -H 'Content-Type: application/json' http://localhost:3030/v1/sales
+Expected: {"name": "agy", "amount": 124, "price": 2534.507961}
+Actual: {"name":"agy","amount":124,"price":2534.507961}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  85561  92691 --:--:-- --:--:-- --:--:--   97k
+
+==================================================
+Command: curl http://localhost:3030/v1/sales
+Expected: {"sales": 6190775.9}
+Actual: {"sales":6190775.9}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  36697      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "rzm", "amount": 80}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "rzm", "amount": 80}
+Actual: {"name":"rzm","amount":80}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29  40847  43872 --:--:-- --:--:-- --:--:-- 56000
+
+==================================================
+Command: curl -d '{"name": "ATN", "amount": 0}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  36563  51188 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "rzm", "amount": 104}' -H 'Content-Type: application/json' http://localhost:3030/v1/stocks
+Expected: {"name": "rzm", "amount": 104}
+Actual: {"name":"rzm","amount":104}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30  45380  48622 --:--:-- --:--:-- --:--:-- 58000
+
+==================================================
