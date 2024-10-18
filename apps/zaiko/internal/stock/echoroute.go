@@ -12,11 +12,12 @@ import (
 
 func AddEchoRoutes(e *echo.Echo) {
 	eventStore := &InMemoryEventStore{}
-	producer, err := NewKafkaProducer()
+	producer, err := NewKafkaProducer("redpanda:8081", "redpanda:9092")
+	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
 	if err != nil {
 		log.Fatalf("failed to create kafka producer: %v", err)
 	}
-	command := NewCommand(eventStore, producer)
+	command := NewCommand(consumer, producer)
 	repo := NewInMemoryRepo(eventStore)
 	ch := NewCommandHandler(command)
 	qh := NewQueryHandler(repo)
@@ -35,7 +36,7 @@ func AddEchoRoutes(e *echo.Echo) {
 func setMockClaims(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		claims := &auth.Claims{
-			Sub: "testusersub",
+			Sub: "testusersub3",
 		}
 		c.Set("claims", claims)
 		return next(c)
