@@ -8,24 +8,28 @@ type InMemoryEventStore struct {
 	projectionEvents []AggregateUpdatedEvent
 }
 
-func (s *InMemoryEventStore) Events() []any {
-	return s.events
+func (s *InMemoryEventStore) Events() ([]any, error) {
+	return s.events, nil
 }
 
-func (s *InMemoryEventStore) onAdded(event AddedEvent) {
+func (s *InMemoryEventStore) onAdded(event AddedEvent) error {
 	s.events = append(s.events, event)
+	return nil
 }
 
-func (s *InMemoryEventStore) onSold(event SoldEvent) {
+func (s *InMemoryEventStore) onSold(event SoldEvent) error {
 	s.events = append(s.events, event)
+	return nil
 }
 
-func (s *InMemoryEventStore) onClearedAll(event ClearedAllEvent) {
+func (s *InMemoryEventStore) onClearedAll(event ClearedAllEvent) error {
 	s.events = append(s.events, event)
+	return nil
 }
 
-func (s *InMemoryEventStore) onAggregateUpdated(event AggregateUpdatedEvent) {
+func (s *InMemoryEventStore) onAggregateUpdated(event AggregateUpdatedEvent) error {
 	s.projectionEvents = append(s.projectionEvents, event)
+	return nil
 }
 
 // Queryのほうで使うrepositoryの実装

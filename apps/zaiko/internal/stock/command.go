@@ -19,47 +19,75 @@ func NewCommand(consumer EventConsumer, producer EventProducer) *Command {
 }
 
 func (c *Command) Add(sub auth.Sub, name string, amount int) error {
-	events := c.consumer.Events()
+	events, err := c.consumer.Events()
+	if err != nil {
+		return err
+	}
 	agg := NewAggregate(events)
 	addedEvent, err := agg.Add(sub, name, amount)
 	if err != nil {
 		return err
 	}
-	c.producer.onAdded(addedEvent)
+	err = c.producer.onAdded(addedEvent)
+	if err != nil {
+		return err
+	}
 	// projectionもやる
-	c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	err = c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
 func (c *Command) Sell(sub auth.Sub, name string, amount int, price decimal.Decimal) error {
-	events := c.consumer.Events()
+	events, err := c.consumer.Events()
+	if err != nil {
+		return err
+	}
 	agg := NewAggregate(events)
 	soldEvent, err := agg.Sell(sub, name, amount, price)
 	if err != nil {
 		return err
 	}
-	c.producer.onSold(soldEvent)
-	c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	err = c.producer.onSold(soldEvent)
+	if err != nil {
+		return err
+	}
+	err = c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
-func (c *Command) ClearAll(sub auth.Sub) {
-	events := c.consumer.Events()
+func (c *Command) ClearAll(sub auth.Sub) error {
+	events, err := c.consumer.Events()
+	if err != nil {
+		return err
+	}
 	agg := NewAggregate(events)
 	clearedAllEvent := agg.ClearAll(sub)
-	c.producer.onClearedAll(clearedAllEvent)
-	c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	err = c.producer.onClearedAll(clearedAllEvent)
+	if err != nil {
+		return err
+	}
+	err = c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 type EventConsumer interface {
-	Events() []any
+	Events() ([]any, error)
 }
 
 type EventProducer interface {
-	onAdded(event AddedEvent)
-	onSold(event SoldEvent)
-	onClearedAll(event ClearedAllEvent)
-	onAggregateUpdated(event AggregateUpdatedEvent)
+	onAdded(event AddedEvent) error
+	onSold(event SoldEvent) error
+	onClearedAll(event ClearedAllEvent) error
+	onAggregateUpdated(event AggregateUpdatedEvent) error
 }
 
 type AddedEvent struct {

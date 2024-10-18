@@ -12,7 +12,11 @@ import (
 
 func AddEchoRoutes(e *echo.Echo) {
 	eventStore := &InMemoryEventStore{}
-	command := NewCommand(eventStore, eventStore)
+	producer, err := NewKafkaProducer()
+	if err != nil {
+		log.Fatalf("failed to create kafka producer: %v", err)
+	}
+	command := NewCommand(eventStore, producer)
 	repo := NewInMemoryRepo(eventStore)
 	ch := NewCommandHandler(command)
 	qh := NewQueryHandler(repo)
