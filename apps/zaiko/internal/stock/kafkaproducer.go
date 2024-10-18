@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
+	"log"
 
 	"github.com/hamba/avro/v2"
 	"github.com/twmb/franz-go/pkg/kgo"
@@ -185,8 +186,9 @@ func (k *KafkaProducer) OnAggregateUpdated(event AggregateUpdatedEvent) error {
 	keyData := event.Sub
 	valueData := map[string]interface{}{
 		"Stocks": event.Stocks,
-		"Sales":  event.Sales,
+		"Sales":  event.Sales.String(),
 	}
+	log.Printf("%v", valueData)
 
 	return k.produce("AggregateUpdated", keyData, valueData)
 }
