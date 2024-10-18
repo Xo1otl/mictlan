@@ -206,6 +206,7 @@ func TestCreateSchema(t *testing.T) {
 			"type": "record",
 			"name": "AggregateUpdated",
 			"fields": [
+				{"name": "Sub", "type": "string"},
 				{
 					"name": "Stocks",
 					"type": {

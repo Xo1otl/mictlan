@@ -4,7 +4,7 @@ input:
     - redpanda:9092
     auto_replay_nacks: true
     checkpoint_limit: 1024
-    consumer_group: zaiko.stock.projector5
+    consumer_group: zaiko.stock.projector
     topics:
     - zaiko.stock.projections
   label: ''
@@ -14,5 +14,4 @@ pipeline:
   processors:
   - schema_registry_decode:
       url: http://redpanda:8081
-  - mapping: "|\n                root.Sales = this.Sales\n                root.Stocks\
-      \ = this.Stocks.key_values().sort_by(pair -> pair.key)\n                "
+  - mutation: root = this
