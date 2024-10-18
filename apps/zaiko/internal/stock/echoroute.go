@@ -11,6 +11,12 @@ import (
 )
 
 func AddEchoRoutes(e *echo.Echo) {
+	// inmemoryの場合
+	// eventStore := &InMemoryEventStore{}
+	// command := NewCommand(eventStore, eventStore)
+	// repo := NewInMemoryRepo(eventStore)
+
+	// kafkaの場合
 	eventStore := &InMemoryEventStore{}
 	producer, err := NewKafkaProducer("redpanda:8081", "redpanda:9092")
 	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
@@ -19,6 +25,8 @@ func AddEchoRoutes(e *echo.Echo) {
 	}
 	command := NewCommand(consumer, producer)
 	repo := NewInMemoryRepo(eventStore)
+
+	// dependency injection
 	ch := NewCommandHandler(command)
 	qh := NewQueryHandler(repo)
 
