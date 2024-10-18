@@ -2,161 +2,201 @@ package stock
 
 import (
 	"context"
+	"encoding/binary"
+	"fmt"
 
+	"github.com/hamba/avro/v2"
 	"github.com/twmb/franz-go/pkg/kgo"
 	"github.com/twmb/franz-go/pkg/sr"
-
-	"github.com/linkedin/goavro/v2"
 )
 
 type KafkaProducer struct {
-	client   *kgo.Client
-	srClient *sr.Client
-	codecs   map[string]*goavro.Codec
+	client *kgo.Client
+
+	keySchemaIDs   map[string]int         // Map topic to key schema ID
+	keySchemas     map[string]avro.Schema // Map topic to key schema
+	valueSchemaIDs map[string]int         // Map event type to value schema ID
+	valueSchemas   map[string]avro.Schema // Map event type to value schema
+	topics         map[string]string      // Map event type to topic
 }
 
-func NewKafkaProducer() (EventProducer, error) {
-	srClient, err := sr.NewClient(sr.URLs("http://redpanda:8081"))
+// NewKafkaProducer initializes a KafkaProducer with necessary schemas and clients.
+func NewKafkaProducer(registryURL string, kafkaURL string) (EventProducer, error) {
+	// Create Schema Registry client
+	rcl, err := sr.NewClient(sr.URLs(registryURL))
 	if err != nil {
 		return nil, err
 	}
 
+	// Create Kafka client
 	client, err := kgo.NewClient(
-		kgo.SeedBrokers("redpanda:9092"),
+		kgo.SeedBrokers(kafkaURL),
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	return &KafkaProducer{
-		client:   client,
-		srClient: srClient,
-		codecs:   make(map[string]*goavro.Codec),
-	}, nil
+	producer := &KafkaProducer{
+		client:         client,
+		keySchemaIDs:   make(map[string]int),
+		keySchemas:     make(map[string]avro.Schema),
+		valueSchemaIDs: make(map[string]int),
+		valueSchemas:   make(map[string]avro.Schema),
+		topics:         make(map[string]string),
+	}
+
+	// Event types and their topics
+	eventTopics := map[string]string{
+		"Added":            "zaiko.stock.commands",
+		"Sold":             "zaiko.stock.commands",
+		"ClearedAll":       "zaiko.stock.commands",
+		"AggregateUpdated": "zaiko.stock.projections",
+	}
+
+	for eventType, topic := range eventTopics {
+		// Fetch key schema for the topic if not already fetched
+		if _, exists := producer.keySchemas[topic]; !exists {
+			keySchemaName := topic + "-key"
+			keySchemaText, err := rcl.SchemaByVersion(context.Background(), keySchemaName, 1)
+			if err != nil {
+				return nil, err
+			}
+			keySchema, err := avro.Parse(keySchemaText.Schema.Schema)
+			if err != nil {
+				return nil, err
+			}
+			producer.keySchemaIDs[topic] = keySchemaText.ID
+			producer.keySchemas[topic] = keySchema
+		}
+
+		// Fetch value schema for the event type
+		valueSchemaName := topic + "-" + eventType + "-value"
+		valueSchemaText, err := rcl.SchemaByVersion(context.Background(), valueSchemaName, 1)
+		if err != nil {
+			return nil, err
+		}
+		valueSchema, err := avro.Parse(valueSchemaText.Schema.Schema)
+		if err != nil {
+			return nil, err
+		}
+		producer.valueSchemaIDs[eventType] = valueSchemaText.ID
+		producer.valueSchemas[eventType] = valueSchema
+
+		// Store the topic for the event type
+		producer.topics[eventType] = topic
+	}
+
+	return producer, nil
 }
 
-func (k *KafkaProducer) getCodec(subject string) (*goavro.Codec, int32, error) {
-	if codec, ok := k.codecs[subject]; ok {
-		return codec, 0, nil
-	}
-	schemaResp, err := k.srClient.LookupSchema(context.Background(), subject, sr.Schema{})
-	if err != nil {
-		return nil, 0, err
-	}
+// produce is a helper method to serialize data and produce messages to Kafka.
+func (k *KafkaProducer) produce(eventType string, keyData interface{}, valueData interface{}) error {
+	ctx := context.Background()
 
-	codec, err := goavro.NewCodec(schemaResp.Schema.Type.String())
-	if err != nil {
-		return nil, 0, err
+	// Get the topic
+	topic, ok := k.topics[eventType]
+	if !ok {
+		return fmt.Errorf("unknown event type: %s", eventType)
 	}
 
-	k.codecs[subject] = codec
+	// Get key schema and ID
+	keySchema, ok := k.keySchemas[topic]
+	if !ok {
+		return fmt.Errorf("key schema not found for topic: %s", topic)
+	}
+	keySchemaID := k.keySchemaIDs[topic]
 
-	return codec, int32(schemaResp.ID), nil
-}
+	// Get value schema and ID
+	valueSchema, ok := k.valueSchemas[eventType]
+	if !ok {
+		return fmt.Errorf("value schema not found for event type: %s", eventType)
+	}
+	valueSchemaID := k.valueSchemaIDs[eventType]
 
-func (k *KafkaProducer) encodeMessage(binary []byte, schemaID int32) ([]byte, error) {
-	message := make([]byte, 0, 5+len(binary))
-	message = append(message, 0) // マジックバイト
-	message = append(message, byte(schemaID>>24), byte(schemaID>>16), byte(schemaID>>8), byte(schemaID))
-	message = append(message, binary...)
-	return message, nil
-}
-
-func (k *KafkaProducer) produceMessage(topic string, key interface{}, value interface{}, keySubject string, valueSubject string) error {
-	keyCodec, keySchemaID, err := k.getCodec(keySubject)
+	// Serialize key
+	keyBytes, err := avro.Marshal(keySchema, keyData)
 	if err != nil {
 		return err
 	}
 
-	keyBinary, err := keyCodec.BinaryFromNative(nil, key)
+	// Serialize value
+	valueBytes, err := avro.Marshal(valueSchema, valueData)
 	if err != nil {
 		return err
 	}
 
-	valueCodec, valueSchemaID, err := k.getCodec(valueSubject)
-	if err != nil {
-		return err
-	}
+	// Encode key and value
+	keyEncoded := EncodeAvro(keySchemaID, keyBytes)
+	valueEncoded := EncodeAvro(valueSchemaID, valueBytes)
 
-	valueBinaryNative, err := valueCodec.BinaryFromNative(nil, value)
-	if err != nil {
-		return err
-	}
-
-	valueMessage, err := k.encodeMessage(valueBinaryNative, valueSchemaID)
-	if err != nil {
-		return err
-	}
-
-	keyMessage, err := k.encodeMessage(keyBinary, keySchemaID)
-	if err != nil {
-		return err
-	}
-
-	k.client.Produce(context.Background(), &kgo.Record{
+	// Create record
+	record := &kgo.Record{
 		Topic: topic,
-		Key:   keyMessage,
-		Value: valueMessage,
-	}, nil)
+		Key:   keyEncoded,
+		Value: valueEncoded,
+	}
+
+	// Produce message
+	err = k.client.ProduceSync(ctx, record).FirstErr()
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
 
-func (k *KafkaProducer) onAdded(event AddedEvent) error {
-	keySubject := "zaiko.stock.commands-key"
-	valueSubject := "zaiko.stock.commands-Added-value"
-	topic := "zaiko.stock.commands"
-
-	value := map[string]interface{}{
+// OnAdded implements EventProducer.
+func (k *KafkaProducer) OnAdded(event AddedEvent) error {
+	keyData := event.Sub
+	valueData := map[string]interface{}{
 		"Sub":    event.Sub,
 		"Name":   event.Name,
 		"Amount": event.Amount,
 	}
 
-	return k.produceMessage(topic, event.Sub, value, keySubject, valueSubject)
+	return k.produce("Added", keyData, valueData)
 }
 
-func (k *KafkaProducer) onSold(event SoldEvent) error {
-	keySubject := "zaiko.stock.commands-key"
-	valueSubject := "zaiko.stock.commands-Sold-value"
-	topic := "zaiko.stock.commands"
-
-	value := map[string]interface{}{
+// OnSold implements EventProducer.
+func (k *KafkaProducer) OnSold(event SoldEvent) error {
+	keyData := event.Sub
+	valueData := map[string]interface{}{
 		"Sub":    event.Sub,
 		"Name":   event.Name,
 		"Amount": event.Amount,
-		"Price":  event.Price.String(),
+		"Price":  event.Price,
 	}
 
-	return k.produceMessage(topic, event.Sub, value, keySubject, valueSubject)
+	return k.produce("Sold", keyData, valueData)
 }
 
-func (k *KafkaProducer) onClearedAll(event ClearedAllEvent) error {
-	keySubject := "zaiko.stock.commands-key"
-	valueSubject := "zaiko.stock.commands-ClearedAll-value"
-	topic := "zaiko.stock.commands"
-
-	value := map[string]interface{}{
+// OnClearedAll implements EventProducer.
+func (k *KafkaProducer) OnClearedAll(event ClearedAllEvent) error {
+	keyData := event.Sub
+	valueData := map[string]interface{}{
 		"Sub": event.Sub,
 	}
 
-	return k.produceMessage(topic, event.Sub, value, keySubject, valueSubject)
+	return k.produce("ClearedAll", keyData, valueData)
 }
 
-func (k *KafkaProducer) onAggregateUpdated(event AggregateUpdatedEvent) error {
-	keySubject := "zaiko.stock.projections-key"
-	valueSubject := "zaiko.stock.projections-AggregateUpdated-value"
-	topic := "zaiko.stock.projections"
-
-	stocks := make(map[string]interface{})
-	for k, v := range event.Stocks {
-		stocks[k] = v
+// OnAggregateUpdated implements EventProducer.
+func (k *KafkaProducer) OnAggregateUpdated(event AggregateUpdatedEvent) error {
+	keyData := event.Sub
+	valueData := map[string]interface{}{
+		"Stocks": event.Stocks,
+		"Sales":  event.Sales,
 	}
 
-	value := map[string]interface{}{
-		"Stocks": stocks,
-		"Sales":  event.Sales.String(),
-	}
+	return k.produce("AggregateUpdated", keyData, valueData)
+}
 
-	return k.produceMessage(topic, event.Sub, value, keySubject, valueSubject)
+// EncodeAvro encodes the data with the magic byte and schema ID.
+func EncodeAvro(schemaID int, data []byte) []byte {
+	// Magic byte (0x00) + Schema ID (4 bytes) + serialized data
+	payload := make([]byte, 1+4+len(data))
+	payload[0] = 0
+	binary.BigEndian.PutUint32(payload[1:5], uint32(schemaID))
+	copy(payload[5:], data)
+	return payload
 }

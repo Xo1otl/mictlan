@@ -1,6 +1,10 @@
 package stock
 
-import "github.com/shopspring/decimal"
+import (
+	"zaiko/internal/auth"
+
+	"github.com/shopspring/decimal"
+)
 
 // Commandのほうで使うEventConsumer/Producerの実装
 type InMemoryEventStore struct {
@@ -8,26 +12,26 @@ type InMemoryEventStore struct {
 	projectionEvents []AggregateUpdatedEvent
 }
 
-func (s *InMemoryEventStore) Events() ([]any, error) {
+func (s *InMemoryEventStore) Events(sub auth.Sub) ([]any, error) {
 	return s.events, nil
 }
 
-func (s *InMemoryEventStore) onAdded(event AddedEvent) error {
+func (s *InMemoryEventStore) OnAdded(event AddedEvent) error {
 	s.events = append(s.events, event)
 	return nil
 }
 
-func (s *InMemoryEventStore) onSold(event SoldEvent) error {
+func (s *InMemoryEventStore) OnSold(event SoldEvent) error {
 	s.events = append(s.events, event)
 	return nil
 }
 
-func (s *InMemoryEventStore) onClearedAll(event ClearedAllEvent) error {
+func (s *InMemoryEventStore) OnClearedAll(event ClearedAllEvent) error {
 	s.events = append(s.events, event)
 	return nil
 }
 
-func (s *InMemoryEventStore) onAggregateUpdated(event AggregateUpdatedEvent) error {
+func (s *InMemoryEventStore) OnAggregateUpdated(event AggregateUpdatedEvent) error {
 	s.projectionEvents = append(s.projectionEvents, event)
 	return nil
 }

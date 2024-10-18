@@ -19,7 +19,7 @@ func NewCommand(consumer EventConsumer, producer EventProducer) *Command {
 }
 
 func (c *Command) Add(sub auth.Sub, name string, amount int) error {
-	events, err := c.consumer.Events()
+	events, err := c.consumer.Events(sub)
 	if err != nil {
 		return err
 	}
@@ -28,12 +28,12 @@ func (c *Command) Add(sub auth.Sub, name string, amount int) error {
 	if err != nil {
 		return err
 	}
-	err = c.producer.onAdded(addedEvent)
+	err = c.producer.OnAdded(addedEvent)
 	if err != nil {
 		return err
 	}
 	// projectionもやる
-	err = c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	err = c.producer.OnAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,7 @@ func (c *Command) Add(sub auth.Sub, name string, amount int) error {
 }
 
 func (c *Command) Sell(sub auth.Sub, name string, amount int, price decimal.Decimal) error {
-	events, err := c.consumer.Events()
+	events, err := c.consumer.Events(sub)
 	if err != nil {
 		return err
 	}
@@ -50,11 +50,11 @@ func (c *Command) Sell(sub auth.Sub, name string, amount int, price decimal.Deci
 	if err != nil {
 		return err
 	}
-	err = c.producer.onSold(soldEvent)
+	err = c.producer.OnSold(soldEvent)
 	if err != nil {
 		return err
 	}
-	err = c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	err = c.producer.OnAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
 	if err != nil {
 		return err
 	}
@@ -62,17 +62,17 @@ func (c *Command) Sell(sub auth.Sub, name string, amount int, price decimal.Deci
 }
 
 func (c *Command) ClearAll(sub auth.Sub) error {
-	events, err := c.consumer.Events()
+	events, err := c.consumer.Events(sub)
 	if err != nil {
 		return err
 	}
 	agg := NewAggregate(events)
 	clearedAllEvent := agg.ClearAll(sub)
-	err = c.producer.onClearedAll(clearedAllEvent)
+	err = c.producer.OnClearedAll(clearedAllEvent)
 	if err != nil {
 		return err
 	}
-	err = c.producer.onAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
+	err = c.producer.OnAggregateUpdated(NewAggregateUpdatedEvent(sub, agg.stocks, agg.sales))
 	if err != nil {
 		return err
 	}
@@ -80,14 +80,14 @@ func (c *Command) ClearAll(sub auth.Sub) error {
 }
 
 type EventConsumer interface {
-	Events() ([]any, error)
+	Events(sub auth.Sub) ([]any, error)
 }
 
 type EventProducer interface {
-	onAdded(event AddedEvent) error
-	onSold(event SoldEvent) error
-	onClearedAll(event ClearedAllEvent) error
-	onAggregateUpdated(event AggregateUpdatedEvent) error
+	OnAdded(event AddedEvent) error
+	OnSold(event SoldEvent) error
+	OnClearedAll(event ClearedAllEvent) error
+	OnAggregateUpdated(event AggregateUpdatedEvent) error
 }
 
 type AddedEvent struct {
