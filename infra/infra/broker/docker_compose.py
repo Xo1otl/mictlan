@@ -1,15 +1,17 @@
+from . import *
+
 # Redpandaサービスの設定
 redpanda_service = {
     'command': [
-        'redpanda',
+        CONTAINER_NAME,
         'start',
-        '--kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092',
-        '--advertise-kafka-addr internal://redpanda:9092,external://localhost:19092',
+        f'--kafka-addr internal://0.0.0.0:{KAFKA_PORT},external://0.0.0.0:19092',
+        f'--advertise-kafka-addr internal://{CONTAINER_NAME}:9092,external://localhost:19092',
         '--pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082',
-        '--advertise-pandaproxy-addr internal://redpanda:8082,external://localhost:18082',
-        '--schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081',
-        '--rpc-addr redpanda:33145',
-        '--advertise-rpc-addr redpanda:33145',
+        f'--advertise-pandaproxy-addr internal://{CONTAINER_NAME}:8082,external://localhost:18082',
+        f'--schema-registry-addr internal://0.0.0.0:{SCHEMA_REGISTRY_PORT},external://0.0.0.0:18081',
+        f'--rpc-addr {CONTAINER_NAME}:33145',
+        f'--advertise-rpc-addr {CONTAINER_NAME}:33145',
         '--mode dev-container',
         '--smp 1',
         '--default-log-level=info'
@@ -27,11 +29,11 @@ redpanda_service = {
     ]
 }
 
-console_config_content = '''kafka:
-  brokers: ["redpanda:9092"]
+console_config_content = f'''kafka:
+  brokers: ["{KAFKA_ADDR}"]
   schemaRegistry:
     enabled: true
-    urls: ["http://redpanda:8081"]
+    urls: ["{SCHEMA_REGISTRY_URL}"]
 redpanda:
   adminApi:
     enabled: true

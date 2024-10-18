@@ -185,6 +185,7 @@ func (k *KafkaProducer) OnClearedAll(event ClearedAllEvent) error {
 func (k *KafkaProducer) OnAggregateUpdated(event AggregateUpdatedEvent) error {
 	keyData := event.Sub
 	valueData := map[string]interface{}{
+		"Sub":    event.Sub,
 		"Stocks": event.Stocks,
 		"Sales":  event.Sales.String(),
 	}
