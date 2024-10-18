@@ -56,7 +56,8 @@ func (sc *SchemaCache) GetSchema(schemaID int) (avro.Schema, error) {
 type KafkaConsumer struct {
 	client  *kgo.Client
 	cache   *SchemaCache
-	fetches kgo.Fetches
+	records []*kgo.Record
+	mu      sync.Mutex
 }
 
 func NewKafkaConsumer(registryURL string, kafkaURL string) EventConsumer {
@@ -83,52 +84,49 @@ func NewKafkaConsumer(registryURL string, kafkaURL string) EventConsumer {
 func (k *KafkaConsumer) pollFetchesLoop() {
 	ctx := context.Background()
 	for {
-		k.fetches = k.client.PollFetches(ctx)
-		if k.fetches.IsClientClosed() {
+		fetches := k.client.PollFetches(ctx)
+		if fetches.IsClientClosed() {
 			return
 		}
-		k.fetches.EachError(func(_ string, _ int32, err error) {
+		fetches.EachError(func(_ string, _ int32, err error) {
 			panic(err)
 		})
+		k.mu.Lock()
+		k.records = append(k.records, fetches.Records()...)
+		k.mu.Unlock()
 	}
 }
 
 func (k *KafkaConsumer) Events(sub auth.Sub) ([]any, error) {
-	var results []any
+	var events []any
 	var lastError error
 
-	k.fetches.EachRecord(func(record *kgo.Record) {
+	for _, record := range k.records {
+		// k.records.EachRecord(func(record *kgo.Record) {
 		var (
 			keyData   auth.Sub
 			valueData map[string]interface{}
 		)
 
-		// Process key
 		if len(record.Key) < 5 {
-			log.Panic("key too short")
-			return
+			return nil, fmt.Errorf("key too short")
 		}
-
-		// Check magic byte
 		if record.Key[0] != 0 {
-			lastError = fmt.Errorf("unexpected magic byte in key")
-			return
+			return nil, fmt.Errorf("unexpected magic byte in key")
 		}
 		schemaID := int(binary.BigEndian.Uint32(record.Key[1:5]))
 		schema, err := k.cache.GetSchema(schemaID)
 		if err != nil {
-			lastError = fmt.Errorf("failed to get key schema: %v", err)
-			return
+			return nil, fmt.Errorf("failed to get key schema: %v", err)
 		}
 		// Unmarshal key
 		err = avro.Unmarshal(schema, record.Key[5:], &keyData)
 		if err != nil {
-			lastError = fmt.Errorf("failed to unmarshal key: %v", err)
-			return
+			return nil, fmt.Errorf("failed to unmarshal key: %v", err)
 		}
 
 		if keyData != sub {
-			return
+			continue
 		}
 
 		// Process value
@@ -138,20 +136,17 @@ func (k *KafkaConsumer) Events(sub auth.Sub) ([]any, error) {
 
 		// Check magic byte
 		if record.Value[0] != 0 {
-			lastError = fmt.Errorf("unexpected magic byte in value")
-			return
+			return nil, fmt.Errorf("unexpected magic byte in value")
 		}
 		schemaID = int(binary.BigEndian.Uint32(record.Value[1:5]))
 		schema, err = k.cache.GetSchema(schemaID)
 		if err != nil {
-			lastError = fmt.Errorf("failed to get value schema: %v", err)
-			return
+			return nil, fmt.Errorf("failed to get value schema: %v", err)
 		}
 		// Unmarshal value
 		err = avro.Unmarshal(schema, record.Value[5:], &valueData)
 		if err != nil {
-			lastError = fmt.Errorf("failed to unmarshal value: %v", err)
-			return
+			return nil, fmt.Errorf("failed to unmarshal value: %v", err)
 		}
 
 		type Schema struct {
@@ -160,30 +155,30 @@ func (k *KafkaConsumer) Events(sub auth.Sub) ([]any, error) {
 		var parsedSchema Schema
 		err = json.Unmarshal([]byte(schema.String()), &parsedSchema)
 		if err != nil {
-			fmt.Println("Error:", err)
-			return
+			return nil, err
 		}
-		var message any
+		// consumer側ではバリデーションは必要ないがnilチェックぐらいは行っている
+		var event any
 		switch parsedSchema.Name {
 		case "Added":
-			message = NewAddedEvent(keyData, valueData["Name"].(string), valueData["Amount"].(int))
+			event = NewAddedEvent(keyData, valueData["Name"].(string), valueData["Amount"].(int))
 		case "Sold":
 			price, err := decimal.NewFromString(valueData["Price"].(string))
 			if err != nil {
 				log.Fatal(err)
 			}
-			message = NewSoldEvent(keyData, valueData["Name"].(string), valueData["Amount"].(int), price)
+			event = NewSoldEvent(keyData, valueData["Name"].(string), valueData["Amount"].(int), price)
 		case "ClearedAll":
-			message = NewClearedAllEvent(keyData)
+			event = NewClearedAllEvent(keyData)
 		default:
 			panic("Unknown schema")
 		}
-		results = append(results, message)
-	})
+		events = append(events, event)
+	}
 
 	if lastError != nil {
 		return nil, lastError
 	}
 
-	return results, nil
+	return events, nil
 }
