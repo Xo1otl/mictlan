@@ -6,5 +6,5 @@ import (
 )
 
 func TestLaunchEcho(t *testing.T) {
-	apiserver.LaunchEcho()
+	apiserver.LaunchEcho("localhost:3030")
 }

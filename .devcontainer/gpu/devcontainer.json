@@ -29,7 +29,8 @@
 				"asvetliakov.vscode-neovim",
 				"tamasfe.even-better-toml",
 				"devsense.phptools-vscode",
-				"julialang.language-julia"
+				"julialang.language-julia",
+				"mongodb.mongodb-vscode"
 			]
 		}
 	},

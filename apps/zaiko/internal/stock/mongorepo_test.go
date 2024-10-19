@@ -6,9 +6,9 @@ import (
 )
 
 func TestMongoRepo(t *testing.T) {
-	repo := stock.NewMongo()
+	repo := stock.NewMongoRepo()
 	sales := repo.Sales("testusersub3")
-	stocks := repo.Stocks("testusersub3", "aaa")
+	stocks := repo.Stocks("testusersub3", "")
 	t.Log(sales)
 	t.Log(stocks)
 }

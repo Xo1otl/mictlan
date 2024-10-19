@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"hash/crc32"
-	"log"
 	"testing"
 	"zaiko/internal/stock"
 
@@ -16,15 +15,13 @@ import (
 
 var (
 	// KafkaとSchema RegistryのURL
-	registry = "redpanda:8081"
-	kafkaURL = "redpanda:9092"
-	topic    = "zaiko.stock.projections"
-	groupID  = "test-group"
+	topic   = "zaiko.stock.projections"
+	groupID = "test-group"
 )
 
 func TestProduce(t *testing.T) {
 	// Schema Registryクライアントの作成
-	rcl, err := sr.NewClient(sr.URLs(registry))
+	rcl, err := sr.NewClient(sr.URLs(stock.Registry))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -75,7 +72,7 @@ func TestProduce(t *testing.T) {
 
 	// Kafkaプロデューサーの作成
 	client, err := kgo.NewClient(
-		kgo.SeedBrokers(kafkaURL),
+		kgo.SeedBrokers(stock.KafkaURL),
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -98,7 +95,7 @@ func TestProduce(t *testing.T) {
 
 func TestConsume(t *testing.T) {
 	// Schema Registryクライアントの作成
-	rcl, err := sr.NewClient(sr.URLs(registry))
+	rcl, err := sr.NewClient(sr.URLs(stock.Registry))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -125,7 +122,7 @@ func TestConsume(t *testing.T) {
 
 	// Kafkaコンシューマーの作成
 	client, err := kgo.NewClient(
-		kgo.SeedBrokers(kafkaURL),
+		kgo.SeedBrokers(stock.KafkaURL),
 		kgo.ConsumerGroup(groupID),
 		kgo.ConsumeTopics(topic),
 	)
@@ -164,76 +161,12 @@ func TestConsume(t *testing.T) {
 	})
 }
 
+func TestCreateTopic(t *testing.T) {
+	stock.CreateTopics()
+}
+
 func TestCreateSchema(t *testing.T) {
-	rcl, err := sr.NewClient(sr.URLs(registry))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// スキーマとサブジェクトの定義
-	var schemas = map[string]string{
-		"zaiko.stock.commands-Added-value": `{
-			"type": "record",
-			"name": "Added",
-			"fields": [
-				{"name": "Sub", "type": "string"},
-				{"name": "Name", "type": "string"},
-				{"name": "Amount", "type": "int"}
-			]
-		}`,
-		"zaiko.stock.commands-ClearedAll-value": `{
-			"type": "record",
-			"name": "ClearedAll",
-			"fields": [
-				{"name": "Sub", "type": "string"}
-			]
-		}`,
-		"zaiko.stock.commands-Sold-value": `{
-			"type": "record",
-			"name": "Sold",
-			"fields": [
-				{"name": "Sub", "type": "string"},
-				{"name": "Name", "type": "string"},
-				{"name": "Amount", "type": "int"},
-				{"name": "Price", "type": "string"}
-			]
-		}`,
-		"zaiko.stock.commands-key": `{
-			"name": "sub",
-			"type": "string"
-		}`,
-		"zaiko.stock.projections-AggregateUpdated-value": `{
-			"type": "record",
-			"name": "AggregateUpdated",
-			"fields": [
-				{"name": "Sub", "type": "string"},
-				{
-					"name": "Stocks",
-					"type": {
-						"type": "map",
-						"values": "int"
-					}
-				},
-				{"name": "Sales", "type": "string"}
-			]
-		}`,
-		"zaiko.stock.projections-key": `{
-			"name": "Sub",
-			"type": "string"
-		}`,
-	}
-
-	// スキーマ作成処理のループ
-	for subject, schemaText := range schemas {
-		ss, err := rcl.CreateSchema(context.Background(), subject, sr.Schema{
-			Schema: schemaText,
-			Type:   sr.TypeAvro,
-		})
-		if err != nil {
-			t.Fatalf("Failed to create schema for subject %s: %v", subject, err)
-		}
-		log.Printf("Created schema with ID: %d for subject: %s", ss.ID, subject)
-	}
+	stock.RegisterSchema()
 }
 
 func TestKafkaProducer(t *testing.T) {
