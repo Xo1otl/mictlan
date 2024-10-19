@@ -1,8 +1,12 @@
 package stock
 
-import "github.com/shopspring/decimal"
+import (
+	"zaiko/internal/auth"
+
+	"github.com/shopspring/decimal"
+)
 
 type Repo interface {
-	Stocks(name string) map[string]int
-	Sales() decimal.Decimal
+	Stocks(sub auth.Sub, name string) map[string]int
+	Sales(sub auth.Sub) decimal.Decimal
 }

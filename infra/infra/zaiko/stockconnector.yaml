@@ -1,18 +1,40 @@
 input:
-  kafka:
-    addresses:
-    - redpanda:9092
+  kafka_franz:
     auto_replay_nacks: true
-    checkpoint_limit: 1024
-    consumer_group: zaiko.stock.projector5
+    consumer_group: zaiko.stock.projector18
+    seed_brokers:
+    - redpanda:9092
     topics:
     - zaiko.stock.projections
-  label: ''
 output:
   stdout: {}
 pipeline:
   processors:
   - schema_registry_decode:
       url: http://redpanda:8081
-  - mapping: "|\n                root.Sales = this.Sales\n                root.Stocks\
-      \ = this.Stocks.key_values().sort_by(pair -> pair.key)\n                "
+  - try:
+    - resource: sales_stocks_mongo
+  - catch:
+    - log:
+        message: 'Processing failed due to: ${!error()}'
+processor_resources:
+- label: sales_stocks_mongo
+  mongodb:
+    collection: sales_stocks
+    database: zaiko
+    document_map: '
+
+      root.Sub = this.Sub
+
+      root.Stocks = this.Stocks
+
+      root.Sales = this.Sales
+
+      '
+    filter_map: root.Sub = this.Sub
+    operation: replace-one
+    upsert: true
+    url: mongodb://mongo:27017
+    write_concern:
+      j: true
+      w: majority
