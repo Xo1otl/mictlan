@@ -20,6 +20,9 @@ func (m *MongoRepo) Sales(sub auth.Sub) decimal.Decimal {
 	collection := m.client.Database("zaiko").Collection("sales_stocks")
 	filter := bson.M{"Sub": string(sub)}
 
+	// projectionでSalesフィールドだけを取得
+	projection := bson.M{"Sales": 1}
+
 	var result struct {
 		Sales string `bson:"Sales"`
 	}
@@ -27,7 +30,8 @@ func (m *MongoRepo) Sales(sub auth.Sub) decimal.Decimal {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err := collection.FindOne(ctx, filter).Decode(&result)
+	// FindOneにprojectionを指定
+	err := collection.FindOne(ctx, filter, options.FindOne().SetProjection(projection)).Decode(&result)
 	if err != nil {
 		return decimal.Zero
 	}
@@ -45,6 +49,9 @@ func (m *MongoRepo) Stocks(sub auth.Sub, name string) map[string]int {
 	collection := m.client.Database("zaiko").Collection("sales_stocks")
 	filter := bson.M{"Sub": string(sub)}
 
+	// projectionでStocksフィールドだけを取得
+	projection := bson.M{"Stocks": 1}
+
 	var result struct {
 		Stocks map[string]int `bson:"Stocks"`
 	}
@@ -52,7 +59,8 @@ func (m *MongoRepo) Stocks(sub auth.Sub, name string) map[string]int {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err := collection.FindOne(ctx, filter).Decode(&result)
+	// FindOneにprojectionを指定
+	err := collection.FindOne(ctx, filter, options.FindOne().SetProjection(projection)).Decode(&result)
 	if err != nil {
 		return nil
 	}
@@ -67,7 +75,7 @@ func (m *MongoRepo) Stocks(sub auth.Sub, name string) map[string]int {
 	return result.Stocks
 }
 
-func NewMongo() Repo {
+func NewMongoRepo() Repo {
 	clientOptions := options.Client().ApplyURI("mongodb://mongo:27017")
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {

@@ -30,7 +30,7 @@ stock_connector = {
         "kafka_franz": {
             "seed_brokers": [broker.KAFKA_ADDR],
             "topics": ["zaiko.stock.projections"],
-            "consumer_group": "zaiko.stock.projector18",
+            "consumer_group": "zaiko.stock.projector",
             "auto_replay_nacks": True,
         }
     },

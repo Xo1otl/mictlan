@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func LaunchEcho() {
+func LaunchEcho(addr string) {
 	e := echo.New()
 
 	// CORS configuration
@@ -43,8 +43,8 @@ func LaunchEcho() {
 	// 課題3
 	stock.AddEchoRoutes(e)
 
-	log.Println("🚀 Server listening at: http://localhost:3030")
-	err := e.Start("localhost:3030")
+	log.Println("🚀 Server listening at: http://" + addr)
+	err := e.Start(addr)
 	if err != nil {
 		log.Fatal(err)
 	}

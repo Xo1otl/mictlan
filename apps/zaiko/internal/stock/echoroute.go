@@ -17,7 +17,7 @@ func AddEchoRoutes(e *echo.Echo) {
 	// command := NewCommand(eventStore, eventStore)
 
 	// kafkaの場合
-	repo := NewMongo()
+	repo := NewMongoRepo()
 	producer, err := NewKafkaProducer("redpanda:8081", "redpanda:9092")
 	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
 	if err != nil {

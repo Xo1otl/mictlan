@@ -1,7 +1,7 @@
 input:
   kafka_franz:
     auto_replay_nacks: true
-    consumer_group: zaiko.stock.projector18
+    consumer_group: zaiko.stock.projector
     seed_brokers:
     - redpanda:9092
     topics:
