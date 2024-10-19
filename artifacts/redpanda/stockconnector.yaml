@@ -1,0 +1,52 @@
+input:
+  kafka_franz:
+    auto_replay_nacks: true
+    consumer_group: zaiko.stock.projector201
+    seed_brokers:
+    - redpanda:9092
+    topics:
+    - zaiko.stock.projections
+output:
+  stdout: {}
+pipeline:
+  processors:
+  - schema_registry_decode:
+      avro_raw_json: true
+      url: http://redpanda:8081
+  - mapping: '
+
+      root.Sub = this.Sub
+
+      root.Sales = this.Sales
+
+      root.Stocks = this.Stocks.key_values()
+
+      root.Args = [this.Sub, this.Sales].concat((root.Stocks.map_each(i -> [this.Sub,
+      i.key, i.value]).flatten()).flatten())
+
+      '
+  - try:
+    - resource: sales_stocks_sql
+  - catch:
+    - log:
+        message: 'Processing failed due to: ${!error()}'
+processor_resources:
+- label: sales_stocks_sql
+  sql_raw:
+    args_mapping: root = this.Args
+    driver: mysql
+    dsn: zaiko_user:zaiko_password@tcp(mysql:3306)/zaiko?allowMultiQueries=true
+    init_statement: "CREATE PROCEDURE IF NOT EXISTS upsert_sales_and_stocks(\n   \
+      \ IN sub_in VARCHAR(255),\n    IN price_in VARCHAR(255),\n    IN stocks_values\
+      \ TEXT\n)\nBEGIN\n    START TRANSACTION;\n\n    INSERT INTO sales (sub, price)\n\
+      \    VALUES (sub_in, price_in)\n    ON DUPLICATE KEY UPDATE price = price_in;\n\
+      \n    DELETE FROM stocks WHERE sub = sub_in;\n\n    SET @insert_sql = CONCAT('INSERT\
+      \ INTO stocks (sub, name, amount) VALUES ', stocks_values, ';');\n    \n   \
+      \ PREPARE stmt FROM @insert_sql;\n    EXECUTE stmt;\n    DEALLOCATE PREPARE\
+      \ stmt;\n\n    COMMIT;\nEND;\n"
+    query: 'SELECT * FROM sales;
+
+      SELECT * FROM stocks;
+
+      '
+    unsafe_dynamic_query: true

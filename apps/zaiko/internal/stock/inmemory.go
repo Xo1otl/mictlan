@@ -45,7 +45,7 @@ func NewInMemoryRepo(store *InMemoryEventStore) Repo {
 	return &InMemoryRepo{store}
 }
 
-func (r *InMemoryRepo) Stocks(name string) map[string]int {
+func (r *InMemoryRepo) Stocks(sub auth.Sub, name string) map[string]int {
 	if len(r.projectionEvents) == 0 {
 		return map[string]int{}
 	}
@@ -56,7 +56,7 @@ func (r *InMemoryRepo) Stocks(name string) map[string]int {
 	return map[string]int{name: stockValue}
 }
 
-func (r *InMemoryRepo) Sales() decimal.Decimal {
+func (r *InMemoryRepo) Sales(sub auth.Sub) decimal.Decimal {
 	if len(r.projectionEvents) == 0 {
 		return decimal.Zero // r.projectionEventsが空の場合、0を返す
 	}

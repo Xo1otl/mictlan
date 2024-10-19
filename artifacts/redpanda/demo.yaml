@@ -1,0 +1,37 @@
+input:
+  generate:
+    mapping: |
+      root.type = if count("type") % 3 == 1 { "order" } else { "item" }
+      root.id = uuid_v4()
+    count: 9
+    interval: 0s
+    batch_size: 3
+  processors:
+    - archive:
+        format: json_array
+    - mapping: |
+        root.order = this.filter(item -> item.type == "order").index(0)
+        root.items = this.filter(item -> item.type == "item")
+
+output:
+  sql_raw:
+    driver: sqlite
+    dsn: file:./foobar.db
+    query: |
+      BEGIN TRANSACTION;
+      INSERT INTO orders (id) VALUES (?);
+      INSERT INTO order_items (id, order_id) VALUES ${! json("items").map_each(i -> "(?, ?)").join(",") };
+      COMMIT;
+    unsafe_dynamic_query: true
+    args_mapping: |
+      root = [ this.order.id ].append(this.items.map_each(i -> [this.order.id, i.id]).flatten()).flatten()
+    conn_max_idle: 1
+    conn_max_open: 1
+    init_statement: |
+      CREATE TABLE IF NOT EXISTS orders (
+        id varchar
+      );
+      CREATE TABLE IF NOT EXISTS order_items (
+        id varchar,
+        order_id varchar
+      );

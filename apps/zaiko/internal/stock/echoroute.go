@@ -13,18 +13,17 @@ import (
 func AddEchoRoutes(e *echo.Echo) {
 	// inmemoryの場合
 	// eventStore := &InMemoryEventStore{}
-	// command := NewCommand(eventStore, eventStore)
 	// repo := NewInMemoryRepo(eventStore)
+	// command := NewCommand(eventStore, eventStore)
 
 	// kafkaの場合
-	eventStore := &InMemoryEventStore{}
+	repo := NewMongo()
 	producer, err := NewKafkaProducer("redpanda:8081", "redpanda:9092")
 	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
 	if err != nil {
 		log.Fatalf("failed to create kafka producer: %v", err)
 	}
 	command := NewCommand(consumer, producer)
-	repo := NewInMemoryRepo(eventStore)
 
 	// dependency injection
 	ch := NewCommandHandler(command)
@@ -143,22 +142,36 @@ func NewQueryHandler(repo Repo) *QueryHandler {
 }
 
 func (h *QueryHandler) HandleStocks(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	sub := claims.(*auth.Claims).Sub
+
 	if c.Request().Method != http.MethodGet {
 		return c.JSON(http.StatusMethodNotAllowed, map[string]string{"message": "Method Not Allowed"})
 	}
-	stocks := h.repo.Stocks("")
+
+	stocks := h.repo.Stocks(sub, "")
 	return c.JSON(http.StatusOK, stocks)
 }
 
 func (h *QueryHandler) HandleSales(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	sub := claims.(*auth.Claims).Sub
+
 	if c.Request().Method != http.MethodGet {
 		return c.JSON(http.StatusMethodNotAllowed, map[string]string{"message": "Method Not Allowed"})
 	}
 
-	sales, exact := h.repo.Sales().Float64()
+	sales, exact := h.repo.Sales(sub).Float64()
 	if !exact {
 		log.Println("セールスは厳密な値ではありません")
 	}
+
 	response := SalesResponse{
 		Sales: Float64(sales),
 	}

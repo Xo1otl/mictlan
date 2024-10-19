@@ -1,18 +1,42 @@
 import yaml
 import os
 from infra import broker
+from infra import zaiko
+from infra import nosql
+
+sales_stocks_mongo = {
+    "label": "sales_stocks_mongo",
+    "mongodb": {
+        "url": f"mongodb://{nosql.CONTAINER_NAME}:{nosql.PORT}",
+        "database": zaiko.DB_NAME,
+        "collection": "sales_stocks",
+        "operation": "replace-one",
+        "write_concern": {
+            "w": "majority",
+            "j": True
+        },
+        "upsert": True,
+        "document_map": """
+root.Sub = this.Sub
+root.Stocks = this.Stocks
+root.Sales = this.Sales
+""",
+        "filter_map": "root.Sub = this.Sub"
+    }
+}
 
 stock_connector = {
     "input": {
-        "label": "",
-        "kafka": {
-            "addresses": [broker.KAFKA_ADDR],
+        "kafka_franz": {
+            "seed_brokers": [broker.KAFKA_ADDR],
             "topics": ["zaiko.stock.projections"],
-            "consumer_group": "zaiko.stock.projector5",
-            "checkpoint_limit": 1024,
-            "auto_replay_nacks": True
+            "consumer_group": "zaiko.stock.projector18",
+            "auto_replay_nacks": True,
         }
     },
+    "processor_resources": [
+        sales_stocks_mongo
+    ],
     "pipeline": {
         "processors": [
             {
@@ -21,10 +45,16 @@ stock_connector = {
                 }
             },
             {
-                "mapping": """|
-                root.Sales = this.Sales
-                root.Stocks = this.Stocks.key_values().sort_by(pair -> pair.key)
-                """
+                "try": [
+                    {"resource": sales_stocks_mongo["label"]},
+                ]
+            },
+            {
+                "catch": [{
+                    "log": {
+                        "message": "Processing failed due to: ${!error()}"
+                    }
+                }]
             }
         ]
     },
