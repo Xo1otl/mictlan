@@ -2,19 +2,20 @@ import yaml
 import os
 from infra import vpn
 from infra import searchengine
-from infra import relationaldb
+from infra import rdb
 from infra import proxy
 from infra import observability
 from infra import broker
 from infra import mail
 from infra import ossekai
+from infra import nosql
 
 
 # docker composeはまとめてやりたい処理とかが考えられるからここでまとめて生成する
 # すべての設定にまとめてnetworksを追加するなどの共通処理が考えられる
 def generate_docker_compose():
     modules = [
-        vpn, searchengine, relationaldb, proxy, observability, broker, mail, ossekai
+        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, nosql
     ]
 
     # includeするパスを保持するリスト

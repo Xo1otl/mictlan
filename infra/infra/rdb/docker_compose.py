@@ -25,9 +25,9 @@ for filepath in workspace.globrelpaths(__file__, 'infra/infra/*/[0-9]*-*.mysql.s
 # Build the config object
 docker_compose = {
     'services': {
-        'mysql': {
+        CONTAINER_NAME: {
             'image': 'mysql:latest',
-            'ports': ['3306:3306'],
+            'ports': [f'{PORT}:{PORT}'],
             'environment': {
                 'MYSQL_ROOT_PASSWORD': MYSQL_ROOT_PASSWORD
             },
