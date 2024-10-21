@@ -1,157 +1,164 @@
-## 課題1
+## 課題 1
 
-- 課題2が終わってから`internal/apiserver/echo.go`にエンドポイントを追加した
+- 課題 2 が終わってから`internal/apiserver/echo.go`にエンドポイントを追加した
+
 ```go
 e.GET("/", func(c echo.Context) error {
 	return c.String(200, "AWS")
 })
 ```
 
-## 課題2
+## 課題 2
 
 ### `auth` モジュールを作った
 
 - バックエンドで必要な認証処理を行うミドルウェアを作成した。
-    - 過去に JWT 認証で使用したエンティティ (`Token`, `Claims`) とインターフェース (`TokenService`) を `internal/auth/*` に持ってきた。
-    - ミドルウェア `internal/auth/echomiddleware.go` をDigest認証に合わせて微修正した。
+  - 過去に JWT 認証で使用したエンティティ (`Token`, `Claims`) とインターフェース (`TokenService`) を `internal/auth/*` に持ってきた。
+  - ミドルウェア `internal/auth/echomiddleware.go` を Digest 認証に合わせて微修正した。
 
 ### `iam` モジュールを作った
 
 - ドメインレイヤを作った
-    - `internal/iam/digest.go` で nonce 発行 (`Init`) とトークンのパース (`Parse`) を行う `Digest` を作った。
-    - インターフェースを定義した 
-        - アカウント情報を取得する `AccountRepo`。
-        - リプレイ攻撃防止のための nonce カウント (`Nc`) の管理/検証 `DigestNcRepo`。
-        - nonce の生成と改ざん防止のための検証 `NonceService`。
-        - Digest レスポンスの検証 `DigestTokenValidator`。
+  - `internal/iam/digest.go` で nonce 発行 (`Init`) とトークンのパース (`Parse`) を行う `Digest` を作った。
+  - インターフェースを定義した
+    - アカウント情報を取得する `AccountRepo`。
+    - リプレイ攻撃防止のための nonce カウント (`Nc`) の管理/検証 `DigestNcRepo`。
+    - nonce の生成と改ざん防止のための検証 `NonceService`。
+    - Digest レスポンスの検証 `DigestTokenValidator`。
 - インターフェースを実装した
-    - MD5を用いたトークン検証 `MD5DigestValidator` (`internal/iam/validator.go`)
-    - nonceカウント (`Nc`) のrepo `InMemoryDigestNcRepo` (`internal/iam/inmemory.go`)
-    - HMACを用いた nonce の生成/検証 `HMACNonceService` (`internal/iam/nonceservice.go`)
-    - アカウントのrepo `InMemoryAccountRepo` (`internal/iam/inmemory.go`)。
-- Digest認証のチャレンジとレスポンスの流れを処理するミドルウェア `EchoDigestMiddleware` を実装した (`internal/iam/echodigestmiddleware.go`)。
+  - MD5 を用いたトークン検証 `MD5DigestValidator` (`internal/iam/validator.go`)
+  - nonce カウント (`Nc`) の repo `InMemoryDigestNcRepo` (`internal/iam/inmemory.go`)
+  - HMAC を用いた nonce の生成/検証 `HMACNonceService` (`internal/iam/nonceservice.go`)
+  - アカウントの repo `InMemoryAccountRepo` (`internal/iam/inmemory.go`)。
+- Digest 認証のチャレンジとレスポンスの流れを処理するミドルウェア `EchoDigestMiddleware` を実装した (`internal/iam/echodigestmiddleware.go`)。
 
 ### `apiserver` モジュールを作った
 
 - `internal/apiserver/echo.go` を書いた
-    - Echo サーバーを初期化。
-    - CORS 設定の構成(今後のためにコード残してある)。
-    - `iam` の各コンポーネント（アカウントリポジトリ、nonce サービス、バリデータなど）を依存性注入。
-    - ミドルウェアチェーンに `iam.EchoDigestMiddleware` と `auth.EchoMiddleware` を追加。
-    - ルート（例：`/secret` エンドポイント）の登録。
-    - サーバーの起動。
+  - Echo サーバーを初期化。
+  - CORS 設定の構成(今後のためにコード残してある)。
+  - `iam` の各コンポーネント（アカウントリポジトリ、nonce サービス、バリデータなど）を依存性注入。
+  - ミドルウェアチェーンに `iam.EchoDigestMiddleware` と `auth.EchoMiddleware` を追加。
+  - ルート（例：`/secret` エンドポイント）の登録。
+  - サーバーの起動。
 
 ### 反省点
 
-- Nc等のリソース解放していない
+- Nc 等のリソース解放していない
 
 ### 参考文献
 
-- [Digest認証の仕様](https://datatracker.ietf.org/doc/html/rfc7616)
-    - `The nc value is the hexadecimal count of the number of requests (including the current request) that the client has sent with the noncevalue in this request. `
-- [Digest認証日本語訳](https://tex2e.github.io/rfc-translater/html/rfc7616.html)
-- [Digest認証日本語解説](https://kunishi.gitbook.io/web-application-textbook/storage)
-- [RubyのDigest Client](https://www.rubydoc.info/gems/net-http-digest_auth/1.1.1/Net/HTTP/DigestAuth)
+- [Digest 認証の仕様](https://datatracker.ietf.org/doc/html/rfc7616)
+  - `The nc value is the hexadecimal count of the number of requests (including the current request) that the client has sent with the noncevalue in this request. `
+- [Digest 認証日本語訳](https://tex2e.github.io/rfc-translater/html/rfc7616.html)
+- [Digest 認証日本語解説](https://kunishi.gitbook.io/web-application-textbook/storage)
+- [Ruby の Digest Client](https://www.rubydoc.info/gems/net-http-digest_auth/1.1.1/Net/HTTP/DigestAuth)
 
-## 課題3
+## 課題 3
 
 ### `stock` モジュールを作った
 
 - ドメイン設計を行った
-    - `stock`モジュール内で「stock」がすべての主語となる命名にした。
-        - 例: Event は `StockEvent`、Aggregate は `StockAggregate`、Add 関数は `AddStock` という形で、主語が省略されている。
-        - Repository Pattern に倣い、具体的なプレフィックスがつく構造。例えば `UserRepository` と同じように考えているけど、主語が省略されている。
-    - `producer` や `consumer` の設計も Repository Pattern を参考にした。ただし、`command service` としての処理のみを考えた。
-    - `query service` は、projection された read model に対して repository pattern を用いてデータを取得する。
+
+  - `stock`モジュール内で「stock」がすべての主語となる命名にした。
+    - 例: Event は `StockEvent`、Aggregate は `StockAggregate`、Add 関数は `AddStock` という形で、主語が省略されている。
+    - Repository Pattern に倣い、具体的なプレフィックスがつく構造。例えば `UserRepository` と同じように考えているけど、主語が省略されている。
+  - `producer` や `consumer` の設計も Repository Pattern を参考にした。ただし、`command service` としての処理のみを考えた。
+  - `query service` は、projection された read model に対して repository pattern を用いてデータを取得する。
 
 - projection の取り扱いを考えた
-    - Projection を別サービスにすることも検討したが、command service が aggregate した結果を用いれば十分と判断した。
-    - そのため、`command service` が projection の処理を兼任し、aggregate の結果を produce。
-    - Kafka Connect を用いて、aggregate のトピックを consume し、read model に反映する予定だが、いったんmockを作って全部動作確認した。
-    
+
+  - Projection を別サービスにすることも検討したが、command service が aggregate した結果を用いれば十分と判断した。
+  - そのため、`command service` が projection の処理を兼任し、aggregate の結果を produce。
+  - Kafka Connect を用いて、aggregate のトピックを consume し、read model に反映する予定だが、いったん mock を作って全部動作確認した。
+
 - ドメインレイヤを書いた
-    - `command.go`にDomainと必要なInterfaceを実装した。
-    
-- Mockサービスを実装した
-    - Command Service の EventProducer と EventConsumer `InMemoryEventStore` (`inmemory.go`)
-    - Query Service Repository `InMemoryRepo` (`inmemory.go`)
+
+  - `command.go`に Domain と必要な Interface を実装した。
+
+- Mock サービスを実装した
+
+  - Command Service の EventProducer と EventConsumer `InMemoryEventStore` (`inmemory.go`)
+  - Query Service Repository `InMemoryRepo` (`inmemory.go`)
 
 - price と sales の扱いを考え直した
-    - もともと文字列だったが、480.0という数字にする必要があることに気づいた
-    - 金額のような精度が求められる計算では浮動小数点による誤差を考える必要があることを思い出した
-    - 高精度な計算が必要と判断し、decimal ライブラリを使用して金額計算を実装しなおした
-    
-- Kafkaを準備
-    - dockerを使用してredpandaとredpanda consoleを立てた
-    - 過去に趣味でかいたKafkaのdocker composeを再利用
-    - zaiko.stockのzaoko.stock_projectionの二つのtopicとschemaを用意した
-        - `rpk --brokers redpanda:9092 topic create zaiko.stock.commands`
-        - `rpk --brokers redpanda:9092 topic create zaiko.stock.projections`
-    - valueのstrategyはtopic&record, avroを使用
-        - zaiko.stockは在庫管理における様々なイベントを持ち、すべて型が異なる
-        - zaoko.stock_projectionは拡張性を考えて設計
-    - keyのstrategyは、record毎に代わるわけではないと判断してtopicだけの方
-    
-- Kafkaを使った実装を行った
-    - avro schema
-        - 同じaggregateに対して複数の型のeventがあるため、strategyはtopic+recordにした
-        - keyのstrategyはaggregate単位で考え、topicにした
-    - KafkaClientのPoCコード
-        - `kafka_test.go`にprojection用のeventをproduceするテスト関数と、consumeするテスト関数を用意した
-        - magic byteがないとredpanda console上で表示できないことがわかり、修正した
-    - `KafkaProducer` (`kafkaproducer.go`)
-        - avroのschemaのkeyはsubにすべきなので、すべてのentityが正しくsubを持つよう修正、echorouteではMockの認証claimをセットするようにした
-    - `KafkaConsumer` (`kafkaconsumer.go`)
-        - kgo.PollFetchをgoroutineでループしており、リアルタイムにeventが更新される
-        - mutexを使用し、eventの更新中はrecordsをロックしている
-    - MockのProcessorのKafkaConnector `stockconnector.yaml`
-        - yamlは手書きせずにpythonで生成
-        - 最初はstdoutに出力するmock connectorを書いた
-    - Query Serviceのデータベースとしてmongodbを採用した
-        - Elasticsearch, Meilisearch等を調べてどれにするか迷った
-        - 全文検索エンジンはメモリが足りないず不要と判断した
-        - mysqlの場合も調べた
-            - redpanda connectではprepared statementでmulti queryができない等の制約があった
-            - stored procedureやsql viewやprepared statementについて詳しくなった
-        - mongodbはredpanda connectを使えば直接exportできるし、documentの検索もできて便利だった
-    - Mongodb用のKafkaConnectorのProcessorを書いた (`stockconnector.yaml`)
-        - pythonで生成
-        - eventには新しいsalesの結果とstocksが入っているので、それを反映する
-    - Repository Adapterを実装 (`mongorepo.go`)
-        - grafanaでmongodb見ようとしたが、enterprise liscenseが必要だった、community版も試したが機能がイマイチ
-        - `mongodb.mongodb-vscode`が便利だった
 
+  - もともと文字列だったが、480.0 という数字にする必要があることに気づいた
+  - 金額のような精度が求められる計算では浮動小数点による誤差を考える必要があることを思い出した
+  - 高精度な計算が必要と判断し、decimal ライブラリを使用して金額計算を実装しなおした
+
+- Kafka を準備
+
+  - docker を使用して redpanda と redpanda console を立てた
+  - 過去に趣味でかいた Kafka の docker compose を再利用
+  - zaiko.stock の zaoko.stock_projection の二つの topic と schema を用意した
+    - `rpk --brokers redpanda:9092 topic create zaiko.stock.commands`
+    - `rpk --brokers redpanda:9092 topic create zaiko.stock.projections`
+  - value の strategy は topic&record, avro を使用
+    - zaiko.stock は在庫管理における様々なイベントを持ち、すべて型が異なる
+    - zaoko.stock_projection は拡張性を考えて設計
+  - key の strategy は、record 毎に代わるわけではないと判断して topic だけの方
+
+- Kafka を使った実装を行った
+  - avro schema
+    - 同じ aggregate に対して複数の型の event があるため、strategy は topic+record にした
+    - key の strategy は aggregate 単位で考え、topic にした
+  - KafkaClient の PoC コード
+    - `kafka_test.go`に projection 用の event を produce するテスト関数と、consume するテスト関数を用意した
+    - magic byte がないと redpanda console 上で表示できないことがわかり、修正した
+  - `KafkaProducer` (`kafkaproducer.go`)
+    - avro の schema の key は sub にすべきなので、すべての entity が正しく sub を持つよう修正、echoroute では Mock の認証 claim をセットするようにした
+  - `KafkaConsumer` (`kafkaconsumer.go`)
+    - kgo.PollFetch を goroutine でループしており、リアルタイムに event が更新される
+    - mutex を使用し、event の更新中は records をロックしている
+  - Mock の Processor の KafkaConnector `stockconnector.yaml`
+    - yaml は手書きせずに python で生成
+    - 最初は stdout に出力する mock connector を書いた
+  - Query Service のデータベースとして mongodb を採用した
+    - Elasticsearch, Meilisearch 等を調べてどれにするか迷った
+    - 全文検索エンジンはメモリが足りないず不要と判断した
+    - mysql の場合も調べた
+      - redpanda connect では prepared statement で multi query ができない等の制約があった
+      - stored procedure や sql view や prepared statement について詳しくなった
+    - mongodb は redpanda connect を使えば直接 export できるし、document の検索もできて便利だった
+  - Mongodb 用の KafkaConnector の Processor を書いた (`stockconnector.yaml`)
+    - python で生成
+    - event には新しい sales の結果と stocks が入っているので、それを反映する
+  - Repository Adapter を実装 (`mongorepo.go`)
+    - grafana で mongodb 見ようとしたが、enterprise liscense が必要だった、community 版も試したが機能がイマイチ
+    - `mongodb.mongodb-vscode`が便利だった
 
 ### 反省点
-    - stocksをmapにしているが、こういうのはmapのarrayとして扱う方が拡張性が高い気もする
-    - kafkaだけではkeyによるフィルタリングもできないため不自然な処理になっている気もする
-        - cassandraにexportしてconsumerはcassandraからイベントを取得するようにするか迷った
-        - connector書いて、eventconsumerのadapterを用意するだけなので実装は現実的
-        - event sourcingについて調べてもkafkaにproduceしてcassandraにexportする方法について実践的な記事や動画が見当たらないため慎重になった
-        - kafka stream, ksqlDB, apache flink等の例があるが、java platformは大体重いので手軽に利用できない、Materializeはrust製のため使ってみたいが、cloud版のみ
-        - partitionを増やしてkeyの存在するpartitionに対してのみクエリを行えば効率化でき、snapshottingも利用すればさらに効率化可能なためkafkaだけでもいいかもしれない
-        - keyごとのpartitionというのが現実的なのかどうかわからない
-    - redpandaもmysqlもproduction環境ではなく認証もない状態であること
-        - helmを勉強してkubernetsクラスタにしたり、分散処理やnamespaceや認証などの設定が必要
+
+- stocksをmapにしているが、こういうのはmapのarrayとして扱う方が拡張性が高い気もする
+- kafkaだけではkeyによるフィルタリングもできないため不自然な処理になっている気もする
+    - cassandraにexportしてconsumerはcassandraからイベントを取得するようにするか迷った
+    - connector書いて、eventconsumerのadapterを用意するだけなので実装は現実的
+    - event sourcingについて調べてもkafkaにproduceしてcassandraにexportする方法について実践的な記事や動画が見当たらないため慎重になった
+    - kafka stream, ksqlDB, apache flink等の例があるが、java platformは大体重いので手軽に利用できない、Materializeはrust製のため使ってみたいが、cloud版のみ
+    - partitionを増やしてkeyの存在するpartitionに対してのみクエリを行えば効率化でき、snapshottingも利用すればさらに効率化可能なためkafkaだけでもいいかもしれない
+    - keyごとのpartitionというのが現実的なのかどうかわからない
+- redpandaもmysqlもproduction環境ではなく認証もない状態であること
+    - helmを勉強してkubernetsクラスタにしたり、分散処理やnamespaceや認証などの設定が必要
 
 ### 確認ポイント
 
-- APIとデータベースの関係性:
-    - APIはデータベースと連携することでステートレスを実現できる
-- HTTP メソッドと API の理解:
-    - HTTP メソッド（GET、POST、DELETE など）の使い方と意味を理解。
-    - curl コマンドの `-d` オプションで POST リクエストを送信できることを学習。
-- API の実行と確認:
-    - 実装した5つのAPIを、curl コマンドを用いて同じ結果が得られることを確認。
-    - 異常系（不正な値のリクエストやエラー処理）にも対応するよう実装。
-    - 価格の計算精度や変数ごとの 0 の扱いに注意し、関連しないメソッドに対してもエラーを出すように設定。
+- API とデータベースの関係性
+  - API はデータベースと連携することでステートレスを実現できる
+- HTTP メソッドと API の理解
+  - HTTP メソッド（GET、POST、DELETE など）の使い方と意味を理解。
+  - curl コマンドの `-d` オプションで POST リクエストを送信できることを学習。
+- API の実行と確認
+  - 実装した 5 つの API を、curl コマンドを用いて同じ結果が得られることを確認。
+  - 異常系（不正な値のリクエストやエラー処理）にも対応するよう実装。
+  - 価格の計算精度や変数ごとの 0 の扱いに注意し、関連しないメソッドに対してもエラーを出すように設定。
 
 ### 参考文献
 
-- [avorについて](https://docs.oracle.com/cd/E35584_01/html/GettingStartedGuide/avroschemas.html)
+- [avor について](https://docs.oracle.com/cd/E35584_01/html/GettingStartedGuide/avroschemas.html)
 - [プログラムの計算精度](https://zenn.dev/sdb_blog/articles/01_plus_02_does_not_equal_03)
-- [decimalについて](https://engineering.mercari.com/blog/entry/20201203-basis-point/)
-- [decimalパッケージ](https://github.com/shopspring/decimal)
+- [decimal について](https://engineering.mercari.com/blog/entry/20201203-basis-point/)
+- [decimal パッケージ](https://github.com/shopspring/decimal)
 - [Event Driven Architecture](https://aws.amazon.com/what-is/eda/)
 - [Kafka Client](https://docs.redpanda.com/redpanda-labs/clients/docker-go/)
 - [redpanda connect mysql](https://docs.redpanda.com/redpanda-connect/components/processors/sql_raw/?tab=tabs-2-table-insert-mysql)
@@ -167,7 +174,9 @@ e.GET("/", func(c echo.Context) error {
 - [docker compose](https://github.com/docker/compose#linux)
 
 ### ソースコード
+
 - `command.go`
+
 ```go
 package stock
 
@@ -363,7 +372,9 @@ func (a *Aggregate) Apply(event any) {
 	}
 }
 ```
+
 - `query.go`
+
 ```go
 package stock
 
@@ -378,61 +389,63 @@ type Repo interface {
 	Sales(sub auth.Sub) decimal.Decimal
 }
 ```
+
 - `avro schema`
+
 ```json
 {
-    "zaiko.stock.commands-Added-value": {
-        "type": "record",
-        "name": "Added",
-        "fields": [
-            {"name": "Sub", "type": "string"},
-            {"name": "Name", "type": "string"},
-            {"name": "Amount", "type": "int"}
-        ]
-    },
-    "zaiko.stock.commands-ClearedAll-value": {
-        "type": "record",
-        "name": "ClearedAll",
-        "fields": [
-            {"name": "Sub", "type": "string"}
-        ]
-    },
-    "zaiko.stock.commands-Sold-value": {
-        "type": "record",
-        "name": "Sold",
-        "fields": [
-            {"name": "Sub", "type": "string"},
-            {"name": "Name", "type": "string"},
-            {"name": "Amount", "type": "int"},
-            {"name": "Price", "type": "string"}
-        ]
-    },
-    "zaiko.stock.commands-key": {
-        "name": "sub",
-        "type": "string"
-    },
-    "zaiko.stock.projections-AggregateUpdated-value": {
-        "type": "record",
-        "name": "AggregateUpdated",
-        "fields": [
-            {"name": "Sub", "type": "string"},
-            {
-                "name": "Stocks",
-                "type": {
-                    "type": "map",
-                    "values": "int"
-                }
-            },
-            {"name": "Sales", "type": "string"}
-        ]
-    },
-    "zaiko.stock.projections-key": {
-        "name": "Sub",
-        "type": "string"
-    }
+  "zaiko.stock.commands-Added-value": {
+    "type": "record",
+    "name": "Added",
+    "fields": [
+      { "name": "Sub", "type": "string" },
+      { "name": "Name", "type": "string" },
+      { "name": "Amount", "type": "int" }
+    ]
+  },
+  "zaiko.stock.commands-ClearedAll-value": {
+    "type": "record",
+    "name": "ClearedAll",
+    "fields": [{ "name": "Sub", "type": "string" }]
+  },
+  "zaiko.stock.commands-Sold-value": {
+    "type": "record",
+    "name": "Sold",
+    "fields": [
+      { "name": "Sub", "type": "string" },
+      { "name": "Name", "type": "string" },
+      { "name": "Amount", "type": "int" },
+      { "name": "Price", "type": "string" }
+    ]
+  },
+  "zaiko.stock.commands-key": {
+    "name": "sub",
+    "type": "string"
+  },
+  "zaiko.stock.projections-AggregateUpdated-value": {
+    "type": "record",
+    "name": "AggregateUpdated",
+    "fields": [
+      { "name": "Sub", "type": "string" },
+      {
+        "name": "Stocks",
+        "type": {
+          "type": "map",
+          "values": "int"
+        }
+      },
+      { "name": "Sales", "type": "string" }
+    ]
+  },
+  "zaiko.stock.projections-key": {
+    "name": "Sub",
+    "type": "string"
+  }
 }
 ```
+
 - `stockprojection.tpl.py`
+
 ```python
 import yaml
 import os
@@ -506,7 +519,9 @@ with open(target, 'w') as file:
 
 print(f"[zaiko] stockconnector has been written to {target}.")
 ```
+
 - `docker compose config redpanda redpanda-console mongo zaiko`
+
 ```
 name: awsjob
 services:
