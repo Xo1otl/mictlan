@@ -4,7 +4,8 @@ import subprocess
 import json
 
 
-base_url = f"http://localhost:3030/v1"
+base_url = f"http://zaiko/v1"
+# base_url = f"http://localhost:3030/v1"
 # base_url = f"http://35.78.179.182:80/v1"
 
 curl_commands = [
