@@ -7,20 +7,21 @@ from util import workspace
 root = workspace.findroot()
 
 # ローカルの変数
-targets = ['apps/zaiko/', 'apps/.gitignore']  # 配列でファイルやフォルダを指定
+targets = ['apps/zaiko/', 'infra']  # 配列でファイルやフォルダを指定
 archive_name = 'archive.tar.gz'
 archive_path = os.path.join("/tmp", archive_name)
 
 # リモートの変数
 server_alias = "awsjob"
-remote_dir = "/home/ec2-user"
+remote_dir = "/home/ec2-user/mictlan"
 
 # 圧縮するコマンドを構築
 target_paths = f" -C {root} {' '.join(targets)}"  # ターゲットを結合してコマンドに渡す
 os.system(f"tar -czf {archive_path} {target_paths}")
 print(f"Created archive: {archive_path}")
 
-# scp でリモートサーバーに送信
+# リモートサーバーで mictlan フォルダを作成し、scp でリモートサーバーに送信
+os.system(f"ssh {server_alias} 'mkdir -p {remote_dir}'")
 os.system(f"scp {archive_path} {server_alias}:{remote_dir}/")
 print(f"Copied {archive_path} to {server_alias}:{remote_dir}/")
 os.system(f"rm {archive_path}")

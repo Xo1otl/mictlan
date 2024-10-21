@@ -13,7 +13,7 @@ import (
 )
 
 func CreateTopics() {
-	seeds := []string{"redpanda:9092"}
+	seeds := []string{KafkaURL}
 
 	var adminClient *kadm.Client
 	{
