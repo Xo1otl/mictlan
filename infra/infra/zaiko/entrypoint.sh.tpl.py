@@ -1,8 +1,12 @@
 import os
+from infra import zaiko
 
-# TODO: zaiko packegeに書かれたgoのコードによりinitを行う
+# redpanda-connectという名前の実行ファイルがルートにあった
 script = f"""\
-
+#!/bin/sh
+/redpanda-connect run /{zaiko.STOCK_CONNECTOR_FILE} &
+(/initkafka && /echoserver) &
+wait
 """
 
 target = os.path.join(os.path.dirname(__file__), "entrypoint.sh")
