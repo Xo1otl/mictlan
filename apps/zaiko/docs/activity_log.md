@@ -14,7 +14,7 @@ e.GET("/", func(c echo.Context) error {
 
 - バックエンドで必要な認証処理を行うミドルウェアを作成した。
   - 過去に JWT 認証で使用したエンティティ (`Token`, `Claims`) とインターフェース (`TokenService`) を `internal/auth/*` に持ってきた。
-  - ミドルウェア `internal/auth/echomiddleware.go` を Digest 認証に合わせて微修正した。
+  - ミドルウェア `internal/auth/echomiddleware.go` を Digest 認証に合わせて微修正した
 
 ### `iam` モジュールを作った
 
@@ -53,6 +53,9 @@ e.GET("/", func(c echo.Context) error {
 - [Digest 認証日本語訳](https://tex2e.github.io/rfc-translater/html/rfc7616.html)
 - [Digest 認証日本語解説](https://kunishi.gitbook.io/web-application-textbook/storage)
 - [Ruby の Digest Client](https://www.rubydoc.info/gems/net-http-digest_auth/1.1.1/Net/HTTP/DigestAuth)
+- [md5](https://pkg.go.dev/crypto/md5#Sum)
+- [qiita hmac](https://qiita.com/gee-gae/items/657ff2ce83199e11de98)
+- [hmac document](https://pkg.go.dev/crypto/hmac)
 
 ## 課題 3
 
@@ -74,7 +77,7 @@ e.GET("/", func(c echo.Context) error {
 
 - ドメインレイヤを書いた
 
-  - `command.go`に Domain と必要な Interface を実装した。
+  - Domain と必要な Interface を実装した。(`command.go`)
 
 - Mock サービスを実装した
 
@@ -104,7 +107,7 @@ e.GET("/", func(c echo.Context) error {
     - 同じ aggregate に対して複数の型の event があるため、strategy は topic+record にした
     - key の strategy は aggregate 単位で考え、topic にした
   - KafkaClient の PoC コード
-    - `kafka_test.go`に projection 用の event を produce するテスト関数と、consume するテスト関数を用意した
+    - projection 用の event を produce するテスト関数と、consume するテスト関数を用意した (`kafka_test.go`)
     - magic byte がないと redpanda console 上で表示できないことがわかり、修正した
   - `KafkaProducer` (`kafkaproducer.go`)
     - avro の schema の key は sub にすべきなので、すべての entity が正しく sub を持つよう修正、echoroute では Mock の認証 claim をセットするようにした
@@ -128,13 +131,15 @@ e.GET("/", func(c echo.Context) error {
     - grafana で mongodb 見ようとしたが、enterprise liscense が必要だった、community 版も試したが機能がイマイチ
     - `mongodb.mongodb-vscode`が便利だった
 
+- docker composeを書いた
+
 ### 反省点
 
 - stocksをmapにしているが、こういうのはmapのarrayとして扱う方が拡張性が高い気もする
 - kafkaだけではkeyによるフィルタリングもできないため不自然な処理になっている気もする
-    - cassandraにexportしてconsumerはcassandraからイベントを取得するようにするか迷った
+    - cassandraやinfluxDB等の独立したevent storeにexportしてconsumerはevent storeからイベントを取得するようにするか迷った
     - connector書いて、eventconsumerのadapterを用意するだけなので実装は現実的
-    - event sourcingについて調べてもkafkaにproduceしてcassandraにexportする方法について実践的な記事や動画が見当たらないため慎重になった
+    - event sourcingについて調べてもkafkaにproduceしてcassandraにexportする方法について、**実践的**な記事や動画が見当たらないため慎重になった
     - kafka stream, ksqlDB, apache flink等の例があるが、java platformは大体重いので手軽に利用できない、Materializeはrust製のため使ってみたいが、cloud版のみ
     - partitionを増やしてkeyの存在するpartitionに対してのみクエリを行えば効率化でき、snapshottingも利用すればさらに効率化可能なためkafkaだけでもいいかもしれない
     - keyごとのpartitionというのが現実的なのかどうかわからない
@@ -161,6 +166,7 @@ e.GET("/", func(c echo.Context) error {
 - [decimal パッケージ](https://github.com/shopspring/decimal)
 - [Event Driven Architecture](https://aws.amazon.com/what-is/eda/)
 - [Kafka Client](https://docs.redpanda.com/redpanda-labs/clients/docker-go/)
+- [schema registry example](https://github.com/twmb/franz-go/blob/master/examples/schema_registry/schema_registry.go)
 - [redpanda connect mysql](https://docs.redpanda.com/redpanda-connect/components/processors/sql_raw/?tab=tabs-2-table-insert-mysql)
 - [event sourcing](https://youtube.com/playlist?list=PLa7VYi0yPIH1TXGUoSUqXgPMD2SQXEXxj)
 - [ES and CQRS](https://youtu.be/MYD4rrIqDhA)
