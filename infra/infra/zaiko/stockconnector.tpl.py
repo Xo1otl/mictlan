@@ -11,6 +11,7 @@ sales_stocks_mongo = {
         "database": zaiko.DB_NAME,
         "collection": "sales_stocks",
         "operation": "replace-one",
+        # offsetを維持するために必要な設定
         "write_concern": {
             "w": "majority",
             "j": True
@@ -63,7 +64,7 @@ stock_connector = {
     }
 }
 
-target = os.path.join(os.path.dirname(__file__), "stockconnector.yaml")
+target = os.path.join(os.path.dirname(__file__), zaiko.STOCK_CONNECTOR_FILE)
 
 with open(target, 'w') as file:
     yaml.dump(stock_connector, file)

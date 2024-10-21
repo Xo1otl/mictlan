@@ -58,3 +58,24 @@ def globrelpaths(base: str, pattern: str) -> List[str]:
                       for file_path in absolute_paths]
 
     return relative_paths
+
+
+def relpath(base: str, target: str) -> str:
+    """
+    グローバル変数 root_dir を使用して、指定されたファイルまたはフォルダへの最短相対パスを
+    開始ファイルの場所から返す。
+
+    :param base: 開始地点となるファイルのパス（通常は __file__）
+    :param target: ワークスペースルートからの相対パスで指定するファイルまたはフォルダ
+    :return: 開始地点からターゲットへの最短相対パス
+    """
+    # 開始ファイルのディレクトリを取得
+    start_dir = os.path.dirname(os.path.abspath(base))
+
+    # ターゲットの絶対パスを取得
+    target_abs_path = os.path.abspath(os.path.join(root_dir, target))
+
+    # 開始ディレクトリからターゲットへの相対パスを計算
+    relative_path = os.path.relpath(target_abs_path, start_dir)
+
+    return relative_path
