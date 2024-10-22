@@ -12,20 +12,17 @@ import (
 	"github.com/twmb/franz-go/pkg/sr"
 )
 
-func CreateTopics() {
+func CreateTopics() error {
 	seeds := []string{KafkaURL}
 
 	var adminClient *kadm.Client
 	{
 		client, err := kgo.NewClient(
 			kgo.SeedBrokers(seeds...),
-
-			// Do not try to send requests newer than 2.4.0 to avoid breaking changes in the request struct.
-			// Sometimes there are breaking changes for newer versions where more properties are required to set.
 			kgo.MaxVersions(kversion.V2_4_0()),
 		)
 		if err != nil {
-			panic(err)
+			return fmt.Errorf("failed to create Kafka client: %w", err)
 		}
 		defer client.Close()
 
@@ -36,42 +33,43 @@ func CreateTopics() {
 
 	topicDetails, err := adminClient.ListTopics(ctx)
 	if err != nil {
-		log.Fatalf("failed to list topics: %v", err)
+		return fmt.Errorf("failed to list topics: %w", err)
 	}
 
 	// Create topic "zaiko.stock.projections" if it doesn't exist already
 	projectionsTopic := "zaiko.stock.projections"
 	if topicDetails.Has(projectionsTopic) {
 		fmt.Printf("topic %v already exists\n", projectionsTopic)
-		return
+	} else {
+		fmt.Printf("Creating topic %v\n", projectionsTopic)
+		createTopicResponse, err := adminClient.CreateTopic(ctx, -1, -1, nil, projectionsTopic)
+		if err != nil {
+			return fmt.Errorf("failed to create projections topic: %w", err)
+		}
+		fmt.Printf("Successfully created topic %v\n", createTopicResponse.Topic)
 	}
-	fmt.Printf("Creating topic %v\n", projectionsTopic)
-
-	createTopicResponse, err := adminClient.CreateTopic(ctx, -1, -1, nil, projectionsTopic)
-	if err != nil {
-		log.Fatalf("failed to create topic: %v", err)
-	}
-	fmt.Printf("Successfully created topic %v\n", createTopicResponse.Topic)
 
 	// Create topic "zaiko.stock.commands" if it doesn't exist already
 	commandsTopic := "zaiko.stock.commands"
 	if topicDetails.Has(commandsTopic) {
-		fmt.Printf("topic %v already exists\n", projectionsTopic)
-		return
+		fmt.Printf("topic %v already exists\n", commandsTopic)
+	} else {
+		fmt.Printf("Creating topic %v\n", commandsTopic)
+		createTopicResponse, err := adminClient.CreateTopic(ctx, -1, -1, nil, commandsTopic)
+		if err != nil {
+			return fmt.Errorf("failed to create commands topic: %w", err)
+		}
+		fmt.Printf("Successfully created topic %v\n", createTopicResponse.Topic)
 	}
-	fmt.Printf("Creating topic %v\n", projectionsTopic)
 
-	createTopicResponse, err = adminClient.CreateTopic(ctx, -1, -1, nil, commandsTopic)
-	if err != nil {
-		log.Fatalf("failed to create topic: %v", err)
-	}
-	fmt.Printf("Successfully created topic %v\n", createTopicResponse.Topic)
+	return nil
 }
 
-func RegisterSchema() {
+// RegisterSchema registers schemas with the schema registry and returns an error if any occur.
+func RegisterSchema() error {
 	rcl, err := sr.NewClient(sr.URLs(Registry))
 	if err != nil {
-		log.Fatal(err)
+		return fmt.Errorf("failed to create schema registry client: %w", err)
 	}
 
 	// スキーマとサブジェクトの定義
@@ -134,10 +132,12 @@ func RegisterSchema() {
 			Type:   sr.TypeAvro,
 		})
 		if err != nil {
-			log.Fatalf("Failed to create schema for subject %s: %v", subject, err)
+			return fmt.Errorf("failed to create schema for subject %s: %w", subject, err)
 		}
 		log.Printf("Created schema with ID: %d for subject: %s", ss.ID, subject)
 	}
+
+	return nil
 }
 
 var (

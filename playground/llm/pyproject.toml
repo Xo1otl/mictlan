@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "llm"
+version = "0.1.0"
+description = ""
+authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12.0a1"
+open-webui = "^0.3.32"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
