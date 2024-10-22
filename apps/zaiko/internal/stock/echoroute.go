@@ -19,10 +19,10 @@ func AddEchoRoutes(e *echo.Echo) {
 	// kafkaの場合
 	repo := NewMongoRepo()
 	producer, err := NewKafkaProducer("redpanda:8081", "redpanda:9092")
-	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
 	if err != nil {
 		log.Fatalf("failed to create kafka producer: %v", err)
 	}
+	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
 	command := NewCommand(consumer, producer)
 
 	// dependency injection
@@ -71,15 +71,15 @@ func (h *CommandHandler) HandleStocks(c echo.Context) error {
 			Amount int    `json:"amount"`
 		}{}
 		if err := c.Bind(&req); err != nil {
-			log.Println("failed to parse request body:", err)
+			log.Println("request bodyのパースに失敗:", err)
 			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 		}
 		if req.Name == "" || req.Amount <= 0 {
-			log.Println("invalid name or amount")
+			log.Println("nameまたはamountが不正")
 			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 		}
 		if err := h.command.Add(sub, req.Name, req.Amount); err != nil {
-			log.Println("command add error:", err)
+			log.Println("add commandエラー:", err)
 			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 		}
 		return c.JSON(http.StatusOK, req)
@@ -106,11 +106,11 @@ func (h *CommandHandler) HandleSales(c echo.Context) error {
 		Price  float64 `json:"price,omitempty"`
 	}{}
 	if err := c.Bind(&req); err != nil {
-		log.Println("failed to parse request body:", err)
+		log.Println("request bodyのパースに失敗:", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 	}
 	if req.Name == "" || req.Price < 0 {
-		log.Println("invalid name or price")
+		log.Println("nameまたはpriceが不正")
 		return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 	}
 	if req.Price <= 0 {
@@ -121,13 +121,13 @@ func (h *CommandHandler) HandleSales(c echo.Context) error {
 	if req.Amount != nil {
 		if *req.Amount == 0 {
 			// 0かどうかのチェックはnilでない時のみ行う
-			log.Println("Amount is zero, which is invalid")
+			log.Println("Amountが0は不正")
 			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 		}
 		amount = *req.Amount
 	}
 	if err := h.command.Sell(sub, req.Name, amount, decimal.NewFromFloat(req.Price)); err != nil {
-		log.Println("command sell error:", err)
+		log.Println("sell command error:", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
 	}
 	return c.JSON(http.StatusOK, req)

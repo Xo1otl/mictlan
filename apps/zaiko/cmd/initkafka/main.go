@@ -1,8 +1,17 @@
 package main
 
-import "zaiko/internal/stock"
+import (
+	"log"
+	"zaiko/internal/stock"
+)
 
 func main() {
-	stock.CreateTopics()
-	stock.RegisterSchema()
+	err := stock.CreateTopics()
+	if err != nil {
+		log.Printf("failed to create topics: %v", err)
+	}
+	err = stock.RegisterSchema()
+	if err != nil {
+		log.Printf("failed to register schema: %v", err)
+	}
 }

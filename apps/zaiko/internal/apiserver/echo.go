@@ -34,7 +34,7 @@ func LaunchEcho(addr string) {
 	nonceServce := iam.NewHMACNonceService("demo_secert")
 	tokenService := iam.NewDigest(accountRepo, digestNcRepo, nonceServce, validator)
 
-	// Add the detailed logger middleware to the /secret route
+	// secret routeには認証用のミドルウェアを追加
 	e.GET("/secret", func(c echo.Context) error {
 		log.Println("Secret route accessed")
 		return c.String(200, "SUCCESS")
