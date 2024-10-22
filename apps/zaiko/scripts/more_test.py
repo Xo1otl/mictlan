@@ -4,7 +4,8 @@ import subprocess
 import json
 import random
 
-base_url = f"http://localhost:3030/v1"
+# base_url = f"http://localhost:3030/v1"
+base_url = f"http://zaiko/v1"
 
 
 class TestRunner:
@@ -191,7 +192,10 @@ class TestRunner:
             return True
         elif isinstance(actual_json, float) or isinstance(expected_json, float):
             # Compare floating point numbers with a tolerance
-            return abs(float(actual_json) - float(expected_json)) < 1e-6 # type: ignore
+
+            return abs(
+                float(actual_json) - float(expected_json)  # type: ignore
+            ) < 1e-6
         else:
             return actual_json == expected_json
 
