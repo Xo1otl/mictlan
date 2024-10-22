@@ -41,6 +41,26 @@ e.GET("/", func(c echo.Context) error {
   - ミドルウェアチェーンに `iam.EchoDigestMiddleware` と `auth.EchoMiddleware` を追加。
   - ルート（例：`/secret` エンドポイント）の登録。
   - サーバーの起動。
+  
+### テストが通るように修正を行った
+
+- 過去問を見てcurlによる動作チェックを行ったミドルウェアをそのまま利用したが通らなかった
+- ログを確認したところnonceが0になっていた
+- `Digest` を修正した (`internal/iam/digest.go`)
+
+  ```go
+  func (d *Digest) Init(realm string) DigestToken {
+	  nonce := d.nonceService.Generate()
+	  // monkey patch: nonceはcurlでは1からだけどテスト通すために0から始めている
+	  d.ncRepo.set(nonce, "00000000")
+	  return DigestToken{
+	  	Nonce:  nonce,
+	  	Opaque: "opaque",
+	  	Qop:    "auth",
+	  	Realm:  realm,
+	  }
+  }
+  ```
 
 ### 反省点
 
@@ -143,8 +163,12 @@ e.GET("/", func(c echo.Context) error {
     - kafka stream, ksqlDB, apache flink等の例があるが、java platformは大体重いので手軽に利用できない、Materializeはrust製のため使ってみたいが、cloud版のみ
     - partitionを増やしてkeyの存在するpartitionに対してのみクエリを行えば効率化でき、snapshottingも利用すればさらに効率化可能なためkafkaだけでもいいかもしれない
     - keyごとのpartitionというのが現実的なのかどうかわからない
+    - awsのイベントソーシングのドキュメントの例ではeventはkinesisで保持してs3にアーカイブなので現在ので問題ない気もする
+      - `インデックス作成とクエリのメカニズムを実装すると、アプリケーションの状態を再構築する際のイベントの取得を高速化できます。クエリ最適化機能を備えた、専用のイベントストアデータベースまたはライブラリの使用を検討することもできます。`
 - redpandaもmysqlもproduction環境ではなく認証もない状態であること
     - helmを勉強してkubernetsクラスタにしたり、分散処理やnamespaceや認証などの設定が必要
+- 結果的にテストに通ったが、テストケースのような高速なリクエストに対して確実に最新の情報を返せる保証がない
+- snapshottingなどを行っていないためコマンドサービスに対するリクエストが多いと重たい
 
 ### 確認ポイント
 
@@ -160,13 +184,15 @@ e.GET("/", func(c echo.Context) error {
 
 ### 参考文献
 
+- [Event Sourcing Pattern](https://docs.aws.amazon.com/ja_jp/prescriptive-guidance/latest/cloud-design-patterns/event-sourcing.html)
 - [avor について](https://docs.oracle.com/cd/E35584_01/html/GettingStartedGuide/avroschemas.html)
 - [プログラムの計算精度](https://zenn.dev/sdb_blog/articles/01_plus_02_does_not_equal_03)
 - [decimal について](https://engineering.mercari.com/blog/entry/20201203-basis-point/)
 - [decimal パッケージ](https://github.com/shopspring/decimal)
 - [Event Driven Architecture](https://aws.amazon.com/what-is/eda/)
 - [Kafka Client](https://docs.redpanda.com/redpanda-labs/clients/docker-go/)
-- [schema registry example](https://github.com/twmb/franz-go/blob/master/examples/schema_registry/schema_registry.go)
+- [golang mongodb example](https://www.mongodb.com/docs/drivers/go/current/quick-start/#std-label-golang-quickstart)
+- [golang schema registry example](https://github.com/twmb/franz-go/blob/master/examples/schema_registry/schema_registry.go)
 - [redpanda connect mysql](https://docs.redpanda.com/redpanda-connect/components/processors/sql_raw/?tab=tabs-2-table-insert-mysql)
 - [event sourcing](https://youtube.com/playlist?list=PLa7VYi0yPIH1TXGUoSUqXgPMD2SQXEXxj)
 - [ES and CQRS](https://youtu.be/MYD4rrIqDhA)
@@ -178,8 +204,205 @@ e.GET("/", func(c echo.Context) error {
 - [stored procedure](https://dev.mysql.com/doc/refman/8.0/ja/create-procedure.html)
 - [docker compose amazon linux](https://qiita.com/mitarashi_cookie/items/92b03e1350cb80e64f64)
 - [docker compose](https://github.com/docker/compose#linux)
+- [go dockerfile](https://docs.docker.com/guides/golang/build-images/)
 
 ### ソースコード
+
+- `echoroute.go`
+
+```go
+package stock
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"zaiko/internal/auth"
+
+	"github.com/labstack/echo/v4"
+	"github.com/shopspring/decimal"
+)
+
+func AddEchoRoutes(e *echo.Echo) {
+	// inmemoryの場合
+	// eventStore := &InMemoryEventStore{}
+	// repo := NewInMemoryRepo(eventStore)
+	// command := NewCommand(eventStore, eventStore)
+
+	// kafkaの場合
+	repo := NewMongoRepo()
+	producer, err := NewKafkaProducer("redpanda:8081", "redpanda:9092")
+	consumer := NewKafkaConsumer("redpanda:8081", "redpanda:9092")
+	if err != nil {
+		log.Fatalf("failed to create kafka producer: %v", err)
+	}
+	command := NewCommand(consumer, producer)
+
+	// dependency injection
+	ch := NewCommandHandler(command)
+	qh := NewQueryHandler(repo)
+
+	route := e.Group("/v1")
+	route.Use(setMockClaims)
+
+	route.POST("/stocks", ch.HandleStocks)
+	route.DELETE("/stocks", ch.HandleStocks)
+	route.POST("/sales", ch.HandleSales)
+
+	route.GET("/stocks", qh.HandleStocks)
+	route.GET("/sales", qh.HandleSales)
+}
+
+func setMockClaims(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		claims := &auth.Claims{
+			Sub: "testusersub3",
+		}
+		c.Set("claims", claims)
+		return next(c)
+	}
+}
+
+type CommandHandler struct {
+	command *Command
+}
+
+func NewCommandHandler(command *Command) *CommandHandler {
+	return &CommandHandler{command}
+}
+
+func (h *CommandHandler) HandleStocks(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	sub := claims.(*auth.Claims).Sub
+	switch c.Request().Method {
+	case http.MethodPost:
+		req := struct {
+			Name   string `json:"name"`
+			Amount int    `json:"amount"`
+		}{}
+		if err := c.Bind(&req); err != nil {
+			log.Println("request bodyのパースに失敗:", err)
+			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+		}
+		if req.Name == "" || req.Amount <= 0 {
+			log.Println("nameまたはamountが不正")
+			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+		}
+		if err := h.command.Add(sub, req.Name, req.Amount); err != nil {
+			log.Println("add commandエラー:", err)
+			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+		}
+		return c.JSON(http.StatusOK, req)
+	case http.MethodDelete:
+		h.command.ClearAll(sub)
+		return c.NoContent(http.StatusOK)
+	default:
+		return c.JSON(http.StatusMethodNotAllowed, map[string]string{"message": "Method Not Allowed"})
+	}
+}
+
+func (h *CommandHandler) HandleSales(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	sub := claims.(*auth.Claims).Sub
+	if c.Request().Method != http.MethodPost {
+		return c.JSON(http.StatusMethodNotAllowed, map[string]string{"message": "Method Not Allowed"})
+	}
+	req := struct {
+		Name   string  `json:"name"`
+		Amount *int    `json:"amount,omitempty"`
+		Price  float64 `json:"price,omitempty"`
+	}{}
+	if err := c.Bind(&req); err != nil {
+		log.Println("request bodyのパースに失敗:", err)
+		return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+	}
+	if req.Name == "" || req.Price < 0 {
+		log.Println("nameまたはpriceが不正")
+		return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+	}
+	if req.Price <= 0 {
+		log.Println("Price is zero")
+	}
+	// Amountは省略可能で、省略された場合は1として扱うが、明示的に0を指定するのは不正
+	amount := 1
+	if req.Amount != nil {
+		if *req.Amount == 0 {
+			// 0かどうかのチェックはnilでない時のみ行う
+			log.Println("Amountが0は不正")
+			return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+		}
+		amount = *req.Amount
+	}
+	if err := h.command.Sell(sub, req.Name, amount, decimal.NewFromFloat(req.Price)); err != nil {
+		log.Println("sell command error:", err)
+		return c.JSON(http.StatusBadRequest, map[string]string{"message": "ERROR"})
+	}
+	return c.JSON(http.StatusOK, req)
+}
+
+type QueryHandler struct {
+	repo Repo
+}
+
+func NewQueryHandler(repo Repo) *QueryHandler {
+	return &QueryHandler{repo}
+}
+
+func (h *QueryHandler) HandleStocks(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	sub := claims.(*auth.Claims).Sub
+
+	if c.Request().Method != http.MethodGet {
+		return c.JSON(http.StatusMethodNotAllowed, map[string]string{"message": "Method Not Allowed"})
+	}
+
+	stocks := h.repo.Stocks(sub, "")
+	return c.JSON(http.StatusOK, stocks)
+}
+
+func (h *QueryHandler) HandleSales(c echo.Context) error {
+	claims := c.Get("claims")
+	if claims == nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "claims not found"})
+	}
+	sub := claims.(*auth.Claims).Sub
+
+	if c.Request().Method != http.MethodGet {
+		return c.JSON(http.StatusMethodNotAllowed, map[string]string{"message": "Method Not Allowed"})
+	}
+
+	sales, exact := h.repo.Sales(sub).Float64()
+	if !exact {
+		log.Println("セールスは厳密な値ではありません")
+	}
+
+	response := SalesResponse{
+		Sales: Float64(sales),
+	}
+
+	return c.JSON(http.StatusOK, response)
+}
+
+type SalesResponse struct {
+	Sales Float64 `json:"sales"`
+}
+
+type Float64 float64
+
+func (f Float64) MarshalJSON() ([]byte, error) {
+	// 例にあった480.0や400.0は小数点第一位までしかないが、480.000000002のような値は480.00にする必要があるのか確認
+	return []byte(fmt.Sprintf("%.1f", f)), nil
+}
+```
 
 - `command.go`
 
@@ -529,7 +752,7 @@ print(f"[zaiko] stockconnector has been written to {target}.")
 - `docker compose config redpanda redpanda-console mongo zaiko`
 
 ```
-name: awsjob
+name: mictlan
 services:
   mongo:
     container_name: mongo
@@ -649,4 +872,25 @@ networks:
 volumes:
   redpanda:
     name: mictlan_redpanda
+```
+
+- `Dockerfile`
+
+```Dockerfile
+FROM golang:1.23.2 AS build
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o initkafka ./cmd/initkafka
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o echoserver ./cmd/echoserver
+
+FROM docker.redpanda.com/redpandadata/connect:latest
+
+COPY --from=build /app/initkafka .
+COPY --from=build /app/echoserver .
 ```

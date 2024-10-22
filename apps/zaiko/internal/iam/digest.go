@@ -78,6 +78,7 @@ func NewDigest(queryRepo AccountRepo, ncRepo DigestNcRepo, nonceService NonceSer
 
 func (d *Digest) Init(realm string) DigestToken {
 	nonce := d.nonceService.Generate()
+	// monkey patch: nonceは普通1からだけどテスト通すために0から始めている
 	d.ncRepo.set(nonce, "00000000")
 	return DigestToken{
 		Nonce:  nonce,
