@@ -99,7 +99,6 @@ func (k *KafkaConsumer) pollFetchesLoop() {
 
 func (k *KafkaConsumer) Events(sub auth.Sub) ([]any, error) {
 	var events []any
-	var lastError error
 
 	for _, record := range k.records {
 		// k.records.EachRecord(func(record *kgo.Record) {
@@ -174,10 +173,6 @@ func (k *KafkaConsumer) Events(sub auth.Sub) ([]any, error) {
 			panic("Unknown schema")
 		}
 		events = append(events, event)
-	}
-
-	if lastError != nil {
-		return nil, lastError
 	}
 
 	return events, nil
