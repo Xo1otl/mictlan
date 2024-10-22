@@ -51,6 +51,10 @@
 - docker sock を閉じる`netsh interface portproxy delete v4tov4 listenport=2375 listenaddress=10.8.0.2`
 - docker sock の forward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
 - `docker context create workstation --docker "host=tcp://10.8.0.2:2375"`
+- devcontainerのport forwardでstuckする時
+  - wslからではなくhostマシンからのsshが可能かどうかを確かめてみる
+  - 不可能な場合defenderの影響だと思われる、もし可能なのにforwardできない場合他のエラーがある
+  - defenderによる問題が継続する場合ファイアーウォールの設定考える
 - docker compose ファイルは devcontainer に入ってから scripts/tplgen.sh を実行して生成する
 - docker compose up(select services)は devcontainer から volume マウントができない、mount ある場合ホストマシンから実行すべし
 - システムのクリップボードも使えるようにする設定(keybindindgs.json は devcontainer ではなくホストマシンの設定)
