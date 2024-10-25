@@ -24,6 +24,8 @@ class Solution:
         dfs(root, 1)
 
         sums.sort(reverse=True)
+        if len(sums) < k:
+            return -1
         return sums[k-1]
 
 
