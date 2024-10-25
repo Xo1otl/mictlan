@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "quantum"
+version = "0.1.0"
+description = ""
+authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+qiskit = "^1.2.4"
+qiskit-ibm-runtime = "^0.31.0"
+pylatexenc = "^2.10"
+qiskit-aer = "^0.15.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -13,7 +13,6 @@ class Solution:
             for n in num_list:
                 merged.append((n, i))
         merged.sort(key=lambda x: x[0])
-        print(merged)
 
         smallest_range = 10**6
         smallest_pair = []
@@ -25,7 +24,7 @@ class Solution:
             first_val = merged[i][0]
 
             while True:
-                if i >= len(merged) - 1:
+                if i >= len(merged):
                     break
                 # その要素が含まれるリストのインデックスを削除、すでに削除済みなら考えなくてよい、要素がなくなったら差分を計算する
                 item_idx = merged[i][1]
@@ -48,5 +47,5 @@ class Solution:
 
 
 pair = Solution().smallestRange(
-    [[2, 18, 24, 26], [0, 10, 12, 20], [1, 3, 22, 30]])
+    [[10], [11]])
 print(pair)
