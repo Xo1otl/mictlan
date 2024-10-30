@@ -10,13 +10,14 @@ from infra import mail
 from infra import ossekai
 from infra import nosql
 from infra import zaiko
+from infra import asyncsns
 
 
 # docker composeはまとめてやりたい処理とかが考えられるからここでまとめて生成する
 # すべての設定にまとめてnetworksを追加するなどの共通処理が考えられる
 def generate_docker_compose():
     modules = [
-        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, nosql, zaiko
+        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, nosql, zaiko, asyncsns
     ]
 
     # includeするパスを保持するリスト
