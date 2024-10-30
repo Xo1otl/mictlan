@@ -1,0 +1,11 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
