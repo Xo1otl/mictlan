@@ -71,8 +71,8 @@ flowchart TB
     end
 
     subgraph Notification["Notification"]
-        SNS["Amazon SNS"]
-        DLQ["Amazon DLQ"]
+        SNS["SNS"]
+        DLQ["DLQ"]
     end
 
     subgraph RTC["RTC"]
@@ -215,20 +215,20 @@ flowchart TB
     - 例えば投稿では、ファイルをstorageに保存したり、テキストデータをrepositoryに保存したり、友達にNotificationを送ったりします
     - またDMでは、対象の接続がある場合RTC経由でリアルタイムなメッセージ送信を行ったり、通知を送ったりします
 - クエリのapiでは、ユーザーが必要とする情報をRepositoryやStorageから取得します
-    - 例えば、投稿に対する高度な全文検索や、友達情報の取得などのリレーショナルな検索が可能です
+    - 例えば、投稿に対する高度な全文検索や、友達のプロフィール取得などが可能です
 
 ### (Repository)
-- Repositoryはテキスト情報の永続化のためのサービスで、dynamodbとopensearchをzero ETL統合して全文検索もできるようにします
+- Repositoryはテキスト情報の永続化のためのサービスで、dynamodbとopensearchをzero ETL統合して全文検索できるようにします
 
 ### (Storage)
 - StorageはS3を使用したファイルの永続化のためのサービスです
 
 ### (RTC)
-- RTCはリアルタイムチャットのためのサービス群で、awsのwebsocket apiでメッセージを送信したり、stun/turnサーバーを用意してnat超えを行いp2p通話を可能にします
+- RTCはリアルタイムコミュニケーションのためのサービス群で、websocket apiでチャットしたり、kinesis video streamで音声通話やビデオ通話ができます
 
 ### (Notification)
-- Notificationはsns、sqs、lambdaを使用する通知のためのサービスです
-- Lambdaに障害が発生しても、後からsqsをconsumeしなおすことで確実な配信を実現します
+- Notificationは通知のためのサービスです
+- 失敗した場合詳細な分析や再処理のためにデッドレターキューに保持します
 
 ### (Observability)
 - Observabilityはメトリクスやトレーシングを行い、可能なすべてのサービスと連携して、障害時の原因特定やボトルネックの特定、システムの状態管理を行います
@@ -409,3 +409,4 @@ A:
 - [amazon sns dlq](https://docs.aws.amazon.com/sns/latest/dg/sns-dead-letter-queues.html)
 - [webrtc amazon](https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/what-is-kvswebrtc.html)
 - [amazon kinesis video streams](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/what-is-kinesis-video.html)
+- [amazon sns resend dlq](https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-message-delivery-retries.html)
