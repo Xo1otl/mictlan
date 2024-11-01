@@ -4,7 +4,7 @@ go 1.23.2
 
 require (
 	github.com/labstack/echo/v4 v4.12.0
-	github.com/twmb/franz-go/pkg/kmsg v2.0.1
+	github.com/twmb/franz-go/pkg/kmsg v1.9.0
 )
 
 require (
