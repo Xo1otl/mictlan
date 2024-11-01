@@ -119,6 +119,7 @@ flowchart TB
     OpenSearchIngestion --> OpenSearch
     OpenSearchIngestion --> OpenSearchDLQ
     SNS --> DLQ
+    SNS --> APNs/FCM
 ```
 
 ### Authentication
