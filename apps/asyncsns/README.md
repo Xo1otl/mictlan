@@ -24,6 +24,8 @@
 - 太線はコマンドとクエリの両方
 - 双方向やじるしはRTC
 
+![AWS構成図](image-1.png)
+
 ```mermaid
 flowchart TB
     Client[Client]
@@ -33,7 +35,9 @@ flowchart TB
     end
     
     subgraph CDN["CDN"]
+        direction LR
         CF["CloudFront"]
+        WAF["WAF"]
     end
 
     subgraph Auth["Authentication"]
@@ -59,16 +63,23 @@ flowchart TB
     
     subgraph Repository["Repository"]
         DynamoDB["DynamoDB"]
-        DynamoStream["DynamoDB Stream"]
-        OpenSearchIngestion["OpenSearch Ingestion"]
+        OpenSearchIngestion["
+            OpenSearch Ingestion
+            DynamoDB Stream
+            S3
+        "]
         OpenSearch["OpenSearch Serverless"]
-        S3Snapshot["S3"]
         OpenSearchDLQ["DLQ"]
     end
 
     subgraph Storage["Storage"]
         S3Store["S3"]
+        Athena["Athena"]
+        Glue["Glue"]
     end
+    
+    Athena --> S3Store
+    Glue --> S3Store
 
     subgraph Notification["Notification"]
         SNS["SNS"]
@@ -84,19 +95,22 @@ flowchart TB
     subgraph Observability["Observability"]
         direction TB
         CloudWatch["CloudWatch"]
+        CloudTrail["CloudTrail"]
+        ManagedGrafana["ManagedGrafana"]
         XRay["X-Ray"]
         note["Note: 統計情報を送信できるすべてのサービスと連携"]
     end
     
+    subgraph SecretsManager["SecretsManager"]
+    end
+    
     %% Basic client interactions
     Client === Cognito
-    Client === CF
+    Client === CDN
     Client <--> RTC
-    CF === APIGW
-    CF -.-> S3
-    
-    %% Direct access paths
-    CF -.-> S3Store
+    CDN === APIGW
+    CDN -.-> S3
+    CDN -.-> S3Store
     
     %% API Gateway to Lambda groups
     APIGW --> CommandAPI
@@ -112,15 +126,74 @@ flowchart TB
     QueryLambda -.-> DynamoDB
     QueryLambda -.-> OpenSearch
     
-    DynamoDB --> DynamoStream
-    DynamoDB --> S3Snapshot
-    S3Snapshot --> OpenSearchIngestion
-    DynamoStream --> OpenSearchIngestion
+    DynamoDB --> OpenSearchIngestion
     OpenSearchIngestion --> OpenSearch
     OpenSearchIngestion --> OpenSearchDLQ
     SNS --> DLQ
     SNS --> APNs/FCM
 ```
+
+## プレゼン
+
+(かっこ内の文章は読まない)
+
+### (ドメインの説明)
+- テキストや写真・動画によりユーザーの非同期コミュニケーションを実現するSNSの構成について発表させていただきます
+- このSNSは、メディアを含むコンテンツの投稿、リアルタイムチャット、高度な検索、プッシュ通知、通話など、主要なSNS機能をすべて備えています
+
+### (アーキテクチャーの説明)
+- アーキテクチャの全体像についてご説明します。
+- 図中の実線はmutation等の副作用を持つコマンドの流れを、破線は副作用を持たないリードオンリーなクエリの流れを表しています
+- 両方存在する場合は太線で示されています。また、双方向矢印はリアルタイムコミュニケーションのためのコネクションを表します
+
+### (Authentication)
+- まず認証についてですが、Cognitoを使用した標準的なJWT形式のトークンによる実装を行います
+- フェデレーテッドアイデンティティによるIAMクレデンシャルの発行と、ロールベースのアクセスコントロールを行います
+
+### (CDN)
+- CDNではCloudFrontとWAFを採用し、ssl証明書の一元管理や、Origin Access Controlポリシーに基づいたS3へのアクセス制御を行います
+
+### (Gateway)
+- Gatewayでは、jwtの一元的な検証や、lambdaの呼び出し等を行います。apiバージョンの切り替えや負荷対策なども可能です
+
+### (UI)
+- UIはフロントエンドのことで、S3を用いてホストします
+
+### (API)
+- APIは、ドメインロジックがまとまっている部分です。
+- コマンドを処理するapiでは、投稿、編集、リアルタイムチャット、通話などの処理を行います
+    - これらはRepository、Storage、RTC、Notification等のサービスを利用して実現します
+    - 例えば投稿では、ファイルをstorageに保存したり、テキストデータをrepositoryに保存したり、友達にNotificationを送ったりします
+    - またDMでは、対象の接続がある場合RTC経由でリアルタイムなメッセージ送信を行ったり、Notificationで通知を送ったりします
+- クエリのapiでは、ユーザーが必要とする情報をRepositoryやStorageから取得します
+    - 例えば、投稿に対する高度な全文検索や、友達のプロフィール取得などが可能です
+
+### (Repository)
+- Repositoryはテキスト情報の永続化のためのサービスで、dynamodbとopensearchをzero ETL統合して全文検索できるようにします
+
+### (Storage)
+- StorageはS3を使用したファイルの永続化のためのサービスです
+
+### (RTC)
+- RTCはリアルタイムコミュニケーションのためのサービス群で、websocket apiでチャットしたり、kinesis video streamで音声通話やビデオ通話ができます
+
+### (Notification)
+- Notificationは通知のためのサービスです
+- 失敗した場合詳細な分析や再処理のためにデッドレターキューに保持します
+
+### (Observability)
+- Observabilityはメトリクスやトレーシングを行い、可能なすべてのサービスと連携して、障害時の原因特定やボトルネックの特定、システムの状態管理を行います
+- CloudWatchでシステムの性能メトリクスを収集・監視し、X-Rayでマイクロサービス間の分散トレーシングを実施し、CloudTrailでAPIやリソースの操作履歴を記録・監査します
+
+### (まとめとアピール)
+- 以上が、主要なSNS機能をすべて備えたサービスの構成です
+- AWSマネージドサービスをフル活用することで、インフラ運用の手間を減らし、従量課金でコストを最適化し、可用性が高くトラフィックに応じた自動スケーリングに対応します
+- WAFとCognitoでセキュリティを一元的に担保し、豊富なメトリクスやトレーシングによる障害対策をしています
+- devopsでは、aws cdkによるIaCでgitやCD/CIを使用し、再現性のある開発を行います
+- またapiの設計ではclean architectureに従ってプロトコル非依存の抽象化を行いインフラの切り替えを可能にします
+    - 例えば、websocketをHTTP/3のwebtransportに変更する等の切り替えを見越しています
+
+## 質問対策
 
 ### Authentication
 - Cognitoを使用
@@ -182,60 +255,7 @@ flowchart TB
 - CloudWatch
 - X-Ray
 
-## プレゼン
 
-(かっこ内の文章は読まない)
-
-### (ドメインの説明)
-- テキストや写真・動画によりユーザーの非同期コミュニケーションを実現するSNSの構成について発表させていただきます
-- このSNSは、メディアを含むコンテンツの投稿、リアルタイムチャット、高度な検索、プッシュ通知、通話など、主要なSNS機能をすべて備えています
-
-### (アーキテクチャーの説明)
-- アーキテクチャの全体像についてご説明します。
-- 図中の実線はmutation等の副作用を持つコマンドの流れを、破線は副作用を持たないリードオンリーなクエリの流れを表しています
-- 両方存在する場合は太線で示されています。また、双方向矢印はリアルタイムコミュニケーションのためのコネクションを表します
-
-### (Authentication)
-- まず認証についてですが、Cognitoを使用した標準的なJWT形式のトークンによる実装を行います
-- フェデレーテッドアイデンティティによるIAMクレデンシャルの発行と、ロールベースのアクセスコントロールを行います
-
-### (CDN)
-- CDNではCloudFrontを採用し、ssl証明書の一元管理や、Origin Access Controlポリシーに基づいたS3へのアクセス制御を行います
-
-### (Gateway)
-- Gatewayでは、jwtの一元的な検証や、lambdaの呼び出し等を行います。apiバージョンの切り替えや負荷対策なども可能です
-
-### (UI)
-- UIはフロントエンドのことで、S3を用いてホストします
-
-### (API)
-- APIは、ドメインロジックがまとまっている部分です、Lambdaを使用します
-- コマンドを処理するapiでは、投稿、編集、リアルタイムチャット、通話などの処理を行います
-    - これらはRepository、Storage、RTC、Notification等のサービスを利用して実現します
-    - 例えば投稿では、ファイルをstorageに保存したり、テキストデータをrepositoryに保存したり、友達にNotificationを送ったりします
-    - またDMでは、対象の接続がある場合RTC経由でリアルタイムなメッセージ送信を行ったり、通知を送ったりします
-- クエリのapiでは、ユーザーが必要とする情報をRepositoryやStorageから取得します
-    - 例えば、投稿に対する高度な全文検索や、友達のプロフィール取得などが可能です
-
-### (Repository)
-- Repositoryはテキスト情報の永続化のためのサービスで、dynamodbとopensearchをzero ETL統合して全文検索できるようにします
-
-### (Storage)
-- StorageはS3を使用したファイルの永続化のためのサービスです
-
-### (RTC)
-- RTCはリアルタイムコミュニケーションのためのサービス群で、websocket apiでチャットしたり、kinesis video streamで音声通話やビデオ通話ができます
-
-### (Notification)
-- Notificationは通知のためのサービスです
-- 失敗した場合詳細な分析や再処理のためにデッドレターキューに保持します
-
-### (Observability)
-- Observabilityはメトリクスやトレーシングを行い、可能なすべてのサービスと連携して、障害時の原因特定やボトルネックの特定、システムの状態管理を行います
-
-### (まとめ)
-- 以上により、主要なSNS機能をすべて備えたサービスをAWSマネージドサービスを活用したサーバーレスアーキテクチャで構成しました
-- これにより、インフラ運用の負荷を最小限に抑制し、使用量に応じた従量課金でコストを最適化し、トラフィックに応じた自動スケーリングに対応するシステムとなっています
 
 ## Q&A
 - CloudFrontの機能について
@@ -277,7 +297,6 @@ flowchart TB
 - lambdaのコールドスタート問題
     - provisioned concurrency機能であっためとく
 - 通知システムでのsqs/sns選択理由
-    - 
     
 ### 1. DynamoDBへの書き込みが遅くなるケースとその対策
 
@@ -357,6 +376,12 @@ A:
 - バックアップの自動化とテスト
 - 障害シナリオの定期的な検証
 
+Q: dynamodbのレイテンシが高いときどうする
+
+A: 
+- 平均レイテンシを確認する
+- DAXを有効化する
+
 4. 監視とパフォーマンスチューニング
 
 Q: システムのパフォーマンスをどのように監視・最適化していますか？
@@ -392,6 +417,7 @@ A:
 
 ## refs
 - [chat application](https://aws.amazon.com/jp/blogs/news/building-a-full-stack-chat-application-with-aws-and-nextjs/)
+- [api gateway](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-jwt-authorizer.html)
 - [localstack](https://docs.docker.com/guides/localstack/)
 - [aws cdk local](https://github.com/localstack/aws-cdk-local?tab=readme-ov-file)
 - [oac](https://qiita.com/shota_hagiwara/items/caacbda7f55aeea110d1)
@@ -410,3 +436,10 @@ A:
 - [webrtc amazon](https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/what-is-kvswebrtc.html)
 - [amazon kinesis video streams](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/what-is-kinesis-video.html)
 - [amazon sns resend dlq](https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-message-delivery-retries.html)
+- [route53 secondary](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/disaster-recovery-resiliency.html)
+- [api gateway api種類](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html)
+- [x ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-go-configuration.html)
+- [aws waf](https://docs.aws.amazon.com/waf/latest/developerguide/getting-started.html)
+- [dynamodb high latency](https://repost.aws/ja/knowledge-center/dynamodb-high-latency)
+- [dynamodb用のcache](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html)
+- [athena grafana s3](https://aws.amazon.com/blogs/big-data/visualize-amazon-s3-data-using-amazon-athena-and-amazon-managed-grafana/)
