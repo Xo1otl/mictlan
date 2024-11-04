@@ -147,7 +147,7 @@ flowchart TB
 - 両方が存在する場合は太線で示され、リアルタイムコミュニケーションのためのコネクションは双方向矢印で表現されています
 
 ### (CDN)
-- CDNの役割は、コンテンツの効率的な配信と、アクセス制御です
+- CDNの役割は、コンテンツの効率的な配信とアクセス制御です
 - 例えば、ssl証明書の一元管理や、Origin Access Controlポリシーに基づいたS3へのアクセス制御を、CloudFrontやWafで実装します
 
 ### (Gateway)
@@ -160,9 +160,7 @@ flowchart TB
 
 ### (Authentication)
 - Authenticationの役割は、ユーザー認証とアクセス制御の一元管理です
-- これをCognitoで実装し、標準的なJWT形式のトークンを使用します
-- フェデレーテッドアイデンティティによるIAMクレデンシャルの発行と、ロールベースのアクセスコントロールを行います
-- ユーザー追加の時にapiも同時に呼び出します
+- Amazon Cognito User Poolsでユーザー管理とJWTベースの認証を実装し、Identity Poolsを通じて一時的なAWSクレデンシャルを発行することで、セキュアなリソースアクセスを実現します
 
 ### (API)
 - APIの役割は、システムの中核となるドメインロジックです
@@ -178,11 +176,11 @@ flowchart TB
 
 ### (Storage)
 - Storageの役割は、ファイルの永続化です
-- S3を用いて、大容量のメディアファイルを効率的に保存・配信します
+- Amazon S3とデフォルトのSSE-S3暗号化を利用することで、大容量メディアファイルのセキュアな保存・配信基盤を実現します
 
 ### (RTC)
 - RTCの役割は、リアルタイムコミュニケーションの実現です
-- websocket apiによるリアルタイムチャットとkinesis video streamによる通話機能を提供します
+- websocket apiによるリアルタイムチャットとIVSによる通話やライブストリーミング機能を提供します
 
 ### (Notification)
 - Notificationの役割は、プッシュ通知の配信です
@@ -193,13 +191,14 @@ flowchart TB
 - CloudWatchによるシステム性能メトリクスの収集・監視、X-Rayによるマイクロサービス間の分散トレーシング、CloudTrailによるAPIやリソースの操作履歴の記録・監査、ManagedGrafanaによる統合的な可視化とダッシュボード作成を行います
 - これにより、障害時の原因特定やボトルネックの特定、システムの状態管理を行います
 
-### (SecretsManager)
-- SecretsManagerの役割は、APIキーや秘密鍵の一元管理です
+### (Secrets)
+- Secretsの役割は、機密情報の一元管理です
+- Parameter Storeを用いて<>し、SecretsManagerを用いてAPIキーや秘密鍵の一元管理です
 
 ### (まとめ)
 - 以上が、本SNSサービスの構成となります
 - マネージドサービスをフル活用することで、インフラ運用の手間を減らし、従量課金でコストを最適化し、高可用性とトラフィックに応じた自動スケーリングを実現します
-- セキュリティ面では、WAF、Cognito、SecretsManagerによる一元的な保護を行い、異常発生時には豊富な観測手段による問題特定が可能です
+- セキュリティ面では、Waf、Cognito、SecretsManager、Parameter Storeによる一元的な保護を行い、異常発生時には豊富な観測手段による問題特定が可能です
 
 ## devops (発表に含めるのやめた)
 - devopsでは、aws cdkを用いてIaCを行い、gitやCD/CIを使用し、再現性のある開発を行います
