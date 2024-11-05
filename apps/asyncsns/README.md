@@ -1,138 +1,6 @@
 # asyncsns
 - awsの一次面接で提出するプロジェクト
 
-# 資料
-
-## ドメイン
-- テキストや写真・動画によりユーザの非同期コミュニケーションを実現するSNS
-- 主要なSNS機能を備える:
-  - コンテンツ投稿（動画・写真・音声等）
-  - リアルタイムチャット
-  - 高度な検索機能
-  - プッシュ通知
-  - 音声・ビデオ通話
-
-## アーキテクチャ
-- AWSマネージドサービスを活用したサーバーレスアーキテクチャを採用
-  - インフラ運用の負荷を最小限に抑制
-  - 使用量に応じた従量課金でコストを最適化
-  - トラフィックに応じた自動スケーリングに対応
-
-### 全体像
-- 実線はコマンド
-- 破線はクエリ
-- 太線はコマンドとクエリの両方
-- 双方向やじるしはRTC
-
-![AWS構成図](docs/architecture.png)
-
-```mermaid
-flowchart TB
-    Client[Client]
-    
-    subgraph UI["UI"]
-        S3["S3"]
-    end
-    
-    subgraph CDN["CDN"]
-        direction LR
-        CF["CloudFront"]
-        WAF["WAF"]
-    end
-
-    subgraph Auth["Authentication"]
-        Cognito["Cognito"]
-    end
-    
-    subgraph Gateway["Gateway"]
-        APIGW["API Gateway"]
-    end
-
-    subgraph API["API"]
-        subgraph QueryAPI["Query"]
-            QueryLambda["Query Lambda"]
-        end
-        subgraph CommandAPI["Command"]
-            direction TB
-            PostLambda["Post Lambda"]
-            ChatLambda["Chat Lambda"]
-            CallLambda["Call Lambda"]
-            ProfileLambda["Profile Lambda"]
-        end
-    end
-    
-    subgraph Repository["Repository"]
-        DynamoDB["DynamoDB"]
-        OpenSearchIngestion["
-            OpenSearch Ingestion
-            DynamoDB Stream
-            S3
-        "]
-        OpenSearch["OpenSearch Serverless"]
-        OpenSearchDLQ["DLQ"]
-    end
-
-    subgraph Storage["Storage"]
-        S3Store["S3"]
-        Athena["Athena"]
-        Glue["Glue"]
-    end
-    
-    Athena --> S3Store
-    Glue --> S3Store
-
-    subgraph Notification["Notification"]
-        SNS["SNS"]
-        DLQ["DLQ"]
-    end
-
-    subgraph RTC["RTC"]
-        WebSocket["WebSocket API"]
-        KinesisVideoStreams["Kinesis Video Streams"]
-    end
-
-    %% Observability components
-    subgraph Observability["Observability"]
-        direction TB
-        CloudWatch["CloudWatch"]
-        CloudTrail["CloudTrail"]
-        ManagedGrafana["ManagedGrafana"]
-        XRay["X-Ray"]
-        note["Note: 統計情報を送信できるすべてのサービスと連携"]
-    end
-    
-    subgraph SecretsManager["SecretsManager"]
-    end
-    
-    %% Basic client interactions
-    Client === Cognito
-    Client === CDN
-    Client <--> RTC
-    CDN === APIGW
-    CDN -.-> S3
-    CDN -.-> S3Store
-    
-    %% API Gateway to Lambda groups
-    APIGW --> CommandAPI
-    APIGW -.-> QueryAPI
-    
-    %% Command paths to specific services
-    CommandAPI --> DynamoDB
-    CommandAPI --> S3Store
-    CommandAPI --> Notification
-    CommandAPI --> RTC
-    
-    %% Query paths
-    QueryLambda -.-> DynamoDB
-    QueryLambda -.-> OpenSearch
-    
-    DynamoDB --> OpenSearchIngestion
-    OpenSearchIngestion --> OpenSearch
-    OpenSearchIngestion --> OpenSearchDLQ
-    SNS --> DLQ
-    SNS --> APNs/FCM
-```
-
 ## プレゼン
 
 (かっこ内の文章は読まない)
@@ -143,13 +11,13 @@ flowchart TB
 
 ### (アーキテクチャーの説明)
 - まず、アーキテクチャの全体像についてご説明します
-- お手元の構成図では、システム内の処理の流れを、副作用を持たないリードオンリーなクエリを破線、コマンドを実線で表現しています
-- 両方が存在する場合は太線で示され、リアルタイムコミュニケーションのためのコネクションは双方向矢印で表現しています
+- お手元の構成図では、システム内の処理の流れを、副作用を持たないリードオンリーなクエリを破線、コマンドを実線で表しています
+- 両方が存在する場合は太線で表され、リアルタイムコミュニケーションのためのコネクションは双方向矢印で表現しています
 - また、機能ごとにフレームで区切って示しております
 - それでは各機能について、詳しくご説明させていただきます
 
 ### (CDN)
-- CDNの役割は、コンテンツの効率的な配信とアクセス制御です
+- CDNの役割は、コンテンツの効率的な配信とアクセス制御とグローバル展開です
 - 例えば、ssl証明書の一元管理や、Origin Access Controlポリシーに基づいたS3へのアクセス制御を、CloudFrontやWafで実装します
 
 ### (Gateway)
@@ -160,29 +28,30 @@ flowchart TB
 - UIの役割は、フロントエンドです
 - S3を用いてホストします
 
-### (Authentication)
-- Authenticationの役割は、ユーザー認証とアクセス制御の一元管理です
+### (Auth)
+- Authの役割は、ユーザー認証とアクセス制御の一元管理です
 - Cognito User Poolでユーザー管理とJWTベースの認証を実装し、Identity Poolを通じて一時的なAWSクレデンシャルを発行することで、セキュアなリソースアクセスを実現します
 
 ### (API)
 - APIの役割は、システムの中核となるドメインロジックです
-- コマンド処理apiでは、投稿、編集、リアルタイムチャット、通話などの処理を、Repository、Storage、RTC、Notificationなどのサービスと連携して実現します
-    - 例えば投稿処理では、storageとrepositoryとnotificationを使って、メディアファイルを一時保存してから移動し、テキストデータを保存して、友達に通知を送るといった一連の処理を行います
-    - また、リアルタイムチャットでは、repositoryとrtcとnotificationを使って、接続情報を管理しながらメッセージをやり取りし、オフラインのユーザーには通知を送るといった処理を行います
-- クエリapiでは、ユーザーが必要とする情報をRepositoryやStorageから取得します
-    - 例えば、投稿に対する全文検索や、友達のプロフィール取得などが可能です
+- コマンド処理apiでは、投稿、編集、リアルタイムチャット、通話などの処理を、Text Repository、Media Repository、RTC、Notificationなどのサービスと連携して実現します
+    - 例えば投稿処理では、Text RepositoryとMedia Repositoryとnotificationを使って、メディアファイルをアップロードし、テキストデータを保存して、友達に通知を送るといった一連の処理を行います
+    - また、リアルタイムチャットでは、Repositoryとrtcとnotificationを使って、接続情報を管理しながらメッセージをリアルタイムやり取りし、オフラインのユーザーには通知を送るといった処理を行います
+- クエリapiでは、ユーザーが必要とする情報をRepositoryから取得します
+    - 例えば、投稿に対する全文検索や、友達のプロフィール画像の取得などが可能です
 
-### (Repository)
-- Repositoryの役割は、テキスト情報の永続化です
-- dynamodbとopensearchのzero ETL統合により、高度な検索機能を実現します
+### (Text Repository)
+- Text Repositoryの役割は、テキスト情報の永続化です
+- dynamodbで保存したデータをopensearchでzero ETL統合することで、高度な検索機能を実現します
 
-### (Storage)
-- Storageの役割は、ファイルの永続化です
-- Amazon S3とデフォルトのSSE-S3暗号化を利用することで、大容量メディアファイルをセキュアに保存・配信します
+### (Media Repository)
+- Media Repositoryの役割は、ファイルの永続化です
+- S3とデフォルトのSSE-S3暗号化とS3 Triggerを使用した署名付きURLによる共有を利用することで、大容量メディアファイルをセキュアに保存・配信します
 
 ### (RTC)
 - RTCの役割は、リアルタイムコミュニケーションの実現です
 - websocket apiによるリアルタイムチャットと、IVSによる通話やライブストリーミング機能を提供します
+- レプリケーションを行うことで、Active Standbyやマルチリージョン対応を行います
 
 ### (Notification)
 - Notificationの役割は、プッシュ通知の配信です
@@ -195,79 +64,12 @@ flowchart TB
 
 ### (Secrets)
 - Secretsの役割は、機密情報の一元管理です
-- Parameter Storeを用いて設定値や構成データを管理し、SecretsManagerを用いてデーターベースの認証情報やAPIキーなどの機密情報を管理します
+- Parameter Storeを用いて設定値や構成データを管理し、SecretsManagerを用いてデーターベースの認証情報やAPIキーなどの機密情報をローテーション管理します
 
 ### (まとめ)
 - 以上が、本SNSサービスの構成となります
-- マネージドサービスをフル活用することで、インフラ運用の手間を減らし、従量課金でコストを最適化し、高可用性とトラフィックに応じた自動スケーリングを実現します
+- マネージドサービスをフル活用することで、インフラ運用の手間を減らし、従量課金でコストを最適化し、高可用性とトラフィックに応じた自動スケーリングとグローバル展開を実現します
 - セキュリティ面では、Waf、Cognito、SecretsManager、Parameter Storeなどによる一元的な保護を行い、異常発生時には豊富な観測手段による問題特定が可能です
-
-## devops (発表に含めるのやめた)
-- devopsでは、aws cdkを用いてIaCを行い、gitやCD/CIを使用し、再現性のある開発を行います
-- また、clean architectureに沿ったプロトコル非依存の抽象化を行い、インフラの切り替えを可能にします
-    - 例えば、websocketをHTTP/3のwebtransportに変更する等の切り替えを見越しています
-
-## 質問対策
-
-### Authentication
-- Cognitoを使用
-- Cognito ProviderでIAM
-- claim発行する、認証・認可
-- jwtでやる
-
-### CDN
-- ssl証明書管理
-- コンテンツのキャッシングと配信
-- cloudfrontを使う
-- nginxとかcloudflareみたいな感じ
-
-### Gateway
-- jwtの検証を行う
-- gateway配下のバックエンドでは、jwt検証ロジックを実装しなくていい
-- ついでにAPIのバージョン切り替え・負荷対策等
-- API Gatewayを使用
-
-### UI
-- ウェブサイトの配信
-- S3を用いる
-- Hosted UIより自作がいい気がする
-
-### API
-- Command
-    - Lambdaでいろいろ用意する
-    - バックグラウンド通知できるようにProduceする
-    - バリデーションの後S3にファイルをアップロードする
-    - Repositoryにテキストデータを保存する
-    - Websocketを確認して直接送るか、SNSにProduceする
-- Query
-    - dynamoDBに対するクエリをする
-    - OpenSearch使って全文検索するLambda
-    - ファイル配信はcloudfront -> S3でシンプルにやる
-
-### Repository
-- テキストデータの保存
-- dynamodb -> dynamodb stream -> opensearch
-- zero ETL統合を行う(ノーコードで統合できる)
-- s3に初期状態をsnapshotしてinit, 以降はdynamodb streamで同期
-
-### Storage
-- S3
-- ファイルを保存
-- websiteのホスト
-- OACを用いてS3からのアクセスのみを許可、期限の設定も可能
-
-### RTC
-- プロトコル非依存の抽象化を行い、移行をスムーズに作る
-- リアルタイムチャットの配信はWebsocket Apiを使用、awsが対応した場合、webtransportに移行
-- DynamoDBで接続情報を管理、要件に応じてElasticCacheで高速化
-- webRTCによる会話、ビデオ通話
-
-### Notification
-- Amazon SNS + SQSでバックグランド時やTLの通知を管理、LambdaでConsumeして確実に配信
-
-### Observability
-- CloudWatch
-- X-Ray
 
 ## Q&A
 - CloudFrontの機能について
@@ -454,3 +256,4 @@ A:
 - [dynamodb用のcache](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html)
 - [athena grafana s3](https://aws.amazon.com/blogs/big-data/visualize-amazon-s3-data-using-amazon-athena-and-amazon-managed-grafana/)
 - [github ivs example](https://aws.amazon.com/blogs/media/add-multiple-hosts-to-live-streams-with-amazon-ivs/)
+- [IVS Configure Thumbnail](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/API_ThumbnailConfiguration.html)
