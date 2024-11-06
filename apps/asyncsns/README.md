@@ -7,22 +7,23 @@
 
 ### (ドメインの説明)
 - 本日は、テキストや写真・動画によりユーザーの非同期コミュニケーションを実現するSNSの構成について発表させていただきます
-- このSNSプラットフォームは、メディアを含むコンテンツの投稿、リアルタイムチャット、高度な検索、プッシュ通知、通話、ライブストリーミングなど、主要なSNS機能をすべて備えた包括的なシステムとなっています
+- このSNSプラットフォームは、メディアを含むコンテンツの投稿、リアルタイムチャット、高度な検索、プッシュ通知、通話、ライブストリーミングなど、主要なSNS機能をすべて備えたシステムとなっています
 
 ### (アーキテクチャーの説明)
 - まず、アーキテクチャの全体像についてご説明します
-- お手元の構成図では、システム内の処理の流れを、副作用を持たないリードオンリーなクエリを破線、コマンドを実線で表しています
+- お手元の構成図では、システム内の処理の流れを、リードオンリーなクエリを破線、コマンドを実線で表しています
 - 両方が存在する場合は太線で表され、リアルタイムコミュニケーションのためのコネクションは双方向矢印で表現しています
 - また、機能ごとにフレームで区切って示しております
 - それでは各機能について、詳しくご説明させていただきます
 
 ### (CDN)
 - CDNの役割は、コンテンツの効率的な配信とアクセス制御とグローバル展開です
-- 例えば、ssl証明書の一元管理や、Origin Access Controlポリシーに基づいたS3へのアクセス制御を、CloudFrontやWafで実装します
+- 例えば、ssl証明書の一元管理や、Origin Access Controlポリシーに基づいたS3へのアクセス制御やキャッシングやエッジ処理を、CloudFrontやWafで実装します
 
 ### (Gateway)
 - Gatewayの役割は、APIリクエストの統合的な制御と管理です
-- 例えば、jwtの一元的な検証、lambdaの統合、ステートフルエンドポイント、apiバージョンの切り替え、負荷対策などの機能をAPI Gatewayで実装します
+- 例えば、jwtの一元的な検証、lambdaの統合、apiバージョンの切り替え、負荷対策などの機能をAPI Gatewayで実装します
+- ステートフルエンドポイントはマルチリージョンにします
 
 ### (UI)
 - UIの役割は、フロントエンドです
@@ -36,7 +37,7 @@
 - APIの役割は、システムの中核となるドメインロジックです
 - コマンド処理apiでは、投稿、編集、リアルタイムチャット、通話などの処理を、Text Repository、Media Repository、RTC、Notificationなどのサービスと連携して実現します
     - 例えば投稿処理では、Text RepositoryとMedia Repositoryとnotificationを使って、メディアファイルをアップロードし、テキストデータを保存して、友達に通知を送るといった一連の処理を行います
-    - また、リアルタイムチャットでは、Repositoryとrtcとnotificationを使って、接続情報を管理しながらメッセージをリアルタイムやり取りし、オフラインのユーザーには通知を送るといった処理を行います
+    - また、リアルタイムチャットでは、Repositoryとrtcとnotificationを使って、接続情報を管理し、メッセージをリアルタイムでやり取りし、オフラインのユーザーには通知を送るといった処理を行います
 - クエリapiでは、ユーザーが必要とする情報をRepositoryから取得します
     - 例えば、投稿に対する全文検索や、友達のプロフィール画像の取得などが可能です
 
@@ -46,21 +47,22 @@
 
 ### (Media Repository)
 - Media Repositoryの役割は、ファイルの永続化です
-- S3とデフォルトのSSE-S3暗号化とS3 Triggerを使用した署名付きURLによる共有を利用することで、大容量メディアファイルをセキュアに保存・配信します
+- S3とデフォルトの暗号化とTriggerを使ったした署名付きURLによる共有を利用することで、大容量メディアファイルをセキュアに保存・配信します
+- また、MediaConvertを用いた動画データのストリーム形式への変換や保存を行います
 
 ### (RTC)
 - RTCの役割は、リアルタイムコミュニケーションの実現です
 - websocket apiによるリアルタイムチャットと、IVSによる通話やライブストリーミング機能を提供します
-- レプリケーションを行うことで、Active Standbyやマルチリージョン対応を行います
+- RTCはマルチリージョンにします
 
 ### (Notification)
 - Notificationの役割は、プッシュ通知の配信です
-- Amazon SNSで実装し、デッドレターキューで失敗時の分析や再処理に対応します
+- Amazon SNSで実装し、デッドレターキューで失敗時の分析や再処理を行います
 
 ### (Observability)
 - Observabilityの役割は、システム全体の監視と分析です
 - CloudWatchによるシステム性能メトリクスの収集・監視、X-Rayによる分散トレーシング、CloudTrailによるAPIやリソースの操作履歴の記録・監査、ManagedGrafanaによる統合的な可視化とダッシュボード作成を行います
-- これにより、障害時の原因特定やボトルネックの特定、システムの状態管理を行います
+- これにより、障害時の原因特定やボトルネックの特定、システムの状態管理が可能になります
 
 ### (Secrets)
 - Secretsの役割は、機密情報の一元管理です
@@ -257,3 +259,4 @@ A:
 - [athena grafana s3](https://aws.amazon.com/blogs/big-data/visualize-amazon-s3-data-using-amazon-athena-and-amazon-managed-grafana/)
 - [github ivs example](https://aws.amazon.com/blogs/media/add-multiple-hosts-to-live-streams-with-amazon-ivs/)
 - [IVS Configure Thumbnail](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/API_ThumbnailConfiguration.html)
+- [mediastoreではなくs3を使う理由](https://docs.aws.amazon.com/mediastore/latest/ug/what-is.html)
