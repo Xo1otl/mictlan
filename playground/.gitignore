@@ -1,3 +1,4 @@
 redpanda/
 .webui_secret_key
 /postgresql
+interview/

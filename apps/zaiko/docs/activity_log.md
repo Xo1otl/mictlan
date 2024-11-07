@@ -185,7 +185,7 @@ e.GET("/", func(c echo.Context) error {
 ### 参考文献
 
 - [Event Sourcing Pattern](https://docs.aws.amazon.com/ja_jp/prescriptive-guidance/latest/cloud-design-patterns/event-sourcing.html)
-- [avor について](https://docs.oracle.com/cd/E35584_01/html/GettingStartedGuide/avroschemas.html)
+- [avro について](https://docs.oracle.com/cd/E35584_01/html/GettingStartedGuide/avroschemas.html)
 - [プログラムの計算精度](https://zenn.dev/sdb_blog/articles/01_plus_02_does_not_equal_03)
 - [decimal について](https://engineering.mercari.com/blog/entry/20201203-basis-point/)
 - [decimal パッケージ](https://github.com/shopspring/decimal)
