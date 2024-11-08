@@ -23,7 +23,7 @@ func LaunchEcho(addr string) {
 	e.Use(middleware.Logger())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.String(200, "AWS")
+		return c.String(200, "Hello, World!")
 	})
 
 	accountRepo := iam.NewInMemoryAccountRepo()

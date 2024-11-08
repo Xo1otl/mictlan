@@ -10,8 +10,8 @@ type InMemoryAccountRepo struct {
 
 // FindAccount implements AccountRepo.
 func (i *InMemoryAccountRepo) FindAccount(username string) (*Account, error) {
-	if username == "aws" {
-		return NewAccount("1", "aws", "candidate"), nil
+	if username == "admin" {
+		return NewAccount("1", "admin", "password"), nil
 	}
 	return nil, errors.New("account not found")
 }
