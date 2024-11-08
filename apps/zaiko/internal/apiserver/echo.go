@@ -22,12 +22,10 @@ func LaunchEcho(addr string) {
 	}))
 	e.Use(middleware.Logger())
 
-	// 課題1
 	e.GET("/", func(c echo.Context) error {
 		return c.String(200, "AWS")
 	})
 
-	// 課題2
 	accountRepo := iam.NewInMemoryAccountRepo()
 	digestNcRepo := iam.NewInMemoryDigestNcRepo()
 	validator := iam.NewMD5DigestValidator()
@@ -40,7 +38,6 @@ func LaunchEcho(addr string) {
 		return c.String(200, "SUCCESS")
 	}, iam.EchoDigestMiddleware(tokenService), auth.EchoMiddleware(tokenService))
 
-	// 課題3
 	stock.AddEchoRoutes(e)
 
 	log.Println("🚀 Server listening at: http://" + addr)
