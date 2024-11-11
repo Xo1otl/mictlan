@@ -29,9 +29,15 @@ class Cli implements VCS, PathRepo, Packer
         exec('git check-ignore ' . escapeshellarg($filepath), $output, $return_var);
 
         if ($return_var !== 0) {
-            // The file is not ignored, so add it to .gitignore
-            file_put_contents($this->rootGitignore, "\n" . $filepath . PHP_EOL, FILE_APPEND | LOCK_EX);
-            echo "Added $filepath to .gitignore\n";
+            // Determine if the path is a directory
+            $isDir = is_dir($filepath);
+
+            // For directories, append / to ignore directory and all contents
+            $ignorePattern = $filepath . ($isDir ? "/" : "");
+
+            // Add to .gitignore
+            file_put_contents($this->rootGitignore, "\n" . $ignorePattern . PHP_EOL, FILE_APPEND | LOCK_EX);
+            echo "Added $ignorePattern to .gitignore\n";
         } else {
             echo "$filepath is already ignored.\n";
         }
@@ -114,58 +120,39 @@ class Cli implements VCS, PathRepo, Packer
     {
         $currentDir = getcwd();
         chdir($this->workspaceFolder);
-
+    
         if (!file_exists($archivePath)) {
             echo "Archive file $archivePath does not exist.\n";
             chdir($currentDir);
             return;
         }
-
-        // アーカイブ内のファイルリストを取得
-        $archiveFiles = [];
-        $cmdList = "tar -tzf " . escapeshellarg($archivePath);
-        exec($cmdList, $archiveFiles, $return_var);
-
-        if ($return_var !== 0) {
-            echo "Error listing archive contents. Command: $cmdList\n";
-            chdir($currentDir);
-            return;
-        }
-
+    
         // 登録されたシークレットのパスを取得
         $registeredSecrets = $this->listAll();
-
-        // パスを正規化（相対パスや絶対パスの違いを吸収）
-        $normalizedArchiveFiles = array_map(function ($path) {
-            return ltrim($path, './'); // './'を削除
-        }, $archiveFiles);
-
-        $normalizedRegisteredSecrets = array_map(function ($path) {
-            return ltrim($path, './'); // './'を削除
-        }, $registeredSecrets);
-
-        // リストをソートして比較
-        sort($normalizedArchiveFiles);
-        sort($normalizedRegisteredSecrets);
-
-        if ($normalizedArchiveFiles !== $normalizedRegisteredSecrets) {
-            echo "The contents of the archive do not match the registered secrets.\n";
+    
+        // 全パスを一度に確認
+        $paths = implode(' ', array_map('escapeshellarg', $registeredSecrets));
+        $cmdCheck = "tar -tf " . escapeshellarg($archivePath) . " " . $paths . " 2>/dev/null";
+        exec($cmdCheck, $output, $return_var);
+    
+        if ($return_var !== 0) {
+            echo "Some required paths are missing from the archive\n";
             chdir($currentDir);
             return;
         }
-
+    
         // アーカイブを解凍
         $archivePathEscaped = escapeshellarg($archivePath);
         $cmdExtract = "tar -xzf $archivePathEscaped";
-
+    
         exec($cmdExtract, $output, $return_var);
-
+    
         if ($return_var === 0) {
             echo "Decompressed archive $archivePath\n";
         } else {
             echo "Error decompressing archive. Command: $cmdExtract\n";
         }
-
+    
         chdir($currentDir);
     }
 }
