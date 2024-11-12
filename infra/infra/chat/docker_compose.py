@@ -1,7 +1,16 @@
 from infra import llm
+from util import workspace
+
+pipelines = {
+    'image': 'ghcr.io/open-webui/pipelines:main',
+    'container_name': 'pipelines',
+    'ports': ['9099:9099'],
+    'volumes': [f'{workspace.relpath(__file__, "apps/chathub/chathub/pipelines")}:/app/pipelines'],
+}
 
 docker_compose = {
     'services': {
+        'chat-pipelines': pipelines,
         'chat': {
             'image': 'ghcr.io/open-webui/open-webui:main',
             'container_name': 'open-webui',
@@ -14,6 +23,6 @@ docker_compose = {
         }
     },
     'volumes': {
-        'open-webui': {}
+        'open-webui': {},
     }
 }

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ai-integration"
+name = "chathub"
 version = "0.1.0"
 description = ""
 authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
