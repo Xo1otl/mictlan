@@ -1,0 +1,4 @@
+# essence
+- Build a customized AI interaction tool
+- Store and track AI interactions over time
+- Analyze the evolution of conversations
