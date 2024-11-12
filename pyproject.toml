@@ -12,8 +12,8 @@ infra = { path = "./infra", develop = true }
 util = { path = "./packages/util/python", develop = true }
 quantum = { path = "./research/quantum", develop = true }
 syuron = { path = "./research/syuron/python", develop = true, optional = true }
+ai-integration = { path = "./apps/ai-integration", develop = true, optional = true }
 notebook = "^7.2.2"
-diagrams = "^0.24.0"
 
 [tool.poetry.extras]
 gpu = [
