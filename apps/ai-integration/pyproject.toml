@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "llm"
+name = "ai-integration"
 version = "0.1.0"
 description = ""
 authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12.0a1"
-open-webui = "^0.3.32"
+python = "^3.10"
+ollama = "^0.3.3"
 
 
 [build-system]
