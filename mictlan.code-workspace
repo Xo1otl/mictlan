@@ -75,6 +75,15 @@
 		"php.completion.autoimport": "fqn",
 		/* julia */
 		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
-		"remote.autoForwardPortsFallback": 0
+		"remote.autoForwardPortsFallback": 0,
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/bower_components": true,
+			"**/*.code-search": true,
+			"**/go.work.sum": true,
+			"**/known_hosts": true,
+			"**/*.min.css": true,
+			"**/*-min.css": true
+		}
 	}
 }
