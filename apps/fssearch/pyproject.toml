@@ -1,12 +1,15 @@
 [tool.poetry]
-name = "infra"
+name = "fssearch"
 version = "0.1.0"
-description = "infrastructure as code"
+description = ""
 authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+meilisearch = "^0.31.5"
+GitPython = "^3.1"
+
 
 [build-system]
 requires = ["poetry-core"]
