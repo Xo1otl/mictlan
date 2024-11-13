@@ -27,7 +27,7 @@ class Manager:
         user_id: str,
         chat_id: str,
         messages: List[dict]
-    ) -> Union[Dict[str, Any], Generator, Iterator]:
+    ) -> Generator[Dict[str, Any], None, None]:
         """
         新しいメッセージを処理し、応答をストリーミングで返す
 
@@ -39,6 +39,8 @@ class Manager:
         Returns:
             Union[str, Generator, Iterator]: API応答のストリーム
         """
+        # ユーザーからのメッセージを保存
+        self.repository.save(user_id, chat_id, messages)
 
         # ストリーミングレスポンスを生成
         response_stream = self.bot.chat(messages)
