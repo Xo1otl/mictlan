@@ -12,6 +12,7 @@ infra = { path = "./infra", develop = true }
 util = { path = "./packages/util/python", develop = true }
 quantum = { path = "./research/quantum", develop = true }
 chathub = { path = "./apps/chathub", develop = true }
+fssearch = { path = "./apps/fssearch", develop = true }
 syuron = { path = "./research/syuron/python", develop = true, optional = true }
 notebook = "^7.2.2"
 
