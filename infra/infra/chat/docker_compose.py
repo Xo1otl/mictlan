@@ -6,8 +6,9 @@ pipelines = {
     'container_name': 'pipelines',
     'ports': ['9099:9099'],
     'volumes': [
+        f'{workspace.relpath(__file__, "apps/chathub")}:/app/chathub',
+        f'{workspace.relpath(__file__, "apps/chathub/repositories")}:/app/repositories',
         f'{workspace.relpath(__file__, "apps/chathub/chathub/pipelines")}:/app/pipelines',
-        f'{workspace.relpath(__file__, "apps/chathub/chathub/chat")}:/app/chat'
     ],
 }
 
