@@ -6,20 +6,40 @@
 ## 構成図
 ```mermaid
 graph TD
-   manager["manager
-   概要: チャット履歴の生成と保存を管理
-   詳細: messageをbotに送って返事をストリーミング、完了後はRepositoryへ保存"]
-   
-   bot["bot
-   概要: AIモデルとの対話を担当
-   詳細: chat(messages): stream"]
-   
-   repository["repository
-   概要: 会話履歴の永続化を担当
-   詳細: save(user_id, chat_id, messages)"]
+    subgraph domain
+        Manager["Manager
+        概要: チャット履歴の生成と保存を管理
+        詳細: messageをbotに送って返事をストリーミング、完了後はRepositoryへ保存"]
+        
+        Bot["Bot
+        概要: AIモデルとの対話を担当
+        詳細: chat(messages): stream"]
+        
+        Repository["Repository
+        概要: 会話履歴の永続化を担当
+        詳細: save(user_id, chat_id, messages)"]
 
-   manager --> bot
-   manager --> repository
+        Manager --> Bot
+        Manager --> Repository
+    end
+
+    subgraph adapter
+        Pipeline["Pipeline
+        概要: open-webuiのpipeline controller
+        詳細: open-webuiの pipeline機能を使用してモデルの実行を制御"]
+
+        OllamaBot["OllamaBot
+        概要: Bot インターフェースの実装
+        詳細: Ollama APIを使用してチャットストリームを生成"]
+        
+        GitRepository["GitRepository
+        概要: Repository インターフェースの実装
+        詳細: Gitリポジトリに会話履歴をJSONとして保存"]
+    end
+
+    Pipeline --> Manager
+    Bot --> OllamaBot
+    Repository --> GitRepository
 ```
 
 ## 仕様
