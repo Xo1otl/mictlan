@@ -1,9 +1,28 @@
-## ChatHub
+# ChatHub
 - open-webui等のpipeline書く
 - 会話した内容をそのままgitで管理
 - 実質リッチなイベントストアなので後からなんぼでも分析できる
 
-### 仕様
+## 構成図
+```mermaid
+graph TD
+   manager["manager
+   概要: チャット履歴の生成と保存を管理
+   詳細: messageをbotに送って返事をストリーミング、完了後はRepositoryへ保存"]
+   
+   bot["bot
+   概要: AIモデルとの対話を担当
+   詳細: chat(messages): stream"]
+   
+   repository["repository
+   概要: 会話履歴の永続化を担当
+   詳細: save(user_id, chat_id, messages)"]
+
+   manager --> bot
+   manager --> repository
+```
+
+## 仕様
 - 一つ一つの会話は長さ制限もあるし、丸ごと扱って問題ない
 - Gitリポジトリ作ってそこにファイル作って新しい会話やお喋りはコミットすればいい
 - ファイルとしてjsonで全部残してる、会話に対して全文検索などなんでもできる、再生もできる
@@ -20,3 +39,6 @@
     - 言語を変えるならワンチ必要があるが、全部pythonで書けるし、それだとサービス分ける意味特にない
     - 同じプログラムからproduceしてconsumeしたら一人キャッチボールみがある
     - イベントドリブンは、バッチ処理などに向いてそうではある
+
+## Memo
+- pipelineでのimportはsys.pathで乗り切る

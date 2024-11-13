@@ -5,7 +5,10 @@ pipelines = {
     'image': 'ghcr.io/open-webui/pipelines:main',
     'container_name': 'pipelines',
     'ports': ['9099:9099'],
-    'volumes': [f'{workspace.relpath(__file__, "apps/chathub/chathub/pipelines")}:/app/pipelines'],
+    'volumes': [
+        f'{workspace.relpath(__file__, "apps/chathub/chathub/pipelines")}:/app/pipelines',
+        f'{workspace.relpath(__file__, "apps/chathub/chathub/chat")}:/app/chat'
+    ],
 }
 
 docker_compose = {

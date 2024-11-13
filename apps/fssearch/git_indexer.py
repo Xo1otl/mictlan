@@ -243,14 +243,15 @@ class DocumentFormatter:
         }
 
 
-collector = GitCollector('https://github.com/riccox/meilisearch-ui', ignore_patterns=[
+collector = GitCollector('/workspaces/mictlan', ignore_patterns=[
     "*.min.css",
     "*-min.css",
     "*.sum",
     "known_hosts",
-    "cdk.json"
+    "cdk.json",
+    "koemadeinfo.html"
 ])
 formatter = DocumentFormatter()
 uploader = MeilisearchUploader(
-    'http://meilisearch:7700', searchengine.MEILI_MASTER_KEY, 'fssearch-poc3')
+    'http://meilisearch:7700', searchengine.MEILI_MASTER_KEY, 'mictlan')
 create_indexer(collector, formatter, uploader).index()
