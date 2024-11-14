@@ -61,4 +61,4 @@ graph TD
     - イベントドリブンは、バッチ処理などに向いてそうではある
 
 ## Memo
-- pipelineでのimportはsys.pathで乗り切る
+- pipelineのコンテナの`app/chathub`で`pip install .`するとインストールができるが、プラグインをリロードするとunknown locationエラーになる、コンテナを再起動すると動く
