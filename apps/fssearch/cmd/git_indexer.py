@@ -6,6 +6,8 @@ from infra import searchengine as infra_searchengine
 import meilisearch
 import argparse
 
+index_name = "fssearch-chatlogs"
+
 
 def clear_index():
     """Clear the MeiliSearch index"""
@@ -13,14 +15,14 @@ def clear_index():
         'http://meilisearch:7700',
         infra_searchengine.MEILI_MASTER_KEY
     )
-    client.index('fssearch-poc').delete()
+    client.index(index_name).delete()
     print("Index cleared successfully")
 
 
 def index_repository():
     """Index files from the specified directory"""
     collector = file.GitCollector(
-        "/workspaces/mictlan",
+        "/workspaces/mictlan/apps/chathub/repositories/50686ea4-428c-4e5c-a018-a890faaffeb3",
         ignore_patterns=[
             "*.min.css",
             "*-min.css",
@@ -35,7 +37,7 @@ def index_repository():
     uploader = searchengine.MeilisearchUploader(
         "http://meilisearch:7700",
         infra_searchengine.MEILI_MASTER_KEY,
-        "fssearch-poc"
+        index_name
     )
     searchengine.Indexer(processor, uploader).index()
     print("Files indexed successfully")

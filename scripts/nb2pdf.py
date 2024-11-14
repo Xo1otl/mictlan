@@ -20,15 +20,15 @@ def convert_notebook_to_html(notebook_path: str) -> str:
 def save_html_as_pdf(html: str, output_path: str):
     with sync_playwright() as p:
         browser = p.chromium.launch()
+        time.sleep(0.5)  # monkey patch for waiting chromium launch
         page = browser.new_page()
         page.set_content(html)
         page.add_style_tag(
             content="* { font-family: 'Noto Sans CJK JP', 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif !important; }")
-        page.wait_for_load_state('networkidle')
-        time.sleep(0.5)  # wait for mathjax
+        time.sleep(1)  # monkey patch for waiting mathjax load
         page.pdf(
             path=output_path,
-            scale=0.9,
+            scale=0.6,
             format="A4"
         )
         browser.close()
