@@ -1,9 +1,9 @@
 import os
 import git
 from typing import Optional, Iterable, Tuple, List
-import fnmatch
 import tempfile
 import shutil
+from fnmatch import fnmatch
 
 
 class GitCollector:
@@ -31,37 +31,7 @@ class GitCollector:
         self.ignore_patterns = ignore_patterns or []
 
     def _should_ignore(self, file_path) -> bool:
-        """
-        ファイルを無視すべきかどうかを判定する
-
-        Args:
-            file_path: 判定対象のファイルパス（リポジトリルートからの相対パス）
-
-        Returns:
-            bool: 無視すべき場合はTrue
-        """
-        # Windowsのパス区切り文字をUNIX形式に統一
-        normalized_path = file_path.replace(os.sep, '/')
-
-        for pattern in self.ignore_patterns:
-            # パターンもUNIX形式に統一
-            normalized_pattern = pattern.replace(os.sep, '/')
-
-            # **/ で始まるパターンの場合は、すべてのサブディレクトリにマッチ
-            if pattern.startswith('**/'):
-                if fnmatch.fnmatch(normalized_path, pattern[3:]):
-                    return True
-
-            # パターンに / が含まれる場合は、完全パスでマッチング
-            if '/' in normalized_pattern:
-                if fnmatch.fnmatch(normalized_path, normalized_pattern):
-                    return True
-            else:
-                # パターンに / が含まれない場合は、ファイル名のみでマッチング
-                if fnmatch.fnmatch(os.path.basename(normalized_path), normalized_pattern):
-                    return True
-
-        return False
+        return any(fnmatch(file_path, pattern) for pattern in self.ignore_patterns)
 
     def _read_file_content(self, file_path) -> Optional[str]:
         """ファイルの内容を読み込む。バイナリファイルの場合はNoneを返す"""

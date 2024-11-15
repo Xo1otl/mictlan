@@ -6,7 +6,7 @@ from infra import searchengine as infra_searchengine
 import meilisearch
 import argparse
 
-index_name = "fssearch-chatlogs"
+index_name = "fssearch-microsoft_graphrag"
 
 
 def clear_index():
@@ -22,14 +22,21 @@ def clear_index():
 def index_repository():
     """Index files from the specified directory"""
     collector = file.GitCollector(
-        "/workspaces/mictlan/apps/chathub/repositories/50686ea4-428c-4e5c-a018-a890faaffeb3",
+        "https://github.com/microsoft/graphrag",
         ignore_patterns=[
             "*.min.css",
             "*-min.css",
             "*.sum",
             "known_hosts",
             "cdk.json",
-            "koemadeinfo.html"
+            "koemadeinfo.html",
+            "docs/**",
+            "examples/**",
+            "examples*/**",
+            ".vscode/**",
+            ".github/**",
+            ".semversioner/**",
+            "tests/**",
         ]
     )
     formatter = file.DocumentFormatter()

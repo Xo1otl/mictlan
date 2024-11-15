@@ -2,12 +2,12 @@ import yaml
 import os
 from infra import broker
 from infra import zaiko
-from infra import nosql
+from infra.db import documentdb
 
 sales_stocks_mongo = {
     "label": "sales_stocks_mongo",
     "mongodb": {
-        "url": f"mongodb://{nosql.CONTAINER_NAME}:{nosql.PORT}",
+        "url": f"mongodb://{documentdb.SERVICE_NAME}:{documentdb.PORT}",
         "database": zaiko.DB_NAME,
         "collection": "sales_stocks",
         "operation": "replace-one",

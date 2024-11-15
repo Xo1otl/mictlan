@@ -12,4 +12,4 @@ for path in paths:
     subprocess.run(['python', path])  # 各ファイルをPythonシェルで実行
 
 # Docker Composeを生成(tplを実行した後に生成する必要がある)
-ecosystem.generate_docker_compose()
+ecosystem.gen_compose()

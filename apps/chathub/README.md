@@ -62,3 +62,4 @@ graph TD
 
 ## Memo
 - pipelineのコンテナの`app/chathub`で`pip install .`するとインストールができるが、プラグインをリロードするとunknown locationエラーになる、コンテナを再起動すると動く
+- ollamaのnum parrarelはデフォルトでは4

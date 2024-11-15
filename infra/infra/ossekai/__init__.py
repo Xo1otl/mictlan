@@ -1,3 +1,6 @@
-def docker_compose():
-    from .docker_compose import docker_compose
-    return docker_compose
+PORT = 9080
+
+
+def compose():
+    from .compose import compose
+    return compose
