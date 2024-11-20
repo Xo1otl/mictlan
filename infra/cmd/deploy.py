@@ -12,7 +12,7 @@ archive_name = f'{target}.tar.gz'
 archive_path = os.path.join("/tmp", archive_name)
 
 # リモートの変数
-server_alias = "vpn"
+server_alias = "ossekai"
 remote_dir = "/home/ubuntu"
 
 # 圧縮するコマンドを実行
