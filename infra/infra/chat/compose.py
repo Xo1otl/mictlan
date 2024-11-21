@@ -1,4 +1,4 @@
-from infra import llm
+from infra.ai import llm
 from util import workspace
 
 pipelines = {

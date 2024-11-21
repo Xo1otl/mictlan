@@ -11,7 +11,6 @@
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [
-		
 			{
 				"name": "Debug ossekai-web",
 				"type": "msedge",
@@ -47,6 +46,7 @@
 		"git.autofetch": true,
 		"git.enableSmartCommit": true,
 		/* python */
+		"python.analysis.typeCheckingMode": "standard",
 		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない
@@ -84,7 +84,8 @@
 			"**/go.work.sum": true,
 			"**/known_hosts": true,
 			"**/*.min.css": true,
-			"**/*-min.css": true
+			"**/*-min.css": true,
+			"**/movies.json": true
 		}
 	}
 }

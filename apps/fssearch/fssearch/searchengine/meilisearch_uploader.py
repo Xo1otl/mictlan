@@ -1,7 +1,8 @@
+from .command import Uploader
 import meilisearch
 
 
-class MeilisearchUploader:
+class MeilisearchUploader(Uploader):
     def __init__(self, host: str, api_key: str, index_name: str):
         self.client = meilisearch.Client(host, api_key)
         self.index = self.client.index(index_name)

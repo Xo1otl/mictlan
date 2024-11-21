@@ -1,9 +1,10 @@
 import os
 import uuid
 import json
+from .command import Formatter
 
 
-class DocumentFormatter:
+class DocumentFormatter(Formatter):
     def _normalize_source(self, source):
         """ソースコードの内容を正規化する"""
         if isinstance(source, list):

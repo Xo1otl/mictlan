@@ -4,9 +4,10 @@ from typing import Optional, Iterable, Tuple, List
 import tempfile
 import shutil
 from fnmatch import fnmatch
+from .command import Collector
 
 
-class GitCollector:
+class GitCollector(Collector):
     def __init__(self, repo_path: str, ignore_patterns: List[str] = []):
         """
         Args:
