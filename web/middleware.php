@@ -8,7 +8,7 @@ function NewApp()
 {
     $userRepo = new auth\PdoAccountRepo();
     $sessionRepo = new auth\FileSessionRepo();
-    return new auth\App($userRepo, $sessionRepo);
+    return new auth\Handler($userRepo, $sessionRepo);
 }
 
 function Session(): ?auth\Session
