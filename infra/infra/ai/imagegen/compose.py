@@ -21,6 +21,7 @@ compose = {
                 'comfyui_custom_nodes:/app/ComfyUI/custom_nodes',
                 'fluxgym_outputs:/app/fluxgym/outputs',
                 'fluxgym_models:/app/fluxgym/models',
+                'fluxgym_datasets:/app/fluxgym/datasets',
             ],
             'deploy': {
                 'resources': {
@@ -40,6 +41,7 @@ compose = {
         'comfyui_models': {},
         'comfyui_custom_nodes': {},
         'fluxgym_outputs': {},
-        'fluxgym_models': {}
+        'fluxgym_models': {},
+        'fluxgym_datasets': {}
     }
 }

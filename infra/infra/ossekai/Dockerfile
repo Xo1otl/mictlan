@@ -1,4 +1,4 @@
-FROM apache/answer as answer-builder
+FROM apache/answer:latest as answer-builder
 
 FROM golang:1.23-alpine AS golang-builder
 

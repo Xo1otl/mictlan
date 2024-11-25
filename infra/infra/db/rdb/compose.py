@@ -25,7 +25,7 @@ for filepath in workspace.globrelpaths(__file__, 'infra/infra/*/[0-9]*-*.mysql.s
 # Build the config object
 compose = {
     'services': {
-        CONTAINER_NAME: {
+        SERVICE_NAME: {
             'image': 'mysql:latest',
             'ports': [f'{PORT}:{PORT}'],
             'environment': {

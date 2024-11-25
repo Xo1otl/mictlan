@@ -1,8 +1,8 @@
 from .env import *
 
-CONTAINER_NAME = 'mysql'
+SERVICE_NAME = 'mysql'
 PORT = 3306
-ADDR = f"{CONTAINER_NAME}:{PORT}"
+ADDR = f"{SERVICE_NAME}:{PORT}"
 
 
 def compose():

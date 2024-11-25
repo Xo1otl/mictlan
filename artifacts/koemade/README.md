@@ -16,3 +16,6 @@ Web application specific components: static web assets, server side templates an
 - htaccess書く。多分web以下だけ許可でいい
 - robotx.txt書く
 - 音声アップロード機能作る
+- query機能
+    - モデルを書く
+    - repositoryをadapterとして実装する

@@ -2,7 +2,7 @@
 
 namespace koemade\auth;
 
-class App
+class Handler
 {
     private AccountRepo $accountRepo;
     private SessionRepo $sessionRepo;

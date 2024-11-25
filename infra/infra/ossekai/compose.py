@@ -2,7 +2,7 @@ from . import *
 
 compose = {
     'services': {
-        'answer': {
+        SERVICE_NAME: {
             'container_name': 'answer',
             'build': {
                 'dockerfile': 'Dockerfile',
