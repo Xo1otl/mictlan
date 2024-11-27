@@ -3,3 +3,4 @@ redpanda/
 /postgresql
 interview/
 cache/
+tmp/

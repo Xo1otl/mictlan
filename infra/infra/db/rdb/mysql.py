@@ -23,16 +23,12 @@ for filepath in workspace.globrelpaths(__file__, 'infra/infra/*/[0-9]*-*.mysql.s
     mysql_init_script_volumes.append(f'{src}:{dst}')
 
 # Build the config object
-compose = {
-    'services': {
-        SERVICE_NAME: {
-            'image': 'mysql:latest',
-            'ports': [f'{PORT}:{PORT}'],
-            'environment': {
-                'MYSQL_ROOT_PASSWORD': MYSQL_ROOT_PASSWORD
-            },
-            # Automate volume creation
-            'volumes': mysql_init_script_volumes
-        }
-    }
+mysql_service = {
+    'image': 'mysql:latest',
+    'ports': [f'{MYSQL_PORT}:{MYSQL_PORT}'],
+    'environment': {
+        'MYSQL_ROOT_PASSWORD': MYSQL_ROOT_PASSWORD
+    },
+    # Automate volume creation
+    'volumes': mysql_init_script_volumes
 }

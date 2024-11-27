@@ -15,6 +15,8 @@ from infra.ai import llm
 from infra.ai import imagegen
 from infra import chat
 from infra.db import multimodaldb
+from infra.db import kvs
+from infra import knowledgebase
 
 
 def check_port_conflicts(modules):
@@ -53,7 +55,7 @@ def check_port_conflicts(modules):
 # すべての設定にまとめてnetworksを追加するなどの共通処理が考えられる
 def gen_compose():
     modules = [
-        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen
+        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase
     ]
 
     check_port_conflicts(modules)

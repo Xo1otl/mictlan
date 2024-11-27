@@ -8,7 +8,7 @@ from util import json as json_util
 def fetchfs() -> dict:
     return json.loads(
         subprocess.run(
-            ['tree', '-J', '.', '-L', '4'],
+            ['tree', '-J', '.', '-L', '2', '-d'],
             capture_output=True,
             text=True
         ).stdout)[0]
