@@ -4,7 +4,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 
 MODEL = 'llama3.2-vision'
-IMAGE_DIR = './images/pikazo'
+IMAGE_DIR = './pikazo_images'
 OUTPUT_FILE = 'image_captions.json'  # File to store the captions in JSON format
 SYSTEM_PROMPT = """\
 You are an assistant who describes the content and composition of images.

@@ -1,0 +1,14 @@
+{
+	"overrides": [
+		{
+			"include": ["../../../biome.json"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off"
+					}
+				}
+			}
+		}
+	]
+}
