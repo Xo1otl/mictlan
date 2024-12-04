@@ -20,6 +20,7 @@
     shape: { matches: 0, total: 0 },
     total: { matches: 0, total: 0 },
     update: (tryResult, actualResult) => {
+      console.log(tryResult.shape, actualResult.shape);
       if (!tryResult) return;
 
       scoreRecord.total.total++;
@@ -78,13 +79,6 @@
       }
       const poppedItem = items[0];
       return poppedItem;
-    };
-
-    const getNthBack = (n: number) => {
-      if (items.length < n) {
-        return undefined;
-      }
-      return items[0];
     };
 
     return {

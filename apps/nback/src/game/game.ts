@@ -36,6 +36,7 @@ export function NewManager(
 	let tryResult: TryResult = NewTryResult();
 	let listeners: ((event: string) => void)[] = [];
 	const input = (matchResult: MatchResult) => {
+		console.log("input shape", matchResult.shape);
 		tryResult.matchResult = matchResult;
 	};
 	const start = async () => {
@@ -134,7 +135,7 @@ function NewCharactor(value: string): Charactor {
 	return character;
 }
 function RandomCharacter(): Charactor {
-	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const characters = "ABCD";
 	return NewCharactor(
 		characters[Math.floor(Math.random() * characters.length)],
 	);
