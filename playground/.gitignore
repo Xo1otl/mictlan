@@ -4,3 +4,5 @@ redpanda/
 interview/
 cache/
 tmp/
+.output/
+data/

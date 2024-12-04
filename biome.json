@@ -7,7 +7,10 @@
 		"ignore": ["**/*.gen.ts", "**/vendor/**"],
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"style": {
+				"useConst": "off"
+			}
 		}
 	},
 	"files": {

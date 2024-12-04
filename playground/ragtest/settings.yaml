@@ -3,7 +3,7 @@ skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
   type: openai_chat # or azure_openai_chat
-  model: jaahas/gemma-2-9b-it-abliterated
+  model: qwq
   model_supports_json: true # recommended if this is available for your model.
   # audience: "https://cognitiveservices.azure.com/.default"
   max_tokens: 2048
@@ -17,7 +17,7 @@ llm:
   max_retries: 4
   max_retry_wait: 10.0
   # sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
-  concurrent_requests: 4 # the number of parallel inflight requests that may be made
+  concurrent_requests: 2 # the number of parallel inflight requests that may be made
   # temperature: 0 # temperature for sampling
   # top_p: 1 # top-p sampling
   # n: 1 # Number of completions to generate
