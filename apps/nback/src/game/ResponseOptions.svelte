@@ -15,7 +15,9 @@
 				coordinates: false,
 				character: false,
 			};
+			manager.input(buttonStates);
 		}
+		console.log("buttonStates", buttonStates.shape);
 	});
 
 	let responseOptions = [
