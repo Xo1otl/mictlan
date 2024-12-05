@@ -56,7 +56,7 @@ export function NewManager(
 				}
 				const result = target.match(newStimulus);
 				scoreRecords.update(tryResult.matchResult, result);
-				tryResult.reset();
+				tryResult.reset(); // FIXME: このリセットは機能しない、listenerでinputを呼び出してfalseを設定した場合は反映される
 				for (const listener of listeners) {
 					listener("update");
 				}
