@@ -14,6 +14,7 @@ quantum = { path = "./research/quantum", develop = true }
 chathub = { path = "./apps/chathub", develop = true }
 fssearch = { path = "./apps/fssearch", develop = true }
 noteprez = { path = "./apps/noteprez", develop = true }
+akinator = { path = "./apps/akinator", develop = true }
 syuron = { path = "./research/syuron/python", develop = true, optional = true }
 notebook = "^7.2.2"
 nbconvert = "^7.16.4"
@@ -33,6 +34,7 @@ include = [
     "build",
     "apps/personal-site/web/notebook",
     "apps/noteprez",
+    "apps/akinator",
     "apps/fssearch",
     "apps/chathub",
     "research/leetcode",
