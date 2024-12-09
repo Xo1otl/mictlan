@@ -14,7 +14,6 @@ class Case(TypedDict):
     initial_p: float
 
 
-# TypedDictをやめてクラスにし、計算に必要な演算を備える
 class QCCPair(TypedDict):
     question_id: str
     case_id: str
@@ -34,8 +33,11 @@ class QuestionSelector:
         qid_ent: Dict[str, float] = {}
         for qid, group in self.qccdf.groupby('question_id'):
             choice_ps = self._choice_ps_per_group(group)
+            cc_per_qs = group[[
+                'case_id', 'case_p', 'yes', 'probably_yes', 'dont_know', 'probably_no', 'no'
+            ]].to_dict(orient='records')
             joint_ent = Entropy(
-                choice_ps, self.qccdf).posterior()  # type: ignore
+                choice_ps, cc_per_qs).posterior()  # type: ignore
             qid_ent[str(qid)] = joint_ent
         print(qid_ent)
         best_qid = min(qid_ent, key=lambda k: qid_ent[k])
@@ -68,13 +70,23 @@ class ChoicePs(TypedDict):
     no: float
 
 
+class CCPerQ(TypedDict):
+    case_id: str
+    case_p: float
+    yes: float
+    probably_yes: float
+    dont_know: float
+    probably_no: float
+    no: float
+
+
 class Entropy:
-    def __init__(self, choice_ps: ChoicePs, qccs: List[QCCPair]):
-        # TODO: cc_per_qsではなく、question_idとqc_pair全部を受け取るようにする
+    def __init__(self, choice_ps: ChoicePs, cc_per_qs: List[CCPerQ]):
+        # TODO: cc_per_qsではなく、question_idとqcc_pair全部を受け取るようにする
         #   なぜなら、エントロピーの計算過程で、すべての選択肢の出現確率を計算するから
         #   また、質問が存在しない選択肢に対しても計算が必要
         self.choice_ps = choice_ps
-        self.qccs = qccs
+        self.cc_per_qs = cc_per_qs
 
     def _per_choice_posterior(self, choice: str) -> float:
         # TODO: エントロピーだけでなく、すべての場合のconditional_case_pも返す必要がある
@@ -85,9 +97,9 @@ class Entropy:
         #   質問に対する回答が欠損している場合が多々ある
         #   そのような欠損を検出し、欠損していないデータを使って重み付き和を計算して推定する必要がある
         # FIXME: このforループはすべてのqcc_pairに対して行う
-        for qcc in self.qccs:
-            case_p = qcc['case_p']
-            conditional_choice_p = qcc[choice]
+        for ccset in self.cc_per_qs:
+            case_p = ccset['case_p']
+            conditional_choice_p = ccset[choice]
             conditional_case_p = (conditional_choice_p * case_p) / choice_p
             ps.append(conditional_case_p)
 

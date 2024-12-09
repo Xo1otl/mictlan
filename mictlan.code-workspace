@@ -51,6 +51,9 @@
 		"pylint.args": [
 			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない
 		],
+		"python.analysis.diagnosticSeverityOverrides": {
+			"reportAttributeAccessIssue": "none"
+		},
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.autopep8"
 		},
