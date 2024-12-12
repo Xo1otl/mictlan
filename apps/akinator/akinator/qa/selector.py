@@ -310,11 +310,17 @@ def recursive_question_selection(completed_choice_df, p_case):
         None (確率が0.5以上のケースが見つかった場合、そのケースを表示して終了)
     """
 
-    # 確率が0.5以上のケースをチェック
-    for case, prob in p_case.items():
-        if prob >= 0.5:
-            print(f"ケース {case} の確率が0.5以上になりました: {prob}")
-            return
+    max_case = max(p_case, key=p_case.get)
+    max_prob = p_case[max_case]
+    if max_prob >= 0.5:
+        print(f"ケース {max_case} の確率が0.5以上になりました: {max_prob}")
+        # 確率の高い順にソートして上位5ケースを取得
+        top_5_cases = sorted(
+            p_case.items(), key=lambda item: item[1], reverse=True)[:5]
+        print("確率の上位5ケース:")
+        for case, prob in top_5_cases:
+            print(f"  ケース {case}: {prob}")
+        return
 
     # Selectorオブジェクトの作成
     selector = Selector(completed_choice_df, p_case)

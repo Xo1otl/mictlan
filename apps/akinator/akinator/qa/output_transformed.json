@@ -1,0 +1,6065 @@
+{
+  "p_case": {
+    "犬": 0.011111111111111112,
+    "猫": 0.011111111111111112,
+    "ウサギ": 0.011111111111111112,
+    "ハムスター": 0.011111111111111112,
+    "鳥": 0.011111111111111112,
+    "亀": 0.011111111111111112,
+    "金魚": 0.011111111111111112,
+    "ライオン": 0.011111111111111112,
+    "虎": 0.011111111111111112,
+    "象": 0.011111111111111112,
+    "キリン": 0.011111111111111112,
+    "パンダ": 0.011111111111111112,
+    "コアラ": 0.011111111111111112,
+    "サル": 0.011111111111111112,
+    "熊": 0.011111111111111112,
+    "鹿": 0.011111111111111112,
+    "キツネ": 0.011111111111111112,
+    "タヌキ": 0.011111111111111112,
+    "イノシシ": 0.011111111111111112,
+    "馬": 0.011111111111111112,
+    "牛": 0.011111111111111112,
+    "羊": 0.011111111111111112,
+    "ヤギ": 0.011111111111111112,
+    "豚": 0.011111111111111112,
+    "ニワトリ": 0.011111111111111112,
+    "アヒル": 0.011111111111111112,
+    "フクロウ": 0.011111111111111112,
+    "ワシ": 0.011111111111111112,
+    "タカ": 0.011111111111111112,
+    "ヘビ": 0.011111111111111112,
+    "リンゴ": 0.011111111111111112,
+    "ミカン": 0.011111111111111112,
+    "バナナ": 0.011111111111111112,
+    "ブドウ": 0.011111111111111112,
+    "イチゴ": 0.011111111111111112,
+    "メロン": 0.011111111111111112,
+    "スイカ": 0.011111111111111112,
+    "桃": 0.011111111111111112,
+    "梨": 0.011111111111111112,
+    "柿": 0.011111111111111112,
+    "オレンジ": 0.011111111111111112,
+    "グレープフルーツ": 0.011111111111111112,
+    "レモン": 0.011111111111111112,
+    "キウイ": 0.011111111111111112,
+    "マンゴー": 0.011111111111111112,
+    "パイナップル": 0.011111111111111112,
+    "アボカド": 0.011111111111111112,
+    "サクランボ": 0.011111111111111112,
+    "栗": 0.011111111111111112,
+    "サツマイモ": 0.011111111111111112,
+    "ジャガイモ": 0.011111111111111112,
+    "玉ねぎ": 0.011111111111111112,
+    "ニンジン": 0.011111111111111112,
+    "トマト": 0.011111111111111112,
+    "キュウリ": 0.011111111111111112,
+    "キャベツ": 0.011111111111111112,
+    "白菜": 0.011111111111111112,
+    "ほうれん草": 0.011111111111111112,
+    "鶏肉": 0.011111111111111112,
+    "豚肉": 0.011111111111111112,
+    "ティッシュペーパー": 0.011111111111111112,
+    "トイレットペーパー": 0.011111111111111112,
+    "洗剤": 0.011111111111111112,
+    "シャンプー": 0.011111111111111112,
+    "歯磨き粉": 0.011111111111111112,
+    "ゴミ袋": 0.011111111111111112,
+    "ラップ": 0.011111111111111112,
+    "掃除機": 0.011111111111111112,
+    "洗濯機": 0.011111111111111112,
+    "冷蔵庫": 0.011111111111111112,
+    "電子レンジ": 0.011111111111111112,
+    "Tシャツ": 0.011111111111111112,
+    "ジーンズ": 0.011111111111111112,
+    "スニーカー": 0.011111111111111112,
+    "ベッド": 0.011111111111111112,
+    "ソファ": 0.011111111111111112,
+    "テーブル": 0.011111111111111112,
+    "椅子": 0.011111111111111112,
+    "カーテン": 0.011111111111111112,
+    "クッション": 0.011111111111111112,
+    "時計": 0.011111111111111112,
+    "テレビ": 0.011111111111111112,
+    "スマートフォン": 0.011111111111111112,
+    "パソコン": 0.011111111111111112,
+    "カメラ": 0.011111111111111112,
+    "ゲーム機": 0.011111111111111112,
+    "ルーター": 0.011111111111111112,
+    "プリンター": 0.011111111111111112,
+    "コーヒーメーカー": 0.011111111111111112,
+    "アイロン": 0.011111111111111112
+  },
+  "p_choice_given_case_question": {
+    "重いですか？(3kg以上)": {
+      "犬": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "金魚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "虎": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キリン": {
+        "yes": 0.1,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "牛": {
+        "yes": 0.2,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "ワシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "リンゴ": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.0,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "グレープフルーツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "アボカド": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.02,
+        "dont_know": 0.45,
+        "probably_no": 0.03,
+        "no": 0.5
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "トマト": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.6,
+        "no": 0.3
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "ほうれん草": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.05,
+        "no": 0.95
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "ソファ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ゲーム機": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "プリンター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.1,
+        "no": 0.7
+      }
+    },
+    "動きますか？": {
+      "犬": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "猫": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ウサギ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "鳥": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "象": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "熊": {
+        "yes": 0.1,
+        "probably_yes": 0.7,
+        "dont_know": 0.05,
+        "probably_no": 0.1,
+        "no": 0.05
+      },
+      "タヌキ": {
+        "yes": 0.4,
+        "probably_yes": 0.6,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "イノシシ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "馬": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "牛": {
+        "yes": 0.8,
+        "probably_yes": 0.2,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "豚": {
+        "yes": 0.4,
+        "probably_yes": 0.3,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ヘビ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "リンゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.05,
+        "no": 0.95
+      },
+      "ミカン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.05,
+        "no": 0.95
+      },
+      "イチゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "スイカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.8,
+        "no": 0.2
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "トマト": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.0,
+        "probably_no": 0.15,
+        "no": 0.8
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "歯磨き粉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "掃除機": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "洗濯機": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "冷蔵庫": {
+        "yes": 0.03,
+        "probably_yes": 0.02,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.85
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "スニーカー": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "テレビ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.0,
+        "no": 0.99
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      }
+    },
+    "光を発したり反射しますか？": {
+      "犬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.01,
+        "no": 0.98
+      },
+      "金魚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "象": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "馬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "牛": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "アヒル": {
+        "yes": 0.0,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.0
+      },
+      "フクロウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.0,
+        "no": 0.95
+      },
+      "ヘビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "グレープフルーツ": {
+        "yes": 0.02,
+        "probably_yes": 0.03,
+        "dont_know": 0.0,
+        "probably_no": 0.15,
+        "no": 0.8
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "マンゴー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.05,
+        "no": 0.95
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.02,
+        "no": 0.03
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "歯磨き粉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.03,
+        "no": 0.92
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "掃除機": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.05,
+        "probably_no": 0.04,
+        "no": 0.9
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ソファ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "カーテン": {
+        "yes": 0.15,
+        "probably_yes": 0.25,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "スマートフォン": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カメラ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "ゲーム機": {
+        "yes": 0.1,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "プリンター": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      }
+    },
+    "危険なもの、または注意が必要ですか？": {
+      "犬": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "猫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "鳥": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "金魚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "虎": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キリン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "熊": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ヤギ": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "アヒル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.3,
+        "probably_no": 0.2,
+        "no": 0.4
+      },
+      "ヘビ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "イチゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "メロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "スイカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.02,
+        "dont_know": 0.0,
+        "probably_no": 0.13,
+        "no": 0.85
+      },
+      "グレープフルーツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.02,
+        "dont_know": 0.05,
+        "probably_no": 0.13,
+        "no": 0.8
+      },
+      "ニンジン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ほうれん草": {
+        "yes": 0.01,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.03,
+        "no": 0.85
+      },
+      "鶏肉": {
+        "yes": 0.02,
+        "probably_yes": 0.03,
+        "dont_know": 0.1,
+        "probably_no": 0.25,
+        "no": 0.6
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.05,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.01,
+        "no": 0.98
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.6
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "洗濯機": {
+        "yes": 0.01,
+        "probably_yes": 0.04,
+        "dont_know": 0.05,
+        "probably_no": 0.3,
+        "no": 0.6
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.02,
+        "no": 0.93
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "スマートフォン": {
+        "yes": 0.05,
+        "probably_yes": 0.15,
+        "dont_know": 0.0,
+        "probably_no": 0.5,
+        "no": 0.3
+      },
+      "パソコン": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.6
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.75
+      }
+    },
+    "身体に作用するものですか？": {
+      "犬": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.1
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ライオン": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "虎": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キリン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.9,
+        "no": 0.1
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "タヌキ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "イノシシ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "馬": {
+        "yes": 0.1,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "豚": {
+        "yes": 0.02,
+        "probably_yes": 0.03,
+        "dont_know": 0.05,
+        "probably_no": 0.8,
+        "no": 0.1
+      },
+      "アヒル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ワシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "ヘビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "リンゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.0,
+        "no": 0.95
+      },
+      "ブドウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "スイカ": {
+        "yes": 0.0,
+        "probably_yes": 1.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "桃": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.6
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "パイナップル": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ニンジン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.9,
+        "no": 0.1
+      },
+      "鶏肉": {
+        "yes": 0.1,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "豚肉": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "歯磨き粉": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.2
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.02,
+        "no": 0.03
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.7,
+        "probably_no": 0.0,
+        "no": 0.3
+      },
+      "スマートフォン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "ゲーム機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "プリンター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      }
+    },
+    "表面に凹凸や模様がありますか？": {
+      "犬": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "猫": {
+        "yes": 0.05,
+        "probably_yes": 0.15,
+        "dont_know": 0.0,
+        "probably_no": 0.6,
+        "no": 0.2
+      },
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "亀": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ライオン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "象": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キリン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "熊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.01,
+        "no": 0.89
+      },
+      "タヌキ": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.5,
+        "no": 0.2
+      },
+      "イノシシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.7,
+        "no": 0.2
+      },
+      "馬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "牛": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.01,
+        "no": 0.98
+      },
+      "ヤギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "アヒル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "フクロウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ヘビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "イチゴ": {
+        "yes": 0.44,
+        "probably_yes": 0.48,
+        "dont_know": 0.01,
+        "probably_no": 0.02,
+        "no": 0.05
+      },
+      "メロン": {
+        "yes": 0.1,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "桃": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "梨": {
+        "yes": 0.1,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.0
+      },
+      "グレープフルーツ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キウイ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "マンゴー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ニンジン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ほうれん草": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.85
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.85,
+        "no": 0.1
+      },
+      "Tシャツ": {
+        "yes": 0.2,
+        "probably_yes": 0.6,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.1
+      },
+      "ジーンズ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "クッション": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "時計": {
+        "yes": 0.3,
+        "probably_yes": 0.35,
+        "dont_know": 0.05,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "テレビ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ゲーム機": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "プリンター": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      }
+    },
+    "食べられるものですか？": {
+      "犬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.0,
+        "no": 0.99
+      },
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "キリン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.05,
+        "no": 0.95
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "熊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "フクロウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ヘビ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "リンゴ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ミカン": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "イチゴ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "桃": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "オレンジ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キウイ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "マンゴー": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "アボカド": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "栗": {
+        "yes": 0.09,
+        "probably_yes": 0.85,
+        "dont_know": 0.01,
+        "probably_no": 0.03,
+        "no": 0.02
+      },
+      "玉ねぎ": {
+        "yes": 0.5,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ニンジン": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "トマト": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キュウリ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キャベツ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "白菜": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ほうれん草": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "歯磨き粉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "洗濯機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.02,
+        "no": 0.03
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ソファ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "スマートフォン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.0,
+        "no": 0.4
+      },
+      "パソコン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.0,
+        "no": 0.05
+      },
+      "ゲーム機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      }
+    },
+    "複数の部品で構成されますか？": {
+      "犬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ライオン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "虎": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "鹿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "牛": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.02,
+        "no": 0.03
+      },
+      "ヤギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ワシ": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "リンゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ミカン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "梨": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "グレープフルーツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "マンゴー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.0,
+        "no": 0.05
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ニンジン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.0,
+        "no": 0.4
+      },
+      "トマト": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.0,
+        "no": 0.05
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "ほうれん草": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "歯磨き粉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "洗濯機": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "冷蔵庫": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "電子レンジ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "パソコン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カメラ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "ゲーム機": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      }
+    },
+    "音を発するものですか？": {
+      "猫": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "金魚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "熊": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "キツネ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "イノシシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ニワトリ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ヘビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ミカン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.02,
+        "no": 0.03
+      },
+      "桃": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "梨": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.0,
+        "no": 0.05
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "アボカド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "キュウリ": {
+        "yes": 0.01,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.01,
+        "no": 0.03
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.01,
+        "no": 0.04
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.02,
+        "no": 0.03
+      },
+      "ティッシュペーパー": {
+        "yes": 0.005,
+        "probably_yes": 0.005,
+        "dont_know": 0.95,
+        "probably_no": 0.01,
+        "no": 0.03
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "掃除機": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "洗濯機": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "冷蔵庫": {
+        "yes": 0.1,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.0,
+        "no": 0.05
+      },
+      "スニーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ソファ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "スマートフォン": {
+        "yes": 0.3,
+        "probably_yes": 0.7,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "プリンター": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.2
+      }
+    },
+    "丸みを帯びた形ですか？": {
+      "猫": {
+        "yes": 0.0,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.0
+      },
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.7,
+        "no": 0.2
+      },
+      "亀": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "金魚": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "虎": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "コアラ": {
+        "yes": 0.2,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.7,
+        "no": 0.2
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ヤギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚": {
+        "yes": 0.1,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "アヒル": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "フクロウ": {
+        "yes": 0.1,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ブドウ": {
+        "yes": 0.0,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "イチゴ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "メロン": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "桃": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "柿": {
+        "yes": 0.3,
+        "probably_yes": 0.7,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "オレンジ": {
+        "yes": 0.2,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "レモン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "マンゴー": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "アボカド": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.1
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.9
+      },
+      "キュウリ": {
+        "yes": 0.3,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ほうれん草": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.05,
+        "no": 0.95
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "掃除機": {
+        "yes": 0.1,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "洗濯機": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.8,
+        "no": 0.1
+      },
+      "スニーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.2
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.3
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.8,
+        "no": 0.1
+      },
+      "テレビ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ゲーム機": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "コーヒーメーカー": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      }
+    },
+    "主に人が使用するものですか？": {
+      "猫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.05,
+        "no": 0.15
+      },
+      "象": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "タヌキ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "イノシシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "馬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "牛": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "豚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "アヒル": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "イチゴ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "メロン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "スイカ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "桃": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.9
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "レモン": {
+        "yes": 0.1,
+        "probably_yes": 0.7,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.1
+      },
+      "キウイ": {
+        "yes": 0.1,
+        "probably_yes": 0.7,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.1
+      },
+      "マンゴー": {
+        "yes": 0.0,
+        "probably_yes": 0.8,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.1
+      },
+      "パイナップル": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ジャガイモ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ニンジン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ほうれん草": {
+        "yes": 0.2,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "豚肉": {
+        "yes": 0.1,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "トイレットペーパー": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "シャンプー": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "歯磨き粉": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "洗濯機": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "冷蔵庫": {
+        "yes": 0.1,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "電子レンジ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カーテン": {
+        "yes": 0.25,
+        "probably_yes": 0.49,
+        "dont_know": 0.01,
+        "probably_no": 0.2,
+        "no": 0.05
+      },
+      "クッション": {
+        "yes": 0.3,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "時計": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "テレビ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "パソコン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "カメラ": {
+        "yes": 0.1,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ゲーム機": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "コーヒーメーカー": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      }
+    },
+    "特定の季節やイベントに関連しますか？": {
+      "猫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "鹿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "イノシシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "馬": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.5
+      },
+      "牛": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ヤギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "アヒル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "ヘビ": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.2,
+        "probably_no": 0.15,
+        "no": 0.6
+      },
+      "リンゴ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "メロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "スイカ": {
+        "yes": 0.5,
+        "probably_yes": 0.3,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.1
+      },
+      "梨": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.02,
+        "dont_know": 0.1,
+        "probably_no": 0.03,
+        "no": 0.85
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "アボカド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "サクランボ": {
+        "yes": 0.2,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "栗": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "Tシャツ": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.3
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.7,
+        "probably_no": 0.1,
+        "no": 0.2
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "スマートフォン": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      }
+    },
+    "柔らかいものですか？": {
+      "猫": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ウサギ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ライオン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "虎": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "キリン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.9
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "タヌキ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ヤギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ミカン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "バナナ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ブドウ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "メロン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "スイカ": {
+        "yes": 0.1,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.0
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "マンゴー": {
+        "yes": 0.4,
+        "probably_yes": 0.6,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.9
+      },
+      "ニンジン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "トマト": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "掃除機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "スニーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ベッド": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.0,
+        "no": 0.95
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "パソコン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.25,
+        "probably_no": 0.0,
+        "no": 0.75
+      },
+      "プリンター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.05,
+        "no": 0.15
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      }
+    },
+    "高価なものですか？(1万円以上)": {
+      "猫": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "ライオン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "キリン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "熊": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.5,
+        "probably_no": 0.15,
+        "no": 0.3
+      },
+      "鹿": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "タヌキ": {
+        "yes": 0.0,
+        "probably_yes": 0.02,
+        "dont_know": 0.8,
+        "probably_no": 0.03,
+        "no": 0.15
+      },
+      "豚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ブドウ": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "イチゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.05,
+        "no": 0.65
+      },
+      "メロン": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "スイカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "桃": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.7,
+        "probably_no": 0.04,
+        "no": 0.25
+      },
+      "グレープフルーツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "サクランボ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "ニンジン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.95,
+        "probably_no": 0.0,
+        "no": 0.05
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.4,
+        "probably_no": 0.1,
+        "no": 0.5
+      },
+      "歯磨き粉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.5,
+        "probably_no": 0.15,
+        "no": 0.3
+      },
+      "洗濯機": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "スニーカー": {
+        "yes": 0.1,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.5
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.5
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "カメラ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.5
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "アイロン": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      }
+    },
+    "主に青や緑系統の色ですか？": {
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.01,
+        "no": 0.98
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "虎": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "象": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.05,
+        "no": 0.15
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.9,
+        "no": 0.1
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "熊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "鹿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.05,
+        "no": 0.15
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ヘビ": {
+        "yes": 0.1,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "ミカン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "ブドウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "スイカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "梨": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キャベツ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ほうれん草": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "洗剤": {
+        "yes": 0.2,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "シャンプー": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ラップ": {
+        "yes": 0.02,
+        "probably_yes": 0.03,
+        "dont_know": 0.2,
+        "probably_no": 0.15,
+        "no": 0.6
+      },
+      "掃除機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "ジーンズ": {
+        "yes": 0.1,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "ソファ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.1,
+        "no": 0.7
+      },
+      "椅子": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "カーテン": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.4
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "プリンター": {
+        "yes": 0.02,
+        "probably_yes": 0.03,
+        "dont_know": 0.2,
+        "probably_no": 0.15,
+        "no": 0.6
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      }
+    },
+    "元々、自然にあったものですか？": {
+      "ウサギ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ハムスター": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "鳥": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "虎": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "象": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キリン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "サル": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "鹿": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "馬": {
+        "yes": 0.1,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "羊": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ニワトリ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "フクロウ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ワシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ヘビ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "リンゴ": {
+        "yes": 0.3,
+        "probably_yes": 0.7,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ミカン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "バナナ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ブドウ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "メロン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "梨": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "グレープフルーツ": {
+        "yes": 0.05,
+        "probably_yes": 0.95,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.89,
+        "dont_know": 0.01,
+        "probably_no": 0.05,
+        "no": 0.05
+      },
+      "マンゴー": {
+        "yes": 0.8,
+        "probably_yes": 0.2,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "アボカド": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "サツマイモ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "玉ねぎ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.0,
+        "no": 0.95
+      },
+      "ニンジン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "トマト": {
+        "yes": 0.1,
+        "probably_yes": 0.6,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.2
+      },
+      "鶏肉": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ラップ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "掃除機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.0,
+        "no": 0.95
+      },
+      "スニーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.02,
+        "dont_know": 0.1,
+        "probably_no": 0.03,
+        "no": 0.85
+      },
+      "スマートフォン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "パソコン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "ゲーム機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      }
+    },
+    "強い香りを放ちますか？": {
+      "ウサギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.5,
+        "probably_no": 0.15,
+        "no": 0.3
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "金魚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "虎": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "象": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.0,
+        "no": 0.7
+      },
+      "パンダ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.9,
+        "probably_no": 0.0,
+        "no": 0.1
+      },
+      "鹿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "イノシシ": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "フクロウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.7,
+        "probably_no": 0.1,
+        "no": 0.2
+      },
+      "ワシ": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.5,
+        "probably_no": 0.15,
+        "no": 0.3
+      },
+      "ヘビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "リンゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "ブドウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "桃": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.4
+      },
+      "オレンジ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "アボカド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.5
+      },
+      "サツマイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.05,
+        "no": 0.85
+      },
+      "ジャガイモ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.7,
+        "probably_no": 0.05,
+        "no": 0.25
+      },
+      "ティッシュペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "洗剤": {
+        "yes": 0.2,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "シャンプー": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "歯磨き粉": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "スニーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "ソファ": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.2,
+        "probably_no": 0.15,
+        "no": 0.6
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.7,
+        "probably_no": 0.1,
+        "no": 0.2
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.7,
+        "probably_no": 0.1,
+        "no": 0.2
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "スマートフォン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "パソコン": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.85,
+        "probably_no": 0.04,
+        "no": 0.1
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.6,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "ゲーム機": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.3,
+        "probably_no": 0.15,
+        "no": 0.5
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "コーヒーメーカー": {
+        "yes": 0.05,
+        "probably_yes": 0.35,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      }
+    },
+    "サイズは大きいですか？": {
+      "ハムスター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.8
+      },
+      "鳥": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.2,
+        "probably_no": 0.15,
+        "no": 0.6
+      },
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "金魚": {
+        "yes": 0.01,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.03,
+        "no": 0.85
+      },
+      "ライオン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "象": {
+        "yes": 0.1,
+        "probably_yes": 0.9,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "キツネ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "馬": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ヤギ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.2,
+        "no": 0.5
+      },
+      "豚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.5,
+        "no": 0.3
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "フクロウ": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.6
+      },
+      "ワシ": {
+        "yes": 0.05,
+        "probably_yes": 0.05,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "タカ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "メロン": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "桃": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "梨": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "柿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "レモン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "マンゴー": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "パイナップル": {
+        "yes": 0.1,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.05,
+        "dont_know": 0.5,
+        "probably_no": 0.15,
+        "no": 0.3
+      },
+      "キュウリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.1,
+        "no": 0.7
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "シャンプー": {
+        "yes": 0.05,
+        "probably_yes": 0.15,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "掃除機": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.3
+      },
+      "洗濯機": {
+        "yes": 0.2,
+        "probably_yes": 0.4,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.5,
+        "no": 0.3
+      },
+      "Tシャツ": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ジーンズ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "ベッド": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "ソファ": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.1
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.4,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.3
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "時計": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.3
+      },
+      "スマートフォン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "パソコン": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.4,
+        "no": 0.3
+      },
+      "アイロン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      }
+    },
+    "生き物ですか？": {
+      "鳥": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "亀": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ライオン": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キリン": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "熊": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "鹿": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "タヌキ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "イノシシ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "馬": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "牛": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ヤギ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ニワトリ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "アヒル": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "フクロウ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ワシ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "タカ": {
+        "yes": 1.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "リンゴ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "ミカン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.9
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ブドウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "梨": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "オレンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キウイ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "マンゴー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "アボカド": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "トマト": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.25,
+        "probably_no": 0.0,
+        "no": 0.75
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ほうれん草": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "トイレットペーパー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "歯磨き粉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "洗濯機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "冷蔵庫": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "電子レンジ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "スニーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "ソファ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.01,
+        "no": 0.98
+      },
+      "テーブル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 1.0
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "クッション": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.01,
+        "probably_no": 0.0,
+        "no": 0.99
+      },
+      "テレビ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.8,
+        "probably_no": 0.0,
+        "no": 0.2
+      },
+      "スマートフォン": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "プリンター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      }
+    },
+    "主に赤やオレンジ系統の色ですか？": {
+      "亀": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "金魚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ライオン": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.0,
+        "probably_no": 0.3,
+        "no": 0.6
+      },
+      "虎": {
+        "yes": 0.1,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.0
+      },
+      "コアラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "サル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "鹿": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "タヌキ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "イノシシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "馬": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "牛": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "羊": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "豚": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ニワトリ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "フクロウ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ワシ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.05,
+        "probably_no": 0.05,
+        "no": 0.9
+      },
+      "リンゴ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "ミカン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "バナナ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 1.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "イチゴ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "メロン": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "柿": {
+        "yes": 0.2,
+        "probably_yes": 0.5,
+        "dont_know": 0.0,
+        "probably_no": 0.2,
+        "no": 0.1
+      },
+      "オレンジ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "グレープフルーツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "キウイ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "パイナップル": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "サクランボ": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "栗": {
+        "yes": 0.0,
+        "probably_yes": 0.01,
+        "dont_know": 0.1,
+        "probably_no": 0.04,
+        "no": 0.85
+      },
+      "トマト": {
+        "yes": 0.2,
+        "probably_yes": 0.8,
+        "dont_know": 0.0,
+        "probably_no": 0.0,
+        "no": 0.0
+      },
+      "キャベツ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "白菜": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "ほうれん草": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.0,
+        "probably_no": 0.1,
+        "no": 0.9
+      },
+      "鶏肉": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.0,
+        "no": 0.9
+      },
+      "洗剤": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      },
+      "シャンプー": {
+        "yes": 0.1,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.3
+      },
+      "ゴミ袋": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.2,
+        "no": 0.7
+      },
+      "掃除機": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ジーンズ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.5,
+        "probably_no": 0.1,
+        "no": 0.4
+      },
+      "スニーカー": {
+        "yes": 0.1,
+        "probably_yes": 0.3,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.2
+      },
+      "椅子": {
+        "yes": 0.0,
+        "probably_yes": 0.1,
+        "dont_know": 0.2,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "カーテン": {
+        "yes": 0.0,
+        "probably_yes": 0.2,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "時計": {
+        "yes": 0.02,
+        "probably_yes": 0.03,
+        "dont_know": 0.2,
+        "probably_no": 0.15,
+        "no": 0.6
+      },
+      "カメラ": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.2,
+        "probably_no": 0.0,
+        "no": 0.8
+      },
+      "ゲーム機": {
+        "yes": 0.1,
+        "probably_yes": 0.1,
+        "dont_know": 0.1,
+        "probably_no": 0.3,
+        "no": 0.4
+      },
+      "ルーター": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.3,
+        "probably_no": 0.1,
+        "no": 0.6
+      },
+      "コーヒーメーカー": {
+        "yes": 0.0,
+        "probably_yes": 0.0,
+        "dont_know": 0.1,
+        "probably_no": 0.1,
+        "no": 0.8
+      }
+    }
+  }
+}
