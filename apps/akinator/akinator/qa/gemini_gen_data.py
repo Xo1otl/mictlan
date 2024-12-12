@@ -5,6 +5,10 @@ from pydantic import BaseModel, Field, model_validator
 from typing import Dict
 import time
 import concurrent.futures
+import google.generativeai as genai
+from infra.ai import llm
+
+genai.configure(api_key=llm.GOOGLE_CLOUD_API_KEY)
 
 questions = [
     "食べられるものですか？",
@@ -91,14 +95,14 @@ class Distribution(BaseModel):
         return values
 
 
-def ask_llm(case, question, model_name="jaahas/gemma-2-9b-it-abliterated:latest", max_retries=3, retry_delay=1):
+def ask_llm(case, question, model_name="gemini-1.5-pro-latest", max_retries=3, retry_delay=1):
     """
-    ケースと質問に基づいて確率分布を生成する関数 (Ollamaを使用)
+    ケースと質問に基づいて確率分布を生成する関数 (GoogleのGeminiを使用)
 
     Args:
       case: ケース (例: "正義")
       question: 質問 (例: "それは、多くの人にとって価値があると一般的に考えられていますか？")
-      model_name: 使用するOllamaモデルの名前
+      model_name: 使用するGeminiモデルの名前
       max_retries: 最大リトライ回数
       retry_delay: リトライ間隔（秒）
 
@@ -106,29 +110,34 @@ def ask_llm(case, question, model_name="jaahas/gemma-2-9b-it-abliterated:latest"
       確率分布を表す辞書 (例: {"yes": 0.7, "probably_yes": 0.2, "dont_know": 0.05, "probably_no": 0.03, "no": 0.02})
     """
     retries = 0
+    model = genai.GenerativeModel(model_name)
     while retries < max_retries:
         prompt = prompt_template.format(case=case, question=question)
-        response = chat(
-            model=model_name,
-            messages=[{'role': 'user', 'content': prompt}],
-            format=Distribution.model_json_schema()  # type: ignore
-        )  # type: ignore
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.GenerationConfig(
+                response_mime_type="application/json",
+                # response_schema=Distribution
+            ),
+        )
         try:
+            # response.textからJSON部分を抽出
+            json_str = response.text.strip("`").strip("json").strip()
             distribution = Distribution.model_validate_json(
-                response['message']['content']).model_dump()
+                json_str).model_dump()
+
             return distribution
         except Exception as e:
             retries += 1
             print(
                 f"Error processing case: {case}, question: {question} (Attempt {retries}/{max_retries})")
-            print(f"Response: {response['message']['content']}")
+            print(f"Response: {response.text}")
             print(f"Error: {e}")
             if retries < max_retries:
                 print(f"Retrying in {retry_delay} seconds...")
                 time.sleep(retry_delay)
 
     print(f"Failed after {max_retries} attempts.")
-    # リトライ失敗時は均等な分布を返す
     exit(1)
 
 
@@ -190,7 +199,7 @@ def process_case(case):
 
 # 各ケースに対して処理を行う
 # ケースごとのスレッド数を調整
-with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
     results = executor.map(process_case, products)
 
 # 結果をJSONファイルに追記

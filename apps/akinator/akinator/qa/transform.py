@@ -1,27 +1,42 @@
 import json
 from collections import defaultdict
 
-
 def transform_data(data):
-    p_case = {item["ケース"]: 1/len(data) for item in data}
-    p_choice_given_case_question = defaultdict(
-        lambda: defaultdict(lambda: defaultdict(float)))
+    """
+    データを変換する関数。
+    各ケースの出現確率を 1/全ケース数 で計算し、確率値をそのまま格納する。
+    """
+    p_case = {}
+    p_choice_given_case_question = defaultdict(lambda: defaultdict(lambda: {}))
+
+    # 全ケース数を計算
+    num_cases = len(data)
 
     for item in data:
+        case_name = item["ケース"]
+        # 各ケースの出現確率を計算
+        p_case[case_name] = 1 / num_cases
+
         for q_data in item["質問リスト"]:
+            question = q_data["質問"]
             for choice, prob in q_data["確率分布"].items():
-                p_choice_given_case_question[q_data["質問"]
-                                             ][item["ケース"]][choice] += prob / len(data)
+                # 確率をそのまま辞書に格納
+                p_choice_given_case_question[question][case_name][choice] = prob
 
     return {
         "p_case": p_case,
-        "p_choice_given_case_question": {q: {c: dict(v) for c, v in cases.items()} for q, cases in p_choice_given_case_question.items()}
+        # defaultdictを通常の辞書に変換して出力
+        "p_choice_given_case_question": {
+            q: {c: dict(v) for c, v in cases.items()} for q, cases in p_choice_given_case_question.items()
+        }
     }
 
-
-# データの読み込みと変換
+# データの読み込み
 with open("output.json", "r", encoding="utf-8") as f:
-    transformed_data = transform_data(json.load(f))
+    data = json.load(f)
+
+# データの変換
+transformed_data = transform_data(data)
 
 # データの出力
 with open("output_transformed.json", "w", encoding="utf-8") as f:
