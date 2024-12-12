@@ -1,0 +1,2612 @@
+[
+    {
+        "ケース": "米",
+        "質問リスト": [
+            {
+                "質問": "この商品は、1,000円以内で購入できることが多いですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.0,
+                    "no": 0.5
+                }
+            },
+            {
+                "質問": "この商品は、使用する際に特別な道具や器具が必要ですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.0,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "この商品は、専門的な知識や技術がなくても、比較的簡単に使用できるものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "この商品は、消耗品ですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "この商品は、電気を使用しますか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.0,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "この商品は、子供が使用する可能性のあるものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.0,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "この商品は、食品ですか？",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.4,
+                    "dont_know": 0.1,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "この商品は、リサイクル可能な素材で作られている部分がありますか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "この商品は、日本語のパッケージで販売されていることが多いですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "この商品は、主に女性が使用するものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "この商品は、特定の季節に関連して需要が高まるものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "米",
+        "質問リスト": [
+            {
+                "質問": "この商品は、特定の季節に関連して需要が高まるものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            },
+            {
+                "質問": "この商品は、日本語のパッケージで販売されていることが多いですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "この商品は、主に室内で使用するものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "この商品は、開封後、使用期限や消費期限が設定されていることが多いですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "この商品は、常温で保存できますか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            },
+            {
+                "質問": "この商品は、リサイクル可能な素材で作られている部分がありますか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.85,
+                    "probably_no": 0.0,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "この商品は、主に女性が使用するものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.85,
+                    "probably_no": 0.0,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "この商品は、組み立てや設置が必要な場合がありますか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "この商品は、専門的な知識や技術がなくても、比較的簡単に使用できるものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "この商品は、特定の資格や免許がないと購入や使用が難しいものですか？",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "この商品は、食品ですか？",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.6,
+                    "dont_know": 0.05,
+                    "probably_no": 0.1,
+                    "no": 0.15
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Rice",
+        "質問リスト": [
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.6,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.05,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.5,
+                    "probably_yes": 0.5,
+                    "dont_know": 0.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.85,
+                    "probably_no": 0.0,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.7,
+                    "probably_no": 0.0,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.4,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Bread",
+        "質問リスト": [
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.5,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.25,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.15,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.7,
+                    "probably_no": 0.0,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.15,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.35,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.0,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.35,
+                    "no": 0.55
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.0,
+                    "no": 0.5
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Noodles",
+        "質問リスト": [
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.4,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.15,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.2,
+                    "probably_no": 0.4,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.1,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.0,
+                    "no": 0.8
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.0,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.4,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Meat",
+        "質問リスト": [
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.0,
+                    "no": 0.8
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.25,
+                    "probably_no": 0.0,
+                    "no": 0.75
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.35,
+                    "probably_yes": 0.35,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Fish",
+        "質問リスト": [
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.4,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.7,
+                    "dont_know": 0.05,
+                    "probably_no": 0.05,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.05,
+                    "no": 0.15
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Vegetables",
+        "質問リスト": [
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.25,
+                    "probably_no": 0.0,
+                    "no": 0.75
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.4,
+                    "probably_no": 0.3,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does using this product require special tools or equipment?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.85,
+                    "probably_no": 0.0,
+                    "no": 0.15
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Fruits",
+        "質問リスト": [
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 1.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.3,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.85,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.15,
+                    "probably_no": 0.25,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Rice",
+        "質問リスト": [
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.8,
+                    "probably_no": 0.0,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.6,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.02,
+                    "no": 0.03
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.02,
+                    "probably_yes": 0.03,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.05,
+                    "no": 0.75
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.85,
+                    "probably_no": 0.0,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.01,
+                    "probably_yes": 0.01,
+                    "dont_know": 0.95,
+                    "probably_no": 0.01,
+                    "no": 0.02
+                }
+            },
+            {
+                "質問": "Does using this product require special tools or equipment?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.7,
+                    "probably_no": 0.0,
+                    "no": 0.3
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Bread",
+        "質問リスト": [
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.2,
+                    "probably_no": 0.4,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.25,
+                    "probably_no": 0.3,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.15,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.025,
+                    "probably_yes": 0.075,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.025,
+                    "no": 0.025
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.35,
+                    "dont_know": 0.2,
+                    "probably_no": 0.25,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.17,
+                    "probably_yes": 0.27,
+                    "dont_know": 0.25,
+                    "probably_no": 0.18,
+                    "no": 0.13
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Noodles",
+        "質問リスト": [
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.15,
+                    "probably_no": 0.3,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.3,
+                    "probably_no": 0.15,
+                    "no": 0.45
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.15,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.25,
+                    "probably_no": 0.35,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.2,
+                    "probably_no": 0.45,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.55,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.03,
+                    "no": 0.02
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.4,
+                    "probably_no": 0.25,
+                    "no": 0.15
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Meat",
+        "質問リスト": [
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.3,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.1,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.0,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.55,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.05,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Fish",
+        "質問リスト": [
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.65,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.15,
+                    "probably_no": 0.05,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.15,
+                    "probably_no": 0.25,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.15,
+                    "probably_no": 0.2,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.15,
+                    "no": 0.75
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.45,
+                    "probably_no": 0.1,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.01,
+                    "probably_yes": 0.01,
+                    "dont_know": 0.75,
+                    "probably_no": 0.03,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.02,
+                    "probably_yes": 0.03,
+                    "dont_know": 0.65,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.2,
+                    "probably_no": 0.15,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.15,
+                    "probably_yes": 0.4,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Vegetables",
+        "質問リスト": [
+            {
+                "質問": "Does using this product require special tools or equipment?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.5,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.1,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.2,
+                    "probably_no": 0.15,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.0,
+                    "no": 0.8
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.0,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.35,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Fruits",
+        "質問リスト": [
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.15,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.15,
+                    "probably_no": 0.15,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.2,
+                    "probably_no": 0.35,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.9,
+                    "probably_no": 0.0,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.0,
+                    "no": 0.8
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.5,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.1,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.95,
+                    "probably_no": 0.02,
+                    "no": 0.03
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.2,
+                    "probably_no": 0.4,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.01,
+                    "probably_yes": 0.04,
+                    "dont_know": 0.7,
+                    "probably_no": 0.1,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.15,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.1,
+                    "probably_no": 0.25,
+                    "no": 0.4
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Eggs",
+        "質問リスト": [
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.15,
+                    "probably_no": 0.3,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.3,
+                    "probably_no": 0.15,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.4,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.0,
+                    "probably_no": 0.0,
+                    "no": 1.0
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.6,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.4,
+                    "probably_no": 0.15,
+                    "no": 0.25
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Dairy products",
+        "質問リスト": [
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.4,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.35,
+                    "probably_yes": 0.35,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.15,
+                    "probably_no": 0.25,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.2,
+                    "probably_no": 0.4,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.65,
+                    "probably_no": 0.1,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.2,
+                    "probably_no": 0.3,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.25,
+                    "probably_no": 0.3,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.5,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.05,
+                    "probably_no": 0.15,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.15,
+                    "probably_no": 0.25,
+                    "no": 0.35
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Tofu",
+        "質問リスト": [
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.15,
+                    "probably_no": 0.3,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.1,
+                    "probably_no": 0.45,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.5,
+                    "probably_no": 0.15,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.9,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Natto",
+        "質問リスト": [
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.5,
+                    "probably_no": 0.15,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.15,
+                    "probably_no": 0.0,
+                    "no": 0.85
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.3,
+                    "probably_no": 0.5,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.1,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.3,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.25,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.5,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.02,
+                    "probably_yes": 0.03,
+                    "dont_know": 0.2,
+                    "probably_no": 0.1,
+                    "no": 0.65
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.15,
+                    "probably_no": 0.25,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.25,
+                    "probably_no": 0.2,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.1,
+                    "probably_no": 0.4,
+                    "no": 0.35
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Pickles",
+        "質問リスト": [
+            {
+                "質問": "Is this product primarily used by women?",
+                "確率分布": {
+                    "yes": 0.15,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.2,
+                    "probably_no": 0.1,
+                    "no": 0.45
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.0,
+                    "no": 0.5
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.2,
+                    "probably_no": 0.3,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.01,
+                    "probably_yes": 0.04,
+                    "dont_know": 0.6,
+                    "probably_no": 0.1,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.2,
+                    "probably_no": 0.15,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.02,
+                    "probably_yes": 0.02,
+                    "dont_know": 0.75,
+                    "probably_no": 0.03,
+                    "no": 0.18
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.6,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.05,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.45,
+                    "probably_no": 0.25,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.35,
+                    "no": 0.25
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Canned food",
+        "質問リスト": [
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.7,
+                    "probably_no": 0.0,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.35,
+                    "probably_no": 0.2,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.6,
+                    "probably_no": 0.2,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.35,
+                    "probably_yes": 0.35,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.2
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Retort pouch food",
+        "質問リスト": [
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.3,
+                    "dont_know": 0.1,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.4,
+                    "probably_no": 0.3,
+                    "no": 0.25
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.3,
+                    "probably_no": 0.2,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Does using this product require special tools or equipment?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.0,
+                    "no": 0.8
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.5,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.05,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Can this product be used relatively easily without specialized knowledge or skills?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.4,
+                    "probably_no": 0.25,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.7,
+                    "probably_no": 0.0,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.1,
+                    "probably_no": 0.25,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Frozen food",
+        "質問リスト": [
+            {
+                "質問": "Can this product be stored at room temperature?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.3,
+                    "probably_no": 0.15,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Does this product often have an expiration date or a best-by date after opening?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.3,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product often purchased for less than 1,000 yen?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.23,
+                    "dont_know": 0.15,
+                    "probably_no": 0.24,
+                    "no": 0.28
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.3,
+                    "probably_no": 0.2,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.05,
+                    "probably_no": 0.0,
+                    "no": 0.95
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.95,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.45,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.025,
+                    "probably_yes": 0.025,
+                    "dont_know": 0.1,
+                    "probably_no": 0.1,
+                    "no": 0.75
+                }
+            },
+            {
+                "質問": "Are parts of this product made from recyclable materials?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Seasonings",
+        "質問リスト": [
+            {
+                "質問": "Is this product often purchased through online shopping?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.4,
+                    "probably_no": 0.2,
+                    "no": 0.35
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.1,
+                    "probably_no": 0.0,
+                    "no": 0.9
+                }
+            },
+            {
+                "質問": "Does using this product require special tools or equipment?",
+                "確率分布": {
+                    "yes": 0.01,
+                    "probably_yes": 0.04,
+                    "dont_know": 0.2,
+                    "probably_no": 0.15,
+                    "no": 0.6
+                }
+            },
+            {
+                "質問": "Is this product primarily used indoors?",
+                "確率分布": {
+                    "yes": 0.45,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.15,
+                    "probably_no": 0.1,
+                    "no": 0.05
+                }
+            },
+            {
+                "質問": "Does this product often weigh more than 1 kg?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.4,
+                    "probably_no": 0.2,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.01,
+                    "dont_know": 0.65,
+                    "probably_no": 0.04,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does the demand for this product increase in relation to a specific season?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.05,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.3
+                }
+            },
+            {
+                "質問": "Does this product use electricity?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.6,
+                    "probably_no": 0.0,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.15,
+                    "dont_know": 0.15,
+                    "probably_no": 0.25,
+                    "no": 0.35
+                }
+            }
+        ]
+    },
+    {
+        "ケース": "Snacks",
+        "質問リスト": [
+            {
+                "質問": "Does using this product require special tools or equipment?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.2,
+                    "probably_no": 0.0,
+                    "no": 0.8
+                }
+            },
+            {
+                "質問": "Is this product a consumable?",
+                "確率分布": {
+                    "yes": 0.9,
+                    "probably_yes": 0.1,
+                    "dont_know": 0.0,
+                    "probably_no": 0.0,
+                    "no": 0.0
+                }
+            },
+            {
+                "質問": "Does this product sometimes contain ingredients that may cause allergies?",
+                "確率分布": {
+                    "yes": 0.05,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.25,
+                    "probably_no": 0.35,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Does this product require care or maintenance?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.75,
+                    "probably_no": 0.05,
+                    "no": 0.2
+                }
+            },
+            {
+                "質問": "Is this product a food item?",
+                "確率分布": {
+                    "yes": 0.2,
+                    "probably_yes": 0.4,
+                    "dont_know": 0.2,
+                    "probably_no": 0.05,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Is this product likely to be used by children?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.25,
+                    "dont_know": 0.2,
+                    "probably_no": 0.35,
+                    "no": 0.1
+                }
+            },
+            {
+                "質問": "Is this product often sold in packaging with Japanese text?",
+                "確率分布": {
+                    "yes": 0.1,
+                    "probably_yes": 0.2,
+                    "dont_know": 0.3,
+                    "probably_no": 0.25,
+                    "no": 0.15
+                }
+            },
+            {
+                "質問": "Does this product require assembly or installation?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.5,
+                    "probably_no": 0.1,
+                    "no": 0.4
+                }
+            },
+            {
+                "質問": "Is it difficult to purchase or use this product without a specific qualification or license?",
+                "確率分布": {
+                    "yes": 0.0,
+                    "probably_yes": 0.0,
+                    "dont_know": 0.25,
+                    "probably_no": 0.0,
+                    "no": 0.75
+                }
+            }
+        ]
+    }
+]
