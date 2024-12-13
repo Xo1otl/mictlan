@@ -1,10 +1,8 @@
 import json
-from typing import Dict
+from typing import Dict, List, TypedDict
 import pandas as pd
 import numpy as np
-from treelib import Tree
-import random
-import string
+import torch
 
 
 def calc_completed_choice_df(data) -> pd.DataFrame:
@@ -40,7 +38,6 @@ def calc_completed_choice_df(data) -> pd.DataFrame:
                              "case_id", "p_case"])
 
     # 加重平均を計算するための関数
-
     def weighted_mean(group, df_p_case):
         question_id, choice = group.name
 
@@ -72,7 +69,7 @@ class Selector:
     質問選択と確率更新のインターフェースを定義するプロトコル。
     """
 
-    def __init__(self, completed_choice_df: pd.DataFrame, p_case: Dict[str, float]):
+    def __init__(self, completed_choice_df: pd.DataFrame, p_case: Dict[str, float], asked_questions: List[str] = []):
         """
         コンストラクタ。
 
@@ -85,6 +82,7 @@ class Selector:
             list(p_case.items()), columns=["case_id", "p_case"])
         self.best_question_id = None
         self.df_joined = None
+        self.asked_questions = asked_questions
 
     def select_best_question(self) -> str:
         """
@@ -95,6 +93,7 @@ class Selector:
         """
         # --- 最もエントロピーが小さい質問を選択 ---
         question_entropy = self._question_entropy()
+        print(question_entropy)
         best_question = question_entropy.loc[question_entropy["entropy"].idxmin(
         )]
         self.best_question_id = best_question['question_id']
@@ -139,9 +138,11 @@ class Selector:
         Returns:
             計算されたエントロピーを含むデータフレーム。
         """
+        df_unasked = self.completed_choice_df[~self.completed_choice_df["question_id"].isin(
+            self.asked_questions)]
 
         # マルチインデックスを設定
-        df_filled = self.completed_choice_df.set_index(
+        df_filled = df_unasked.set_index(
             ["question_id", "case_id", "choice"])
 
         # p_caseのDataFrameと結合
@@ -193,102 +194,9 @@ class Selector:
         entropy_df.rename(
             columns={"weighted_entropy": "entropy"}, inplace=True)
         return entropy_df
-        # エントロピーを計算する関数
 
     def calculate_entropy(self, probabilities):
         return -np.sum(np.where(probabilities > 0, probabilities * np.log2(probabilities), 0))
-
-
-data = {
-    "p_case": {
-        "apple": 0.4,
-        "banana": 0.4,
-        "watermelon": 0.2
-    },
-    "p_choice_given_case_question": {
-        "is_it_delicious": {
-            "apple": {"yes": 0.8, "probably_yes": 0.15, "dont_know": 0.03, "probably_no": 0.02, "no": 0.0},
-            "banana": {"yes": 0.7, "probably_yes": 0.2, "dont_know": 0.05, "probably_no": 0.04, "no": 0.01},
-            "watermelon": {"yes": 0.6, "probably_yes": 0.2, "dont_know": 0.1, "probably_no": 0.08, "no": 0.02}
-        },
-        "is_it_heavy": {
-            "apple": {"yes": 0.2, "probably_yes": 0.3, "dont_know": 0.4, "probably_no": 0.05, "no": 0.05},
-            "banana": {"yes": 0.1, "probably_yes": 0.2, "dont_know": 0.5, "probably_no": 0.15, "no": 0.05},
-            "watermelon": {"yes": 0.9, "probably_yes": 0.08, "dont_know": 0.01, "probably_no": 0.01, "no": 0.0}
-        },
-        "is_it_animal": {
-            "apple": {"yes": 0.01, "probably_yes": 0.01, "dont_know": 0.01, "probably_no": 0.01, "no": 0.96},
-            # "banana" に関する行自体が存在しない
-            # "watermelon" に関する行自体が存在しない
-        },
-        "is_it_similar_to_apple_than_watermelon": {
-            "apple": {"yes": 0.9, "probably_yes": 0.1, "dont_know": 0.0, "probably_no": 0.0, "no": 0.0},
-            "banana": {"yes": 0.01, "probably_yes": 0.01, "dont_know": 0.96, "probably_no": 0.01, "no": 0.01},
-            "watermelon": {"yes": 0.0, "probably_yes": 0.0, "dont_know": 0.0, "probably_no": 0.1, "no": 0.9}
-        }
-    }
-}
-
-
-def grow_tree(selector: Selector, p_case: Dict[str, float], max_depth: int) -> Tree:
-    """
-    決定木を成長させる関数。treelib の Tree を直接操作する。
-
-    Args:
-        selector: Selector オブジェクト。
-        p_case: 初期の確率分布。
-        max_depth: 木の最大深さ。
-
-    Returns:
-        treelib の Tree オブジェクト。
-    """
-    tree = Tree()
-    # ルートノードを作成
-    tree.create_node(
-        "Root",  # tag
-        "root",  # identifier
-        data={"p_case": p_case, "depth": 0,
-              "question_id": "root_question"}  # data
-    )
-
-    # 再帰的にノードを追加する関数
-    def add_node(parent_id: str, depth: int, current_p_case: Dict[str, float], choice=""):
-        if depth >= max_depth or any(p >= 0.5 for p in current_p_case.values()):
-            # 葉ノードの場合
-            tree.create_node(
-                f"Leaf: {', '.join(f'{k}: {v:.2f}' for k, v in current_p_case.items())}",
-                parent=parent_id,
-                data={"p_case": current_p_case,
-                      "depth": depth, "is_leaf": True, "question_id": "End"}
-            )
-            return
-
-        question_id = selector.select_best_question()
-        # 質問ノードの場合
-        # ノードIDを生成
-        node_id = f"{question_id}_{choice}_{''.join(random.choice(string.ascii_letters) for i in range(4))}"
-        print(tree)
-        tree.create_node(
-            f"Q: {question_id} (d: {depth})",
-            node_id,
-            parent=parent_id,
-            data={"p_case": current_p_case, "depth": depth,
-                  "question_id": question_id, "is_leaf": False}
-        )
-
-        available_choices = selector.completed_choice_df[selector.completed_choice_df[
-            "question_id"] == question_id]["choice"].unique()
-        for choice in available_choices:
-            selector.df_p_case = pd.DataFrame(
-                list(current_p_case.items()), columns=["case_id", "p_case"])
-            selector._question_entropy()
-            updated_p_case = selector.update_p_case(question_id, choice)
-            # 子ノードを追加（再帰呼び出し）
-            add_node(node_id, depth + 1, updated_p_case, choice)
-
-    # ルートノードから再帰的にノードを追加
-    add_node("root", 0, p_case)
-    return tree
 
 
 data = json.loads(
@@ -297,7 +205,7 @@ data = json.loads(
 completed_choice_df = calc_completed_choice_df(data)
 
 
-def recursive_question_selection(completed_choice_df, p_case):
+def recursive_question_selection(completed_choice_df, p_case, asked_questions=[]):
     """
     再帰的に質問を選択し、確率を更新する関数
 
@@ -312,21 +220,27 @@ def recursive_question_selection(completed_choice_df, p_case):
 
     max_case = max(p_case, key=p_case.get)
     max_prob = p_case[max_case]
+    top_5_cases = sorted(
+        p_case.items(), key=lambda item: item[1], reverse=True)[:5]
+    print("確率の上位5ケース:")
+    for case, prob in top_5_cases:
+        print(f"  ケース {case}: {prob}")
+
     if max_prob >= 0.5:
         print(f"ケース {max_case} の確率が0.5以上になりました: {max_prob}")
-        # 確率の高い順にソートして上位5ケースを取得
-        top_5_cases = sorted(
-            p_case.items(), key=lambda item: item[1], reverse=True)[:5]
-        print("確率の上位5ケース:")
-        for case, prob in top_5_cases:
-            print(f"  ケース {case}: {prob}")
         return
 
+    if max_prob >= 2 * top_5_cases[1][1]:
+        print(
+            f"ケース {max_case} の確率が2位の2倍以上になりました: {max_prob} >= {2 * top_5_cases[1][1]}")
+        return True, max_case
+
     # Selectorオブジェクトの作成
-    selector = Selector(completed_choice_df, p_case)
+    selector = Selector(completed_choice_df, p_case, asked_questions)
 
     # 最適な質問を選択
     question_id = selector.select_best_question()
+    asked_questions.append(question_id)
     if question_id is None:
         print("質問が残っていません。")
         return  # 質問がない場合は終了
@@ -363,7 +277,7 @@ def recursive_question_selection(completed_choice_df, p_case):
     p_case = selector.update_p_case(question_id, answer)
 
     # 再帰呼び出し
-    recursive_question_selection(completed_choice_df, p_case)
+    recursive_question_selection(completed_choice_df, p_case, asked_questions)
 
 
 recursive_question_selection(completed_choice_df, data["p_case"])

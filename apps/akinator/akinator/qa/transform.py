@@ -1,6 +1,7 @@
 import json
 from collections import defaultdict
 
+
 def transform_data(data):
     """
     データを変換する関数。
@@ -21,7 +22,8 @@ def transform_data(data):
             question = q_data["質問"]
             for choice, prob in q_data["確率分布"].items():
                 # 確率をそのまま辞書に格納
-                p_choice_given_case_question[question][case_name][choice] = prob
+                p_choice_given_case_question[question][case_name][choice] =\
+                    prob + 0.05 / (1 + 0.05 * 5)
 
     return {
         "p_case": p_case,
@@ -30,6 +32,7 @@ def transform_data(data):
             q: {c: dict(v) for c, v in cases.items()} for q, cases in p_choice_given_case_question.items()
         }
     }
+
 
 # データの読み込み
 with open("output.json", "r", encoding="utf-8") as f:
