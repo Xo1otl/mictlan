@@ -148,7 +148,7 @@ def append_to_json(filepath, data):
 
 
 # 出力ファイル名
-output_filepath = "output.json"
+output_filepath = "../out/dataset.json"
 
 
 # スレッドプールを使用して同時に質問を処理する関数

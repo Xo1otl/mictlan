@@ -35,14 +35,14 @@ def transform_data(data):
 
 
 # データの読み込み
-with open("output.json", "r", encoding="utf-8") as f:
+with open("../out/dataset.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 # データの変換
 transformed_data = transform_data(data)
 
 # データの出力
-with open("output_transformed.json", "w", encoding="utf-8") as f:
+with open("../out/dataset_transformed.json", "w", encoding="utf-8") as f:
     json.dump(transformed_data, f, indent=2, ensure_ascii=False)
 
 print("データ変換が完了しました。")
