@@ -2,9 +2,6 @@
 
 namespace mysql;
 
-use auth\EditPasswordInput;
-use auth\Username;
-
 class AccountRepo implements \auth\AccountRepo
 {
     private \mysqli $mysqli;
@@ -115,7 +112,7 @@ class AccountRepo implements \auth\AccountRepo
         $stmt->close();
     }
 
-    public function deleteByUsername(Username $username)
+    public function deleteByUsername(\auth\Username $username)
     {
         \logger\imp("delete account ", $username);
         $stmt = $this->mysqli->prepare("DELETE FROM accounts WHERE username = ?");
@@ -127,7 +124,7 @@ class AccountRepo implements \auth\AccountRepo
     /**
      * @throws \Exception
      */
-    public function editPassword(EditPasswordInput $input)
+    public function editPassword(\auth\EditPasswordInput $input)
     {
         $mysqli = $this->mysqli;
 

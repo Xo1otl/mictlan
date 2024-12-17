@@ -40,8 +40,8 @@ validation_dataset: qa.Dataset = {
 }
 
 dataset = json.loads(
-    open("/workspaces/mictlan/apps/akinator/out/dataset_transformed.json").read())
-context = qa.Context(dataset, device)
+    open("/workspaces/mictlan/apps/akinator/out/dataset.json").read())
+context = qa.Context(dataset["生き物"], device)
 # context = qa.Context(validation_dataset, device)
 context.complete()  # completeメソッドを呼び出して補完を実行
 
@@ -50,7 +50,5 @@ print("テンソルの次元数:", context.tensor.ndim)
 print("テンソルの要素数:", context.tensor.numel())
 # print("選択肢分布", context.tensor[:, :, :,
 #       context.probability_attr_to_idx["p_choice_given_case_question"]])
-
-selector = qa.Selector(context)
 
 qa.interactive_ask(context)

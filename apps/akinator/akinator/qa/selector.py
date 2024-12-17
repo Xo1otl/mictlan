@@ -10,6 +10,8 @@ class Selector:
 
     def best_question(self):
         entropies = self.question_entropies()
+        # 事後分布は既出の確率からは独立している
+        # 影響のある選択肢だけを考慮する
         mask = torch.zeros_like(entropies, dtype=torch.bool)
         mask[self.asked_questions] = True
         filtered_entropies = entropies.masked_fill(mask, float('inf'))

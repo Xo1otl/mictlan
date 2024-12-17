@@ -11,18 +11,22 @@ class Handler
         $this->repo = $repo;
     }
 
-    function actorVoices(): ActorVoices
+    /**
+     * @param ActorVoiceParams $input
+     * @return ActorVoice[]
+     */
+    function actorVoices(ActorVoiceParams $input): array
     {
-        return $this->repo->actorVoices();
+        return $this->repo->actorVoices($input);
     }
 
-    function actors(): Actors
+    function actors(ActorParams $input): Actor
     {
-        return $this->repo->actors();
+        return $this->repo->actors($input);
     }
 
-    function actorProfile(): ActorProfile
+    function actorProfile(ActorProfileParams $input): ActorProfile
     {
-        return $this->repo->actorProfile();
+        return $this->repo->actorProfile($input);
     }
 }

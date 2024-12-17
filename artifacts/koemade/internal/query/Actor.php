@@ -2,6 +2,6 @@
 
 namespace query;
 
-class Actors
+class Actor
 {
 }

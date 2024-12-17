@@ -19,8 +19,17 @@ Web application specific components: static web assets, server side templates an
 - query機能
     - モデルを書く
     - repositoryをadapterとして実装する
+- jwt認証
+    - [firebaseが出してるライブラリ](https://github.com/firebase/php-jwt)
+    - 秘密鍵と公開鍵作成
+    - ログイン時にtokenを作成し秘密鍵で署名
+        - 認証用のエンドポイントでこれを行う
+        - authを修正
+    - フロントエンドでtokenを管理してもらう
+    - バックエンドではtokenの署名を公開鍵で検証
+        - 署名と有効期間 
+        - authミドルウェア的なものを用意
     
-# TODO2
 ```
 サンプルボイスの公開状態について
 指摘漏れすみません。

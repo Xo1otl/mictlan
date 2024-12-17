@@ -34,12 +34,14 @@ include = [
     "build",
     "apps/personal-site/web/notebook",
     "apps/noteprez",
-    "apps/akinator",
+    "apps/akinator/**",
     "apps/fssearch",
     "apps/chathub",
     "research/leetcode",
     "research/quantum",
 ]
+reportIncompatibleMethodOverride = true
+reportAbstractUsage = true
 
 [build-system]
 requires = ["poetry-core"]

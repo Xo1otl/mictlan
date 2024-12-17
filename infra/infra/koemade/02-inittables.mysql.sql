@@ -43,7 +43,7 @@ CREATE TABLE if not exists profiles (
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-CREATE TABLE if not exists actors_r (
+CREATE TABLE if not exists nsfw_options (
     ok BOOLEAN NOT NULL,
     price INT NOT NULL,
     hard_ok BOOLEAN NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE if not exists voices (
     filename VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
-    INDEX (account_id),
+    INDEX (account_id),kkkk
     UNIQUE (title, account_id) -- Ensures title is unique per account_id
 );
 
