@@ -49,7 +49,7 @@ class ProfileRepo implements \actor\ProfileRepo
     public function addOrEditR(\actor\RInput $input)
     {
         $stmt = $this->mysqli->prepare("
-            INSERT INTO actors_r (ok, price, hard_ok, hard_surcharge, account_id)
+            INSERT INTO nsfw_options (ok, price, hard_ok, hard_surcharge, account_id)
             VALUES (?, ?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
                 ok = VALUES(ok),
@@ -83,7 +83,7 @@ class ProfileRepo implements \actor\ProfileRepo
      */
     public function findR(\common\Id $accountId): \actor\R
     {
-        $stmt = $this->mysqli->prepare("SELECT ok, price, hard_ok, hard_surcharge FROM actors_r WHERE account_id = ?");
+        $stmt = $this->mysqli->prepare("SELECT ok, price, hard_ok, hard_surcharge FROM nsfw_options WHERE account_id = ?");
         $stmt->bind_param("s", $accountId->value); // Assuming $accountId->getValue() returns the actual ID
 
         $stmt->execute();
@@ -141,7 +141,7 @@ class ProfileRepo implements \actor\ProfileRepo
             pi.path AS profile_image_path, 
             pi.created_at AS profile_image_created_at
         FROM profiles p 
-        LEFT JOIN actors_r r ON p.account_id = r.account_id 
+        LEFT JOIN nsfw_options r ON p.account_id = r.account_id 
         LEFT JOIN profile_images pi ON p.account_id = pi.account_id
         WHERE p.account_id = ?';
 
@@ -155,8 +155,18 @@ class ProfileRepo implements \actor\ProfileRepo
         $stmt->execute();
 
         $stmt->bind_result(
-            $displayName, $category, $selfPromotion, $price,
-            $ok, $rPrice, $hardOk, $hardSurcharge, $mimeType, $size, $filename, $createdAt
+            $displayName,
+            $category,
+            $selfPromotion,
+            $price,
+            $ok,
+            $rPrice,
+            $hardOk,
+            $hardSurcharge,
+            $mimeType,
+            $size,
+            $filename,
+            $createdAt
         );
 
         if (!$stmt->fetch()) {

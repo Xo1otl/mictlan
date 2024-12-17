@@ -1,5 +1,3 @@
-Sure, let's include some example requests and responses for clarity.
-
 ### 1. Sample Voice Search API
 
 **Endpoint:**

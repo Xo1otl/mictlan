@@ -23,6 +23,13 @@
 				"type": "php",
 				"request": "launch",
 				"port": 7003
+			},
+			{
+				"name": "Python:Streamlit",
+				"type": "debugpy",
+				"request": "launch",
+				"module": "streamlit",
+				"args": ["run", "${file}", "--server.port", "8501"]
 			}
 		]
 	},

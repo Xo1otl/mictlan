@@ -75,7 +75,7 @@ class Context:
         p_choice_given_question = p_choice_given_question / \
             p_choice_given_question.sum(dim=2, keepdim=True)
 
-        # 欠損値をp_choice_given_questionで補完
+        # 欠損値を補完
         nan_mask = torch.isnan(
             self.tensor[:, :, :, self.probability_attr_to_idx["p_choice_given_case_question"]])
         self.tensor[:, :, :, self.probability_attr_to_idx["p_choice_given_case_question"]] = torch.where(

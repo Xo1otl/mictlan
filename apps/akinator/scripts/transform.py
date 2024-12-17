@@ -22,8 +22,7 @@ def transform_data(data):
             question = q_data["質問"]
             for choice, prob in q_data["確率分布"].items():
                 # 確率をそのまま辞書に格納
-                p_choice_given_case_question[question][case_name][choice] =\
-                    prob + 0.05 / (1 + 0.05 * 5)
+                p_choice_given_case_question[question][case_name][choice] = prob
 
     return {
         "p_case": p_case,

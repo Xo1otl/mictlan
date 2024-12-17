@@ -1,6 +1,5 @@
 from . import Context, Selector
 import torch
-from typing import Dict
 
 
 def check_status(context: Context, top_n: int = 3):

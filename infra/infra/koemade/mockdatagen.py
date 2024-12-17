@@ -202,7 +202,7 @@ def generate_and_insert_fake_data(num_accounts=10, num_voices_per_account=5):
 
             # Generate and insert actor data
             actor_r_data = generate_actor_r(account_id)
-            insert_data("actors_r", actor_r_data)
+            insert_data("nsfw_options", actor_r_data)
 
             # Generate and insert profile image data
             profile_image_data = generate_profile_image(account_id)

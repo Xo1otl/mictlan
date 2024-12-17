@@ -1,12 +1,10 @@
 import random
 import json
-from ollama import chat
-from pydantic import BaseModel, Field, model_validator
-from typing import Dict
 import time
 import concurrent.futures
 import google.generativeai as genai
 from infra.ai import llm
+import threading
 import typing_extensions as typing
 
 questions = [
@@ -47,7 +45,7 @@ creatures = ["イヌ", "ゾウ", "チンパンジー", "カンガルー", "イ�
 
 prompt_template = """
 以下の質問とケースについて大勢の人間にアンケートをとった時に、`yes`, `probably_yes`, `dont_know`, `probably_no`, `no`のそれぞれが選択される確率分布を予想してください。
-すべての選択肢の合計は1になるようにしてください。
+それぞれの選択肢の確率は少数点第一位まで表し、合計が1になるようにしてください。
 
 Use this JSON schema:
 
@@ -59,62 +57,57 @@ Return: Recipe
 """
 
 
-class Distribution(BaseModel):
-    yes: float = Field(ge=0, le=1)
-    probably_yes: float = Field(ge=0, le=1)
-    dont_know: float = Field(ge=0, le=1)
-    probably_no: float = Field(ge=0, le=1)
-    no: float = Field(ge=0, le=1)
-    # reason: str = Field(default="")
-
-    @model_validator(mode='after')
-    def validate_total(cls, values):
-        total = 0
-        for key, value in values.model_dump().items():
-            # if key != "dont_know" and not (0 < value <= 1):
-            #     raise ValueError(
-            #         f"Probability values must be grater 0, got {value}")
-            # if key == "dont_know" and not (0.5 > value):
-            #     raise ValueError(
-            #         f"Probability of 'dont_know' must be less than 0.5, got {value}")
-            total += value
-        if not (0.99999 <= total <= 1.00001):
-            raise ValueError(
-                f"Probability distribution must sum to 1, got {total}")
-        return values
+class Distribution(typing.TypedDict):
+    yes: float
+    probably_yes: float
+    dont_know: float
+    probably_no: float
+    no: float
 
 
-def ask_llm(case, question, model_name="jaahas/gemma-2-9b-it-abliterated:latest", max_retries=3, retry_delay=1):
-    """
-    ケースと質問に基づいて確率分布を生成する関数 (Ollamaを使用)
+def validate_distribution(distribution: Distribution):
+    total = 0
+    for key, value in distribution.items():
+        total += value  # type: ignore
+    if not (0.99999 <= total <= 1.00001):
+        raise ValueError(
+            f"Probability distribution must sum to 1, got {total}")
+    return distribution
 
-    Args:
-      case: ケース (例: "正義")
-      question: 質問 (例: "それは、多くの人にとって価値があると一般的に考えられていますか？")
-      model_name: 使用するOllamaモデルの名前
-      max_retries: 最大リトライ回数
-      retry_delay: リトライ間隔（秒）
 
-    Returns:
-      確率分布を表す辞書 (例: {"yes": 0.7, "probably_yes": 0.2, "dont_know": 0.05, "probably_no": 0.03, "no": 0.02})
-    """
+genai.configure(api_key=llm.GOOGLE_CLOUD_API_KEY)
+model = genai.GenerativeModel(model_name="gemini-2.0-flash-exp")
+generation_config = genai.GenerationConfig(
+    response_mime_type="application/json",
+    response_schema=Distribution,
+    max_output_tokens=16  # 簡単な分布を出力するだけなので、トークン数を制限
+)
+
+
+def find_json(answer_string: str):
+    start = answer_string.find("{")
+    end = answer_string.rfind("}")
+    return answer_string[start:end+1]
+
+
+def ask_llm(case, question, max_retries=5, retry_delay=10):
     retries = 0
+    answer_string = ""
     while retries < max_retries:
         prompt = prompt_template.format(case=case, question=question)
-        response = chat(
-            model=model_name,
-            messages=[{'role': 'user', 'content': prompt}],
-            format=Distribution.model_json_schema()  # type: ignore
-        )  # type: ignore
         try:
-            distribution = Distribution.model_validate_json(
-                response['message']['content']).model_dump()
+            response = model.generate_content(prompt)
+            answer_string = response.text.strip()
+            json_string = find_json(answer_string)
+
+            distribution: Distribution = json.loads(json_string)
+            validate_distribution(distribution)
             return distribution
         except Exception as e:
             retries += 1
             print(
                 f"Error processing case: {case}, question: {question} (Attempt {retries}/{max_retries})")
-            print(f"Response: {response['message']['content']}")
+            print(f"Response: {answer_string}")
             print(f"Error: {e}")
             if retries < max_retries:
                 print(f"Retrying in {retry_delay} seconds...")
@@ -124,27 +117,41 @@ def ask_llm(case, question, model_name="jaahas/gemma-2-9b-it-abliterated:latest"
     exit(1)
 
 
-# JSONファイルにデータを追記する関数
-def append_to_json(filepath, data):
-    try:
-        with open(filepath, "r+", encoding="utf-8") as f:
-            try:
-                file_data = json.load(f)
-                if not isinstance(file_data, list):
-                    file_data = []
-            except json.JSONDecodeError:
-                file_data = []
-            file_data.append(data)
-            f.seek(0)  # ファイルの先頭に移動
-            json.dump(file_data, f, ensure_ascii=False, indent=4)
-            f.truncate()  # ファイルの残りの部分を削除
-    except FileNotFoundError:
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump([data], f, ensure_ascii=False, indent=4)
-
-
 # 出力ファイル名
-output_filepath = "../out/gen_ollama.json"
+output_filepath = "../out/gen.json"
+# ファイルアクセス用のロック
+file_lock = threading.Lock()
+
+
+# JSONファイルにデータを追記する関数（スレッドセーフ）
+def append_to_json(filepath, data):
+    with file_lock:
+        try:
+            with open(filepath, "r+", encoding="utf-8") as f:
+                try:
+                    file_data = json.load(f)
+                    if not isinstance(file_data, list):
+                        file_data = []
+                except json.JSONDecodeError:
+                    file_data = []
+
+                # 既存のデータから、data["ケース"]と同じ"ケース"の値を持つ辞書を探す
+                existing_case_data = next(
+                    (item for item in file_data if item["ケース"] == data["ケース"]), None)
+
+                if existing_case_data:
+                    # 既存のデータがあれば、"質問リスト"を更新
+                    existing_case_data["質問リスト"].extend(data["質問リスト"])
+                else:
+                    # 既存のデータがなければ、新しいデータを追加
+                    file_data.append(data)
+
+                f.seek(0)  # ファイルの先頭に移動
+                json.dump(file_data, f, ensure_ascii=False, indent=4)
+                f.truncate()  # ファイルの残りの部分を削除
+        except FileNotFoundError:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump([data], f, ensure_ascii=False, indent=4)
 
 
 # スレッドプールを使用して同時に質問を処理する関数
@@ -155,8 +162,6 @@ def process_case(case):
     # ランダムに質問を選択
     selected_questions = random.sample(questions, num_questions)
 
-    # 質問と回答、確率分布を格納する辞書
-    qa_list = []
     # スレッド数を調整
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         future_to_question = {executor.submit(
@@ -165,27 +170,22 @@ def process_case(case):
             question = future_to_question[future]
             try:
                 distribution = future.result()
-                qa_list.append({"質問": question, "確率分布": distribution})
+                qa_data = {"質問": question, "確率分布": distribution}
                 print(
                     f"Case: {case}, Question: {question}, Distribution: {distribution}")
+                # データをファイルに追記
+                append_to_json(output_filepath, {
+                               "ケース": case, "質問リスト": [qa_data]})
+
             except Exception as e:
                 print(
                     f"Error processing question: {question} for case: {case}")
                 print(f"Error: {e}")
 
-    return {
-        "ケース": case,
-        "質問リスト": qa_list
-    }
-
 
 # 各ケースに対して処理を行う
 # ケースごとのスレッド数を調整
-with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-    results = executor.map(process_case, creatures)
-
-# 結果をJSONファイルに追記
-for result in results:
-    append_to_json(output_filepath, result)
+with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+    executor.map(process_case, creatures)
 
 print(f"JSONデータを出力しました: {output_filepath}")
