@@ -1,18 +1,11 @@
-from typing import Dict, TypedDict
+from typing import Dict, TypedDict, List
 import torch
 
 
-class ChoiceProbabilities(TypedDict):
-    yes: float
-    probably_yes: float
-    dont_know: float
-    probably_no: float
-    no: float
-
-
 class Dataset(TypedDict):
+    choices: List[str]
     p_case: Dict[str, float]
-    p_choice_given_case_question: Dict[str, Dict[str, ChoiceProbabilities]]
+    p_choice_given_case_question: Dict[str, Dict[str, Dict[str, float]]]
 
 
 class Probabilities(TypedDict):
@@ -23,13 +16,15 @@ class Probabilities(TypedDict):
 
 
 class Context:
+    tensor: torch.Tensor
+
     def __init__(self, dataset: Dataset, device: torch.device):
         self.question_idx_to_id: Dict[int, str] = {}
         self.question_id_to_idx: Dict[str, int] = {}
         self.case_id_to_idx: Dict[str, int] = {}
         self.case_idx_to_id: Dict[int, str] = {}
         self.choice_to_idx: Dict[str, int] = {
-            choice: idx for idx, choice in enumerate((ChoiceProbabilities.__annotations__).keys())}
+            choice: idx for idx, choice in enumerate(dataset["choices"])}
         self.probability_attr_to_idx = {
             attr: idx for idx, attr in enumerate(Probabilities.__annotations__.keys())}
         self.p_case_tensor = torch.tensor(
@@ -56,14 +51,13 @@ class Context:
                     self.case_id_to_idx[case_id] = case_idx
                     self.case_idx_to_id[case_idx] = case_id
                     case_idx += 1
-                for choice_name, p_choice_given_case_question in choice_data.items():
+                for choice_name, idx in self.choice_to_idx.items():
                     self.tensor[
                         question_idx,
                         self.case_id_to_idx[case_id],
-                        self.choice_to_idx[choice_name],
-                        self.probability_attr_to_idx["p_choice_given_case_question"]] = p_choice_given_case_question  # type: ignore
+                        idx,
+                        self.probability_attr_to_idx["p_choice_given_case_question"]] = choice_data.get(choice_name, 0)
             question_idx += 1
-        return
 
     def complete(self):
         p_choice_case_given_question = self.tensor[
@@ -83,4 +77,24 @@ class Context:
             p_choice_given_question,
             self.tensor[
                 :, :, :, self.probability_attr_to_idx["p_choice_given_case_question"]]
+        )
+
+    def print_value(self, question=None, case=None, choice=None, attr=None, message=""):
+        print("==== テンソルの値 ====")
+        if message:
+            print(f"メッセージ: {message}")
+        print(
+            f"質問: {question}, 場合: {case}, 選択肢: {choice}, 属性: {attr}",
+        )
+        print(
+            self.tensor[
+                slice(
+                    None) if question is None else self.question_id_to_idx[question],
+                slice(
+                    None) if case is None else self.case_id_to_idx[case],
+                slice(
+                    None) if choice is None else self.choice_to_idx[choice],
+                slice(
+                    None) if attr is None else self.probability_attr_to_idx[attr]
+            ]
         )

@@ -1,16 +1,21 @@
 from typing import TypedDict, List, Dict, Protocol
 
 
-class OptionsQuestions(TypedDict):
-    options: List[str]
-    questions: List[str]
+class Case(TypedDict):
+    text: str
+
+
+class Question(TypedDict):
+    text: str
+
+
+class Category(TypedDict):
+    text: str
+    choices: List[str]
+    cases: Dict[str, Case]
+    questions: Dict[str, Question]
 
 
 class QueryRepo(Protocol):
-    def options_questions(self) -> Dict[str, OptionsQuestions]:
-        """genre_idをキーとして、そのジャンルに対する質問と選択肢のリストを返す"""
-        ...
-
-    def cases(self) -> Dict[str, List[str]]:
-        """genre_idをキーとして、そのジャンルに対する場合のリストを返す"""
+    def categories(self) -> Dict[str, Category]:
         ...

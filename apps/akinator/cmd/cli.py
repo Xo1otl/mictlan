@@ -10,6 +10,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 validation_dataset: qa.Dataset = {
+    "choices": ["yes", "probably_yes", "dont_know", "probably_no", "no"],
     "p_case": {
         "apple": 0.4,
         "banana": 0.4,
@@ -39,9 +40,10 @@ validation_dataset: qa.Dataset = {
     }
 }
 
-dataset = json.loads(
-    open("/workspaces/mictlan/apps/akinator/out/dataset.json").read())
-context = qa.Context(dataset["生き物"], device)
+# dataset = json.loads(
+#     open("/workspaces/mictlan/apps/akinator/out/dataset.json").read())
+dataset = qa.default_repo().dataset("果物")
+context = qa.Context(dataset, device)
 # context = qa.Context(validation_dataset, device)
 context.complete()  # completeメソッドを呼び出して補完を実行
 
