@@ -69,7 +69,7 @@ CREATE TABLE if not exists voices (
     filename VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
-    INDEX (account_id),kkkk
+    INDEX (account_id),
     UNIQUE (title, account_id) -- Ensures title is unique per account_id
 );
 

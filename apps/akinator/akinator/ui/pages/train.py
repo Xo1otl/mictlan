@@ -1,5 +1,6 @@
 import streamlit as st
 from typing import Dict, Tuple, Any, Callable
+from akinator import train
 import uuid
 
 
@@ -8,61 +9,26 @@ def generate_uuid() -> str:
     return str(uuid.uuid4())
 
 
-mock_data: Dict[str, Dict[str, Any]] = {
-    generate_uuid(): {
-        "text": "動物",
-        "choices": ["はい", "多分はい", "わからない", "多分いいえ", "いいえ"],
-        "cases": {
-            generate_uuid(): {"text": "カエル"},
-            generate_uuid(): {"text": "犬"},
-            generate_uuid(): {"text": "猫"},
-        },
-        "questions": {
-            generate_uuid(): {"text": "肉食ですか？"},
-            generate_uuid(): {"text": "飛びますか？"},
-            generate_uuid(): {"text": "4本足ですか？"},
-        },
-    },
-    generate_uuid(): {
-        "text": "乗り物",
-        "choices": ["そう", "部分的にそう", "無関係", "いいえ"],
-        "cases": {
-            generate_uuid(): {"text": "飛行機"},
-            generate_uuid(): {"text": "車"},
-            generate_uuid(): {"text": "自転車"},
-        },
-        "questions": {
-            generate_uuid(): {"text": "高いですか？"},
-            generate_uuid(): {"text": "速いですか？"},
-            generate_uuid(): {"text": "肉食ですか？"},
-        },
-    },
-    generate_uuid(): {
-        "text": "食べ物",
-        "choices": ["はい", "いいえ"],
-        "cases": {
-            generate_uuid(): {"text": "りんご"},
-            generate_uuid(): {"text": "みかん"},
-            generate_uuid(): {"text": "バナナ"},
-        },
-        "questions": {
-            generate_uuid(): {"text": "甘いですか？"},
-            generate_uuid(): {"text": "赤いですか？"},
-            generate_uuid(): {"text": "丸いですか？"},
-        },
-    },
-}
+@st.cache_resource
+def init_akinator():
+    """Akinatorの初期化関数 (最初の1回だけ実行)"""
+    repo = train.default_repo()
+    categories = repo.categories()
+    return repo, categories
+
+
+repo, categories = init_akinator()
 
 initial_state = {
-    "genre_id": None,
+    "category_id": None,
     "question_id": None,
     "case_id": None,
     "choice": None,
-    "data": mock_data,
+    "categories": categories,
 }
 
-SELECT_GENRE = "SELECT_GENRE"
-ADD_GENRE = "ADD_GENRE"
+SELECT_CATEGORY = "SELECT_CATEGORY"
+ADD_CATEGORY = "ADD_CATEGORY"
 EDIT_CHOICES = "EDIT_CHOICES"
 SELECT_QUESTION = "SELECT_QUESTION"
 ADD_QUESTION = "ADD_QUESTION"
@@ -75,40 +41,40 @@ Action = Tuple[str, Dict[str, Any]]
 
 def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
     type, payload = action
-    if type == SELECT_GENRE:
-        state["genre_id"] = payload["genre_id"]
+    if type == SELECT_CATEGORY:
+        state["category_id"] = payload["category_id"]
         state["question_id"] = None
         state["case_id"] = None
         state["choice"] = None
         return state
 
-    if type == ADD_GENRE:
+    if type == ADD_CATEGORY:
         if any(
-            genre_data["text"] == payload["genre_text"]
-            for genre_data in state["data"].values()
+            category_data["text"] == payload["category_name"]
+            for category_data in state["categories"].values()
         ):
-            raise ValueError("そのジャンル名はすでに存在します")
+            raise ValueError("そのカテゴリ名はすでに存在します")
 
-        genre_id = generate_uuid()
-        state["data"][genre_id] = {
-            "text": payload["genre_text"],
+        category_id = repo.add_category(payload["category_name"])
+        state["categories"][category_id] = {
+            "text": payload["category_name"],
             "choices": [],
             "cases": {},
             "questions": {},
         }
-        state["genre_id"] = genre_id
+        state["category_id"] = category_id
         state["question_id"] = None
         state["case_id"] = None
         state["choice"] = None
         return state
 
-    if state["genre_id"] is None:
-        raise ValueError("分野が選択されていません")
+    if state["category_id"] is None:
+        raise ValueError("カテゴリが選択されていません")
 
     if type == EDIT_CHOICES:
         if (
-            state["data"][state["genre_id"]]["questions"]
-            or state["data"][state["genre_id"]]["cases"]
+            state["categories"][state["category_id"]]["questions"]
+            or state["categories"][state["category_id"]]["cases"]
         ):
             raise ValueError("質問または場合が存在するため、選択肢を編集できません")
 
@@ -118,7 +84,9 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
         if any(not choice.strip() for choice in payload["choices"]):
             raise ValueError("選択肢に空文字列が含まれています")
 
-        state["data"][state["genre_id"]]["choices"] = payload["choices"]
+        repo.edit_choices(state["category_id"], payload["choices"])
+        state["categories"][state["category_id"]
+                            ]["choices"] = payload["choices"]
         return state
 
     if type == SELECT_QUESTION:
@@ -129,12 +97,13 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
     if type == ADD_QUESTION:
         if any(
             question_data["text"] == payload["question_text"]
-            for question_data in state["data"][state["genre_id"]]["questions"].values()
+            for question_data in state["categories"][state["category_id"]]["questions"].values()
         ):
             raise ValueError("その質問はすでに存在します")
 
-        question_id = generate_uuid()
-        state["data"][state["genre_id"]]["questions"][question_id] = {
+        question_id = repo.add_question(
+            state["category_id"], payload["question_text"])
+        state["categories"][state["category_id"]]["questions"][question_id] = {
             "text": payload["question_text"]
         }
         state["question_id"] = question_id
@@ -148,14 +117,14 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
 
     if type == ADD_CASE:
         if any(
-            case_data["text"] == payload["case_text"]
-            for case_data in state["data"][state["genre_id"]]["cases"].values()
+            case_data["text"] == payload["case_name"]
+            for case_data in state["categories"][state["category_id"]]["cases"].values()
         ):
             raise ValueError("その場合はすでに存在します")
 
-        case_id = generate_uuid()
-        state["data"][state["genre_id"]]["cases"][case_id] = {
-            "text": payload["case_text"]
+        case_id = repo.add_case(state["category_id"], payload["case_name"])
+        state["categories"][state["category_id"]]["cases"][case_id] = {
+            "text": payload["case_name"]
         }
         state["case_id"] = case_id
         state["choice"] = None
@@ -164,9 +133,15 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
     if type == SELECT_CHOICE:
         if state["question_id"] is None or state["case_id"] is None:
             raise ValueError("質問と場合が選択されていません")
-        if payload["choice"] not in state["data"][state["genre_id"]]["choices"]:
+        if payload["choice"] not in state["categories"][state["category_id"]]["choices"]:
             raise ValueError("その回答は選択肢に存在しません")
 
+        repo.add_answer(
+            state["category_id"],
+            state["question_id"],
+            state["case_id"],
+            payload["choice"],
+        )
         state["choice"] = payload["choice"]
         return state
 
@@ -186,65 +161,63 @@ def useTrainer() -> Tuple[Dict[str, Any], Callable[[Action], None]]:
     return st.session_state.state, dispatch
 
 
-st.set_page_config(layout="wide")
-
 state, dispatch = useTrainer()
 
 st.title("学習する")
 
-genre_tab, question_tab, case_tab, answer_tab = st.tabs(
-    ["分野", "質問", "場合", "回答"])
+category_tab, question_tab, case_tab, answer_tab = st.tabs(
+    ["カテゴリ", "質問", "場合", "回答"])
 
-with genre_tab:
-    st.header("分野を選択または追加")
+with category_tab:
+    st.header("カテゴリを選択または追加")
 
-    genre_id_to_text = {}
-    genre_ids = []
-    for genre_id, genre_data in state["data"].items():
-        genre_id_to_text[genre_id] = genre_data["text"]
-        genre_ids.append(genre_id)
+    category_id_to_text = {}
+    category_ids = []
+    for category_id, category_data in state["categories"].items():
+        category_id_to_text[category_id] = category_data["text"]
+        category_ids.append(category_id)
 
     st.selectbox(
-        "分野を選択",
-        options=genre_ids,
-        format_func=lambda id: genre_id_to_text.get(id, ""),
-        index=None if state["genre_id"] is None else genre_ids.index(
-            state["genre_id"]),
-        placeholder="既存の分野を入力してください",
-        key="genre_select",
+        "カテゴリを選択",
+        options=category_ids,
+        format_func=lambda id: category_id_to_text.get(id, ""),
+        index=None if state["category_id"] is None else category_ids.index(
+            state["category_id"]),
+        placeholder="既存のカテゴリを入力してください",
+        key="category_select",
         on_change=lambda: dispatch(
-            (SELECT_GENRE, {"genre_id": st.session_state.get("genre_select", "")})),
+            (SELECT_CATEGORY, {"category_id": st.session_state.get("category_select", "")})),
     )
 
-    new_genre = st.text_input(
-        "分野を追加",
-        placeholder="新しい分野を入力してください",
-        key="new_genre_input",
+    new_category_name = st.text_input(
+        "カテゴリを追加",
+        placeholder="新しいカテゴリを入力してください",
+        key="new_category_input",
     )
-    if new_genre:
-        if new_genre not in genre_id_to_text.values():
-            st.subheader(f"{new_genre}の選択肢を設定")
+    if new_category_name:
+        if new_category_name not in category_id_to_text.values():
+            st.subheader(f"{new_category_name}の選択肢を設定")
             options_text = st.text_area("選択肢を改行で区切って入力", value="\n".join([]))
-            new_genre_options = [
+            new_category_options = [
                 line.strip() for line in options_text.split("\n") if line.strip()
             ]
             if st.button("選択肢を保存"):
-                dispatch((ADD_GENRE, {"genre_text": new_genre}))
-                dispatch((EDIT_CHOICES, {"choices": new_genre_options}))
+                dispatch((ADD_CATEGORY, {"category_name": new_category_name}))
+                dispatch((EDIT_CHOICES, {"choices": new_category_options}))
 
 with question_tab:
     st.header("質問を選択または追加")
-    if state["genre_id"]:
-        genre_data = state["data"][state["genre_id"]]
+    if state["category_id"]:
+        category_data = state["categories"][state["category_id"]]
 
         question_id_to_text = {}
         question_ids = []
-        for question_id, question_data in genre_data["questions"].items():
+        for question_id, question_data in category_data["questions"].items():
             question_id_to_text[question_id] = question_data["text"]
             question_ids.append(question_id)
 
         selected_question_id = st.selectbox(
-            f"{genre_data['text']} の質問を選択",
+            f"{category_data['text']} の質問を選択",
             options=question_ids,
             format_func=lambda id: question_id_to_text.get(
                 id, "") if id is not None else "",
@@ -257,29 +230,29 @@ with question_tab:
         )
 
         st.text_input(
-            f"{genre_data['text']} の質問を追加",
+            f"{category_data['text']} の質問を追加",
             placeholder="新しい質問を入力してください",
             key="new_question_input",
             on_change=lambda: dispatch(
                 (ADD_QUESTION, {"question_text": st.session_state.new_question_input}))
         )
     else:
-        st.warning("分野を選択してください")
+        st.warning("カテゴリを選択してください")
 
 with case_tab:
     st.header("場合を選択または追加")
-    if state["genre_id"]:
-        genre_data = state["data"][state["genre_id"]]
+    if state["category_id"]:
+        category_data = state["categories"][state["category_id"]]
 
         case_id_to_text = {}
         case_ids = []
-        for case_id, case_data in genre_data["cases"].items():
+        for case_id, case_data in category_data["cases"].items():
             case_id_to_text[case_id] = case_data["text"]
             case_ids.append(case_id)
 
         selected_case_id = st.selectbox(
-            f"{genre_data['text']} の場合を選択",
-            options=case_ids,  # None を先頭に追加
+            f"{category_data['text']} の場合を選択",
+            options=case_ids,
             format_func=lambda id: case_id_to_text.get(
                 id, "") if id is not None else "",
             index=None if state["case_id"] is None else case_ids.index(
@@ -291,36 +264,36 @@ with case_tab:
         )
 
         st.text_input(
-            f"{genre_data['text']} の場合を追加",
+            f"{category_data['text']} の場合を追加",
             placeholder="新しい場合を入力してください",
             key="new_case_input",
             on_change=lambda: dispatch(
-                (ADD_CASE, {"case_text": st.session_state.new_case_input}))
+                (ADD_CASE, {"case_name": st.session_state.new_case_input}))
         )
 
     else:
-        st.warning("分野を選択してください")
+        st.warning("カテゴリを選択してください")
 
 with answer_tab:
     st.header("回答を追加")
-    if not state["genre_id"]:
-        st.warning("分野を選択してください")
+    if not state["category_id"]:
+        st.warning("カテゴリを選択してください")
     if not state["question_id"]:
         st.warning("質問を選択してください")
     if not state["case_id"]:
         st.warning("場合を選択してください")
-    if state["genre_id"] and state["question_id"] and state["case_id"]:
-        genre_data = state["data"][state["genre_id"]]
-        st.write(f"分野: **{genre_data['text']}**")
+    if state["category_id"] and state["question_id"] and state["case_id"]:
+        category_data = state["categories"][state["category_id"]]
+        st.write(f"カテゴリ: **{category_data['text']}**")
         st.write(
-            f"質問: **{genre_data['questions'][state['question_id']]['text']}**")
-        st.write(f"場合: **{genre_data['cases'][state['case_id']]['text']}**")
+            f"質問: **{category_data['questions'][state['question_id']]['text']}**")
+        st.write(f"場合: **{category_data['cases'][state['case_id']]['text']}**")
         answer = st.radio(
-            "回答を選択", options=genre_data["choices"], horizontal=True)
+            "回答を選択", options=category_data["choices"], horizontal=True)
         if st.button("回答を追加"):
             dispatch((SELECT_CHOICE, {"choice": answer}))
             st.success(
-                f"分野: {genre_data['text']}, 場合: {genre_data['cases'][state['case_id']]['text']}, 質問: {genre_data['questions'][state['question_id']]['text']} に対して「{answer}」と回答しました")
+                f"カテゴリ: {category_data['text']}, 場合: {category_data['cases'][state['case_id']]['text']}, 質問: {category_data['questions'][state['question_id']]['text']} に対して「{answer}」と回答しました")
 
 st.write("---")
 st.write("デバッグ情報")
