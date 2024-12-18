@@ -13,3 +13,5 @@ text_inputは入力がクリアされず再レンダリングのときに勝手�
 `play.py`はstate machineで実装すべきな気がする
 
 dispatch(event, effect)ができるstate machineを用意してやろうかなと思う
+
+質問を聞ききった場合は現在ある中で一番確率の高いものを選択して終了する

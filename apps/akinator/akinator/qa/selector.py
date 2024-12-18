@@ -15,6 +15,8 @@ class Selector:
         mask = torch.zeros_like(entropies, dtype=torch.bool)
         mask[self.asked_questions] = True
         filtered_entropies = entropies.masked_fill(mask, float('inf'))
+        if torch.all(filtered_entropies == float('inf')):
+            raise ValueError("all entropies are inf")
         best_question_idx = torch.argmin(filtered_entropies)
         return self.context.question_idx_to_id[int(best_question_idx)]
 
