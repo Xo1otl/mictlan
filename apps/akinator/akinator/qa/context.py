@@ -98,3 +98,11 @@ class Context:
                     None) if attr is None else self.probability_attr_to_idx[attr]
             ]
         )
+        if not question:
+            print(f"質問: {self.question_id_to_idx}")
+        if not case:
+            print(f"場合: {self.case_id_to_idx}")
+        if not choice:
+            print(f"選択肢: {self.choice_to_idx}")
+        if not attr:
+            print(f"属性: {self.probability_attr_to_idx}")

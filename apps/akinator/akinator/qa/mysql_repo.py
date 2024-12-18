@@ -1,12 +1,15 @@
 from akinator.qa import Dataset
+from akinator.qa.command_repo import HistoryItem
 import mysql.connector
 from mysql.connector import MySQLConnection
-from mysql.connector.cursor import MySQLCursor
 from infra import akinator
-from .repo import Repo
+from .query_repo import QueryRepo
+from .command_repo import CommandRepo
+from typing import Dict, List
+import uuid
 
 
-class MysqlRepo(Repo):
+class MysqlRepo(QueryRepo, CommandRepo):
     def __init__(self, host: str, user: str, password: str, database: str) -> None:
         self.conn: MySQLConnection = mysql.connector.connect(
             host=host,
@@ -14,6 +17,13 @@ class MysqlRepo(Repo):
             password=password,
             database=database
         )  # type: ignore
+
+    def categories(self) -> Dict[str, str]:
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT category_name FROM categories")
+        categories = [row[0] for row in cursor.fetchall()]
+        cursor.close()
+        return categories  # type: ignore
 
     def dataset(self, category) -> Dataset:
         cursor = self.conn.cursor()
@@ -37,10 +47,8 @@ class MysqlRepo(Repo):
 
         dataset: Dataset = {
             "choices": [],
-            "p_case": {
-            },
-            "p_choice_given_case_question": {
-            }
+            "p_case": {},
+            "p_choice_given_case_question": {}
         }
         # choices のデータを dataset に格納
         dataset["choices"] = [choice[0] for choice in choices]  # type: ignore
@@ -65,8 +73,68 @@ class MysqlRepo(Repo):
 
         return dataset
 
+    def send_answer(self, category: str, answer: str, history: List[HistoryItem]) -> None:
+        cursor = self.conn.cursor(buffered=True)
 
-def default_repo() -> Repo:
+        try:
+            # Get category_id
+            cursor.execute(
+                "SELECT category_id FROM categories WHERE category_name = %s", (category,))
+            category_result = cursor.fetchone()
+            if category_result is None:
+                raise ValueError(f"Category '{category}' not found.")
+            category_id = category_result[0]
+
+            # Get case_id
+            cursor.execute("SELECT case_id FROM cases WHERE category_id = %s AND case_name = %s",
+                           (category_id, answer))  # type: ignore
+            case_result = cursor.fetchone()
+            if case_result is None:
+                raise ValueError(
+                    f"Case '{answer}' not found for category '{category}'.")
+            case_id = case_result[0]
+
+            # Prepare data for insertion
+            insert_data = []
+            for item in history:
+                question_text = item['question']
+                choice_name = item['choice']
+
+                # Get question_id
+                cursor.execute("SELECT question_id FROM questions WHERE category_id = %s AND question_text = %s", (
+                    category_id, question_text))  # type: ignore
+                question_result = cursor.fetchone()
+                if question_result is None:
+                    raise ValueError(
+                        f"Question '{question_text}' not found for category '{category}'.")
+                question_id = question_result[0]
+
+                # Get choice_id
+                cursor.execute("SELECT choice_id FROM choices WHERE category_id = %s AND choice_name = %s", (
+                    category_id, choice_name))  # type: ignore
+                choice_result = cursor.fetchone()
+                if choice_result is None:
+                    raise ValueError(
+                        f"Choice '{choice_name}' not found for category '{category}'.")
+                choice_id = choice_result[0]
+
+                insert_data.append(
+                    (str(uuid.uuid4()), case_id, question_id, choice_id))
+
+            # Insert case_question_choices
+            if insert_data:
+                cursor.executemany(
+                    "INSERT INTO case_question_choices (case_question_choice_id, case_id, question_id, choice_id) VALUES (%s, %s, %s, %s)", insert_data)
+                self.conn.commit()
+
+        except Exception as e:
+            self.conn.rollback()
+            raise e
+        finally:
+            cursor.close()
+
+
+def default_repo() -> MysqlRepo:
     return MysqlRepo(
         host="mysql",
         user=akinator.MYSQL_USER,
