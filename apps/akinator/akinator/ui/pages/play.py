@@ -76,7 +76,10 @@ def reducer(state: Dict[str, Any], action: Action):
         if check_status(state["context"]):
             state["answer"] = check_status(state["context"])
             return
-        state["question"] = state["selector"].best_question()
+        try:
+            state["question"] = state["selector"].best_question()
+        except ValueError as e:
+            state["answer"] = "不明"
         return
     if type == SEND_ANSWER:
         repo.send_answer(state["category"],
@@ -115,14 +118,21 @@ if state["category"] is None:
         st.rerun()
     st.stop()
 if state["answer"] is not None:
-    default_index = list(state["cases"]).index(state["answer"])
+    if state["answer"] == "不明":
+        msg1 = "回答が見つかりませんでした"
+        msg2 = "正しい答えを選択してください。選択肢にない場合は、trainページから追加してください。"
+        default_index = 0
+    else:
+        msg1 = "正解でしたか？"
+        msg2 = "間違っていた場合は正しい答えを選択してください。選択肢にない場合は、trainページから追加してください。"
+        default_index = list(state["cases"]).index(state["answer"])
     correct_case = st.selectbox(
-        "正解でしたか？",
+        msg1,
         state["cases"],
         key="correct_case",
         index=default_index
     )
-    st.write("間違っていた場合は正しい答えを選択してください。選択肢にない場合は、trainページから追加してください。")
+    st.write(msg2)
     if st.button("回答を送信", key="send_correct_case"):
         dispatch((SEND_ANSWER, {"answer": correct_case}))
         dispatch((PLAY_AGAIN, {}))

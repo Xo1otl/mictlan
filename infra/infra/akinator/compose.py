@@ -30,7 +30,18 @@ compose = {
                 '/bin/bash',
                 '-c',
                 f'echo \'{entrypoint}\' > /entrypoint.sh && chmod +x /entrypoint.sh && /entrypoint.sh'
-            ]
+            ],
+            'deploy': {
+                'resources': {
+                    'reservations': {
+                        'devices': [{
+                            'driver': 'nvidia',
+                            'capabilities': ['gpu'],
+                            'count': 'all'
+                        }]
+                    }
+                }
+            }
         }
     },
 }
