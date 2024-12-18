@@ -47,7 +47,6 @@ def check_status(context: qa.Context, top_n: int = 3) -> str | None:
 
     print("Current most likely cases:")
     for i, (prob, idx) in enumerate(zip(top_probs, top_indices)):
-        context.print_value(choice="多分はい", attr="p_case_given_choice_question")
         print(
             f"  {i+1}. {context.case_idx_to_id[int(idx.item())]} ({prob.item():.4f})")
 
@@ -116,14 +115,14 @@ if state["category"] is None:
         st.rerun()
     st.stop()
 if state["answer"] is not None:
-    st.write("正解でしたか？")
     default_index = list(state["cases"]).index(state["answer"])
     correct_case = st.selectbox(
-        "間違っていた場合は正しい答えに変更してください",
+        "正解でしたか？",
         state["cases"],
         key="correct_case",
         index=default_index
     )
+    st.write("間違っていた場合は正しい答えを選択してください。選択肢にない場合は、trainページから追加してください。")
     if st.button("回答を送信", key="send_correct_case"):
         dispatch((SEND_ANSWER, {"answer": correct_case}))
         dispatch((PLAY_AGAIN, {}))
@@ -134,7 +133,7 @@ else:
     if st.button("回答を確定"):
         dispatch((SELECT_CHOICE, {"choice": choice}))
         st.rerun()
-if st.button("リセット"):
+if st.button("はじめから"):
     dispatch((PLAY_AGAIN, {}))
     st.rerun()
 st.write("---")

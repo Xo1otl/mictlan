@@ -3,8 +3,8 @@ from . import CommandRepo, QueryRepo, Category
 import mysql.connector
 from mysql.connector import MySQLConnection
 from mysql.connector.cursor import MySQLCursor
-from infra import akinator
 import uuid
+import os
 
 
 class MysqlRepo(CommandRepo, QueryRepo):
@@ -165,10 +165,23 @@ class MysqlRepo(CommandRepo, QueryRepo):
         return categories
 
 
+try:
+    import infra.akinator as akiconf
+except ImportError:
+    # infra モジュールが存在しない場合、環境変数から設定を読み込む
+    class AkinatorConfig:
+        def __init__(self):
+            self.MYSQL_USER = os.environ.get("MYSQL_USER", "user")
+            self.MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "password")
+            self.MYSQL_DB = os.environ.get("MYSQL_DB", "akinator_db")
+
+    akiconf = AkinatorConfig()
+
+
 def default_repo() -> MysqlRepo:
     return MysqlRepo(
         host="mysql",
-        user=akinator.MYSQL_USER,
-        password=akinator.MYSQL_PASSWORD,
-        database=akinator.MYSQL_DB
+        user=akiconf.MYSQL_USER,
+        password=akiconf.MYSQL_PASSWORD,
+        database=akiconf.MYSQL_DB
     )
