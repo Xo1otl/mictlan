@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 streamlit = "^1.41.1"
 mysql-connector-python = "^9.1.0"
+redis = "^5.1.1"
 
 
 [build-system]

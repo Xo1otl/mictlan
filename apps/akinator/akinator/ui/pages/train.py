@@ -12,14 +12,10 @@ def generate_uuid() -> str:
     return str(uuid.uuid4())
 
 
-@st.cache_resource
-def init_akinator():
-    """Akinatorの初期化関数 (最初の1回だけ実行)"""
-    repo = train.default_repo()
-    return repo
-
-
-repo = init_akinator()
+# cache_resourceしたらqueryの結果までキャッシュされてしまうせいでsessionで代用
+if st.session_state.get("train_repo") is None:
+    st.session_state.train_repo = train.default_repo()
+repo = st.session_state.train_repo
 categories = repo.categories()
 
 initial_state = {
@@ -165,7 +161,10 @@ def useTrainer() -> Tuple[Dict[str, Any], Callable[[Action], None]]:
 
 state, dispatch = useTrainer()
 
-st.title("学習する")
+"""
+# 学習する
+※新規の質問や場合は、回答を追加しないとplayに出現しません
+"""
 
 category_tab, question_tab, case_tab, answer_tab = st.tabs(
     ["カテゴリ", "質問", "場合", "回答"])
