@@ -13,11 +13,11 @@ def generate_uuid() -> str:
 def init_akinator():
     """Akinatorの初期化関数 (最初の1回だけ実行)"""
     repo = train.default_repo()
-    categories = repo.categories()
-    return repo, categories
+    return repo
 
 
-repo, categories = init_akinator()
+repo = init_akinator()
+categories = repo.categories()
 
 initial_state = {
     "category_id": None,
@@ -39,14 +39,14 @@ SELECT_CHOICE = "SELECT_CHOICE"
 Action = Tuple[str, Dict[str, Any]]
 
 
-def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
+def reducer(state: Dict[str, Any], action: Action) -> None:
     type, payload = action
     if type == SELECT_CATEGORY:
         state["category_id"] = payload["category_id"]
         state["question_id"] = None
         state["case_id"] = None
         state["choice"] = None
-        return state
+        return
 
     if type == ADD_CATEGORY:
         if any(
@@ -66,7 +66,7 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
         state["question_id"] = None
         state["case_id"] = None
         state["choice"] = None
-        return state
+        return
 
     if state["category_id"] is None:
         raise ValueError("カテゴリが選択されていません")
@@ -87,12 +87,12 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
         repo.edit_choices(state["category_id"], payload["choices"])
         state["categories"][state["category_id"]
                             ]["choices"] = payload["choices"]
-        return state
+        return
 
     if type == SELECT_QUESTION:
         state["question_id"] = payload["question_id"]
         state["choice"] = None
-        return state
+        return
 
     if type == ADD_QUESTION:
         if any(
@@ -100,7 +100,6 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
             for question_data in state["categories"][state["category_id"]]["questions"].values()
         ):
             raise ValueError("その質問はすでに存在します")
-
         question_id = repo.add_question(
             state["category_id"], payload["question_text"])
         state["categories"][state["category_id"]]["questions"][question_id] = {
@@ -108,12 +107,12 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
         }
         state["question_id"] = question_id
         state["choice"] = None
-        return state
+        return
 
     if type == SELECT_CASE:
         state["case_id"] = payload["case_id"]
         state["choice"] = None
-        return state
+        return
 
     if type == ADD_CASE:
         if any(
@@ -128,7 +127,7 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
         }
         state["case_id"] = case_id
         state["choice"] = None
-        return state
+        return
 
     if type == SELECT_CHOICE:
         if state["question_id"] is None or state["case_id"] is None:
@@ -143,7 +142,7 @@ def reducer(state: Dict[str, Any], action: Action) -> Dict[str, Any]:
             payload["choice"],
         )
         state["choice"] = payload["choice"]
-        return state
+        return
 
     raise ValueError(f"Unknown action type: {type}")
 
@@ -155,7 +154,7 @@ def useTrainer() -> Tuple[Dict[str, Any], Callable[[Action], None]]:
     def dispatch(action: Action) -> None:
         # streamlitはstateによる画面のレンダリングは機能はないのでmutableでよい
         try:
-            st.session_state.state = reducer(st.session_state.state, action)
+            reducer(st.session_state.state, action)
         except ValueError as e:
             st.error(e)
     return st.session_state.state, dispatch
@@ -184,9 +183,9 @@ with category_tab:
         index=None if state["category_id"] is None else category_ids.index(
             state["category_id"]),
         placeholder="既存のカテゴリを入力してください",
-        key="category_select",
+        key="train_category_select",
         on_change=lambda: dispatch(
-            (SELECT_CATEGORY, {"category_id": st.session_state.get("category_select", "")})),
+            (SELECT_CATEGORY, {"category_id": st.session_state.get("train_category_select", "")})),
     )
 
     new_category_name = st.text_input(
@@ -229,13 +228,15 @@ with question_tab:
                 (SELECT_QUESTION, {"question_id": st.session_state.get("question_select", "")})),
         )
 
-        st.text_input(
+        new_question = st.text_input(
             f"{category_data['text']} の質問を追加",
             placeholder="新しい質問を入力してください",
             key="new_question_input",
-            on_change=lambda: dispatch(
-                (ADD_QUESTION, {"question_text": st.session_state.new_question_input}))
         )
+        if st.button("質問を追加"):
+            dispatch((ADD_QUESTION, {"question_text": new_question}))
+            st.success(f"新しい質問: {new_question} を追加しました")
+
     else:
         st.warning("カテゴリを選択してください")
 
@@ -263,13 +264,14 @@ with case_tab:
                 (SELECT_CASE, {"case_id": st.session_state.get("case_select", "")})),
         )
 
-        st.text_input(
+        new_case = st.text_input(
             f"{category_data['text']} の場合を追加",
             placeholder="新しい場合を入力してください",
             key="new_case_input",
-            on_change=lambda: dispatch(
-                (ADD_CASE, {"case_name": st.session_state.new_case_input}))
         )
+        if st.button("場合を追加"):
+            dispatch((ADD_CASE, {"case_name": new_case}))
+            st.success(f"新しい場合: {new_case} を追加しました")
 
     else:
         st.warning("カテゴリを選択してください")

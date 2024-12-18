@@ -42,7 +42,7 @@ validation_dataset: qa.Dataset = {
 
 # dataset = json.loads(
 #     open("/workspaces/mictlan/apps/akinator/out/dataset.json").read())
-dataset = qa.default_repo().dataset("果物")
+dataset = qa.default_repo().dataset("テストデータ")
 context = qa.Context(dataset, device)
 # context = qa.Context(validation_dataset, device)
 context.complete()  # completeメソッドを呼び出して補完を実行

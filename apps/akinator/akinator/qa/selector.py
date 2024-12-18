@@ -8,7 +8,7 @@ class Selector:
         self.context = conetxt
         self.asked_questions: List[int] = []
 
-    def best_question(self):
+    def best_question(self) -> str:
         entropies = self.question_entropies()
         # 事後分布は既出の確率からは独立している
         # 影響のある選択肢だけを考慮する
