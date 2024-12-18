@@ -22,8 +22,8 @@ def get_redis_conn():
 
 r = get_redis_conn()
 
-MAX_SESSIONS = 100  # 最大同時セッション数
-SESSION_TTL = 60 * 20  # セッションの有効期限 (秒)
+MAX_SESSIONS = 30  # 最大同時セッション数
+SESSION_TTL = 60 * 10  # セッションの有効期限 (秒)
 REDIS_PREFIX = "akinator_session"
 
 
@@ -61,17 +61,21 @@ if not session_available():
     """
     st.stop()
 
-"""
-# アキネイタースタイルアプリへようこそ!
 
-このアプリでは、推測ゲームをプレイしたり、知識ベースに貢献したりできます。
-
-**play:** あなたが考えていることを推測するアプリの能力をテストします。
-
-**train:** 新しい分野、質問、場合に対する回答を追加して、アプリの改善に役立ててください。
-
-ソースコードはこちら: [GitHub](https://github.com/Xo1otl/mictlan/tree/main/apps/akinator)
-"""
+texts, image = st.columns(2)
+with texts:
+    st.title("アキネイタースタイルアプリへようこそ!")
+    """
+    このアプリでは、推測ゲームをプレイしたり、知識ベースに貢献したりできます。
+    
+    **play:** あなたが考えていることを推測するアプリの能力をテストします。
+    
+    **train:** 新しい分野、質問、場合に対する回答を追加して、アプリの改善に役立ててください。
+    
+    ソースコードはこちら: [GitHub](https://github.com/Xo1otl/mictlan/tree/main/apps/akinator)
+    """
+with image:
+    st.image("assets/akinator.png", width=400)
 
 st.write("---")
 st.write("デバッグ情報")

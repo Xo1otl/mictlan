@@ -10,11 +10,14 @@ if st.session_state.get("session_id") is None:
 @st.cache_resource
 def init_akinator():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    repo = qa.default_repo()
-    return repo, device
+    return device
 
 
-repo, device = init_akinator()
+device = init_akinator()
+# cache_resourceしたらqueryの結果までキャッシュされてしまうせいでsessionで代用
+if st.session_state.get("play_repo") is None:
+    st.session_state.play_repo = qa.default_repo()
+repo = st.session_state.play_repo
 categories = repo.categories()
 
 
@@ -53,7 +56,7 @@ def check_status(context: qa.Context, top_n: int = 3) -> str | None:
         print(
             f"  {i+1}. {context.case_idx_to_id[int(idx.item())]} ({prob.item():.4f})")
 
-    if top_probs[0].item() > 0.5:
+    if top_probs[0].item() > 0.7:
         print(
             f"The most likely case is {context.case_idx_to_id[int(top_indices[0].item())]} with probability {top_probs[0].item():.4f}.")
         return context.case_idx_to_id[int(top_indices[0].item())]

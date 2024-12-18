@@ -3,11 +3,11 @@ from infra import akinator
 
 entrypoint = """
 #!/bin/bash
-cd /app/akinator
+cd /app/akinator/akinator/ui
 pip install poetry
 poetry config virtualenvs.create false
 poetry install 
-streamlit run akinator/ui/app.py --server.address 0.0.0.0
+streamlit run app.py --server.address 0.0.0.0
 """
 
 compose = {

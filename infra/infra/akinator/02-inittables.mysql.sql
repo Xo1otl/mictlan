@@ -11,7 +11,7 @@ CREATE TABLE if not exists cases (
     case_id VARCHAR(36) PRIMARY KEY,
     category_id VARCHAR(36) NOT NULL,
     case_name VARCHAR(255) NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories (category_id),
+    FOREIGN KEY (category_id) REFERENCES categories (category_id) ON DELETE CASCADE,
     UNIQUE (category_id, case_name)
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE if not exists questions (
     question_id VARCHAR(36) PRIMARY KEY,
     category_id VARCHAR(36) NOT NULL,
     question_text VARCHAR(255) NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories (category_id),
+    FOREIGN KEY (category_id) REFERENCES categories (category_id) ON DELETE CASCADE,
     UNIQUE (category_id, question_text)
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE if not exists choices (
     choice_id INT AUTO_INCREMENT PRIMARY KEY,
     category_id VARCHAR(36) NOT NULL,
     choice_name VARCHAR(255) NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories (category_id),
+    FOREIGN KEY (category_id) REFERENCES categories (category_id) ON DELETE CASCADE,
     UNIQUE (category_id, choice_name)
 );
 
@@ -36,11 +36,12 @@ CREATE TABLE if not exists case_question_choices (
     case_id VARCHAR(36) NOT NULL,
     question_id VARCHAR(36) NOT NULL,
     choice_id INT NOT NULL,
-    FOREIGN KEY (case_id) REFERENCES cases (case_id),
-    FOREIGN KEY (question_id) REFERENCES questions (question_id),
-    FOREIGN KEY (choice_id) REFERENCES choices (choice_id)
+    FOREIGN KEY (case_id) REFERENCES cases (case_id) ON DELETE CASCADE,
+    FOREIGN KEY (question_id) REFERENCES questions (question_id) ON DELETE CASCADE,
+    FOREIGN KEY (choice_id) REFERENCES choices (choice_id) ON DELETE CASCADE
 );
 
+-- 本来はすべての質疑の履歴から回数の統計をとって、出現確率とするつもりだったけど、一時的に単純な割合にしてる
 CREATE OR REPLACE VIEW p_case AS
 SELECT cat.category_name, c.case_name, COUNT(c.case_id) / (
         SELECT COUNT(*)
