@@ -3,6 +3,9 @@ from typing import Dict, Tuple, Any, Callable
 from akinator import train
 import uuid
 
+if st.session_state.get("session_id") is None:
+    st.switch_page("app.py")
+
 
 def generate_uuid() -> str:
     """UUIDを生成する関数"""

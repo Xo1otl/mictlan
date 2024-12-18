@@ -16,7 +16,7 @@ compose = {
             'image': 'pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime',
             'container_name': 'akinator',
             'ports': ['8501:8501'],
-            'depends_on': ['mysql'],
+            'depends_on': ['mysql', 'redis'],
             'volumes': [
                 f'{workspace.relpath(__file__, "apps/akinator")}:/app/akinator',
             ],

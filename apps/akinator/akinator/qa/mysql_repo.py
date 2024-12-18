@@ -148,6 +148,8 @@ except ImportError:
 
 
 def default_repo() -> MysqlRepo:
+    print(
+        f"connection opened to mysql user: {akiconf.MYSQL_USER}, db: {akiconf.MYSQL_DB}")
     return MysqlRepo(
         host="mysql",
         user=akiconf.MYSQL_USER,
