@@ -3,6 +3,9 @@ from typing import Any, Dict, Tuple, Callable
 from akinator import qa
 import torch
 
+if st.session_state.get("session_id") is None:
+    st.switch_page("app.py")
+
 
 @st.cache_resource
 def init_akinator():
