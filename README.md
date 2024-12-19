@@ -26,6 +26,13 @@
 - https://www.elastic.co/jp/blog/getting-started-with-the-elastic-stack-and-docker-compose
 - awscli と rpk の lazy install 書く
 
+## CloudFlare利用
+DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストしたい
+* vpnサーバーでcomposeでFQDNではなくipを指定する
+* 今のmxレコードだとip割れるので隠匿機能が使えない
+  * CloudFlare Email Routingを使用する
+
+
 # Memo
 
 - lean のダウンロードはエディタの通知に従ってやる

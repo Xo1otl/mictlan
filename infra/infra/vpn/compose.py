@@ -5,7 +5,7 @@ compose = {
         'wg-easy': {
             'image': 'ghcr.io/wg-easy/wg-easy:latest',
             'environment': {
-                'WG_HOST': FQDN,
+                'WG_HOST': FQDN,  # TODO: CloudFlareでホストしたいのでFQDNだとIPが取得できないからIPに変更する
                 'PASSWORD_HASH': WEBUI_PASSWORD_HASH,
                 'WG_PORT': UDP_PORT,
                 'PORT': WEBUI_PORT,
