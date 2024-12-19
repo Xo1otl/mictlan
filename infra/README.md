@@ -6,6 +6,10 @@ infrastructure as code
 
 イメージと感覚つかめてきたし、workspace用のpackageとしてツール化したい
 
+## TODO
+
+searchengineはdbに含めるべきかもしれん
+
 ## Memo
 
 - サービスによっては複数のドメインで使われる場合がある
@@ -14,6 +18,8 @@ infrastructure as code
 - pythonパッケージとして登録されているのでimportが使える
 
 ## 設計
+
+カテゴライズされた位置に配置されていても、モジュール名はFQDNである必要がある (db/rdb, db/documentdb等)
 
 ### Poc
 

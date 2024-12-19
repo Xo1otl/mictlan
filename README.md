@@ -16,16 +16,6 @@
 
 # TODO
 
-1. 事前イベントと事後状態で状態遷移図を書く
-2. 内部的に、事前イベントと事後状態の間に、中間イベントと事後イベントと取り消しイベントを挿入した状態遷移図に変換する
-3. hook を用意して、事前イベントと処理を登録すると、処理を行って事後状態になるか、エラーを返して処理前の状態に戻る仕様を以下のように実装
-   1. 事前イベントを発火して中間状態への遷移を試みる、無理だったら処理しないでエラーを返す
-   2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
-   3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
-
-- https://www.elastic.co/jp/blog/getting-started-with-the-elastic-stack-and-docker-compose
-- awscli と rpk の lazy install 書く
-
 ## CloudFlare利用
 DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストしたい
 * vpnサーバーはudpなのでcomposeでFQDNではなくipを指定する必要がある (WebUIはhttps)
@@ -43,9 +33,15 @@ DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストし�
 - direnv が動かん時やターミナルが fish にならない時があるけど code-workspace ファイルでなんどか書き直すと戻る
 - julia では、pkg で add IJulia すると jupyter kernel がインストールでき、vscode で julia のカーネル選択すると jupyter notebook で使える
 - secrets がなくても devcontainer のビルドは正常にできるけど、ssh key だけ手動で移動する必要がある
-- workspace root で`tar -xvf secrets.tar.gz`してからビルドしたら万事解決する
 - [これでいいやん](https://github.com/apache/incubator-answer?tab=readme-ov-file)
 - nginxなくてもcloudflareで同じことできる
+1. 事前イベントと事後状態で状態遷移図を書く
+2. 内部的に、事前イベントと事後状態の間に、中間イベントと事後イベントと取り消しイベントを挿入した状態遷移図に変換する
+3. hook を用意して、事前イベントと処理を登録すると、処理を行って事後状態になるか、エラーを返して処理前の状態に戻る仕様を以下のように実装
+   1. 事前イベントを発火して中間状態への遷移を試みる、無理だったら処理しないでエラーを返す
+   2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
+   3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
+
 
 # Note
 
