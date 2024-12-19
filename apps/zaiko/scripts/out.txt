@@ -1,0 +1,2046 @@
+Command: curl -d '{"name": "vzr", "amount": 395}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "vzr", "amount": 395}
+Actual: {"name":"vzr","amount":395}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   1378   1477 --:--:-- --:--:-- --:--:--  2900
+
+==================================================
+Command: curl -d '{"name": "vzr", "amount": 335, "price": 8020.651317}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "vzr", "amount": 335, "price": 8020.651317}
+Actual: {"name":"vzr","amount":335,"price":8020.651317}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  13157  14254 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 2686918.2}
+Actual: {"sales":0.0}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    14  100    14    0     0   5638      0 --:--:-- --:--:-- --:--:--  7000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {}
+Actual: null
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     5  100     5    0     0   2605      0 --:--:-- --:--:-- --:--:--  5000
+
+==================================================
+Command: curl -d '{"name": "ZIM", "amount": 919}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ZIM", "amount": 919}
+Actual: {"name":"ZIM","amount":919}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7349   7874 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   1375      0 --:--:-- --:--:-- --:--:--  1500
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 874}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 874}
+Actual: {"name":"QGF","amount":874}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7823   8382 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 836, "price": 6096.78102}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "QGF", "amount": 836, "price": 6096.78102}
+Actual: {"name":"QGF","amount":836,"price":6096.78102}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  10439  11328 --:--:-- --:--:-- --:--:-- 24500
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 27, "price": 4031.723551}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "QGF", "amount": 27, "price": 4031.723551}
+Actual: {"name":"QGF","amount":27,"price":4031.723551}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  12104  13134 --:--:-- --:--:-- --:--:-- 32666
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 388}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 388}
+Actual: {"name":"QGF","amount":388}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6577   7047 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 871}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 871}
+Actual: {"name":"QGF","amount":871}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7792   8349 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 383}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 383}
+Actual: {"name":"QGF","amount":383}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6209   6653 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 0}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  15948  22328 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 866}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 866}
+Actual: {"name":"QGF","amount":866}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7941   8508 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 200, "price": 8429.068427}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "QGF", "amount": 200, "price": 8429.068427}
+Actual: {"name":"QGF","amount":200,"price":8429.068427}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  13125  14219 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 437}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 437}
+Actual: {"name":"QGF","amount":437}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7741   8294 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "AMA", "amount": 0}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  16155  22617 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"QGF": 2756}
+Actual: {"QGF":2756}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    13  100    13    0     0   8447      0 --:--:-- --:--:-- --:--:-- 13000
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 1089, "price": 6085.595747}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "QGF", "amount": 1089, "price": 6085.595747}
+Actual: {"name":"QGF","amount":1089,"price":6085.595747}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   102  100    49  100    53   8896   9622 --:--:-- --:--:-- --:--:-- 20400
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 1088, "price": 2877.332091}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "QGF", "amount": 1088, "price": 2877.332091}
+Actual: {"name":"QGF","amount":1088,"price":2877.332091}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   102  100    49  100    53  14327  15497 --:--:-- --:--:-- --:--:-- 34000
+
+==================================================
+Command: curl -d '{"name": "ZOY", "amount": 269}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ZOY", "amount": 269}
+Actual: {"name":"ZOY","amount":269}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   8264   8854 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "ZOY", "amount": 176, "price": -10}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    64  100    20  100    44  16103  35426 --:--:-- --:--:-- --:--:-- 64000
+
+==================================================
+Command: curl -d '{"name": "QGF", "amount": 753}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "QGF", "amount": 753}
+Actual: {"name":"QGF","amount":753}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7885   8448 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "ZOY", "amount": 231, "price": 1640.639487}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "ZOY", "amount": 231, "price": 1640.639487}
+Actual: {"name":"ZOY","amount":231,"price":1640.639487}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  11350  12296 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl -d '{"name": "GDG", "amount": 832}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "GDG", "amount": 832}
+Actual: {"name":"GDG","amount":832}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7749   8303 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "GDG", "amount": 615}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "GDG", "amount": 615}
+Actual: {"name":"GDG","amount":615}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   8335   8931 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "GDG", "amount": 124}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "GDG", "amount": 124}
+Actual: {"name":"GDG","amount":124}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   4611   4940 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 565}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "VRJ", "amount": 565}
+Actual: {"name":"VRJ","amount":565}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7627   8172 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 486, "price": -10}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    64  100    20  100    44  16420  36124 --:--:-- --:--:-- --:--:-- 64000
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 740}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "VRJ", "amount": 740}
+Actual: {"name":"VRJ","amount":740}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5867   6286 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 778}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "VRJ", "amount": 778}
+Actual: {"name":"VRJ","amount":778}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   8539   9149 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 529}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "VRJ", "amount": 529}
+Actual: {"name":"VRJ","amount":529}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7918   8484 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 917}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "VRJ", "amount": 917}
+Actual: {"name":"VRJ","amount":917}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7775   8331 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 882, "price": 2237.575467}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "VRJ", "amount": 882, "price": 2237.575467}
+Actual: {"name":"VRJ","amount":882,"price":2237.575467}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   9896  10721 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl -d '{"name": "byy", "amount": 902}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "byy", "amount": 902}
+Actual: {"name":"byy","amount":902}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7929   8496 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "VRJ", "amount": 757}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "VRJ", "amount": 757}
+Actual: {"name":"VRJ","amount":757}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7490   8025 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "byy", "amount": 299, "price": 1.123456789}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    72  100    20  100    52   5091  13238 --:--:-- --:--:-- --:--:-- 24000
+
+==================================================
+Command: curl -d '{"name": "BZY", "amount": 957}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "BZY", "amount": 957}
+Actual: {"name":"BZY","amount":957}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7758   8312 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "rkc", "amount": 590}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "rkc", "amount": 590}
+Actual: {"name":"rkc","amount":590}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7786   8342 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "byy", "amount": 585, "price": 6999.795453}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "byy", "amount": 585, "price": 6999.795453}
+Actual: {"name":"byy","amount":585,"price":6999.795453}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   8907   9649 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "AWY", "amount": 869}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "AWY", "amount": 869}
+Actual: {"name":"AWY","amount":869}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7860   8422 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "oas", "amount": 141}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "oas", "amount": 141}
+Actual: {"name":"oas","amount":141}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7893   8457 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "JPW", "amount": -10}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  16460  24691 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"VRJ": 3404, "byy": 317, "BZY": 957, "rkc": 590, "AWY": 869, "oas": 141}
+Actual: {"AWY":869,"BZY":957,"VRJ":3404,"byy":317,"oas":141,"rkc":590}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    63  100    63    0     0  33582      0 --:--:-- --:--:-- --:--:-- 63000
+
+==================================================
+Command: curl -d '{"name": "LTA", "amount": 871}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "LTA", "amount": 871}
+Actual: {"name":"LTA","amount":871}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   4909   5260 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "OVB", "amount": 133}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "OVB", "amount": 133}
+Actual: {"name":"OVB","amount":133}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7963   8532 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "OVB", "amount": 921}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "OVB", "amount": 921}
+Actual: {"name":"OVB","amount":921}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7891   8455 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "rxm", "amount": 840}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "rxm", "amount": 840}
+Actual: {"name":"rxm","amount":840}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5638   6041 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "OVB", "amount": 327, "price": 8868.960157}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "OVB", "amount": 327, "price": 8868.960157}
+Actual: {"name":"OVB","amount":327,"price":8868.960157}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  14117  15294 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "rxm", "amount": 831, "price": 5884.950808}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "rxm", "amount": 831, "price": 5884.950808}
+Actual: {"name":"rxm","amount":831,"price":5884.950808}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  13111  14203 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "OVB", "amount": 347, "price": 4009.478508}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "OVB", "amount": 347, "price": 4009.478508}
+Actual: {"name":"OVB","amount":347,"price":4009.478508}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   9656  10460 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl -d '{"name": "OVB", "amount": 316}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "OVB", "amount": 316}
+Actual: {"name":"OVB","amount":316}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7486   8021 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "UVM", "amount": 923}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "UVM", "amount": 923}
+Actual: {"name":"UVM","amount":923}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7658   8205 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"OVB": 696, "rxm": 9, "UVM": 923}
+Actual: {"OVB":696,"UVM":923,"rxm":9}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    30  100    30    0     0  14513      0 --:--:-- --:--:-- --:--:-- 30000
+
+==================================================
+Command: curl -d '{"name": "RKT", "amount": -10}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  16313  24469 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl -d '{"name": "MIB", "amount": 131}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "MIB", "amount": 131}
+Actual: {"name":"MIB","amount":131}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5664   6069 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "rxm", "amount": 4, "price": 4439.734003}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "rxm", "amount": 4, "price": 4439.734003}
+Actual: {"name":"rxm","amount":4,"price":4439.734003}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  12388  13466 --:--:-- --:--:-- --:--:-- 32000
+
+==================================================
+Command: curl -d '{"name": "ZMK", "amount": 231}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ZMK", "amount": 231}
+Actual: {"name":"ZMK","amount":231}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6963   7460 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   1666      0 --:--:-- --:--:-- --:--:--  3000
+
+==================================================
+Command: curl -d '{"name": "NIG", "amount": 570}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "NIG", "amount": 570}
+Actual: {"name":"NIG","amount":570}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7417   7947 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   1497      0 --:--:-- --:--:-- --:--:--  3000
+
+==================================================
+Command: curl -d '{"name": "GZV", "amount": 155}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "GZV", "amount": 155}
+Actual: {"name":"GZV","amount":155}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7633   8178 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"GZV": 155}
+Actual: {"GZV":155}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    12  100    12    0     0   6362      0 --:--:-- --:--:-- --:--:-- 12000
+
+==================================================
+Command: curl -d '{"name": "GZV", "amount": 35, "price": 3229.344812}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "GZV", "amount": 35, "price": 3229.344812}
+Actual: {"name":"GZV","amount":35,"price":3229.344812}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51   9855  10694 --:--:-- --:--:-- --:--:-- 24500
+
+==================================================
+Command: curl -d '{"name": "GZV", "amount": 53, "price": 8417.947391}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "GZV", "amount": 53, "price": 8417.947391}
+Actual: {"name":"GZV","amount":53,"price":8417.947391}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  12912  14010 --:--:-- --:--:-- --:--:-- 32666
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 956}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "fez", "amount": 956}
+Actual: {"name":"fez","amount":956}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5935   6359 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 261, "price": 4401.865962}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 261, "price": 4401.865962}
+Actual: {"name":"fez","amount":261,"price":4401.865962}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12931  14008 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 861}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "fez", "amount": 861}
+Actual: {"name":"fez","amount":861}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7248   7765 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 926, "price": 4977.783643}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 926, "price": 4977.783643}
+Actual: {"name":"fez","amount":926,"price":4977.783643}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   9931  10759 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 571}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "CSX", "amount": 571}
+Actual: {"name":"CSX","amount":571}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7616   8161 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 235, "price": 4622.111618}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 235, "price": 4622.111618}
+Actual: {"name":"CSX","amount":235,"price":4622.111618}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12519  13562 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 705}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "CSX", "amount": 705}
+Actual: {"name":"CSX","amount":705}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5777   6190 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 588}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "fez", "amount": 588}
+Actual: {"name":"fez","amount":588}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7567   8108 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 310, "price": 98.426307}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 310, "price": 98.426307}
+Actual: {"name":"fez","amount":310,"price":98.426307}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  13165  14310 --:--:-- --:--:-- --:--:-- 32000
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 718, "price": 7338.222796}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 718, "price": 7338.222796}
+Actual: {"name":"CSX","amount":718,"price":7338.222796}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  13086  14176 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"fez": 908, "CSX": 323}
+Actual: {"CSX":323,"fez":908}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    22  100    22    0     0   9105      0 --:--:-- --:--:-- --:--:-- 11000
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 263, "price": 6128.193281}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 263, "price": 6128.193281}
+Actual: {"name":"fez","amount":263,"price":6128.193281}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12522  13566 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 121, "price": 5122.249267}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 121, "price": 5122.249267}
+Actual: {"name":"CSX","amount":121,"price":5122.249267}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  13318  14428 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 59, "price": 506.481214}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 59, "price": 506.481214}
+Actual: {"name":"CSX","amount":59,"price":506.481214}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50   8866   9637 --:--:-- --:--:-- --:--:-- 19200
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 17, "price": 7876.78092}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 17, "price": 7876.78092}
+Actual: {"name":"CSX","amount":17,"price":7876.78092}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  10449  11358 --:--:-- --:--:-- --:--:-- 24000
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 14539161.8}
+Actual: {"sales":14539161.7}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    21  100    21    0     0  11176      0 --:--:-- --:--:-- --:--:-- 21000
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 375, "price": 6672.668022}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 375, "price": 6672.668022}
+Actual: {"name":"fez","amount":375,"price":6672.668022}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12393  13426 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 80}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "fez", "amount": 80}
+Actual: {"name":"fez","amount":80}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29   5580   5994 --:--:-- --:--:-- --:--:-- 14000
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 871}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "CSX", "amount": 871}
+Actual: {"name":"CSX","amount":871}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7287   7808 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "JLS", "amount": 1.1}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  17021  25531 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 212, "price": 1179.940334}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 212, "price": 1179.940334}
+Actual: {"name":"fez","amount":212,"price":1179.940334}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  11286  12226 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 357, "price": 5955.411861}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 357, "price": 5955.411861}
+Actual: {"name":"CSX","amount":357,"price":5955.411861}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12269  13292 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 132, "price": 3378.130281}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 132, "price": 3378.130281}
+Actual: {"name":"CSX","amount":132,"price":3378.130281}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12628  13680 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "xmw", "amount": 303}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "xmw", "amount": 303}
+Actual: {"name":"xmw","amount":303}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6102   6538 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "gpo", "amount": 852}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "gpo", "amount": 852}
+Actual: {"name":"gpo","amount":852}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7648   8194 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "gpo", "amount": 516, "price": 576.238228}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "gpo", "amount": 516, "price": 576.238228}
+Actual: {"name":"gpo","amount":516,"price":576.238228}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  11380  12348 --:--:-- --:--:-- --:--:-- 24500
+
+==================================================
+Command: curl -d '{"name": "gpo", "amount": 778}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "gpo", "amount": 778}
+Actual: {"name":"gpo","amount":778}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5827   6243 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "SEM", "amount": 743}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "SEM", "amount": 743}
+Actual: {"name":"SEM","amount":743}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7150   7660 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "gpo", "amount": 976, "price": 1144.98047}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "gpo", "amount": 976, "price": 1144.98047}
+Actual: {"name":"gpo","amount":976,"price":1144.98047}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  12082  13110 --:--:-- --:--:-- --:--:-- 32666
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"fez": 138, "CSX": 508, "xmw": 303, "gpo": 138, "SEM": 743}
+Actual: {"CSX":508,"SEM":743,"fez":138,"gpo":138,"xmw":303}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    52  100    52    0     0  30285      0 --:--:-- --:--:-- --:--:-- 52000
+
+==================================================
+Command: curl -d '{"name": "gpo", "amount": 318}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "gpo", "amount": 318}
+Actual: {"name":"gpo","amount":318}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5481   5873 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "fez", "amount": 30, "price": 7440.14928}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "fez", "amount": 30, "price": 7440.14928}
+Actual: {"name":"fez","amount":30,"price":7440.14928}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  11776  12800 --:--:-- --:--:-- --:--:-- 32000
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 130, "price": 7665.915761}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 130, "price": 7665.915761}
+Actual: {"name":"CSX","amount":130,"price":7665.915761}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  12938  14016 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "oth", "amount": 997}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "oth", "amount": 997}
+Actual: {"name":"oth","amount":997}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   4792   5135 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"fez": 108, "CSX": 378, "xmw": 303, "gpo": 456, "SEM": 743, "oth": 997}
+Actual: {"CSX":378,"SEM":743,"fez":108,"gpo":456,"oth":997,"xmw":303}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    62  100    62    0     0  30170      0 --:--:-- --:--:-- --:--:-- 62000
+
+==================================================
+Command: curl -d '{"name": "xmw", "amount": -5, "price": 47.7}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    64  100    20  100    44   7656  16845 --:--:-- --:--:-- --:--:-- 32000
+
+==================================================
+Command: curl -d '{"name": "xmw", "amount": 1.1}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  16542  24813 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl -d '{"name": "CSX", "amount": 261, "price": 3046.22214}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "CSX", "amount": 261, "price": 3046.22214}
+Actual: {"name":"CSX","amount":261,"price":3046.22214}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51   8846   9599 --:--:-- --:--:-- --:--:-- 19600
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 23293232.2}
+Actual: {"sales":23293232.1}
+Result: ❌ Mismatch
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    21  100    21    0     0  11481      0 --:--:-- --:--:-- --:--:-- 21000
+
+==================================================
+Command: curl -d '{"name": "SEM", "amount": 39, "price": 2905.066135}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "SEM", "amount": 39, "price": 2905.066135}
+Actual: {"name":"SEM","amount":39,"price":2905.066135}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  12169  13205 --:--:-- --:--:-- --:--:-- 32666
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"fez": 108, "CSX": 117, "xmw": 303, "gpo": 456, "SEM": 704, "oth": 997}
+Actual: {"CSX":117,"SEM":704,"fez":108,"gpo":456,"oth":997,"xmw":303}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    62  100    62    0     0  29893      0 --:--:-- --:--:-- --:--:-- 62000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {}
+Actual: {}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100     3  100     3    0     0   1588      0 --:--:-- --:--:-- --:--:--  3000
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 938}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "kju", "amount": 938}
+Actual: {"name":"kju","amount":938}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5028   5387 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 174}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "kju", "amount": 174}
+Actual: {"name":"kju","amount":174}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6796   7281 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 1051, "price": 8937.490921}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 1051, "price": 8937.490921}
+Actual: {"name":"kju","amount":1051,"price":8937.490921}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   102  100    49  100    53  10603  11469 --:--:-- --:--:-- --:--:-- 25500
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 26, "price": 8311.260382}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 26, "price": 8311.260382}
+Actual: {"name":"kju","amount":26,"price":8311.260382}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  11528  12509 --:--:-- --:--:-- --:--:-- 32666
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 19, "price": 7344.706924}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 19, "price": 7344.706924}
+Actual: {"name":"kju","amount":19,"price":7344.706924}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  10973  11907 --:--:-- --:--:-- --:--:-- 24500
+
+==================================================
+Command: curl -d '{"name": "btk", "amount": 0}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    48  100    20  100    28  14545  20363 --:--:-- --:--:-- --:--:-- 48000
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 7, "price": 1965.739692}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 7, "price": 1965.739692}
+Actual: {"name":"kju","amount":7,"price":1965.739692}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50   8750   9511 --:--:-- --:--:-- --:--:-- 19200
+
+==================================================
+Command: curl -d '{"name": "ERG", "amount": 613}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ERG", "amount": 613}
+Actual: {"name":"ERG","amount":613}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7172   7684 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 1, "price": 6821.314778}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 1, "price": 6821.314778}
+Actual: {"name":"kju","amount":1,"price":6821.314778}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  11834  12863 --:--:-- --:--:-- --:--:-- 32000
+
+==================================================
+Command: curl -d '{"name": "XXQ", "amount": 159}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "XXQ", "amount": 159}
+Actual: {"name":"XXQ","amount":159}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5648   6052 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "KER", "amount": 595}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "KER", "amount": 595}
+Actual: {"name":"KER","amount":595}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6879   7371 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 1, "price": 6367.960622}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 1, "price": 6367.960622}
+Actual: {"name":"kju","amount":1,"price":6367.960622}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  11572  12578 --:--:-- --:--:-- --:--:-- 32000
+
+==================================================
+Command: curl -d '{"name": "XXQ", "amount": 668}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "XXQ", "amount": 668}
+Actual: {"name":"XXQ","amount":668}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5321   5701 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl -d '{"name": "XXQ", "amount": 725, "price": 6592.875573}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "XXQ", "amount": 725, "price": 6592.875573}
+Actual: {"name":"XXQ","amount":725,"price":6592.875573}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  11597  12563 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl -d '{"name": "rer", "amount": 73}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "rer", "amount": 73}
+Actual: {"name":"rer","amount":73}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29   6009   6454 --:--:-- --:--:-- --:--:-- 14000
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 1, "price": 83.262664}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 1, "price": 83.262664}
+Actual: {"name":"kju","amount":1,"price":83.262664}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    92  100    44  100    48  11250  12273 --:--:-- --:--:-- --:--:-- 30666
+
+==================================================
+Command: curl -d '{"name": "kju", "amount": 5, "price": 4096.401054}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "kju", "amount": 5, "price": 4096.401054}
+Actual: {"name":"kju","amount":5,"price":4096.401054}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  10555  11473 --:--:-- --:--:-- --:--:-- 24000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "yco", "amount": 476}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "yco", "amount": 476}
+Actual: {"name":"yco","amount":476}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7153   7664 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "zgw", "amount": 72}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "zgw", "amount": 72}
+Actual: {"name":"zgw","amount":72}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29   5634   6051 --:--:-- --:--:-- --:--:-- 14000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 674}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "tqd", "amount": 674}
+Actual: {"name":"tqd","amount":674}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7270   7790 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 602, "price": 2475.46739}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "tqd", "amount": 602, "price": 2475.46739}
+Actual: {"name":"tqd","amount":602,"price":2475.46739}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51   9997  10848 --:--:-- --:--:-- --:--:-- 24500
+
+==================================================
+Command: curl -d '{"name": "PGC", "amount": 3}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "PGC", "amount": 3}
+Actual: {"name":"PGC","amount":3}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    54  100    26  100    28   6885   7415 --:--:-- --:--:-- --:--:-- 18000
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 18, "price": -10}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    63  100    20  100    43  15082  32428 --:--:-- --:--:-- --:--:-- 63000
+
+==================================================
+Command: curl -d '{"name": "GKP", "amount": 690}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "GKP", "amount": 690}
+Actual: {"name":"GKP","amount":690}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6558   7027 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "GKP", "amount": 313, "price": 6768.795956}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "GKP", "amount": 313, "price": 6768.795956}
+Actual: {"name":"GKP","amount":313,"price":6768.795956}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   8768   9499 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"tqd": 72, "PGC": 3, "GKP": 377}
+Actual: {"GKP":377,"PGC":3,"tqd":72}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    29  100    29    0     0  14616      0 --:--:-- --:--:-- --:--:-- 29000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"tqd": 72, "PGC": 3, "GKP": 377}
+Actual: {"GKP":377,"PGC":3,"tqd":72}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    29  100    29    0     0  16129      0 --:--:-- --:--:-- --:--:-- 29000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"tqd": 72, "PGC": 3, "GKP": 377}
+Actual: {"GKP":377,"PGC":3,"tqd":72}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    29  100    29    0     0  17901      0 --:--:-- --:--:-- --:--:-- 29000
+
+==================================================
+Command: curl -d '{"name": "ACU", "amount": 362}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ACU", "amount": 362}
+Actual: {"name":"ACU","amount":362}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6799   7285 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 0, "price": 91.24}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    64  100    20  100    44  18148  39927 --:--:-- --:--:-- --:--:-- 64000
+
+==================================================
+Command: curl -d '{"name": "ACU", "amount": 480}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ACU", "amount": 480}
+Actual: {"name":"ACU","amount":480}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6773   7256 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 59, "price": 731.872258}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "tqd", "amount": 59, "price": 731.872258}
+Actual: {"name":"tqd","amount":59,"price":731.872258}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50   9101   9893 --:--:-- --:--:-- --:--:-- 24000
+
+==================================================
+Command: curl -d '{"name": "MOP", "amount": 661}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "MOP", "amount": 661}
+Actual: {"name":"MOP","amount":661}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6871   7361 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "MOP", "amount": 22}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "MOP", "amount": 22}
+Actual: {"name":"MOP","amount":22}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29   6718   7215 --:--:-- --:--:-- --:--:-- 18666
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 3652045.0}
+Actual: {"sales":3652045.0}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    20  100    20    0     0  10224      0 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl -d '{"name": "PGC", "amount": 1, "price": 3934.598549}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "PGC", "amount": 1, "price": 3934.598549}
+Actual: {"name":"PGC","amount":1,"price":3934.598549}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50   8279   8999 --:--:-- --:--:-- --:--:-- 19200
+
+==================================================
+Command: curl -d '{"name": "WQG", "amount": 686}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "WQG", "amount": 686}
+Actual: {"name":"WQG","amount":686}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   7035   7537 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "nah", "amount": 997}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "nah", "amount": 997}
+Actual: {"name":"nah","amount":997}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5309   5688 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl -d '{"name": "ACU", "amount": 13}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "ACU", "amount": 13}
+Actual: {"name":"ACU","amount":13}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29   6688   7183 --:--:-- --:--:-- --:--:-- 18666
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 548}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "tqd", "amount": 548}
+Actual: {"name":"tqd","amount":548}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6698   7177 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "ACU", "amount": 386, "price": 1603.248222}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "ACU", "amount": 386, "price": 1603.248222}
+Actual: {"name":"ACU","amount":386,"price":1603.248222}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   8536   9247 --:--:-- --:--:-- --:--:-- 20000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"tqd": 561, "PGC": 2, "GKP": 377, "ACU": 469, "MOP": 683, "WQG": 686, "nah": 997}
+Actual: {"ACU":469,"GKP":377,"MOP":683,"PGC":2,"WQG":686,"nah":997,"tqd":561}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    70  100    70    0     0  37017      0 --:--:-- --:--:-- --:--:-- 70000
+
+==================================================
+Command: curl -d '{"name": "PGC", "amount": 2, "price": 7881.402215}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "PGC", "amount": 2, "price": 7881.402215}
+Actual: {"name":"PGC","amount":2,"price":7881.402215}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    96  100    46  100    50  11119  12086 --:--:-- --:--:-- --:--:-- 24000
+
+==================================================
+Command: curl -d '{"name": "WQG", "amount": 721, "price": 89.16}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    66  100    20  100    46   4899  11268 --:--:-- --:--:-- --:--:-- 22000
+
+==================================================
+Command: curl -d '{"name": "GKP", "amount": 324, "price": 7593.236508}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "GKP", "amount": 324, "price": 7593.236508}
+Actual: {"name":"GKP","amount":324,"price":7593.236508}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52  11946  12941 --:--:-- --:--:-- --:--:-- 33333
+
+==================================================
+Command: curl -d '{"name": "GKP", "amount": 777}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "GKP", "amount": 777}
+Actual: {"name":"GKP","amount":777}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6740   7221 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "MOP", "amount": 91, "price": 3733.349651}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "MOP", "amount": 91, "price": 3733.349651}
+Actual: {"name":"MOP","amount":91,"price":3733.349651}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51   9305  10097 --:--:-- --:--:-- --:--:-- 24500
+
+==================================================
+Command: curl -d '{"name": "MOP", "amount": -10}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  15847  23771 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl -d '{"name": "tqd", "amount": 845}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "tqd", "amount": 845}
+Actual: {"name":"tqd","amount":845}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6608   7080 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "GKP", "amount": 784, "price": 9499.022439}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "GKP", "amount": 784, "price": 9499.022439}
+Actual: {"name":"GKP","amount":784,"price":9499.022439}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   9538  10333 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"tqd": 1406, "PGC": 0, "GKP": 46, "ACU": 469, "MOP": 592, "WQG": 686, "nah": 997}
+Actual: {"ACU":469,"GKP":46,"MOP":592,"PGC":0,"WQG":686,"nah":997,"tqd":1406}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    70  100    70    0     0  39171      0 --:--:-- --:--:-- --:--:-- 70000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"tqd": 1406, "PGC": 0, "GKP": 46, "ACU": 469, "MOP": 592, "WQG": 686, "nah": 997}
+Actual: {"ACU":469,"GKP":46,"MOP":592,"PGC":0,"WQG":686,"nah":997,"tqd":1406}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    70  100    70    0     0  40091      0 --:--:-- --:--:-- --:--:-- 70000
+
+==================================================
+Command: curl -d '{"name": "PGC", "amount": 1.1}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    50  100    20  100    30  17152  25728 --:--:-- --:--:-- --:--:-- 50000
+
+==================================================
+Command: curl -d '{"name": "ACU", "amount": "abc", "price": 38.15}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"message":"ERROR"}
+Actual: {"message":"ERROR"}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    68  100    20  100    48  13927  33426 --:--:-- --:--:-- --:--:-- 68000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "qha", "amount": 645}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "qha", "amount": 645}
+Actual: {"name":"qha","amount":645}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6732   7213 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl -d '{"name": "qha", "amount": 80}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "qha", "amount": 80}
+Actual: {"name":"qha","amount":80}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    56  100    27  100    29   4982   5351 --:--:-- --:--:-- --:--:-- 11200
+
+==================================================
+Command: curl -d '{"name": "tzw", "amount": 853}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "tzw", "amount": 853}
+Actual: {"name":"tzw","amount":853}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6299   6749 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 0.0}
+Actual: {"sales":0.0}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    14  100    14    0     0   7113      0 --:--:-- --:--:-- --:--:-- 14000
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 0.0}
+Actual: {"sales":0.0}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    14  100    14    0     0   7070      0 --:--:-- --:--:-- --:--:-- 14000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl http://zaiko/v1/sales
+Expected: {"sales": 0.0}
+Actual: {"sales":0.0}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    14  100    14    0     0   7612      0 --:--:-- --:--:-- --:--:-- 14000
+
+==================================================
+Command: curl -X DELETE http://zaiko/v1/stocks
+Expected: 
+Actual: 
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+==================================================
+Command: curl -d '{"name": "hov", "amount": 344}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "hov", "amount": 344}
+Actual: {"name":"hov","amount":344}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5421   5808 --:--:-- --:--:-- --:--:-- 11600
+
+==================================================
+Command: curl -d '{"name": "hov", "amount": 89, "price": 4523.736477}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "hov", "amount": 89, "price": 4523.736477}
+Actual: {"name":"hov","amount":89,"price":4523.736477}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    98  100    47  100    51  11856  12865 --:--:-- --:--:-- --:--:-- 32666
+
+==================================================
+Command: curl -d '{"name": "hov", "amount": 240, "price": 1198.647923}' -H 'Content-Type: application/json' http://zaiko/v1/sales
+Expected: {"name": "hov", "amount": 240, "price": 1198.647923}
+Actual: {"name":"hov","amount":240,"price":1198.647923}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   100  100    48  100    52   9430  10216 --:--:-- --:--:-- --:--:-- 25000
+
+==================================================
+Command: curl http://zaiko/v1/stocks
+Expected: {"hov": 15}
+Actual: {"hov":15}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    11  100    11    0     0   5753      0 --:--:-- --:--:-- --:--:-- 11000
+
+==================================================
+Command: curl -d '{"name": "hov", "amount": 460}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "hov", "amount": 460}
+Actual: {"name":"hov","amount":460}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   6972   7470 --:--:-- --:--:-- --:--:-- 19333
+
+==================================================
+Command: curl -d '{"name": "hov", "amount": 417}' -H 'Content-Type: application/json' http://zaiko/v1/stocks
+Expected: {"name": "hov", "amount": 417}
+Actual: {"name":"hov","amount":417}
+Result: ✅ Match
+Error:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    58  100    28  100    30   5932   6355 --:--:-- --:--:-- --:--:-- 14500
+
+==================================================
