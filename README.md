@@ -5,6 +5,12 @@
 [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 なんか subpackage に manifest がないとか言われるが動いてるので問題なし
 
+# Links
+
+* [Q&Aサイト](https://answer.mictlan.site/)
+* [アキネーター](https://akinator.mictlan.site/)
+* [ブログ](https://blog.mictlan.site/)
+
 # Idea
 
 - 今回考えた state machine を使った設計で、しかのこダイアグラムをポチポチ進められるページを作りたい
