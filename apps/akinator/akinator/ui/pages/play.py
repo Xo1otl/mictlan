@@ -1,6 +1,7 @@
 import streamlit as st
 from typing import Any, Dict, Tuple, Callable
 from akinator import qa
+from akinator import common
 import torch
 
 if st.session_state.get("session_id") is None:
@@ -14,9 +15,9 @@ def init_akinator():
 
 
 device = init_akinator()
-# cache_resourceしたらqueryの結果までキャッシュされてしまうせいでsessionで代用
+# connをcache_resourceしたらqueryの結果までキャッシュされてしまうせいでsessionで代用
 if st.session_state.get("play_repo") is None:
-    st.session_state.play_repo = qa.default_repo()
+    st.session_state.play_repo = qa.MysqlRepo(common.default_conn())
 repo = st.session_state.play_repo
 categories = repo.categories()
 
