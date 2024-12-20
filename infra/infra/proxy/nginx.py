@@ -26,25 +26,20 @@ for conf_file in conf_files:
 
 print('[proxy] docker-compose.yamlから使ってないサービスに対するvolumeを削除してください')
 
-# docker_compose設定を作成
-compose = {
-    'services': {
-        'nginx': {
-            'build': {
-                'dockerfile': 'Dockerfile'
-            },
-            'environment': [
-                f'VPN_HOST={vpn.FQDN}',
-                f'MAIL_HOST={mail.FQDN}',
-                f'CERTBOT_EMAIL={CERTBOT_EMAIL}'
-            ],
-            'volumes': volumes,
-            'entrypoint': ["/entrypoint.sh"],
-            'ports': [
-                '80:80/tcp',
-                '443:443/tcp'
-            ],
-            'restart': 'unless-stopped'
-        }
-    }
+nginx_service = {
+    'build': {
+        'dockerfile': 'Dockerfile'
+    },
+    'environment': [
+        f'VPN_HOST={vpn.FQDN}',
+        f'MAIL_HOST={mail.FQDN}',
+        f'CERTBOT_EMAIL={CERTBOT_EMAIL}'
+    ],
+    'volumes': volumes,
+    'entrypoint': ["/entrypoint.sh"],
+    'ports': [
+        '80:80/tcp',
+        '443:443/tcp'
+    ],
+    'restart': 'unless-stopped'
 }

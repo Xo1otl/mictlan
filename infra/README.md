@@ -6,10 +6,6 @@ infrastructure as code
 
 イメージと感覚つかめてきたし、workspace用のpackageとしてツール化したい
 
-## TODO
-
-searchengineはdbに含めるべきかもしれん
-
 ## Memo
 
 - サービスによっては複数のドメインで使われる場合がある

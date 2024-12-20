@@ -143,6 +143,9 @@ if state["answer"] is not None:
         dispatch((SEND_ANSWER, {"answer": correct_case}))
         dispatch((PLAY_AGAIN, {}))
         st.rerun()
+    """
+    同じ回答や違う回答で繰り返しあそぶと、リアルタイムにどんどん賢くなります！回答を送信したら Let's リトライ！
+    """
 else:
     st.write(state["question"])
     choice = st.radio("回答を選択", state["choices"], horizontal=True)
@@ -152,6 +155,7 @@ else:
 if st.button("はじめから"):
     dispatch((PLAY_AGAIN, {}))
     st.rerun()
+
 st.write("---")
 st.write("デバッグ情報")
 st.write(state)

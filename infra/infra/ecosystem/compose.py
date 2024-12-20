@@ -1,7 +1,7 @@
 import yaml
 import os
 from infra import vpn
-from infra import searchengine
+from infra.db import searchengine
 from infra.db import rdb
 from infra import proxy
 from infra import observability
