@@ -1,3 +1,13 @@
+import streamlit as st
+
+st.set_page_config(layout="wide")
+
+"""
+# 状態管理について
+
+## ステートマシン
+
+```typescript
 type SimpleState = string;
 type RegionName = string;
 
@@ -27,3 +37,25 @@ export interface Machine<T extends State, U extends Event> {
 	 */
 	dispatch<T>(event: U, effect?: () => T): T | undefined;
 }
+```
+
+このようなインターフェース考えてみたら割と便利だった
+
+例えばsubscribeにreactのsetStateを渡せば、任意のオブジェクトでデータバインディングできる
+
+状態遷移の実装はなんでもよい。xstateとか使ってもいいし、switch文で頑張って書いてもよい
+
+dispatchにeffectをもたせてエラーのときに状態遷移しないことで、正常な動作しかできない完全な状態遷移を実現できる
+
+## Reducer Pattern
+
+複数の入力欄があるフォームとか考えた時
+
+入力欄Aが有効or無効、入力欄Bが有効or無効、入力欄Cが有効or無効などそれぞれの状態はシンプルでも、フォーム全体としてみれば8通りの複雑な状態がある
+
+ステートマシンでこういうのを管理するのは向いてない、Reducer Patternを使うといい
+
+Reducer Patternはドシンプルで、状態を持つクラスを作って、状態を変更する関数を作って、それを呼び出して一元管理するだけ
+
+一応本家Reactのやつはimmutableとかよくわからんことをやってるけど、普通にstreamlitでmutableにやってみても便利だった
+"""
