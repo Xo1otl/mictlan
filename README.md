@@ -21,7 +21,8 @@ DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストし�
 * vpnサーバーはudpなのでcomposeでFQDNではなくipを指定する必要がある (WebUIはhttps)
 * 今のmxレコードだとip割れるので隠匿機能が使えない
   * CloudFlare Email Routingを使用する
-
+  * 送信はgmailのsmtpなのでmxレコードいらない
+* zrok無くてもこれからcloudflare tunnelでローカルをすぐ公開できるようになる
 
 # Memo
 

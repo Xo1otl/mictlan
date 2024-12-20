@@ -68,15 +68,17 @@ with texts:
     """
     このアプリでは、推測ゲームをプレイしたり、知識ベースに貢献したりできます。
     
+    **docs**: このアプリの仕組みについて詳細を技術的に説明しています！
+
     **play:** あなたが考えていることを推測するアプリの能力をテストします。
     
     **train:** 新しい分野、質問、場合に対する回答を追加して、アプリの改善に役立ててください。
-    
+
     ソースコードはこちら: [GitHub](https://github.com/Xo1otl/mictlan/tree/main/apps/akinator)
     """
 with image:
     st.image("assets/akinator.png", width=400)
 
-st.write("---")
-st.write("デバッグ情報")
-st.write(f"セッションID: {st.session_state.session_id}")
+# st.write("---")
+# st.write("デバッグ情報")
+# st.write(f"セッションID: {st.session_state.session_id}")

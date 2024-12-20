@@ -53,6 +53,8 @@ def reducer(state: Dict[str, Any], action: Action) -> None:
             for category_data in state["categories"].values()
         ):
             raise ValueError("そのカテゴリ名はすでに存在します")
+        if payload["category_name"].strip() == "":
+            raise ValueError("カテゴリ名が空です")
 
         category_id = repo.add_category(payload["category_name"])
         state["categories"][category_id] = {
@@ -72,10 +74,12 @@ def reducer(state: Dict[str, Any], action: Action) -> None:
 
     if type == EDIT_CHOICES:
         if (
-            state["categories"][state["category_id"]]["questions"]
-            or state["categories"][state["category_id"]]["cases"]
+            # 選択肢が存在しない場合編集できる
+            state["categories"][state["category_id"]]["choices"] and
+            (state["categories"][state["category_id"]]["questions"]
+             or state["categories"][state["category_id"]]["cases"])
         ):
-            raise ValueError("質問または場合が存在するため、選択肢を編集できません")
+            raise ValueError("質問または場合が存在するため、空でない選択肢は編集できません")
 
         # choicesが空文字列を含む場合、エラーを出す
         if len(payload["choices"]) == 0:
@@ -99,6 +103,8 @@ def reducer(state: Dict[str, Any], action: Action) -> None:
             for question_data in state["categories"][state["category_id"]]["questions"].values()
         ):
             raise ValueError("その質問はすでに存在します")
+        if payload["question_text"].strip() == "":
+            raise ValueError("質問が空です")
         question_id = repo.add_question(
             state["category_id"], payload["question_text"])
         state["categories"][state["category_id"]]["questions"][question_id] = {
@@ -119,6 +125,8 @@ def reducer(state: Dict[str, Any], action: Action) -> None:
             for case_data in state["categories"][state["category_id"]]["cases"].values()
         ):
             raise ValueError("その場合はすでに存在します")
+        if payload["case_name"].strip() == "":
+            raise ValueError("場合が空です")
 
         case_id = repo.add_case(state["category_id"], payload["case_name"])
         state["categories"][state["category_id"]]["cases"][case_id] = {
@@ -152,10 +160,7 @@ def useTrainer() -> Tuple[Dict[str, Any], Callable[[Action], None]]:
 
     def dispatch(action: Action) -> None:
         # streamlitはstateによる画面のレンダリングは機能はないのでmutableでよい
-        try:
-            reducer(st.session_state.state, action)
-        except ValueError as e:
-            st.error(e)
+        reducer(st.session_state.state, action)
     return st.session_state.state, dispatch
 
 
@@ -195,16 +200,22 @@ with category_tab:
         placeholder="新しいカテゴリを入力してください",
         key="new_category_input",
     )
-    if new_category_name:
-        if new_category_name not in category_id_to_text.values():
-            st.subheader(f"{new_category_name}の選択肢を設定")
-            options_text = st.text_area("選択肢を改行で区切って入力", value="\n".join([]))
-            new_category_options = [
-                line.strip() for line in options_text.split("\n") if line.strip()
-            ]
-            if st.button("選択肢を保存"):
-                dispatch((ADD_CATEGORY, {"category_name": new_category_name}))
-                dispatch((EDIT_CHOICES, {"choices": new_category_options}))
+    if st.button("カテゴリを追加"):
+        dispatch((ADD_CATEGORY, {"category_name": new_category_name}))
+        st.success(f"新しいカテゴリ: {new_category_name} を追加しました")
+
+    if state["category_id"]:
+        category_data = state["categories"][state["category_id"]]
+        st.subheader(
+            f"{category_data['text']}の選択肢を設定")
+        options_text = st.text_area(
+            "選択肢を改行で区切って入力", value="\n".join(category_data["choices"] if category_data.get("choices") else []),)
+        new_category_options = [
+            line.strip() for line in options_text.split("\n") if line.strip()
+        ]
+        if st.button("選択肢を保存"):
+            dispatch((EDIT_CHOICES, {"choices": new_category_options}))
+            st.success(f"{category_data['text']}の選択肢を更新しました")
 
 with question_tab:
     st.header("質問を選択または追加")
@@ -299,6 +310,6 @@ with answer_tab:
             st.success(
                 f"カテゴリ: {category_data['text']}, 場合: {category_data['cases'][state['case_id']]['text']}, 質問: {category_data['questions'][state['question_id']]['text']} に対して「{answer}」と回答しました")
 
-st.write("---")
-st.write("デバッグ情報")
-st.write(state)
+# st.write("---")
+# st.write("デバッグ情報")
+# st.write(state)
