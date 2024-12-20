@@ -1,8 +1,6 @@
 from akinator.qa import Dataset
 from akinator.qa.command_repo import HistoryItem
-import mysql.connector
 from mysql.connector import MySQLConnection
-import os
 from .query_repo import QueryRepo
 from .command_repo import CommandRepo
 from typing import Dict, List
@@ -10,13 +8,8 @@ import uuid
 
 
 class MysqlRepo(QueryRepo, CommandRepo):
-    def __init__(self, host: str, user: str, password: str, database: str) -> None:
-        self.conn: MySQLConnection = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )  # type: ignore
+    def __init__(self, conn: MySQLConnection) -> None:
+        self.conn: MySQLConnection = conn
 
     def categories(self) -> Dict[str, str]:
         cursor = self.conn.cursor()
@@ -132,27 +125,3 @@ class MysqlRepo(QueryRepo, CommandRepo):
             raise e
         finally:
             cursor.close()
-
-
-try:
-    import infra.akinator as akiconf
-except ImportError:
-    # infra モジュールが存在しない場合、環境変数から設定を読み込む
-    class AkinatorConfig:
-        def __init__(self):
-            self.MYSQL_USER = os.environ.get("MYSQL_USER", "user")
-            self.MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "password")
-            self.MYSQL_DB = os.environ.get("MYSQL_DB", "akinator_db")
-
-    akiconf = AkinatorConfig()
-
-
-def default_repo() -> MysqlRepo:
-    print(
-        f"connection opened to mysql user: {akiconf.MYSQL_USER}, db: {akiconf.MYSQL_DB}")
-    return MysqlRepo(
-        host="mysql",
-        user=akiconf.MYSQL_USER,
-        password=akiconf.MYSQL_PASSWORD,
-        database=akiconf.MYSQL_DB
-    )

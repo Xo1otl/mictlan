@@ -1,6 +1,7 @@
 import streamlit as st
 from typing import Dict, Tuple, Any, Callable
 from akinator import train
+from akinator import common
 import uuid
 
 if st.session_state.get("session_id") is None:
@@ -12,9 +13,9 @@ def generate_uuid() -> str:
     return str(uuid.uuid4())
 
 
-# cache_resourceしたらqueryの結果までキャッシュされてしまうせいでsessionで代用
+# connをcache_resourceしたらqueryの結果までキャッシュされてしまうせいでsessionで代用
 if st.session_state.get("train_repo") is None:
-    st.session_state.train_repo = train.default_repo()
+    st.session_state.train_repo = train.MysqlRepo(common.default_conn())
 repo = st.session_state.train_repo
 categories = repo.categories()
 
