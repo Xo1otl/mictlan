@@ -53,7 +53,7 @@ require (
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
-	github.com/labstack/echo/v4 v4.12.0
+	github.com/labstack/echo/v4 v4.13.3
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/lestrrat-go/jwx/v2 v2.1.2
 	github.com/mattn/go-isatty v0.0.20 // indirect
