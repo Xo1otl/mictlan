@@ -1,9 +1,12 @@
+-- Active: 1734432854840@@mysql@3306@koemade
 CREATE DATABASE IF NOT EXISTS koemade;
 
 USE koemade;
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 
-CREATE TABLE if not exists signup_requests (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS signup_requests (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     furigana VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
@@ -12,170 +15,129 @@ CREATE TABLE if not exists signup_requests (
     bank_name VARCHAR(255) NOT NULL,
     branch_name VARCHAR(255) NOT NULL,
     account_number VARCHAR(20) NOT NULL,
-    self_promotion VARCHAR(500) NOT NULL
+    self_promotion TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS accounts (
-    id SERIAL PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    status ENUM('active', 'banned', 'suspended') NOT NULL DEFAULT 'active',
+    INDEX idx_username (username)
 );
 
 CREATE TABLE IF NOT EXISTS roles (
-    id SERIAL PRIMARY KEY,
-    role_name VARCHAR(50) NOT NULL UNIQUE
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS account_roles (
-    account_id BIGINT UNSIGNED NOT NULL,
-    role_id BIGINT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS account_role (
+    account_id BIGINT NOT NULL,
+    role_id BIGINT NOT NULL,
     PRIMARY KEY (account_id, role_id),
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
     FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 );
 
-CREATE TABLE if not exists profiles (
+CREATE TABLE IF NOT EXISTS actor_ranks (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT
+);
+
+CREATE TABLE IF NOT EXISTS actor_profiles (
     display_name VARCHAR(255) NOT NULL,
-    category VARCHAR(255) NOT NULL,
+    rank_id BIGINT NOT NULL,
     self_promotion TEXT,
     price INT NOT NULL,
-    account_id BIGINT UNSIGNED PRIMARY KEY NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
+    status VARCHAR(50) NOT NULL DEFAULT '受付中',
+    account_id BIGINT PRIMARY KEY NOT NULL,
+    FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
+    FOREIGN KEY (rank_id) REFERENCES actor_ranks (id) ON DELETE RESTRICT
 );
 
-CREATE TABLE if not exists nsfw_options (
-    ok BOOLEAN NOT NULL,
+CREATE TABLE IF NOT EXISTS nsfw_options (
+    allowed BOOLEAN NOT NULL,
     price INT NOT NULL,
-    hard_ok BOOLEAN NOT NULL,
-    hard_surcharge INT NOT NULL,
-    account_id BIGINT UNSIGNED PRIMARY KEY NOT NULL,
+    extreme_allowed BOOLEAN NOT NULL,
+    extreme_surcharge INT NOT NULL,
+    account_id BIGINT PRIMARY KEY NOT NULL,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-CREATE TABLE if not exists profile_images (
-    account_id BIGINT UNSIGNED PRIMARY KEY NOT NULL,
-    mime_type VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS profile_images (
+    account_id BIGINT PRIMARY KEY NOT NULL,
+    mime_type VARCHAR(255) NOT NULL,
     size INTEGER NOT NULL,
     path TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-CREATE TABLE if not exists voices (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS voices (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    account_id BIGINT UNSIGNED NOT NULL,
-    mime_type VARCHAR(50) NOT NULL,
-    filename VARCHAR(255) NOT NULL UNIQUE,
+    account_id BIGINT NOT NULL,
+    mime_type VARCHAR(255) NOT NULL,
+    path TEXT NOT NULL,
+    hash VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
     INDEX (account_id),
-    UNIQUE (title, account_id) -- Ensures title is unique per account_id
+    UNIQUE (title, account_id)
 );
 
-CREATE TABLE IF NOT EXISTS voice_tags (
-    id SERIAL PRIMARY KEY,
-    tag_name VARCHAR(255) NOT NULL UNIQUE, -- タグの名前 (例: "10代", "20代", "おとなしい", "快活")
-    tag_category VARCHAR(255) NOT NULL --  タグタイプの名前 (例: "年代別タグ", "キャラ別タグ")
+CREATE TABLE IF NOT EXISTS tags (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    category VARCHAR(255) NOT NULL,
+    UNIQUE (name, category)
 );
 
-CREATE TABLE IF NOT EXISTS voice_tag_map (
-    voice_id BIGINT UNSIGNED NOT NULL, -- ID of the voice from the voices table
-    tag_id BIGINT UNSIGNED NOT NULL, -- ID of the tag from the voice_tags table
-    PRIMARY KEY (voice_id, tag_id), -- Composite primary key to ensure unique pairs of voice_id and tag_id
-    FOREIGN KEY (voice_id) REFERENCES voices (id) ON DELETE CASCADE, -- Foreign key constraint linking to voices table
-    FOREIGN KEY (tag_id) REFERENCES voice_tags (id) ON DELETE CASCADE -- Foreign key constraint linking to voice_tags table
+CREATE TABLE IF NOT EXISTS voice_tag (
+    voice_id BIGINT NOT NULL,
+    tag_id BIGINT NOT NULL,
+    PRIMARY KEY (voice_id, tag_id),
+    FOREIGN KEY (voice_id) REFERENCES voices (id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE
 );
 
--- Abcd1234*
-INSERT INTO
-    accounts (username, password)
-VALUES (
-        'admin@koemade.net',
-        '$2y$10$1ohq7F7XDTRZa7L9y6FYVui1Bq/8ncdFU0fWeS1ALLBo0z4C4u8qm'
-    );
+-- Insert data into the tags table with the corresponding tag types
+INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
+INSERT INTO tags (name, category) VALUES ('20代', '年代別タグ');
+INSERT INTO tags (name, category) VALUES ('30代以上', '年代別タグ');
+INSERT INTO tags (name, category) VALUES ('大人しい', 'キャラ別タグ');
+INSERT INTO tags (name, category) VALUES ('快活', 'キャラ別タグ');
+INSERT INTO tags (name, category) VALUES ('セクシー・渋め', 'キャラ別タグ');
 
--- Get the last inserted ID
-SET @last_id = LAST_INSERT_ID();
+-- Insert admin user
+INSERT INTO accounts (username, password) VALUES (
+    'admin@koemade.net',
+    '$2y$10$1ohq7F7XDTRZa7L9y6FYVui1Bq/8ncdFU0fWeS1ALLBo0z4C4u8qm' -- Abcd1234*
+);
 
--- Insert role into roles table if it does not exist
-INSERT INTO
-    roles (role_name)
-VALUES ('admin')
-ON DUPLICATE KEY UPDATE
-    id = id;
+-- Insert admin role
+INSERT INTO roles (name) VALUES ('admin');
 
--- Get the role ID
-SET
-    @role_id = (
-        SELECT id
-        FROM roles
-        WHERE
-            role_name = 'admin'
-    );
+-- Get the admin account_id and role_id
+SET @admin_account_id = LAST_INSERT_ID();
+SET @admin_role_id = (SELECT id FROM roles WHERE name = 'admin');
 
--- Insert role into account_roles table
-INSERT INTO
-    account_roles (account_id, role_id)
-VALUES (@last_id, @role_id);
+-- Insert role into account_role table
+INSERT INTO account_role (account_id, role_id) VALUES (@admin_account_id, @admin_role_id);
 
 -- Insert another user
-INSERT INTO
-    accounts (username, password)
-VALUES (
-        'qlovolp.ttt@gmail.com',
-        '$2y$10$1ohq7F7XDTRZa7L9y6FYVui1Bq/8ncdFU0fWeS1ALLBo0z4C4u8qm'
-    );
+INSERT INTO accounts (username, password) VALUES (
+    'qlovolp.ttt@gmail.com',
+    '$2y$10$1ohq7F7XDTRZa7L9y6FYVui1Bq/8ncdFU0fWeS1ALLBo0z4C4u8qm' -- Abcd1234*
+);
 
-SET @last_id = LAST_INSERT_ID();
+-- Insert actor role
+INSERT INTO roles (name) VALUES ('actor');
 
--- Insert role into roles table if it does not exist
-INSERT INTO
-    roles (role_name)
-VALUES ('actor')
-ON DUPLICATE KEY UPDATE
-    id = id;
+-- Get the actor account_id and role_id
+SET @actor_account_id = LAST_INSERT_ID();
+SET @actor_role_id = (SELECT id FROM roles WHERE name = 'actor');
 
--- Get the role ID
-SET
-    @role_id = (
-        SELECT id
-        FROM roles
-        WHERE
-            role_name = 'actor'
-    );
-
--- Insert role into account_roles table
-INSERT INTO
-    account_roles (account_id, role_id)
-VALUES (@last_id, @role_id);
-
--- Set the character set and collation for the session
-SET NAMES utf8mb4;
-
-SET CHARACTER SET utf8mb4;
-
--- Insert data into the voice_tags table with the corresponding tag types
-INSERT INTO
-    voice_tags (tag_name, tag_category)
-values ('10代', '年代別タグ');
-
-INSERT INTO
-    voice_tags (tag_name, tag_category)
-values ('20代', '年代別タグ');
-
-INSERT INTO
-    voice_tags (tag_name, tag_category)
-values ('30代以上', '年代別タグ');
-
-INSERT INTO
-    voice_tags (tag_name, tag_category)
-values ('大人しい', 'キャラ別タグ');
-
-INSERT INTO
-    voice_tags (tag_name, tag_category)
-values ('快活', 'キャラ別タグ');
-
-INSERT INTO
-    voice_tags (tag_name, tag_category)
-values ('セクシー・渋め', 'キャラ別タグ');
+-- Insert role into account_role table
+INSERT INTO account_role (account_id, role_id) VALUES (@actor_account_id, @actor_role_id);

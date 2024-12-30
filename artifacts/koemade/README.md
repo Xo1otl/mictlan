@@ -29,7 +29,8 @@ Web application specific components: static web assets, server side templates an
     - バックエンドではtokenの署名を公開鍵で検証
         - 署名と有効期間 
         - authミドルウェア的なものを用意
-    
+- idの作り方間違えている
+
 ```
 サンプルボイスの公開状態について
 指摘漏れすみません。

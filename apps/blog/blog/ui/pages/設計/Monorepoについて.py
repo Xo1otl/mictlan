@@ -1,7 +1,5 @@
 import streamlit as st
 
-st.set_page_config(layout="wide")
-
 """
 # Monorepoについて
 
@@ -60,7 +58,7 @@ Clean Architectureは**暗黙的に**守るようにしていますつまりdoma
 思想つよくてすいません...orz
 """
 
-st.page_link("pages/設計について.py", label="設計について")
+st.page_link("pages/CHSHゲーム.py", label="設計について")
 
 """
 の示すページにあるような感じでデータを基準に考えたり補題分割だと思って頑張ったり、センスでいい感じにドメインツリーを構築します

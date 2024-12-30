@@ -46,7 +46,7 @@ class ProfileRepo implements \actor\ProfileRepo
     /**
      * @throws \Exception
      */
-    public function addOrEditR(\actor\RInput $input)
+    public function addOrEditR(\actor\NSFWInput $input)
     {
         $stmt = $this->mysqli->prepare("
             INSERT INTO nsfw_options (ok, price, hard_ok, hard_surcharge, account_id)
@@ -66,8 +66,8 @@ class ProfileRepo implements \actor\ProfileRepo
             "iiiii",
             $input->ok,
             $input->price,
-            $input->hardOk,
-            $input->hardSurcharge,
+            $input->extremeOk,
+            $input->extremeSurcharge,
             $input->accountId->value
         );
 
@@ -81,7 +81,7 @@ class ProfileRepo implements \actor\ProfileRepo
     /**
      * @throws \Exception
      */
-    public function findR(\common\Id $accountId): \actor\R
+    public function findR(\common\Id $accountId): \actor\NSFWOptions
     {
         $stmt = $this->mysqli->prepare("SELECT ok, price, hard_ok, hard_surcharge FROM nsfw_options WHERE account_id = ?");
         $stmt->bind_param("s", $accountId->value); // Assuming $accountId->getValue() returns the actual ID
@@ -90,7 +90,7 @@ class ProfileRepo implements \actor\ProfileRepo
         $stmt->bind_result($ok, $price, $hardOk, $hardSurcharge);
 
         if ($stmt->fetch()) {
-            $result = new \actor\R($ok, $price, $hardOk, $hardSurcharge);
+            $result = new \actor\NSFWOptions($ok, $price, $hardOk, $hardSurcharge);
         } else {
             // Handle case where no result is found, e.g., by throwing an exception
             throw new \Exception("No record found for accountId: " . $accountId->value);
@@ -178,7 +178,7 @@ class ProfileRepo implements \actor\ProfileRepo
         $rPrice = $rPrice ?? 0;
         $hardOk = $hardOk ?? false;
         $hardSurcharge = $hardSurcharge ?? 0;
-        $r = new \actor\R($ok, $rPrice, $hardOk, $hardSurcharge);
+        $r = new \actor\NSFWOptions($ok, $rPrice, $hardOk, $hardSurcharge);
 
         $profile = new \actor\Profile($displayName, $category, $selfPromotion, $price, $r);
 

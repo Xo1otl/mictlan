@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 mpl.rcParams['font.family'] = 'Noto Sans CJK JP'
 
-st.set_page_config(layout="wide")
+
 
 r"""
 # 一次元の井戸型ポテンシャルの簡単な理解・前半

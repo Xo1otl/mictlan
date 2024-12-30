@@ -4,7 +4,6 @@ import mysql.connector
 from mysql.connector import MySQLConnection
 from mysql.connector.cursor import MySQLCursor
 import uuid
-import os
 
 
 class MysqlRepo(CommandRepo, QueryRepo):
