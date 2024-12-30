@@ -20,7 +20,11 @@ class Handler
         return $this->repo->actorVoices($input);
     }
 
-    function actors(ActorParams $input): Actor
+    /**
+     * @param ActorParams $input
+     * @return Actor[]
+     */
+    function actors(ActorParams $input): array
     {
         return $this->repo->actors($input);
     }

@@ -1,27 +1,11 @@
-### 1. Sample Voice Search API
+### 1. サンプルボイス検索用API
 
-**Endpoint:**
-```
-GET https://api.koemade.net/voices
-```
-
-**Request Parameters:**
-
-- `keyword`: Search term (e.g., "happy")
-- `status`: Status of acceptance (any, enabled, disabled)
-- `sex`: Voice actor's gender (any, male, female)
-- `rating`: Content rating (any, default, r18, extreme)
-- `age`: Age group of the voice (any, 0: kids, 1: teens, 2: twenties, 3: thirties, 7: forties and above)
-- `delivery`: Character traits of the voice (any, 4: quiet, 5: lively, 6: sexy/mature, 8: young, 9: serious, 10: other)
+**リクエスト:**
+- `title`: タイトル
+- `tags`: tagの配列 (カテゴリと名前、性別、年齢、deliveryなど)
 - `page`: Page number for pagination (e.g., 1)
 
-**Example Request URL:**
-```
-https://api.koemade.net/voices?keyword=happy&status=enabled&sex=female&rating=default&age=2&delivery=5&page=1
-```
-
-**Response Example:**
-
+**レスポンス:**
 ```json
 {
     "total": 120,
@@ -33,11 +17,6 @@ https://api.koemade.net/voices?keyword=happy&status=enabled&sex=female&rating=de
             "name": "Happy Greeting",
             "source_url": "https://koemade.net/samples/happy_greeting.mp3",
             "tags": ["greeting", "happy", "female"],
-            "ratings": {
-                "overall": 4.5,
-                "clarity": 4.2,
-                "naturalness": 4.8
-            },
             "actor": {
                 "id": 10,
                 "name": "Jane Doe",
@@ -51,11 +30,6 @@ https://api.koemade.net/voices?keyword=happy&status=enabled&sex=female&rating=de
             "name": "Excited Announcement",
             "source_url": "https://koemade.net/samples/excited_announcement.mp3",
             "tags": ["announcement", "excited", "female"],
-            "ratings": {
-                "overall": 4.7,
-                "clarity": 4.5,
-                "naturalness": 4.9
-            },
             "actor": {
                 "id": 10,
                 "name": "Jane Doe",
@@ -69,30 +43,15 @@ https://api.koemade.net/voices?keyword=happy&status=enabled&sex=female&rating=de
 }
 ```
 
-### 2. Actor Search API
+### 2. 声優検索用API
 
-**Endpoint:**
-```
-GET https://api.koemade.net/actors
-```
+**リクエスト:**
+- `display_name`: 名前
+- `status`: 受付中と受付停止中
+- `nsfw_options`: nsfwの設定でokかextreme.okかどうか
+- `page`: ページ番号
 
-**Request Parameters:**
-
-- `keyword`: Search term (e.g., "John")
-- `status`: Status of acceptance (any, enabled, disabled)
-- `sex`: Voice actor's gender (any, male, female)
-- `rating`: Content rating (any, default, r18, extreme)
-- `age`: Age group of the voice (any, 0: kids, 1: teens, 2: twenties, 3: thirties, 7: forties and above)
-- `delivery`: Character traits of the voice (any, 4: quiet, 5: lively, 6: sexy/mature, 8: young, 9: serious, 10: other)
-- `page`: Page number for pagination (e.g., 1)
-
-**Example Request URL:**
-```
-https://api.koemade.net/actors?keyword=John&status=enabled&sex=male&rating=default&age=3&delivery=9&page=1
-```
-
-**Response Example:**
-
+**レスポンス:**
 ```json
 {
     "total": 50,
@@ -118,25 +77,13 @@ https://api.koemade.net/actors?keyword=John&status=enabled&sex=male&rating=defau
 }
 ```
 
-### 3. Actor Profile API
+### 3. 声優プロフィールAPI
 
-**Endpoint:**
-```
-GET https://api.koemade.net/actor/
-```
+**リクエスト:**
+- `id`: 声優のID
+- `page`: ページ番号
 
-**Request Parameters:**
-
-- `id`: Actor's ID (e.g., 20)
-- `page`: Page number for sample voices (e.g., 1)
-
-**Example Request URL:**
-```
-https://api.koemade.net/actor/?id=20&page=1
-```
-
-**Response Example:**
-
+**レスポンス:**
 ```json
 {
     "actor": {
@@ -146,12 +93,10 @@ https://api.koemade.net/actor/?id=20&page=1
         "rank": "expert",
         "description": "Experienced voice actor with a deep and soothing voice.",
         "avatar_url": "https://koemade.net/avatars/john_smith.jpg",
-        "pricing": {
-            "base_rate": 100,
-            "additional_options": {
-                "urgent_delivery": 50,
-                "special_effects": 30
-            }
+        "price": {
+            "default": 100,
+            "nsfw": 150,
+            "nsfw_extreme": 250
         }
     },
     "sample_voices": [
@@ -159,72 +104,49 @@ https://api.koemade.net/actor/?id=20&page=1
             "id": 110,
             "name": "Narration Sample",
             "source_url": "https://koemade.net/samples/narration_sample.mp3",
-            "tags": ["narration", "deep", "male"],
-            "ratings": {
-                "overall": 4.6,
-                "clarity": 4.4,
-                "naturalness": 4.8
-            }
+            "tags": ["narration", "deep", "male"]
         },
         {
             "id": 111,
             "name": "Character Voice",
             "source_url": "https://koemade.net/samples/character_voice.mp3",
-            "tags": ["character", "mysterious", "male"],
-            "ratings": {
-                "overall": 4.5,
-                "clarity": 4.3,
-                "naturalness": 4.7
-            }
+            "tags": ["character", "mysterious", "male"]
         },
         // More sample voice entries...
     ]
 }
 ```
 
-### 4. Voice Details API
+### 4. ボイス詳細API
 
-**Endpoint:**
-```
-GET https://api.koemade.net/voice/
-```
+**リクエスト:**
+- `id`: ボイスID (例: 101)
 
-**Request Parameters:**
-
-- `id`: Voice ID (e.g., 101)
-
-**Example Request URL:**
-```
-https://api.koemade.net/voice/?id=101
-```
-
-**Response Example:**
-
+**レスポンス:**
 ```json
 {
     "voice": {
-        "id": 101,
-        "name": "Happy Greeting",
-        "source_url": "https://koemade.net/samples/happy_greeting.mp3",
-        "tags": ["greeting", "happy", "female"],
-        "ratings": {
-            "overall": 4.5,
-            "clarity": 4.2,
-            "naturalness": 4.8
+        "id": 1,
+        "title": "サンプルボイス",
+        "account": {
+            "id": 2,
+            "username": "qlovolp.ttt@gmail.com"
         },
-        "actor": {
-            "id": 10,
-            "name": "Jane Doe",
-            "status": "enabled",
-            "rank": "senior",
-            "total_voices": 50
-        },
-        "transcript": "Hello everyone, have a wonderful day!",
-        "duration_seconds": 5.2,
-        "pricing": {
-            "base_price": 75,
-            "license_type": "royalty-free"
-        }
+        "mime_type": "audio/mpeg",
+        "filename": "sample.mp3",
+        "created_at": "2023-10-27 15:30:00",
+        "tags": [
+            {
+                "id": 1,
+                "tag_name": "10代",
+                "tag_category": "年代別タグ"
+            },
+            {
+                "id": 5,
+                "tag_name": "快活",
+                "tag_category": "キャラ別タグ"
+            }
+        ]
     }
 }
 ```

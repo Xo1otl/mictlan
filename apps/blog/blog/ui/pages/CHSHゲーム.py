@@ -5,9 +5,6 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.set_page_config(layout="wide")
-
-
 def display_circle_with_specific_marks():
     def deg2rad(deg):
         return deg * np.pi / 180

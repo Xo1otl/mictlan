@@ -8,11 +8,11 @@ interface ProfileRepo
 
     public function addOrEdit(ProfileInput $input);
 
-    public function addOrEditR(RInput $input);
+    public function addOrEditR(NSFWInput $input);
 
     public function findById(\common\Id $accountId): Profile;
 
-    public function findR(\common\Id $accountId): R;
+    public function findR(\common\Id $accountId): NSFWOptions;
 
     public function findProfileImage(\common\Id $accountId): ProfileImage;
 }

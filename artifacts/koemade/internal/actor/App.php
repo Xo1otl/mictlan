@@ -16,7 +16,7 @@ class App
         $this->profileRepo->addOrEdit($input);
     }
 
-    public function editR(RInput $input)
+    public function editR(NSFWInput $input)
     {
         $this->profileRepo->addOrEditR($input);
     }
@@ -42,7 +42,7 @@ class App
                 $r = $this->profileRepo->findR($accountId);
                 $profile = new Profile("", Category::AMATEUR, "", 0, $r);
             } catch (\Exception $e) {
-                $r = new R(0, false, 0, false);
+                $r = new NSFWOptions(0, false, 0, false);
                 $profile = new Profile("", Category::AMATEUR, "", 0, $r);
             }
 

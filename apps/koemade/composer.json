@@ -11,10 +11,16 @@
 		"ext-pdo": "*",
 		"ext-pdo_mysql": "*",
 		"ext-mbstring": "*",
+		"firebase/php-jwt": "*",
+		"paragonie/sodium_compat": "*",
 		"mictlan/util": "dev-main",
-		"phpmailer/phpmailer": "^6.9"
+		"phpmailer/phpmailer": "*",
+		"slim/slim": "*",
+		"slim/psr7": "*"
 	},
 	"autoload": {
-		"classmap": ["internal"]
+		"psr-4": {
+			"koemade\\": "koemade/"
+		}
 	}
 }

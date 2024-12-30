@@ -1,9 +1,5 @@
 import streamlit as st
 
-st.set_page_config(
-    layout="wide"
-)
-
 """
 # ここはtwitterです(異論は認めない)
 

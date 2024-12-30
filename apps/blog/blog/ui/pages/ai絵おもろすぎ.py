@@ -2,10 +2,6 @@ import streamlit as st
 from util import workspace
 import os
 
-st.set_page_config(
-    layout="wide"
-)
-
 """
 ### AI絵おもろすぎ
 

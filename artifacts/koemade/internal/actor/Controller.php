@@ -42,7 +42,7 @@ class Controller
     public function handleUpdateR(array $postData, \common\Id $accountId)
     {
         \logger\imp("updating r", $postData);
-        $input = new RInput($postData['ok'], $postData['price'], $postData['hardOk'], $postData['hardSurcharge'], $accountId);
+        $input = new NSFWInput($postData['ok'], $postData['price'], $postData['hardOk'], $postData['hardSurcharge'], $accountId);
         $this->app->editR($input);
     }
 

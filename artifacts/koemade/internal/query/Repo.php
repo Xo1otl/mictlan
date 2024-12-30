@@ -21,4 +21,9 @@ interface Repo
      * @return ActorProfile
      */
     function actorProfile(ActorProfileParams $input): ActorProfile;
+    /**
+     * @param string $voiceId
+     * @return VoiceDetail
+     */
+    function voice(string $voiceId): VoiceDetail;
 }

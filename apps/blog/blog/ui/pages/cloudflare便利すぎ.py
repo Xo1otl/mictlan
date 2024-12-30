@@ -1,10 +1,6 @@
 import requests
 import streamlit as st
 
-st.set_page_config(
-    layout="wide"
-)
-
 r"""
 ### cloudflare tunnelでのデプロイが便利だった
 

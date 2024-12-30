@@ -9,9 +9,9 @@ class Profile
     public string $selfPromotion;
     public int $price;
     public ?ProfileImage $profileImage;
-    public R $r;
+    public NSFWOptions $nsfwOptions;
 
-    public function __construct(string $displayName, string $category, string $selfPromotion, int $price, R $r, ?ProfileImage $profileImage = null)
+    public function __construct(string $displayName, string $category, string $selfPromotion, int $price, NSFWOptions $nsfwOptions, ?ProfileImage $profileImage = null)
     {
         if (!in_array($category, Category::ACTOR_CATEGORIES, true)) {
             throw new \InvalidArgumentException("Invalid category: $category");
@@ -21,7 +21,7 @@ class Profile
             throw new \InvalidArgumentException("Self promotion must be 200 characters or less.");
         }
 
-        $this->r = $r;
+        $this->nsfwOptions = $nsfwOptions;
         $this->profileImage = $profileImage;
         $this->displayName = $displayName;
         $this->category = $category;
