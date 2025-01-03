@@ -179,11 +179,6 @@ def generate_and_insert_fake_data(num_accounts=10, num_voices_per_account=5):
         if account_id is None:
             continue
 
-        # Insert into signup_requests
-        signup_request_data = generate_signup_request(account_id)
-        insert_data("signup_requests", signup_request_data,
-                    exclude_columns=["id"])
-
         # Generate and insert profile data
         profile_data = generate_profile(account_id, rank_ids)
         insert_data("actor_profiles", profile_data, exclude_columns=["id"])
