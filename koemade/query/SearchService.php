@@ -4,12 +4,8 @@ namespace koemade\query;
 
 class ActorsSearchParams
 {
-    public string $keyword;
+    public string $display_name;
     public string $status;
-    /**
-     * @var array{category: string, name: string}[]
-     */
-    public array $tags;
     public int $page;
 }
 
@@ -24,8 +20,21 @@ class ActorsSearchResult
 
 class TaggedVoicesWithActorSearchParams
 {
-    public string $keyword;
-    public string $status;
+    public string $title;
+    /**
+     * @var array{category: string, name: string}[]
+     */
+    public array $tags;
+    public int $page;
+}
+
+class TaggedVoicesWithActorSearchResult
+{
+    public string $title;
+    /**
+     * @var array{category: string, name: string}[]
+     */
+    public array $tags;
     public int $page;
 }
 

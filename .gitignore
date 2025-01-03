@@ -1,1 +1,3 @@
 config.php
+DBConnection.php
+secrets.php
