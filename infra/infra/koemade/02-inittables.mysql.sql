@@ -5,19 +5,6 @@ USE koemade;
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
-CREATE TABLE IF NOT EXISTS signup_requests (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    furigana VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    tel VARCHAR(20) NOT NULL,
-    bank_name VARCHAR(255) NOT NULL,
-    branch_name VARCHAR(255) NOT NULL,
-    account_number VARCHAR(20) NOT NULL,
-    self_promotion TEXT NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS accounts (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,

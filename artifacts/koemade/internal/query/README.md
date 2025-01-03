@@ -45,6 +45,8 @@
 
 ### 2. 声優検索用API
 
+条件を満たすサンプルボイスを投稿したユーザーを検索できるのが理想
+
 **リクエスト:**
 - `display_name`: 名前
 - `status`: 受付中と受付停止中
@@ -78,6 +80,8 @@
 ```
 
 ### 3. 声優プロフィールAPI
+
+nsfwが許可されていない場合は適当にfalse入れて返す
 
 **リクエスト:**
 - `id`: 声優のID
@@ -130,7 +134,8 @@
         "title": "サンプルボイス",
         "account": {
             "id": 2,
-            "username": "qlovolp.ttt@gmail.com"
+            "username": "qlovolp.ttt@gmail.com",
+            "avator_url": "abcd@example.com"
         },
         "mime_type": "audio/mpeg",
         "filename": "sample.mp3",
