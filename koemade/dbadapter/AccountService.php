@@ -3,11 +3,12 @@
 namespace koemade\dbadapter;
 
 use koemade\admin;
+use koemade\actor;
 use koemade\util;
 use PDO;
 use PDOException;
 
-class AccountService implements admin\AccountService
+class AccountService implements admin\AccountService, actor\AccountService
 {
     private PDO $conn;
     private util\Logger $logger;
@@ -105,6 +106,56 @@ class AccountService implements admin\AccountService
             }
         } catch (PDOException $e) {
             $this->logger->error("Failed to delete account $username: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function changePassword(string $username, string $oldPassword, string $newPassword): bool
+    {
+        $this->logger->info("Changing password for account: $username");
+
+        try {
+            $this->conn->beginTransaction();
+
+            // 現在のパスワードを取得
+            $stmt = $this->conn->prepare("SELECT password FROM accounts WHERE username = :username");
+            $stmt->execute([':username' => $username]);
+            $account = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$account) {
+                $this->logger->warning("Account $username not found.");
+                return false;
+            }
+
+            // 現在のパスワードが正しいか確認
+            if (!password_verify($oldPassword, $account['password'])) {
+                $this->logger->warning("Incorrect old password for account $username.");
+                return false;
+            }
+
+            // 新しいパスワードをハッシュ化して更新
+            $newPasswordHash = password_hash($newPassword, PASSWORD_BCRYPT);
+            $stmt = $this->conn->prepare("UPDATE accounts SET password = :new_password WHERE username = :username");
+            $stmt->execute([
+                ':new_password' => $newPasswordHash,
+                ':username' => $username
+            ]);
+
+            if ($stmt->rowCount() > 0) {
+                $this->conn->commit();
+                $this->logger->info("Password for account $username has been changed successfully.");
+                return true;
+            } else {
+                $this->conn->rollBack();
+                $this->logger->warning("Failed to change password for account $username.");
+                return false;
+            }
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            $this->logger->error("Failed to change password for account $username: " . $e->getMessage());
             throw $e;
         }
     }
