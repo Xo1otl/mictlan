@@ -14,9 +14,9 @@ class Logger
     private function __construct()
     {
         $dateFormat = "D M j H:i:s Y";
-        $output = "[%datetime%] %message%" . self::ANSI_RESET . "\n";
+        $output = "[%datetime%] %level_name%: %message%" . self::ANSI_RESET . "\n";
 
-        $formatter = new LineFormatter($output, $dateFormat);
+        $formatter = new LineFormatter($output, $dateFormat, true);
         $handler = new StreamHandler('php://stdout', MonologLogger::DEBUG);
         $handler->setFormatter($formatter);
 
@@ -34,27 +34,27 @@ class Logger
 
     public function info(...$msgs)
     {
-        $this->log(MonologLogger::INFO, "Info: " . implode(' ', array_map('json_encode', $msgs)) . $this->getCallerInfo());
+        $this->log(MonologLogger::INFO, self::ANSI_GREEN . $this->formatMessage($msgs) . $this->getCallerInfo());
     }
 
     public function debug(...$msgs)
     {
-        $this->log(MonologLogger::DEBUG, "Debug: " . implode(' ', array_map('json_encode', $msgs)) . $this->getCallerInfo());
+        $this->log(MonologLogger::DEBUG, self::ANSI_BLUE . $this->formatMessage($msgs) . $this->getCallerInfo());
     }
 
     public function warning(...$msgs)
     {
-        $this->log(MonologLogger::WARNING, "Warning: " . implode(' ', array_map('json_encode', $msgs)) . $this->getCallerInfo());
+        $this->log(MonologLogger::WARNING, self::ANSI_YELLOW . $this->formatMessage($msgs) . $this->getCallerInfo());
     }
 
     public function error(...$msgs)
     {
-        $this->log(MonologLogger::ERROR, "Error: " . implode(' ', array_map('json_encode', $msgs)) . $this->getCallerInfo());
+        $this->log(MonologLogger::ERROR, self::ANSI_RED . $this->formatMessage($msgs) . $this->getCallerInfo());
     }
 
     public function critical(...$msgs)
     {
-        $this->log(MonologLogger::CRITICAL, "Fatal: " . implode(' ', array_map('json_encode', $msgs)) . $this->getCallerInfo());
+        $this->log(MonologLogger::CRITICAL, self::ANSI_WHITE_ON_RED . $this->formatMessage($msgs) . $this->getCallerInfo());
     }
 
     private function log($level, $message)
@@ -70,6 +70,21 @@ class Logger
             return " in " . ($caller['file'] ?? 'unknown') . " on line " . ($caller['line'] ?? 'unknown');
         }
         return " error in getCallerInfo";
+    }
+
+    private function formatMessage(array $msgs): string
+    {
+        return implode(' ', array_map(function ($msg) {
+            if (is_string($msg)) {
+                return $msg; // 文字列はそのまま返す
+            }
+            if (is_array($msg) || is_object($msg)) {
+                // 配列やオブジェクトは JSON に変換
+                return json_encode($msg, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+            }
+            // その他の型は文字列に変換
+            return print_r($msg, true);
+        }, $msgs));
     }
 
     public const ANSI_RESET = "\033[0m";

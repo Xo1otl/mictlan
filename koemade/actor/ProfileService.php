@@ -4,5 +4,5 @@ namespace koemade\actor;
 
 interface ProfileService
 {
-    // TODO: Profileに対するmutationを定義する、クエリはクエリサービスでやりたい
+    public function save(string $actor_id, ProfileInput $input);
 }

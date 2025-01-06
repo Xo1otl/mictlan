@@ -7,15 +7,16 @@ use PDO;
 use PDOException;
 use Exception;
 use Firebase\JWT\JWT;
+use koemade\admin;
 
-class AuthService implements auth\AuthService
+class AuthService implements auth\AuthService, admin\AdminService
 {
     private PDO $conn;
     private string $jwtSecretKey;
 
-    public function __construct(PDO $conn, string $jwtSecretKey)
+    public function __construct(string $jwtSecretKey)
     {
-        $this->conn = $conn;
+        $this->conn = DBConnection::getInstance();
         $this->jwtSecretKey = $jwtSecretKey;
     }
 
@@ -77,5 +78,35 @@ class AuthService implements auth\AuthService
         ];
 
         return JWT::encode($payload, $this->jwtSecretKey, 'HS256');
+    }
+
+    /**
+     * 管理者が指定されたアカウントとしてログインし、JWT トークンを返す
+     *
+     * @param string $username ログインするアカウントのユーザー名
+     * @return string 生成された JWT トークン
+     * @throws Exception アカウントが見つからない場合またはデータベースエラー時に例外をスロー
+     */
+    public function loginAsAccount(string $username): string
+    {
+        try {
+            $stmt = $this->conn->prepare("
+                SELECT a.id, a.password, a.status, r.name AS role
+                FROM accounts a
+                LEFT JOIN account_role ar ON a.id = ar.account_id
+                LEFT JOIN roles r ON ar.role_id = r.id
+                WHERE a.username = :username
+            ");
+            $stmt->execute(['username' => $username]);
+            $account = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$account) {
+                throw new Exception("指定されたユーザー名のアカウントが見つかりません。");
+            }
+
+            return $this->generateJwtToken($account);
+        } catch (PDOException $e) {
+            throw new exceptions\DatabaseException("データベースエラーが発生しました。");
+        }
     }
 }
