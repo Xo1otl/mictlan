@@ -68,6 +68,7 @@ def generate_profile(account_id, rank_ids):
         "display_name": fake.user_name(),
         "rank_id": rank_id,
         "self_promotion": fake.text(max_nb_chars=200),
+        "status": "受付中",
         "price": random.randint(1000, 10000),
         "account_id": account_id
     }
@@ -151,7 +152,37 @@ def insert_account_role(account_id, role_name):
         print(f"Error inserting data into account_role: {err}")
 
 
+def generate_tags():
+    categories = ["genre", "mood", "theme"]
+    tags = []
+    for category in categories:
+        for _ in range(5):  # 各カテゴリに5つのタグを生成
+            tags.append({
+                "name": fake.word(),
+                "category": category
+            })
+    return tags
+
+
+def insert_tags(tags):
+    tag_ids = []
+    for tag in tags:
+        tag_id = insert_data("tags", tag, exclude_columns=["id"])
+        if tag_id:
+            tag_ids.append(tag_id)
+    return tag_ids
+
+
+def assign_tags_to_voice(voice_id, tag_ids):
+    for tag_id in tag_ids:
+        insert_data("voice_tag", {"voice_id": voice_id, "tag_id": tag_id})
+
+
 def generate_and_insert_fake_data(num_accounts=10, num_voices_per_account=5):
+    # タグを生成して挿入
+    tags = generate_tags()
+    tag_ids = insert_tags(tags)
+
     # Define actor ranks with descriptions
     actor_ranks_data = [
         {"name": "Bronze", "description": "Entry-level actor rank for new users."},
@@ -200,6 +231,16 @@ def generate_and_insert_fake_data(num_accounts=10, num_voices_per_account=5):
             if voice_id:
                 # Assign tags to voice here if needed
                 pass
+
+        # Generate and insert voices data
+        for _ in range(num_voices_per_account):
+            voice_data = generate_voice(account_id)
+            voice_id = insert_data("voices", voice_data,
+                                   exclude_columns=["id"])
+            if voice_id:
+                # タグを声に関連付ける
+                assign_tags_to_voice(voice_id, random.sample(
+                    tag_ids, k=3))  # 各声に3つのタグをランダムに割り当て
 
         # Assign role to account
         insert_account_role(account_id, "actor")
