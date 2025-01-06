@@ -29,27 +29,36 @@ class SearchService implements search\Service
 
         // Start building the query
         $query = "
-            SELECT
-                ap.account_id AS id,
-                ap.display_name AS `name`,
-                ap.status AS `status`,
-                ar.name AS `rank`,
-                pi.path AS avatar_url
-            FROM
-                actor_profiles ap
-            INNER JOIN
-                actor_ranks ar ON ap.rank_id = ar.id
-            LEFT JOIN
-                profile_images pi ON ap.account_id = pi.account_id
-            WHERE 1=1
-        ";
+        SELECT
+            ap.account_id AS id,
+            ap.display_name AS `name`,
+            ap.status AS `status`,
+            ar.name AS `rank`,
+            pi.path AS avatar_url
+        FROM
+            actor_profiles ap
+        INNER JOIN
+            actor_ranks ar ON ap.rank_id = ar.id
+        LEFT JOIN
+            profile_images pi ON ap.account_id = pi.account_id
+        LEFT JOIN
+            nsfw_options no ON ap.account_id = no.account_id
+        WHERE 1=1
+    ";
 
         // Apply filters based on parameters
-        if (!empty($params->name_like)) {
-            $query .= " AND ap.display_name LIKE :display_name ";
-        }
-        if (!empty($params->status)) {
-            $query .= " AND ap.status = :status ";
+        $filters = [
+            'name_like' => !empty($params->name_like) ? " AND ap.display_name LIKE :display_name " : "",
+            'status' => !empty($params->status) ? " AND ap.status = :status " : "",
+            'nsfw_allowed' => $params->nsfw_allowed !== null ? " AND no.allowed = :nsfw_allowed " : "",
+            'nsfw_extreme_allowed' => $params->nsfw_extreme_allowed !== null ? " AND no.extreme_allowed = :nsfw_extreme_allowed " : ""
+        ];
+
+        // Add filters to the query
+        foreach ($filters as $key => $filter) {
+            if (!empty($filter)) {
+                $query .= $filter;
+            }
         }
 
         // Add pagination
@@ -64,6 +73,12 @@ class SearchService implements search\Service
         }
         if (!empty($params->status)) {
             $stmt->bindValue(':status', $params->status);
+        }
+        if ($params->nsfw_allowed !== null) {
+            $stmt->bindValue(':nsfw_allowed', $params->nsfw_allowed, \PDO::PARAM_BOOL);
+        }
+        if ($params->nsfw_extreme_allowed !== null) {
+            $stmt->bindValue(':nsfw_extreme_allowed', $params->nsfw_extreme_allowed, \PDO::PARAM_BOOL);
         }
         $stmt->bindValue(':limit', $itemsPerPage, \PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);

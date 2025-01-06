@@ -22,7 +22,7 @@ class ProfileInput
     public ?string $profileImagePath; // プロフィール画像のパス
 
     public function __construct(
-        string $displayName = null,
+        string $displayName,
         string $selfPromotion = null,
         int $price = null,
         string $status = null,

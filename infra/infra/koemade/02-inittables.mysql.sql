@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS actor_profiles (
 );
 
 CREATE TABLE IF NOT EXISTS nsfw_options (
-    allowed BOOLEAN NOT NULL,
-    price INT NOT NULL,
-    extreme_allowed BOOLEAN NOT NULL,
-    extreme_surcharge INT NOT NULL,
+    allowed BOOLEAN NOT NULL DEFAULT FALSE,
+    price INT NULL,
+    extreme_allowed BOOLEAN NOT NULL DEFAULT FALSE,
+    extreme_surcharge INT NULL,
     account_id BIGINT PRIMARY KEY NOT NULL,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 );
