@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../auth/secrets.php';
+require_once __DIR__ . '/secrets.php';
 
 use koemade\util;
 

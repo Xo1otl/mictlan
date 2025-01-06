@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS actor_ranks (
 
 CREATE TABLE IF NOT EXISTS actor_profiles (
     display_name VARCHAR(255) NOT NULL,
-    rank_id BIGINT NOT NULL,
+    rank_id BIGINT,
     self_promotion TEXT,
     price INT NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT '受付中',
@@ -89,6 +89,36 @@ CREATE TABLE IF NOT EXISTS voice_tag (
     FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE
 );
 
+CREATE OR REPLACE VIEW voices_view AS
+SELECT
+    v.id AS voice_id,
+    v.title AS voice_name,
+    ap.account_id AS actor_id,
+    a.username AS actor_name,
+    ap.status AS actor_status,
+    ar.name AS actor_rank,
+    COUNT(vv.id) AS total_voices,
+    vt.tag_id AS tag_id,
+    t.category AS tag_category,
+    t.name AS tag_name,
+    v.path AS source_url
+FROM
+    voices v
+JOIN
+    actor_profiles ap ON v.account_id = ap.account_id
+JOIN
+    accounts a ON ap.account_id = a.id
+JOIN
+    actor_ranks ar ON ap.rank_id = ar.id
+LEFT JOIN
+    voice_tag vt ON v.id = vt.voice_id
+LEFT JOIN
+    tags t ON vt.tag_id = t.id
+LEFT JOIN
+    voices vv ON ap.account_id = vv.account_id
+GROUP BY
+    v.id, ap.account_id, a.username, ar.name, vt.tag_id, t.category, t.name, v.path;
+
 -- Insert data into the tags table with the corresponding tag types
 INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
 INSERT INTO tags (name, category) VALUES ('20代', '年代別タグ');
@@ -96,6 +126,38 @@ INSERT INTO tags (name, category) VALUES ('30代以上', '年代別タグ');
 INSERT INTO tags (name, category) VALUES ('大人しい', 'キャラ別タグ');
 INSERT INTO tags (name, category) VALUES ('快活', 'キャラ別タグ');
 INSERT INTO tags (name, category) VALUES ('セクシー・渋め', 'キャラ別タグ');
+
+CREATE OR REPLACE VIEW actor_feed_view AS
+SELECT
+    ap.account_id AS actor_id,
+    ap.display_name AS actor_name,
+    ap.status AS actor_status,
+    ar.name AS actor_rank,
+    ap.self_promotion AS actor_description,
+    pi.path AS actor_avatar_url,
+    ap.price AS actor_price_default,
+    nsfw.price AS actor_price_nsfw,
+    nsfw.extreme_surcharge AS actor_price_nsfw_extreme,
+    v.id AS voice_id,
+    v.title AS voice_title,
+    v.path AS voice_source_url,
+    t.id AS tag_id,
+    t.name AS tag_name,
+    t.category AS tag_category
+FROM
+    actor_profiles ap
+JOIN
+    actor_ranks ar ON ap.rank_id = ar.id
+LEFT JOIN
+    profile_images pi ON ap.account_id = pi.account_id
+LEFT JOIN
+    nsfw_options nsfw ON ap.account_id = nsfw.account_id
+LEFT JOIN
+    voices v ON ap.account_id = v.account_id
+LEFT JOIN
+    voice_tag vt ON v.id = vt.voice_id
+LEFT JOIN
+    tags t ON vt.tag_id = t.id;
 
 -- Insert admin user
 INSERT INTO accounts (username, password) VALUES (
