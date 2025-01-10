@@ -18,7 +18,7 @@ $tokenService = new auth\JWTService($secretKey);
 
 $app->add(new middleware\SlimAuth($tokenService));
 
-// グローバル変数としてサービスを初期化
+// サービスを初期化
 $searchService = new SearchService();
 $queryRepository = new QueryRepository();
 

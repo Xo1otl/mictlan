@@ -13,10 +13,15 @@
 		"ext-mbstring": "*",
 		"firebase/php-jwt": "*",
 		"paragonie/sodium_compat": "*",
-		"mictlan/util": "dev-main",
 		"phpmailer/phpmailer": "*",
 		"slim/slim": "*",
-		"slim/psr7": "*"
+		"slim/psr7": "*",
+		"monolog/monolog": "*"
+	},
+	"config": {
+		"platform": {
+			"php": "8.3"
+		}
 	},
 	"autoload": {
 		"psr-4": {
