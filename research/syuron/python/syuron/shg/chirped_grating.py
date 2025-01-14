@@ -26,7 +26,7 @@ class ChirpedGrating:
         self.K0 = 2 * np.pi / self.Lambda_0
 
     def Lambda_z(self, z):
-        """z における波長を計算する"""
+        """z におけるグレーティングを計算する"""
         return self.Lambda_0 / (1 + self.r * z)
 
     def calculate_efficiency(self, lambda_val):

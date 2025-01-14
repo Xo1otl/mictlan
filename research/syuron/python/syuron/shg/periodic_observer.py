@@ -34,11 +34,12 @@ class PeriodicObserver:
         z = transform_func(z_prime)
 
         # 非周期的な層の幅を計算
-        dz_dz_prime = np.gradient(z, z_prime)  # dz/dz' を数値微分で計算
+        dz_dz_prime = np.gradient(z, z_prime)  # dz/dz' を中央差分で計算
         distribution = self.period / dz_dz_prime
 
         return distribution
 
+    # FIXME: ここで与えられるのは幅配列なので修正が必要
     def infer_transform(self, distribution):
         """
         与えられた非周期的な幅の配列が周期的に見えている座標系からの座標変換を逆算する。
