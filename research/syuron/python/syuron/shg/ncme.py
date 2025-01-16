@@ -52,7 +52,7 @@ class NCME:
         return B_L
 
 
-def efficiency(B_L, A0):
+def calculate_efficiency(B_L, A0):
     """
     SHG効率を計算する。
 

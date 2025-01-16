@@ -6,3 +6,4 @@ cache/
 tmp/
 .output/
 data/
+config.ini
