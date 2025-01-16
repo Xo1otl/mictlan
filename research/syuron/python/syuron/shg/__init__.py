@@ -1,4 +1,4 @@
 from .ncme import *
-from .chirped_grating import ChirpedGrating, calculate_refractive_index
-from .periodic_observer import PeriodicObserver
-from .grating import Grating
+from .periodic_observer import PeriodicObserver, compare_transformation
+# from .grating import ChirpedGrating, calculate_refractive_index, Grating
+from .grating import calculate_refractive_index, Grating
