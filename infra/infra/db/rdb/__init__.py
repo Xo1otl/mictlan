@@ -16,5 +16,8 @@ def compose():
         'services': {
             MYSQL_SERVICE_NAME: mysql_service,
             POSTGRES_SERVICE_NAME: postgres_service
+        },
+        'volumes': {
+            'mysql_data': None,
         }
     }

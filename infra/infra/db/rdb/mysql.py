@@ -3,7 +3,9 @@ from util import workspace
 from . import *
 
 # Variable to store the volume mappings for MySQL initialization scripts
-mysql_init_script_volumes = []
+mysql_init_script_volumes = [
+    'mysql_data:/var/lib/mysql'
+]
 
 # Find all .mysql.sql files in folders under build
 for filepath in workspace.globrelpaths(__file__, 'infra/infra/*/[0-9]*-*.mysql.sql'):
