@@ -1,13 +1,14 @@
 import os
+import fnmatch
 from typing import List, Optional
 
 
-def print_source(directory: str, ext: str) -> Optional[List[str]]:
+def print_source(directory: str, pattern: str) -> Optional[List[str]]:
     printed_files = []
 
     for root, _, files in os.walk(directory):
         for file in files:
-            if file.endswith(ext):
+            if fnmatch.fnmatch(file, pattern):  # ワイルドカードでマッチング
                 file_path = os.path.join(root, file)
                 printed_files.append(file_path)
 

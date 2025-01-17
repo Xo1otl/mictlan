@@ -1,0 +1,20 @@
+{
+  # for more info about the config, check out the documentation
+  # https://join-lemmy.org/docs/en/administration/configuration.html
+
+  database: {
+    uri: "postgresql://lemmy:h71BIDej311Hkal@postgres:5432/lemmy"
+  }
+  hostname: "lemmy.mictlan.site"
+  pictrs: {
+    url: "http://pictrs:8080/"
+    api_key: "h71BIDej311Hkal"
+  }
+  email: {
+    smtp_server: "mail.mictlan.site:587"
+    smtp_login: "xolotl@mictlan.site"
+    smtp_from_address: "xolotl@mictlan.site"
+    smtp_password: "UfudjcjJ746*"
+    tls_type: "starttls"
+  }
+}

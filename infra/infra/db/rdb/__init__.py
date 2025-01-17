@@ -19,5 +19,6 @@ def compose():
         },
         'volumes': {
             'mysql_data': None,
+            'postgres_data': None,
         }
     }

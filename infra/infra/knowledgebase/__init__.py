@@ -1,5 +1,7 @@
+from .env import *
+
 DBNAME = 'affine'
-USERNAME = 'affine'
+DBUSER = 'affine'
 PORTS = [3010, 5555]
 
 

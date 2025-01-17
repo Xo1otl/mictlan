@@ -1,5 +1,6 @@
 # credentials
 01-inituser.mysql.sql
+01-init.postgres.sql
 env.py
 
 # 自動生成されるファイル
