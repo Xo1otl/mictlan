@@ -23,7 +23,7 @@ affine_service = {
         'NODE_OPTIONS="--import=./scripts/register.js"',
         'AFFINE_CONFIG_PATH=/root/.affine/config',
         'REDIS_SERVER_HOST=redis',
-        f'DATABASE_URL=postgres://{USERNAME}:{rdb.POSTGRES_PASSWORD}@{rdb.POSTGRES_ADDR}/{DBNAME}',
+        f'DATABASE_URL=postgres://{DBUSER}:{DBPASSWORD}@{rdb.POSTGRES_ADDR}/{DBNAME}',
         'NODE_ENV=production',
         # 'TELEMETRY_ENABLE=false'  # テレメトリ無効化する場合
     ]
