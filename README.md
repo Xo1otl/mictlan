@@ -17,7 +17,8 @@
 * [Mail Server](https://mail.mictlan.site)
 * [VPN Server](https://vpn.mictlan.site)
 * [Knowledgebase](http://10.8.0.2:3010)
-* [AI Image](http://10.8.0.2:8188)
+* [ComfyUI](http://10.8.0.2:8188)
+* [Fluxgym](http://10.8.0.2:8672)
 * [LLM](http://10.8.0.2:3000)
 
 # Idea
