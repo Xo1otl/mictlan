@@ -11,13 +11,13 @@
 * [アキネーター](https://akinator.mictlan.site)
 * [ブログ](https://blog.mictlan.site)
 * [Fediverse](https://lemmy.mictlan.site)
-* [Mail](https://mail.mictlan.site)
-* [VPN](https://vpn.mictlan.site)
 
 # Private Linkes in this Repo
-* [Knowledgebase](https://affine.mictlan.site)
-* [AI Image](https://comfy.mictlan.site)
-* [LLM](https://llm.mictlan.site)
+* [Mail Server](https://mail.mictlan.site)
+* [VPN Server](https://vpn.mictlan.site)
+* [Knowledgebase](http://10.8.0.2:3010)
+* [AI Image](http://10.8.0.2:8188)
+* [LLM](https://10.8.0.2:3000)
 
 # Idea
 
