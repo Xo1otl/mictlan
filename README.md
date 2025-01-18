@@ -5,11 +5,17 @@
 [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 なんか subpackage に manifest がないとか言われるが動いてるので問題なし
 
-# Links
+# Hosted Links in this Repo
 
-* [Q&Aサイト](https://answer.mictlan.site/)
-* [アキネーター](https://akinator.mictlan.site/)
-* [ブログ](https://blog.mictlan.site/)
+* [Q&Aサイト](https://answer.mictlan.site)
+* [アキネーター](https://akinator.mictlan.site)
+* [ブログ](https://blog.mictlan.site)
+* [Fediverse](https://lemmy.mictlan.site)
+* [Mail](https://mail.mictlan.site)
+* [VPN](https://vpn.mictlan.site)
+* [Knowledgebase](https://affine.mictlan.site)
+* [AI Image](https://comfy.mictlan.site)
+* [LLM](https://llm.mictlan.site)
 
 # Idea
 
