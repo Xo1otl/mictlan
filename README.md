@@ -13,11 +13,12 @@
 * [Fediverse](https://lemmy.mictlan.site)
 
 # Private Linkes in this Repo
+
 * [Mail Server](https://mail.mictlan.site)
 * [VPN Server](https://vpn.mictlan.site)
 * [Knowledgebase](http://10.8.0.2:3010)
 * [AI Image](http://10.8.0.2:8188)
-* [LLM](https://10.8.0.2:3000)
+* [LLM](http://10.8.0.2:3000)
 
 # Idea
 
