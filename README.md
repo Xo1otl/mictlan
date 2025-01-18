@@ -13,6 +13,8 @@
 * [Fediverse](https://lemmy.mictlan.site)
 * [Mail](https://mail.mictlan.site)
 * [VPN](https://vpn.mictlan.site)
+
+# Private Linkes in this Repo
 * [Knowledgebase](https://affine.mictlan.site)
 * [AI Image](https://comfy.mictlan.site)
 * [LLM](https://llm.mictlan.site)
