@@ -6,17 +6,17 @@ use koemade\query\valueObjects;
 
 class VoicesParams
 {
-    public string $title;
+    public ?string $title;
     /**
      * @var valueObjects\Tag[]
      */
-    public array $tags;
+    public ?array $tags;
     public int $page;
 
     /**
      * @param valueObjects\Tag[] $tags
      */
-    public function __construct(string $title, array $tags, int $page)
+    public function __construct(?string $title, ?array $tags, int $page = 1)
     {
         $this->title = $title;
         $this->tags = $tags;
