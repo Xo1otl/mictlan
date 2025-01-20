@@ -127,7 +127,7 @@ class QueryRepository implements query\repository\Service
         $voiceWithTags->tags = [];
         foreach ($rows as $row) {
             if ($row['tag_id']) {
-                $tag = new query\valueObjects\Tag($row['tag_name'], $row['tag_category']);
+                $tag = new query\valueObjects\Tag($row['tag_category'], $row['tag_name']);
                 $voiceWithTags->tags[] = $tag;
             }
         }

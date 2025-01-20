@@ -1,4 +1,4 @@
--- Active: 1734432854840@@mysql@3306@koemade
+-- Active: 1737364454842@@mysql@3306@koemade
 CREATE DATABASE IF NOT EXISTS koemade;
 
 USE koemade;
@@ -97,28 +97,31 @@ SELECT
     a.username AS actor_name,
     ap.status AS actor_status,
     ar.name AS actor_rank,
-    COUNT(vv.id) AS total_voices,
-    vt.tag_id AS tag_id,
-    t.category AS tag_category,
-    t.name AS tag_name,
+    (SELECT COUNT(*) FROM voices vv WHERE vv.account_id = ap.account_id) AS total_voices,
+    (
+        SELECT JSON_ARRAYAGG(
+            JSON_OBJECT(
+                'id', t.id,
+                'category', t.category,
+                'name', t.name
+            )
+        )
+        FROM voice_tag vt
+        JOIN tags t ON vt.tag_id = t.id
+        WHERE vt.voice_id = v.id
+    ) AS tags,
     v.path AS source_url
 FROM
     voices v
-JOIN
+LEFT JOIN
     actor_profiles ap ON v.account_id = ap.account_id
-JOIN
+LEFT JOIN
     accounts a ON ap.account_id = a.id
-JOIN
+LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id
-LEFT JOIN
-    voice_tag vt ON v.id = vt.voice_id
-LEFT JOIN
-    tags t ON vt.tag_id = t.id
-LEFT JOIN
-    voices vv ON ap.account_id = vv.account_id
 GROUP BY
-    v.id, ap.account_id, a.username, ar.name, vt.tag_id, t.category, t.name, v.path;
-
+    v.id, ap.account_id, a.username, ar.name, v.path;
+    
 -- Insert data into the tags table with the corresponding tag types
 INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
 INSERT INTO tags (name, category) VALUES ('20代', '年代別タグ');

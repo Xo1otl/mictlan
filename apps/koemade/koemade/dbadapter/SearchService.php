@@ -117,32 +117,66 @@ class SearchService implements search\Service
         $page = $query->page < 1 ? 1 : $query->page;
         $offset = ($page - 1) * $itemsPerPage;
 
-        $sql = "SELECT * FROM voices_view WHERE voice_name LIKE :title"; // Changed 'title' to 'voice_name'
-        $params = [':title' => "%{$query->title}%"];
+        // Base SQL for fetching data
+        $sql = "SELECT * FROM voices_view WHERE 1=1";
+        $params = [];
 
-        if (!empty($query->tags)) {
-            $tagConditions = [];
-            foreach ($query->tags as $index => $tag) {
-                $tagConditions[] = "(tag_category = :tag_category_$index AND tag_name = :tag_name_$index)";
-                $params[":tag_category_$index"] = $tag->category;
-                $params[":tag_name_$index"] = $tag->name;
-            }
-            $sql .= " AND (" . implode(' OR ', $tagConditions) . ")";
+        // Add title filter
+        if (!empty($query->title)) {
+            $sql .= " AND voice_name LIKE :title";
+            $params[':title'] = "%{$query->title}%";
         }
 
-        // Directly insert itemsPerPage and offset into the SQL
+        // Handle tags if specified
+        if (!empty($query->tags)) {
+            // Step 1: Find tag_ids that match the specified tags
+            $tagConditions = [];
+            $tagParams = [];
+            foreach ($query->tags as $index => $tag) {
+                $tagConditions[] = "(category = :tag_category_$index AND name = :tag_name_$index)";
+                $tagParams[":tag_category_$index"] = $tag->category;
+                $tagParams[":tag_name_$index"] = $tag->name;
+            }
+
+            $tagSubquery = "
+            SELECT id
+            FROM tags
+            WHERE " . implode(' OR ', $tagConditions) . "
+        ";
+
+            // Step 2: Find voice_ids that have ALL specified tags
+            $voiceTagSubquery = "
+            SELECT voice_id
+            FROM voice_tag
+            WHERE tag_id IN ($tagSubquery)
+            GROUP BY voice_id
+            HAVING COUNT(DISTINCT tag_id) = :tag_count
+        ";
+            $params[':tag_count'] = count($query->tags);
+
+            // Add subquery to main SQL
+            $sql .= " AND voice_id IN ($voiceTagSubquery)";
+
+            // Merge tagParams into params
+            $params = array_merge($params, $tagParams);
+        }
+
+        // Add pagination
         $sql .= " LIMIT $itemsPerPage OFFSET $offset";
 
+        // Execute the query
         $stmt = $this->conn->prepare($sql);
         $this->logger->info("Query: {$stmt->queryString}");
 
-        // Bind parameters excluding offset since it's directly in the SQL
+        // Bind parameters
         foreach ($params as $key => $value) {
             $stmt->bindValue($key, $value);
         }
 
         $stmt->execute();
+        $this->logger->info($stmt->queryString);
 
+        // Process results
         $results = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $actor = new search\VoicesResultActor();
@@ -152,21 +186,14 @@ class SearchService implements search\Service
             $actor->rank = $row['actor_rank'];
             $actor->total_voices = $row['total_voices'];
 
-            $result = new search\VoicesResult();
-            $result->id = $row['voice_id'];
-            $result->name = $row['voice_name'];
-            $result->actor = $actor;
-            $result->tags = [];
-            $result->source_url = $row['source_url'];
+            $voiceResult = new search\VoicesResult();
+            $voiceResult->id = $row['voice_id'];
+            $voiceResult->name = $row['voice_name'];
+            $voiceResult->actor = $actor;
+            $voiceResult->tags = json_decode($row['tags'], true) ?? []; // Decode JSON array
+            $voiceResult->source_url = $row['source_url'];
 
-            if ($row['tag_id']) {
-                $result->tags[] = [
-                    'category' => $row['tag_category'],
-                    'name' => $row['tag_name']
-                ];
-            }
-
-            $results[] = $result;
+            $results[] = $voiceResult;
         }
 
         return $results;

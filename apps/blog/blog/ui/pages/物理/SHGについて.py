@@ -7,7 +7,17 @@ r"""
 
 まとめ直すことにより理論があってるかの確認も兼ねる
 
-## 元となる連立ODE
+## 連立ODE
+
+Nonlinear Coupled Mode Equations (NCME)
+$$
+\frac{d}{dz} A(z) = -j \kappa ^ * A^*(z) B(z) exp(j 2 \Delta_1 (z)) \\
+\frac{d}{dz} B(z) = -j \kappa [A(z)]^2 exp(+j 2 \Delta_1 (z)) \\
+$$
+ただし
+$$
+2\Delta_q(z) = \beta_{2\omega} z - 2\beta_{\omega} z - q \Phi(z) \\
+$$
 
 ## プログラムの設計
 

@@ -5,7 +5,8 @@ import hashlib
 from infra import koemade
 import bcrypt
 
-fake = Faker('ja_JP')
+# fake = Faker('ja_JP')
+fake = Faker()
 
 # MySQL Database Configuration
 db_config = {
