@@ -51,8 +51,12 @@ $app->get('/search-voices', function (Request $request, Response $response, arra
 
     try {
         $voices = $searchService->voices($voicesParams);
+        $responseData = [
+            'total_matches' => count($voices), // 総一致件数を設定
+            'items' => $voices // アイテムを設定
+        ];
         $response = $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write(json_encode($voices, JSON_UNESCAPED_UNICODE));
+        $response->getBody()->write(json_encode($responseData, JSON_UNESCAPED_UNICODE));
         return $response;
     } catch (\Exception $e) {
         $response = $response->withHeader('Content-Type', 'application/json');
@@ -88,8 +92,12 @@ $app->get('/search-actors', function (Request $request, Response $response, arra
 
     try {
         $actors = $searchService->actors($actorsParams);
+        $responseData = [
+            'total_matches' => count($actors), // 総一致件数を設定
+            'items' => $actors // アイテムを設定
+        ];
         $response = $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write(json_encode($actors, JSON_UNESCAPED_UNICODE));
+        $response->getBody()->write(json_encode($responseData, JSON_UNESCAPED_UNICODE));
         return $response;
     } catch (\Exception $e) {
         $response = $response->withHeader('Content-Type', 'application/json');
@@ -140,8 +148,15 @@ $app->get('/actor/{id}', function (Request $request, Response $response, array $
             $response->getBody()->write(json_encode(['error' => 'Actor not found']));
             return $response->withStatus(404);
         }
+        $responseData = [
+            'actor' => $actor,
+            'sample_voices' => [ // スネークケースに統一
+                'total_matches' => count($actor->sampleVoices ?? []), // 総一致件数を設定
+                'items' => $actor->sampleVoices ?? [] // アイテムを設定
+            ]
+        ];
         $response = $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write(json_encode($actor, JSON_UNESCAPED_UNICODE));
+        $response->getBody()->write(json_encode($responseData, JSON_UNESCAPED_UNICODE));
         return $response;
     } catch (\Exception $e) {
         $response = $response->withHeader('Content-Type', 'application/json');
