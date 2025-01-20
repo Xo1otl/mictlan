@@ -142,17 +142,17 @@ $app->get('/actor/{id}', function (Request $request, Response $response, array $
     }
 
     try {
-        $actor = $queryRepository->actorFeed((int) $id);
-        if ($actor === null) {
+        $actorFeed = $queryRepository->actorFeed((int) $id);
+        if ($actorFeed === null) {
             $response = $response->withHeader('Content-Type', 'application/json');
             $response->getBody()->write(json_encode(['error' => 'Actor not found']));
             return $response->withStatus(404);
         }
         $responseData = [
-            'actor' => $actor,
+            'actor' => $actorFeed->actor,
             'sample_voices' => [ // スネークケースに統一
-                'total_matches' => count($actor->sampleVoices ?? []), // 総一致件数を設定
-                'items' => $actor->sampleVoices ?? [] // アイテムを設定
+                'total_matches' => count($actorFeed->sampleVoices ?? []), // 総一致件数を設定
+                'items' => $actorFeed->sampleVoices ?? [] // アイテムを設定
             ]
         ];
         $response = $response->withHeader('Content-Type', 'application/json');
