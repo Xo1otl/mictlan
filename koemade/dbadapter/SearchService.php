@@ -107,6 +107,9 @@ class SearchService implements search\Service
 
     /**
      * @inheritDoc
+     * 1. 検索条件に合うtag_idをtagsテーブルからすべて取得
+     * 2. 指定されたtag_idをすべて持つvoice_idをvoice_tagテーブルから取得
+     * 3. 取得したvoice_idを使ってviewから全データを取得。このviewではtagsがaggregateされている
      */
     public function voices(search\VoicesParams $query): array
     {
