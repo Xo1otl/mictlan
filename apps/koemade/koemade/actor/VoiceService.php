@@ -4,6 +4,9 @@ namespace koemade\actor;
 
 interface VoiceService
 {
-    // TODO: Voiceに対するmutationを定義する、クエリはクエリサービスでやりたい
-    // 投稿と編集と削除とタグ付け
+    public function editTitle(string $voice_id, string $newTitle): void;
+    /**
+     * @param int[] $tagIds
+     */
+    public function updateTags(string $voice_id, array $tagIds): void;
 }

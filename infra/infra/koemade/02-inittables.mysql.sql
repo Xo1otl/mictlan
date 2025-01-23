@@ -1,4 +1,4 @@
--- Active: 1737364454842@@mysql@3306@koemade
+-- Active: 1737615399853@@mysql@3306@koemade
 CREATE DATABASE IF NOT EXISTS koemade;
 
 USE koemade;
@@ -32,9 +32,11 @@ CREATE TABLE IF NOT EXISTS actor_ranks (
     description TEXT
 );
 
+INSERT INTO actor_ranks (name, description) VALUES ('amateur', '初心者向けのランクです');
+
 CREATE TABLE IF NOT EXISTS actor_profiles (
     display_name VARCHAR(255) NOT NULL,
-    rank_id BIGINT,
+    rank_id BIGINT DEFAULT 1,
     self_promotion TEXT,
     price INT NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT '受付中',
@@ -67,7 +69,6 @@ CREATE TABLE IF NOT EXISTS voices (
     account_id BIGINT NOT NULL,
     mime_type VARCHAR(255) NOT NULL,
     path TEXT NOT NULL,
-    hash VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
     INDEX (account_id),
@@ -121,15 +122,7 @@ LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id
 GROUP BY
     v.id, ap.account_id, a.username, ar.name, v.path;
-    
--- Insert data into the tags table with the corresponding tag types
-INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
-INSERT INTO tags (name, category) VALUES ('20代', '年代別タグ');
-INSERT INTO tags (name, category) VALUES ('30代以上', '年代別タグ');
-INSERT INTO tags (name, category) VALUES ('大人しい', 'キャラ別タグ');
-INSERT INTO tags (name, category) VALUES ('快活', 'キャラ別タグ');
-INSERT INTO tags (name, category) VALUES ('セクシー・渋め', 'キャラ別タグ');
-
+ 
 CREATE OR REPLACE VIEW actor_feed_view AS
 SELECT
     ap.account_id AS actor_id,
@@ -139,7 +132,9 @@ SELECT
     ap.self_promotion AS actor_description,
     pi.path AS actor_avatar_url,
     ap.price AS actor_price_default,
+    nsfw.allowed AS actor_nsfw_allowed,
     nsfw.price AS actor_price_nsfw,
+    nsfw.extreme_allowed AS actor_nsfw_extreme_allowed,
     nsfw.extreme_surcharge AS actor_price_nsfw_extreme,
     v.id AS voice_id,
     v.title AS voice_title,
@@ -149,7 +144,7 @@ SELECT
     t.category AS tag_category
 FROM
     actor_profiles ap
-JOIN
+LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id
 LEFT JOIN
     profile_images pi ON ap.account_id = pi.account_id
@@ -160,7 +155,15 @@ LEFT JOIN
 LEFT JOIN
     voice_tag vt ON v.id = vt.voice_id
 LEFT JOIN
-    tags t ON vt.tag_id = t.id;
+    tags t ON vt.tag_id = t.id;   
+
+-- Insert data into the tags table with the corresponding tag types
+INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
+INSERT INTO tags (name, category) VALUES ('20代', '年代別タグ');
+INSERT INTO tags (name, category) VALUES ('30代以上', '年代別タグ');
+INSERT INTO tags (name, category) VALUES ('大人しい', 'キャラ別タグ');
+INSERT INTO tags (name, category) VALUES ('快活', 'キャラ別タグ');
+INSERT INTO tags (name, category) VALUES ('セクシー・渋め', 'キャラ別タグ');
 
 -- Insert admin user
 INSERT INTO accounts (username, password) VALUES (

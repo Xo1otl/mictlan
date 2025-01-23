@@ -11,6 +11,8 @@ class Actor
     public string $status;
     public string $rank;
     public string $description;
-    public string $avator_url;
+    public ?string $avator_url;
+    public bool $nsfwAllowed;
+    public bool $nsfwExtremeAllowed;
     public valueObjects\Price $price;
 }

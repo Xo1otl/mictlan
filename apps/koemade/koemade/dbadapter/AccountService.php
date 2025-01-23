@@ -33,7 +33,7 @@ class AccountService implements admin\AccountService, actor\AccountService
             if ($stmt->rowCount() > 0) {
                 $this->logger->info("Account $username has been banned.");
             } else {
-                $this->logger->warning("Account $username not found.");
+                throw new exceptions\AccountNotFoundException("Account $username not found or banned already.");
             }
         } catch (PDOException $e) {
             $this->logger->error("Failed to ban account $username: " . $e->getMessage());
@@ -102,7 +102,7 @@ class AccountService implements admin\AccountService, actor\AccountService
             if ($stmt->rowCount() > 0) {
                 $this->logger->info("Account $username has been deleted.");
             } else {
-                $this->logger->warning("Account $username not found.");
+                throw new exceptions\AccountNotFoundException("Account $username not found.");
             }
         } catch (PDOException $e) {
             $this->logger->error("Failed to delete account $username: " . $e->getMessage());
@@ -113,49 +113,49 @@ class AccountService implements admin\AccountService, actor\AccountService
     /**
      * @inheritDoc
      */
-    public function changePassword(string $username, string $oldPassword, string $newPassword): bool
+    public function changePassword(string $accountId, string $oldPassword, string $newPassword): bool
     {
-        $this->logger->info("Changing password for account: $username");
+        $this->logger->info("Changing password for account: $accountId");
 
         try {
             $this->conn->beginTransaction();
 
             // 現在のパスワードを取得
-            $stmt = $this->conn->prepare("SELECT password FROM accounts WHERE username = :username");
-            $stmt->execute([':username' => $username]);
+            $stmt = $this->conn->prepare("SELECT password FROM accounts WHERE id = :account_id");
+            $stmt->execute([':account_id' => $accountId]);
             $account = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$account) {
-                $this->logger->warning("Account $username not found.");
+                $this->logger->warning("Account $accountId not found.");
                 return false;
             }
 
             // 現在のパスワードが正しいか確認
             if (!password_verify($oldPassword, $account['password'])) {
-                $this->logger->warning("Incorrect old password for account $username.");
+                $this->logger->warning("Incorrect old password for account $accountId.");
                 return false;
             }
 
             // 新しいパスワードをハッシュ化して更新
             $newPasswordHash = password_hash($newPassword, PASSWORD_BCRYPT);
-            $stmt = $this->conn->prepare("UPDATE accounts SET password = :new_password WHERE username = :username");
+            $stmt = $this->conn->prepare("UPDATE accounts SET password = :new_password WHERE id = :account_id");
             $stmt->execute([
                 ':new_password' => $newPasswordHash,
-                ':username' => $username
+                ':account_id' => $accountId
             ]);
 
             if ($stmt->rowCount() > 0) {
                 $this->conn->commit();
-                $this->logger->info("Password for account $username has been changed successfully.");
+                $this->logger->info("Password for account $accountId has been changed successfully.");
                 return true;
             } else {
                 $this->conn->rollBack();
-                $this->logger->warning("Failed to change password for account $username.");
+                $this->logger->warning("Failed to change password for account $accountId.");
                 return false;
             }
         } catch (PDOException $e) {
             $this->conn->rollBack();
-            $this->logger->error("Failed to change password for account $username: " . $e->getMessage());
+            $this->logger->error("Failed to change password for account $accountId: " . $e->getMessage());
             throw $e;
         }
     }
