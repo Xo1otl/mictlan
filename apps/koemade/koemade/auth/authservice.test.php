@@ -5,8 +5,8 @@ use koemade\auth;
 
 require_once __DIR__ . "/../kernel/bootstrap.php";
 
-$auth = new dbadapter\AuthService($secretKey);
-$token = $auth->authenticate("admin@koemade.net", "Abcd1234*");
+$authService = new dbadapter\AuthService($secretKey);
+$token = $authService->authenticate("admin@koemade.net", "Abcd1234*");
 $logger->info("Token: $token");
 
 $tokenService = new auth\JWTService($secretKey);
