@@ -154,8 +154,15 @@ class ProfileService implements actor\ProfileService
 
     private function updateNsfwOptions(string $actor_id, array $data)
     {
+        $filteredData = [
+            'allowed' => isset($data['allowed']) ? (int) filter_var($data['allowed'], FILTER_VALIDATE_BOOLEAN) : null,
+            'extreme_allowed' => isset($data['extreme_allowed']) ? (int) filter_var($data['extreme_allowed'], FILTER_VALIDATE_BOOLEAN) : null,
+            'price' => $data['price'] ?? null,
+            'extreme_surcharge' => $data['extreme_surcharge'] ?? null,
+        ];
+
         // Remove null values
-        $filteredData = array_filter($data, function ($value) {
+        $filteredData = array_filter($filteredData, function ($value) {
             return $value !== null;
         });
 
@@ -179,8 +186,15 @@ class ProfileService implements actor\ProfileService
 
     private function insertNsfwOptions(string $actor_id, array $data)
     {
+        $filteredData = [
+            'allowed' => isset($data['allowed']) ? (int) filter_var($data['allowed'], FILTER_VALIDATE_BOOLEAN) : null,
+            'extreme_allowed' => isset($data['extreme_allowed']) ? (int) filter_var($data['extreme_allowed'], FILTER_VALIDATE_BOOLEAN) : null,
+            'price' => $data['price'] ?? null,
+            'extreme_surcharge' => $data['extreme_surcharge'] ?? null,
+        ];
+
         // Remove null values
-        $filteredData = array_filter($data, function ($value) {
+        $filteredData = array_filter($filteredData, function ($value) {
             return $value !== null;
         });
 
@@ -232,10 +246,9 @@ class ProfileService implements actor\ProfileService
             return $value !== null;
         });
 
-        // Add account_id to the insert data
-        $filteredData['account_id'] = $actor_id;
-
         if (!empty($filteredData)) {
+            // Add account_id to the insert data
+            $filteredData['account_id'] = $actor_id;
             $columns = implode(', ', array_keys($filteredData));
             $placeholders = ':' . implode(', :', array_keys($filteredData));
 

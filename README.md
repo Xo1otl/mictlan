@@ -23,6 +23,7 @@
 
 # Idea
 
+- shebangは`#!/usr/bin/env python`、shellscript引退
 - 今回考えた state machine を使った設計で、しかのこダイアグラムをポチポチ進められるページを作りたい
 - camunda みたいなサービスを go で作りたい
 - ターミナルから AI 呼び出せる機能を作る、一つのターミナルにつき一つの会話

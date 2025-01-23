@@ -34,6 +34,9 @@ class ProfileInput
         ?int $profileImageSize = null,
         ?string $profileImagePath = null
     ) {
+        if ($status !== null && $status !== "受付中" && $status !== "受付停止中") {
+            throw new \InvalidArgumentException("Invalid status value");
+        }
         $this->displayName = $displayName;
         $this->selfPromotion = $selfPromotion;
         $this->price = $price;
