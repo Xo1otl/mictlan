@@ -27,7 +27,7 @@ class QueryRepository implements query\repository\Service
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         if (empty($rows)) {
-            throw new \RuntimeException("Actor not found with ID: $actor_id");
+            throw new exceptions\ProfileNotFoundException("Profile not found with ID: $actor_id");
         }
 
         $actor = new query\repository\Actor();
@@ -37,6 +37,8 @@ class QueryRepository implements query\repository\Service
         $actor->rank = $rows[0]['actor_rank'];
         $actor->description = $rows[0]['actor_description'];
         $actor->avator_url = $rows[0]['actor_avatar_url'];
+        $actor->nsfwAllowed = $rows[0]['actor_nsfw_allowed'] === 1;
+        $actor->nsfwExtremeAllowed = $rows[0]['actor_nsfw_extreme_allowed'] === 1;
         $actor->price = new query\valueObjects\Price(
             $rows[0]['actor_price_default'],
             $rows[0]['actor_price_nsfw'],
@@ -47,6 +49,11 @@ class QueryRepository implements query\repository\Service
         $voiceMap = [];
 
         foreach ($rows as $row) {
+            // 音声を一つも投稿していないユーザーがいる場合
+            if ($row['voice_id'] === null) {
+                continue;
+            }
+
             if (!isset($voiceMap[$row['voice_id']])) {
                 $voice = new query\repository\SampleVoice();
                 $voice->id = $row['voice_id'];
@@ -58,8 +65,9 @@ class QueryRepository implements query\repository\Service
                 $sampleVoices[] = $voice;
             }
 
+            // tag_idとvoice_idが両方同じようなデータは複数できないはずなのでこれで問題ない
             if ($row['tag_id']) {
-                $tag = new query\valueObjects\Tag($row['tag_name'], $row['tag_category']);
+                $tag = new query\repository\Tag($row['tag_id'], $row['tag_category'], $row['tag_name']);
                 $voiceMap[$row['voice_id']]->tags[] = $tag;
             }
         }
@@ -133,5 +141,26 @@ class QueryRepository implements query\repository\Service
         }
 
         return $voiceWithTags;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function listAllAccounts(): array
+    {
+        throw new \RuntimeException("Not implemented.");
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function listAllTags(): array
+    {
+        $sql = "SELECT id, name, category FROM tags";
+        $stmt = $this->conn->query($sql);
+        return array_map(
+            fn($row) => new query\repository\Tag($row['id'], $row['category'], $row['name']),
+            $stmt->fetchAll(\PDO::FETCH_ASSOC)
+        );
     }
 }

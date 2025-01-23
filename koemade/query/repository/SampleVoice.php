@@ -11,7 +11,7 @@ class SampleVoice
     public string $name;
     public string $source_url;
     /**
-     * @var valueObjects\Tag[]
+     * @var Tag[]
      */
     public array $tags;
 }

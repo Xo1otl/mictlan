@@ -10,7 +10,7 @@ class MailService implements SignupRequestService
         'ENCODING' => '7bit',
         'HOST' => 's16.valueserver.jp',
         'FROM' => 'demo3@koemade.net',
-        'FROM_NAME' => 'コエメイド運営',
+        'FROM_NAME' => 'コエメイド自動送信プログラム',
         'PHP_LANGUAGE' => 'japanese',
         'PHP_INTERNAL_ENCODING' => 'UTF-8',
         'CHARSET' => 'iso-2022-jp',
@@ -30,7 +30,7 @@ class MailService implements SignupRequestService
         $this->logger->info('メール送信を開始します。');
 
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
-        $mail->SMTPDebug = 4;
+        $mail->SMTPDebug = 0;
 
         try {
             mb_language(self::MAIL_CONFIG['PHP_LANGUAGE']);
