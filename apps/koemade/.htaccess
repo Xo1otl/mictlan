@@ -1,30 +1,34 @@
-# ホストされているフォルダ直下の .htaccess
-
-# Basic認証を無効にする
+# Basic認証を無効化
 AuthType None
 Require all granted
 
-# RewriteEngineを有効にする
+# ディレクトリリスト表示を無効化
+Options -Indexes
+
+# RewriteEngineを有効化
 RewriteEngine On
 
-# URLから ui/ を隠す
-# 1. リクエストが ui/ で始まらない場合
+# 外部から直接uiパスでアクセスされた場合のリダイレクト（UIパス隠蔽）
+RewriteCond %{THE_REQUEST} /ui/
+RewriteRule ^ui/(.*)$ /$1 [R=302,L]
+
+# ルートアクセス時のリダイレクト処理（403エラー解消）
+RewriteRule ^$ /ui/guest/login-example.php [L,R=302]
+
+# ui/以外の実ファイル/ディレクトリへのアクセスを禁止
 RewriteCond %{REQUEST_URI} !^/ui/
-# 2. かつ、リクエストされたファイルやディレクトリが存在しない場合
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [F,L]
+
+# URLからui/を隠す内部リライト
+RewriteCond %{REQUEST_URI} !^/ui/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-# 3. 内部的に ui/ を追加する
 RewriteRule ^(.*)$ ui/$1 [L]
 
-# 存在しないファイルやディレクトリにアクセスした場合にリダイレクト
-# 1. リクエストが ui/ で始まる場合
+# 存在しないパスへのアクセスをログインページにリダイレクト
 RewriteCond %{REQUEST_URI} ^/ui/
-# 2. かつ、リクエストされたファイルやディレクトリが存在しない場合
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-# 3. リダイレクト
-RewriteRule ^(.*)$ /ui/guest/login-example.php [L,R=302]
-
-# ルート（/）にアクセスした場合や、パスがない場合にリダイレクト
-RewriteCond %{REQUEST_URI} ^/$
 RewriteRule ^(.*)$ /ui/guest/login-example.php [L,R=302]

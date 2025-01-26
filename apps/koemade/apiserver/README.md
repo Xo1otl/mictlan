@@ -1,163 +1,203 @@
-### 1. サンプルボイス検索用API
-
-`curl "http://localhost:8001/search-voices?title=%E3%83%95%E3%82%A7%E3%83%9F%E3%83%8B%E3%82%B9%E3%83%88&tags%5B%5D=mood:%E7%8A%AF%E7%BD%AA%E8%80%85&page=1"`
-
-**リクエスト:**
-- `title`: タイトル
-- `tags`: tagの配列 (カテゴリと名前、性別、年齢、deliveryなど)
-- `page`: Page number for pagination (e.g., 1)
-
-**レスポンス:**
+# 声優取得API
+curl "http://localhost:8001/actor/8"
 ```json
 {
-    "total": 120,
-    "page": 1,
-    "per_page": 20,
-    "voices": [
-        {
-            "id": 101,
-            "name": "Happy Greeting",
-            "source_url": "https://koemade.net/samples/happy_greeting.mp3",
-            "tags": ["greeting", "happy", "female"],
-            "actor": {
-                "id": 10,
-                "name": "Jane Doe",
-                "status": "enabled",
-                "rank": "senior",
-                "total_voices": 50
-            }
-        },
-        {
-            "id": 102,
-            "name": "Excited Announcement",
-            "source_url": "https://koemade.net/samples/excited_announcement.mp3",
-            "tags": ["announcement", "excited", "female"],
-            "actor": {
-                "id": 10,
-                "name": "Jane Doe",
-                "status": "enabled",
-                "rank": "senior",
-                "total_voices": 50
-            }
-        },
-        // More voice entries...
-    ]
-}
-```
-
-### 2. 声優検索用API
-
-`curl "http://localhost:8001/search-actors?name_like=&status=%E5%8F%97%E4%BB%98%E4%B8%AD&page=1"`
-
-条件を満たすサンプルボイスを投稿したユーザーを検索できるのが理想
-
-**リクエスト:**
-- `name_like`: 名前
-- `status`: 受付中と受付停止中
-- `nsfw_options`: nsfwの設定でokかextreme.okかどうか
-- `page`: ページ番号
-
-**レスポンス:**
-```json
-{
-    "total": 50,
-    "page": 1,
-    "per_page": 20,
-    "actors": [
-        {
-            "id": 20,
-            "name": "John Smith",
-            "status": "enabled",
-            "rank": "expert",
-            "avatar_url": "https://koemade.net/avatars/john_smith.jpg"
-        },
-        {
-            "id": 21,
-            "name": "John Doe",
-            "status": "enabled",
-            "rank": "intermediate",
-            "avatar_url": "https://koemade.net/avatars/john_doe.jpg"
-        },
-        // More actor entries...
-    ]
-}
-```
-
-### 3. 声優プロフィールAPI
-
-`curl "http://localhost:8001/actor/10"`
-
-nsfwが許可されていない場合は適当にfalse入れて返す
-
-**リクエスト:**
-- `id`: 声優のID
-- `page`: ページ番号
-
-**レスポンス:**
-```json
-{
-    "actor": {
-        "id": 20,
-        "name": "John Smith",
-        "status": "enabled",
-        "rank": "expert",
-        "description": "Experienced voice actor with a deep and soothing voice.",
-        "avatar_url": "https://koemade.net/avatars/john_smith.jpg",
-        "price": {
-            "default": 100,
-            "nsfw": 150,
-            "nsfw_extreme": 250
-        }
-    },
-    "sample_voices": [
-        {
-            "id": 110,
-            "name": "Narration Sample",
-            "source_url": "https://koemade.net/samples/narration_sample.mp3",
-            "tags": ["narration", "deep", "male"]
-        },
-        {
-            "id": 111,
-            "name": "Character Voice",
-            "source_url": "https://koemade.net/samples/character_voice.mp3",
-            "tags": ["character", "mysterious", "male"]
-        },
-        // More sample voice entries...
-    ]
-}
-```
-
-### 4. ボイス詳細API
-
-**リクエスト:**
-- `id`: ボイスID (例: 101)
-
-**レスポンス:**
-```json
-{
-    "voice": {
-        "id": 1,
-        "title": "サンプルボイス",
-        "account": {
-            "id": 2,
-            "username": "qlovolp.ttt@gmail.com",
-            "avator_url": "abcd@example.com"
-        },
-        "mime_type": "audio/mpeg",
-        "filename": "sample.mp3",
-        "created_at": "2023-10-27 15:30:00",
-        "tags": [
-            {
-                "id": 1,
-                "tag_name": "10代",
-                "tag_category": "年代別タグ"
-            },
-            {
-                "id": 5,
-                "tag_name": "快活",
-                "tag_category": "キャラ別タグ"
-            }
-        ]
+  "actor": {
+    "id": "8",
+    "name": "satokyosuke",
+    "status": "受付中",
+    "rank": "Bronze",
+    "description": "隠すキャビンクルー催眠術分割サワー。知覚じぶんの緩む君は普通の。\n奨励します彼証言する人形残る。主婦コミュニティ舗装彼タワー装置ソース。\n主婦クロス暖かい教会錯覚符号障害。編組風景電池舗装欠乏再現する電池。状況錯覚合計感謝する楽しんで移動トースト。\n感謝する知覚デッド細かいバーゲンスキーム。\n販売バーゲンキャビネットクロス索引。呼ぶジャム創傷意図月オークション怒り。ノートダイヤモンド私戦略的。",
+    "avator_url": "8_ジャム_8566.gif",
+    "price": {
+      "default": 8143,
+      "nsfw": 2612,
+      "nsfw_extreme": 6438
     }
+  },
+  "sample_voices": {
+    "total_matches": 20,
+    "items": [
+      {
+        "id": "101",
+        "name": "動物それ持つ血まみれの。",
+        "source_url": "8_シュガー_3376.wav",
+        "tags": []
+      },
+// ...以下略
+    ]
+  }
+}
+```
+
+# 音声取得API
+curl "http://localhost:8001/voice/8"
+```json
+{
+  "id": "8",
+  "title": "不自然なシュガートースト電池。",
+  "account": {
+    "id": 3,
+    "username": "kobayashimai@example.com",
+    "avator_url": "3_文言_3809.gif"
+  },
+  "filename": "3_合計_4588.mpeg",
+  "created_at": "2025-01-20 09:13:28",
+  "tags": []
+}
+```
+
+# 声優検索API
+curl "http://localhost:8001/search-actors?nsfw_allowed=0"
+
+```json
+{
+  "total_matches": 19,
+  "items": [
+    {
+      "id": 3,
+      "name": "mai99",
+      "status": "受付中",
+      "rank": "Diamond",
+      "avatar_url": "3_文言_3809.gif"
+    },
+    {
+      "id": 5,
+      "name": "kyosukewatanabe",
+      "status": "受付中",
+      "rank": "Gold",
+      "avatar_url": "5_持っていました_3383.png"
+    },
+// ...以下略
+  ]
+}
+```
+
+# 音声検索API
+curl "http://localhost:8001/search-voices?tags[]=genre:vote&tags[]=theme:staff"
+
+```json
+{
+  "total_matches": 7,
+  "items": [
+    {
+      "id": "460",
+      "name": "Probably indeed institution ask here.",
+      "actor": {
+        "id": "25",
+        "name": "spencerbrandt@example.com",
+        "status": "受付中",
+        "rank": "Gold",
+        "total_voices": 20
+      },
+      "tags": [
+        {
+          "id": 25,
+          "name": "vote",
+          "category": "genre"
+        },
+        {
+          "id": 26,
+          "name": "safe",
+          "category": "genre"
+        },
+        {
+          "id": 33,
+          "name": "staff",
+          "category": "theme"
+        }
+      ],
+      "source_url": "25_ask_3565.ogg"
+    },
+    {
+      "id": "491",
+      "name": "Could bank practice dinner.",
+      "actor": {
+        "id": "27",
+        "name": "mikaylabright@example.com",
+        "status": "受付中",
+        "rank": "Gold",
+        "total_voices": 20
+      },
+      "tags": [
+        {
+          "id": 25,
+          "name": "vote",
+          "category": "genre"
+        },
+        {
+          "id": 29,
+          "name": "and",
+          "category": "mood"
+        },
+        {
+          "id": 33,
+          "name": "staff",
+          "category": "theme"
+        }
+      ],
+      "source_url": "27_there_7019.wav"
+    },
+// ...以下略
+  ]
+}
+```
+
+検索クエリ例(パラメータ全部指定版)
+# 音声検索API
+curl "http://localhost:8001/search-voices?title=bank&tags[]=genre:vote&tags[]=theme:staff&page=1"
+
+```json
+{
+  "total_matches": 1,
+  "items": [
+    {
+      "id": "491",
+      "name": "Could bank practice dinner.",
+      "actor": {
+        "id": "27",
+        "name": "mikaylabright@example.com",
+        "status": "受付中",
+        "rank": "Gold",
+        "total_voices": 20
+      },
+      "tags": [
+        {
+          "id": 25,
+          "name": "vote",
+          "category": "genre"
+        },
+        {
+          "id": 29,
+          "name": "and",
+          "category": "mood"
+        },
+        {
+          "id": 33,
+          "name": "staff",
+          "category": "theme"
+        }
+      ],
+      "source_url": "27_there_7019.wav"
+    }
+  ]
+}
+```
+
+# 声優検索API
+curl "http://localhost:8001/search-actors?nsfw_allowed=0&name_like=ale&status=%E5%8F%97%E4%BB%98%E4%B8%AD&page=1&nsfw_extreme_allowed=0"
+
+```json
+{
+  "total_matches": 1,
+  "items": [
+    {
+      "id": 42,
+      "name": "alevy",
+      "status": "受付中",
+      "rank": "Silver",
+      "avatar_url": "42_call_8215.png"
+    }
+  ]
 }
 ```
