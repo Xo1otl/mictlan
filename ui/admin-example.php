@@ -55,13 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setcookie('auth_token', $token, [
                 'expires' => time() + 3600, // 1時間有効
                 'path' => '/',
-                'secure' => true, // HTTPSのみ
+                // 'secure' => true, // HTTPSのみ (対応後に有効化)
                 'httponly' => true, // JavaScriptからアクセス不可
                 'samesite' => 'Strict' // CSRF対策
             ]);
 
             // ログイン成功後にリダイレクト
-            header('Location: actor-example.php');
+            header('Location: actor/profile-example.php');
             exit;
         } elseif (isset($_POST['delete'])) {
             $accountService->deleteAccount($email);
@@ -92,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
+        (アカウント作成時のみ入力が必要)
         <br>
         <button type="submit" name="create">Create Account</button>
         <button type="submit" name="ban">Ban Account</button>
