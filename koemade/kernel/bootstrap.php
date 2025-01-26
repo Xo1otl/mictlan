@@ -16,10 +16,19 @@ $logger->info('Bootstraping the application');
 $authService = new dbadapter\AuthService($secretKey);
 $tokenService = new auth\JWTService($secretKey);
 
+// ストレージの初期化
 $storage = new storage\Storage();
 
 // セッションを開始
 session_start();
+// echo session_id() . '<br>';
+// echo 'request token: ' . $_POST['csrf_token'] . '<br>';
+// echo 'session csrf_token: ' . $_SESSION['csrf_token'] . '<br>';
+// if (!isset($_SESSION['request_count'])) {
+//     $_SESSION['request_count'] = 0;
+// }
+// $_SESSION['request_count']++;
+// echo 'Request Count: ' . $_SESSION['request_count'] . '<br>';
 
 // CSRFトークンの検証処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     unset($_SESSION['csrf_token']);
 }
 
-// CSRFトークンを生成（GETリクエスト時やトークンが未設定の場合）
-if ($_SERVER['REQUEST_METHOD'] === 'GET' || empty($_SESSION['csrf_token'])) {
+// CSRFトークンを生成（トークンが未設定の場合）
+// GETリクエスト時に再生成すると、マルチタブや複数回処理の発生でトークンが一致しなくなるのでしない
+if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // ランダムなトークンを生成
 }

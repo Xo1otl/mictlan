@@ -1,0 +1,30 @@
+# ホストされているフォルダ直下の .htaccess
+
+# Basic認証を無効にする
+AuthType None
+Require all granted
+
+# RewriteEngineを有効にする
+RewriteEngine On
+
+# URLから ui/ を隠す
+# 1. リクエストが ui/ で始まらない場合
+RewriteCond %{REQUEST_URI} !^/ui/
+# 2. かつ、リクエストされたファイルやディレクトリが存在しない場合
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# 3. 内部的に ui/ を追加する
+RewriteRule ^(.*)$ ui/$1 [L]
+
+# 存在しないファイルやディレクトリにアクセスした場合にリダイレクト
+# 1. リクエストが ui/ で始まる場合
+RewriteCond %{REQUEST_URI} ^/ui/
+# 2. かつ、リクエストされたファイルやディレクトリが存在しない場合
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# 3. リダイレクト
+RewriteRule ^(.*)$ /ui/guest/login-example.php [L,R=302]
+
+# ルート（/）にアクセスした場合や、パスがない場合にリダイレクト
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^(.*)$ /ui/guest/login-example.php [L,R=302]
