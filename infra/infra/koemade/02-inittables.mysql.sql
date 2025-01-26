@@ -95,7 +95,7 @@ SELECT
     v.id AS voice_id,
     v.title AS voice_name,
     ap.account_id AS actor_id,
-    a.username AS actor_name,
+    ap.display_name AS actor_name,  -- ここをusername → display_nameに変更
     ap.status AS actor_status,
     ar.name AS actor_rank,
     (SELECT COUNT(*) FROM voices vv WHERE vv.account_id = ap.account_id) AS total_voices,
@@ -117,11 +117,9 @@ FROM
 LEFT JOIN
     actor_profiles ap ON v.account_id = ap.account_id
 LEFT JOIN
-    accounts a ON ap.account_id = a.id
-LEFT JOIN
-    actor_ranks ar ON ap.rank_id = ar.id
+    actor_ranks ar ON ap.rank_id = ar.id  -- accountsテーブルの結合を削除
 GROUP BY
-    v.id, ap.account_id, a.username, ar.name, v.path;
+    v.id, ap.account_id, ap.display_name, ar.name, v.path;  -- GROUP BYを調整
  
 CREATE OR REPLACE VIEW actor_feed_view AS
 SELECT

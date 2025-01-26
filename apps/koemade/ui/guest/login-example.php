@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         setcookie('auth_token', $token, [
             'expires' => time() + 3600, // 1時間有効
             'path' => '/',
-            'secure' => true, // HTTPSのみ
+            // 'secure' => true, // HTTPSのみ、対応後に有効化
             'httponly' => true, // JavaScriptからアクセス不可
             'samesite' => 'Strict' // CSRF対策
         ]);
@@ -34,7 +34,7 @@ if (isset($_GET['logout'])) {
     setcookie('auth_token', '', [
         'expires' => time() - 3600, // 過去の日付に設定して削除
         'path' => '/',
-        'secure' => true,
+        // 'secure' => true, // HTTPSのみ、対応後に有効化
         'httponly' => true,
         'samesite' => 'Strict'
     ]);
