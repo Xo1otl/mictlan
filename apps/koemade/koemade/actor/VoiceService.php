@@ -4,9 +4,11 @@ namespace koemade\actor;
 
 interface VoiceService
 {
-    public function editTitle(string $voice_id, string $newTitle): void;
     /**
      * @param int[] $tagIds
      */
-    public function updateTags(string $voice_id, array $tagIds): void;
+    public function updateVoice(UpdateVoiceInput $updateVoiceInput): void;
+
+    public function newVoice(NewVoiceInput $input): void;
+    public function deleteVoice(string $sub, string $voice_id): void;
 }
