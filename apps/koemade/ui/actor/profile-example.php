@@ -35,7 +35,7 @@ try {
 // プロファイル保存処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_profile'])) {
     // ファイルアップロード処理
-    $uploadResult = $storage->upload($_FILES['profile_image']);
+    $uploadInfo = $storage->upload($_FILES['profile_image']);
 
     $profileInput = new actor\ProfileInput(
         $_POST['display_name'],
@@ -46,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_profile'])) {
         (int) $_POST['nsfw_price'] ?? null,
         isset($_POST['extreme_allowed']) ? (bool) $_POST['extreme_allowed'] : false,
         (int) $_POST['extreme_surcharge'] ?? null,
-        $uploadResult['type'],
-        $uploadResult['size'],
-        $uploadResult['path']
+        $uploadInfo['type'],
+        $uploadInfo['size'],
+        $uploadInfo['path']
     );
 
     $profileService = new dbadapter\ProfileService();
