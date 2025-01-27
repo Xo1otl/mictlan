@@ -67,7 +67,8 @@ require_once __DIR__ . "/../koemade/kernel/bootstrap.php";
 <body>
     <nav>
         <ul>
-            <li><a href="/guest/search-example.php">Search & Query</a></li>
+            <li><a href="/guest/search-example.php">Search Voices/Actors</a></li>
+            <li><a href="/guest/query-example.php">Query Voice/Actor</a></li>
             <li><a href="/guest/login-example.php">Guest Login</a></li>
             <li><a href="/guest/submit-example.php">Guest Submit</a></li>
             <li><a href="/actor/profile-example.php">Actor Profile</a></li>

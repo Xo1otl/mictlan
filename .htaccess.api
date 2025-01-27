@@ -1,0 +1,22 @@
+# Basic認証を無効化
+AuthType None
+Require all granted
+
+# ディレクトリリスト表示を無効化
+Options -Indexes
+
+# RewriteEngineを有効化
+RewriteEngine On
+
+# すべてのリクエストを apiserver/index.php にルーティング
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ apiserver/index.php [QSA,L]
+
+# apiserver/ をURLから隠す
+# 外部から直接 apiserver/ でアクセスされた場合のリダイレクト
+RewriteCond %{THE_REQUEST} /apiserver/
+RewriteRule ^apiserver/(.*)$ /$1 [R=302,L]
+
+# ルートアクセス時のリダイレクト処理（apiserver/index.php にリダイレクト）
+RewriteRule ^$ apiserver/index.php [L,R=302]
