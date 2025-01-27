@@ -17,6 +17,7 @@ $app = AppFactory::create();
 $tokenService = new auth\JWTService($secretKey);
 
 $app->add(new middleware\SlimAuth($tokenService));
+$app->add(new middleware\SlimCORS());
 
 // サービスを初期化
 $searchService = new SearchService();

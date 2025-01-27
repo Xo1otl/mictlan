@@ -21,14 +21,6 @@ $storage = new storage\Storage();
 
 // セッションを開始
 session_start();
-// echo session_id() . '<br>';
-// echo 'request token: ' . $_POST['csrf_token'] . '<br>';
-// echo 'session csrf_token: ' . $_SESSION['csrf_token'] . '<br>';
-// if (!isset($_SESSION['request_count'])) {
-//     $_SESSION['request_count'] = 0;
-// }
-// $_SESSION['request_count']++;
-// echo 'Request Count: ' . $_SESSION['request_count'] . '<br>';
 
 // CSRFトークンの検証処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
