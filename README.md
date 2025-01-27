@@ -59,7 +59,9 @@ DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストし�
    1. 事前イベントを発火して中間状態への遷移を試みる、無理だったら処理しないでエラーを返す
    2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
    3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
-
+- Gitの[subtree](https://github.com/git/git/tree/master/contrib/subtree)を使って他のリポジトリに上げつつ同時にmonorepo管理できる
+  - `git remote add <repo-name> <url>`
+  - `git subtree push --prefix=<path/to/subtree> <repo-name> main`
 
 # Note
 
