@@ -19,7 +19,7 @@
 * [Knowledgebase](http://10.8.0.2:3010)
 * [ComfyUI](http://10.8.0.2:8188)
 * [Fluxgym](http://10.8.0.2:8672)
-* [LLM](http://10.8.0.2:3000)
+* [AnythingLLM](http://10.8.0.2:3001)
 
 # Idea
 
