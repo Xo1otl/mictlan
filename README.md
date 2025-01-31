@@ -11,6 +11,7 @@
 * [アキネーター](https://akinator.mictlan.site)
 * [ブログ](https://blog.mictlan.site)
 * [Fediverse](https://lemmy.mictlan.site)
+* [IdP](https://auth.mictlan.site)
 
 # Private Linkes in this Repo
 
