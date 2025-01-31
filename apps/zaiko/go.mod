@@ -6,6 +6,7 @@ require (
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/twmb/franz-go/pkg/kmsg v1.9.0
 	go.mongodb.org/mongo-driver v1.17.2
+	go.mongodb.org/mongo-driver/v2 v2.0.0
 )
 
 require (
@@ -36,7 +37,6 @@ require (
 	github.com/twmb/franz-go/pkg/sr v1.2.0
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
-	go.mongodb.org/mongo-driver/v2 v2.0.0
 	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
