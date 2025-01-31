@@ -7,7 +7,7 @@ redis_service = {
             'container_name': 'redis',
             'restart': 'unless-stopped',
             'ports': [f'{PORT}:6379'],
-            'volumes': ['./redis:/data'],
+            'volumes': ['redis_data:/data'],
             'healthcheck': {
                 'test': ['CMD', 'redis-cli', '--raw', 'incr', 'ping'],
                 'interval': '10s',
@@ -15,5 +15,8 @@ redis_service = {
                 'retries': 5
             }
         }
+    },
+    'volumes': {
+        'redis_data': None
     }
 }
