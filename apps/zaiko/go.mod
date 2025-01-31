@@ -32,7 +32,7 @@ require (
 	github.com/shopspring/decimal v1.4.0
 	github.com/twmb/franz-go v1.18.1
 	github.com/twmb/franz-go/pkg/kadm v1.15.0
-	github.com/twmb/franz-go/pkg/sr v1.2.0
+	github.com/twmb/franz-go/pkg/sr v1.3.0
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	go.mongodb.org/mongo-driver/v2 v2.0.0
