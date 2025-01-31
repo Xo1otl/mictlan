@@ -5,7 +5,7 @@ go 1.23.2
 require (
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/twmb/franz-go/pkg/kmsg v1.9.0
-	go.mongodb.org/mongo-driver v1.17.2
+	go.mongodb.org/mongo-driver/v2 v2.0.0
 )
 
 require (
@@ -25,7 +25,6 @@ require (
 )
 
 require (
-	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/hamba/avro/v2 v2.27.0
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

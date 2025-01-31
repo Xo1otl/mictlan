@@ -6,9 +6,9 @@ import (
 	"zaiko/internal/auth"
 
 	"github.com/shopspring/decimal"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 type MongoRepo struct {
@@ -77,7 +77,7 @@ func (m *MongoRepo) Stocks(sub auth.Sub, name string) map[string]int {
 
 func NewMongoRepo() Repo {
 	clientOptions := options.Client().ApplyURI("mongodb://mongo:27017")
-	client, err := mongo.Connect(context.TODO(), clientOptions)
+	client, err := mongo.Connect(clientOptions)
 	if err != nil {
 		panic(err)
 	}
