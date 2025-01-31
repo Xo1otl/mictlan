@@ -2,9 +2,6 @@
 
 namespace koemade\query\repository;
 
-use koemade\query\valueObjects;
-
-
 class SampleVoice
 {
     public string $id;
