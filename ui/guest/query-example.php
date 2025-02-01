@@ -93,7 +93,7 @@ require_once __DIR__ . '/../bootstrap.php';
         document.getElementById('actor-fetch-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const actorId = document.getElementById('actor-id').value;
-            fetch(`//api.koemade.net/actor/${actorId}`)
+            fetch(`http://localhost:8002/actor/${actorId}`)
                 .then(response => response.json())
                 .then(data => {
                     const resultDiv = document.getElementById('actor-result');
@@ -133,7 +133,7 @@ require_once __DIR__ . '/../bootstrap.php';
         document.getElementById('voice-fetch-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const voiceId = document.getElementById('voice-id').value;
-            fetch(`//api.koemade.net/voice/${voiceId}`)
+            fetch(`http://localhost:8002/voice/${voiceId}`)
                 .then(response => response.json())
                 .then(data => {
                     const resultDiv = document.getElementById('voice-result');

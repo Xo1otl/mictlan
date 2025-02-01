@@ -93,7 +93,7 @@ require_once __DIR__ . '/../bootstrap.php';
             event.preventDefault();
             const formData = new FormData(event.target);
             const params = new URLSearchParams(formData).toString();
-            fetch(`//api.koemade.net/search-actors?${params}`)
+            fetch(`http://localhost:8002/search-actors?${params}`)
                 .then(response => response.json())
                 .then(data => {
                     const resultsDiv = document.getElementById('actor-results');
@@ -124,7 +124,7 @@ require_once __DIR__ . '/../bootstrap.php';
             }
 
             const params = new URLSearchParams(formData).toString();
-            fetch(`//api.koemade.net/search-voices?${params}`)
+            fetch(`http://localhost:8002/search-voices?${params}`)
                 .then(response => response.json())
                 .then(data => {
                     const resultsDiv = document.getElementById('voice-results');
