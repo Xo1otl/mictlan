@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . "/../koemade/kernel/bootstrap.php";
+
+$apiURL = "http://localhost:8002/api";
 ?>
 
 <!DOCTYPE html>

@@ -17,7 +17,7 @@ test_data = [
 data = []
 for r in range(9):
     for c in range(9):
-        g = 3 * (r // 3) + (c // 3)  # g を計算
+        g = 3 * (r // 3) + (c // 3)
         data.append({"row": r, "col": c, "grid": g,
                     "value": z3.Int(f"x_{r}_{c}")})
 

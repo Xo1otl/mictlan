@@ -20,6 +20,7 @@ from infra import knowledgebase
 from infra import akinator
 from infra import fediverse
 from infra import idp
+from infra.idp import oidc
 from infra import ldap
 
 
@@ -59,7 +60,7 @@ def check_port_conflicts(modules):
 # すべての設定にまとめてnetworksを追加するなどの共通処理が考えられる
 def gen_compose():
     modules = [
-        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap
+        vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap, oidc
     ]
 
     check_port_conflicts(modules)
