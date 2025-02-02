@@ -32,14 +32,17 @@ $app->get('/search-voices', function (Request $request, Response $response, arra
 
     // Parse tags
     $tags = [];
+    // クエリパラメータのtagsが配列である場合
+    // パラメータの書式例：tags[category1]=name1&tags[category2]=name2
     if (isset($queryParams['tags']) && is_array($queryParams['tags'])) {
-        foreach ($queryParams['tags'] as $tagStr) {
-            if (strpos($tagStr, ':') === false) {
+        foreach ($queryParams['tags'] as $category => $name) {
+            $category = htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
+            $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+            if (empty($category)) {
                 $response = $response->withHeader('Content-Type', 'application/json');
                 $response->getBody()->write(json_encode(['error' => 'Invalid tag format']));
                 return $response->withStatus(400);
             }
-            [$category, $name] = explode(':', $tagStr, 2);
             $tags[] = new Tag($category, $name);
         }
     }

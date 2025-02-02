@@ -74,7 +74,7 @@ curl "http://localhost:8001/search-actors?nsfw_allowed=0"
 ```
 
 # 音声検索API
-curl "http://localhost:8001/search-voices?tags[]=genre:vote&tags[]=theme:staff"
+curl "http://localhost:8001/search-voices?tags[genre]=vote&tags[theme]=staff"
 
 ```json
 {
@@ -145,7 +145,7 @@ curl "http://localhost:8001/search-voices?tags[]=genre:vote&tags[]=theme:staff"
 
 検索クエリ例(パラメータ全部指定版)
 # 音声検索API
-curl "http://localhost:8001/search-voices?title=bank&tags[]=genre:vote&tags[]=theme:staff&page=1"
+curl "http://localhost:8001/search-voices?title=bank&tags[genre]=vote&tags[theme]=staff&page=1"
 
 ```json
 {
