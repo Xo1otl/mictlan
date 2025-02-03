@@ -1,0 +1,34 @@
+# Basic認証を無効化
+AuthType None
+Require all granted
+
+# ディレクトリリスト表示を無効化
+Options -Indexes
+
+# RewriteEngineを有効化
+RewriteEngine On
+
+# 外部から直接examples/uiパスでアクセスされた場合のリダイレクト（UIパス隠蔽）
+RewriteCond %{THE_REQUEST} /examples/ui/
+RewriteRule ^examples/ui/(.*)$ /$1 [R=302,L]
+
+# ルートアクセス時のリダイレクト処理（403エラー解消）
+RewriteRule ^$ /examples/ui/guest/login-example.php [L,R=302]
+
+# examples/ui/以外の実ファイル/ディレクトリへのアクセスを禁止
+RewriteCond %{REQUEST_URI} !^/examples/ui/
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [F,L]
+
+# URLからexamples/ui/を隠す内部リライト
+RewriteCond %{REQUEST_URI} !^/examples/ui/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ examples/ui/$1 [L]
+
+# 存在しないパスへのアクセスをログインページにリダイレクト
+RewriteCond %{REQUEST_URI} ^/examples/ui/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /examples/ui/guest/login-example.php [L,R=302]

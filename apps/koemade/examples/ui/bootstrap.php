@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . "/../koemade/kernel/bootstrap.php";
+require_once __DIR__ . "/../../koemade/kernel/bootstrap.php";
 
-$apiURL = "http://localhost:8002/api";
+// $apiURL = "http://localhost:8002/api";
+$apiURL = "http://stg5.koemade.net";
 ?>
 
 <!DOCTYPE html>
