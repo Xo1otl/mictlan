@@ -1,6 +1,3 @@
-[submodule "koemade"]
-	path = apps/koemade
-	url = git@github.com:Xo1otl/koemade.git
 [submodule "apps/koemade"]
 	path = apps/koemade
 	url = git@github.com:Xo1otl/koemade.git
