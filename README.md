@@ -19,7 +19,7 @@
 * [VPN Server](https://vpn.mictlan.site)
 * [Knowledgebase](http://10.8.0.2:3010)
 * [ComfyUI](http://10.8.0.2:8188)
-* [Fluxgym](http://10.8.0.2:8672)
+* [Fluxgym](http://10.8.0.2:7860)
 * [AnythingLLM](http://10.8.0.2:3001)
 
 # Idea
