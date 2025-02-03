@@ -120,6 +120,28 @@ LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id  -- accountsテーブルの結合を削除
 GROUP BY
     v.id, ap.account_id, ap.display_name, ar.name, v.path;  -- GROUP BYを調整
+    
+CREATE OR REPLACE VIEW actor_info_view AS
+SELECT
+    ap.account_id AS actor_id,
+    ap.display_name AS actor_name,
+    ap.status AS actor_status,
+    ar.name AS actor_rank,
+    ap.self_promotion AS actor_description,
+    pi.path AS actor_avatar_url,
+    ap.price AS actor_price_default,
+    nsfw.allowed AS actor_nsfw_allowed,
+    nsfw.price AS actor_price_nsfw,
+    nsfw.extreme_allowed AS actor_nsfw_extreme_allowed,
+    nsfw.extreme_surcharge AS actor_price_nsfw_extreme
+FROM
+    actor_profiles ap
+LEFT JOIN
+    actor_ranks ar ON ap.rank_id = ar.id
+LEFT JOIN
+    profile_images pi ON ap.account_id = pi.account_id
+LEFT JOIN
+    nsfw_options nsfw ON ap.account_id = nsfw.account_id;
  
 CREATE OR REPLACE VIEW actor_feed_view AS
 SELECT
