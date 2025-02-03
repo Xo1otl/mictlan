@@ -143,40 +143,6 @@ LEFT JOIN
 LEFT JOIN
     nsfw_options nsfw ON ap.account_id = nsfw.account_id;
  
-CREATE OR REPLACE VIEW actor_feed_view AS
-SELECT
-    ap.account_id AS actor_id,
-    ap.display_name AS actor_name,
-    ap.status AS actor_status,
-    ar.name AS actor_rank,
-    ap.self_promotion AS actor_description,
-    pi.path AS actor_avatar_url,
-    ap.price AS actor_price_default,
-    nsfw.allowed AS actor_nsfw_allowed,
-    nsfw.price AS actor_price_nsfw,
-    nsfw.extreme_allowed AS actor_nsfw_extreme_allowed,
-    nsfw.extreme_surcharge AS actor_price_nsfw_extreme,
-    v.id AS voice_id,
-    v.title AS voice_title,
-    v.path AS voice_source_url,
-    t.id AS tag_id,
-    t.name AS tag_name,
-    t.category AS tag_category
-FROM
-    actor_profiles ap
-LEFT JOIN
-    actor_ranks ar ON ap.rank_id = ar.id
-LEFT JOIN
-    profile_images pi ON ap.account_id = pi.account_id
-LEFT JOIN
-    nsfw_options nsfw ON ap.account_id = nsfw.account_id
-LEFT JOIN
-    voices v ON ap.account_id = v.account_id
-LEFT JOIN
-    voice_tag vt ON v.id = vt.voice_id
-LEFT JOIN
-    tags t ON vt.tag_id = t.id;   
-
 -- Insert data into the tags table with the corresponding tag types
 INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
 INSERT INTO tags (name, category) VALUES ('20代', '年代別タグ');
