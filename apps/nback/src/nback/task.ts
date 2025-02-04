@@ -81,7 +81,7 @@ export const newTaskEngine = (
 
 					const inputResult = readTrialInput();
 
-					const matchResult = systemResult.map((sys) => {
+					const matchResults = systemResult.map((sys) => {
 						const input = inputResult.find(
 							(inp) => inp.stimulusType === sys.stimulusType,
 						);
@@ -97,7 +97,7 @@ export const newTaskEngine = (
 
 					trialResult = {
 						trial_idx: state.current_trial_idx,
-						matchResults: matchResult,
+						matchResults: matchResults,
 					};
 
 					if (state.current_trial_idx >= problemCount + n) {
