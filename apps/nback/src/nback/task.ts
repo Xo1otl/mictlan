@@ -1,8 +1,7 @@
 export interface TaskEngine {
 	start(
 		readTrialInput: () => MatchResult[],
-		onGenerateTrial?: (trial: Trial) => void,
-		onStop?: (results: TrialResult[]) => void,
+		onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
 	): () => void;
 }
 
@@ -37,7 +36,6 @@ export type TrialStimuli = {
 type TaskState = {
 	current_trial_idx: number;
 	queue: Trial[];
-	results: TrialResult[];
 };
 
 export const newTaskEngine = (
@@ -49,13 +47,11 @@ export const newTaskEngine = (
 	return {
 		start(
 			readTrialInput: () => MatchResult[],
-			onGenerateTrial?: (trial: Trial) => void,
-			onStop?: (results: TrialResult[]) => void,
+			onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
 		): () => void {
 			let state: TaskState = {
 				current_trial_idx: 0,
 				queue: [],
-				results: [],
 			};
 
 			let timer: ReturnType<typeof setInterval> | undefined = undefined;
@@ -65,30 +61,24 @@ export const newTaskEngine = (
 					clearInterval(timer);
 					timer = undefined;
 				}
-				if (onStop) {
-					onStop(state.results);
-				}
 				state = {
 					current_trial_idx: 0,
 					queue: [],
-					results: [],
 				};
 			};
 
 			const loopTrial = () => {
-				if (state.current_trial_idx >= problemCount + n) {
-					reset();
-					return;
-				}
+				let trialResult: TrialResult | undefined = undefined;
 
-				if (state.queue.length === n) {
+				if (state.queue.length === n + 1) {
 					const previousTrial = state.queue.shift();
 					if (previousTrial === undefined) {
+						reset();
 						throw new Error("previousTrial is undefined");
 					}
-
 					const latestTrial = state.queue[state.queue.length - 1];
 					const systemResult = previousTrial.compare(latestTrial);
+
 					const inputResult = readTrialInput();
 
 					const matchResult = systemResult.map((sys) => {
@@ -96,6 +86,7 @@ export const newTaskEngine = (
 							(inp) => inp.stimulusType === sys.stimulusType,
 						);
 						if (!input) {
+							reset();
 							throw new Error(`Input result not found for ${sys.stimulusType}`);
 						}
 						return {
@@ -104,20 +95,27 @@ export const newTaskEngine = (
 						};
 					});
 
-					state.results.push({
+					trialResult = {
 						trial_idx: state.current_trial_idx,
 						matchResults: matchResult,
-					});
+					};
+
+					if (state.current_trial_idx >= problemCount + n) {
+						reset();
+						return;
+					}
 				}
 
 				const trial = trialFactory.random();
-				if (onGenerateTrial) {
-					onGenerateTrial(trial);
-				}
 				state.queue.push(trial);
 				state.current_trial_idx++;
+
+				if (onUpdate) {
+					onUpdate(trial, trialResult);
+				}
 			};
 
+			loopTrial();
 			timer = setInterval(loopTrial, interval);
 			return reset;
 		},
@@ -138,31 +136,11 @@ export const newTrialFactory = ({
 	stimulusTypes = ["color", "character", "position"],
 	colors = ["red", "green", "blue", "black"],
 	shapes = ["circle", "square", "triangle", "star"],
-	characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
+	characters = "ABCDEHKLMO".split(""),
 	sounds = ["beep", "boop", "ring"],
 	animations = ["spin", "fade", "bounce"],
-	gridSize = [5, 5],
+	gridSize = [3, 3],
 }: TrialFactoryOptions): TrialFactory => {
-	const newTrial = (stimuli: TrialStimuli): Trial => {
-		return {
-			compare(other: Trial): MatchResult[] {
-				const results: MatchResult[] = [];
-				for (const type of stimulusTypes) {
-					const value = stimuli[type];
-					const otherValue = other.stimuli()[type];
-					results.push({
-						stimulusType: type,
-						match: value === otherValue,
-					});
-				}
-				return results;
-			},
-			stimuli(): TrialStimuli {
-				return stimuli;
-			},
-		};
-	};
-
 	const random = (): Trial => {
 		const stimuli: TrialStimuli = {
 			position: [
@@ -187,7 +165,24 @@ export const newTrialFactory = ({
 			stimuli.animation =
 				animations[Math.floor(Math.random() * animations.length)];
 		}
-		return newTrial(stimuli);
+
+		return {
+			compare(other: Trial): MatchResult[] {
+				const results: MatchResult[] = [];
+				for (const type of stimulusTypes) {
+					const value = stimuli[type];
+					const otherValue = other.stimuli()[type];
+					results.push({
+						stimulusType: type,
+						match: value === otherValue,
+					});
+				}
+				return results;
+			},
+			stimuli(): TrialStimuli {
+				return stimuli;
+			},
+		};
 	};
 
 	return {

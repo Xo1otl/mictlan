@@ -1,138 +1,211 @@
 <script lang="ts">
     import { onDestroy } from "svelte";
     import * as nback from "../../nback";
+    import ResultList from "./ResultList.svelte";
+    import TrialList from "./TrialList.svelte";
 
-    // ゲーム状態や生成されたトライアルを管理するリアクティブ変数
     let gameStarted = false;
     let generatedTrials: nback.TrialStimuli[] = [];
-    // エンジンのリセット（停止）関数を保持する変数（エンジン実装によっては利用可能）
+    let trialResults: nback.TrialResult[] = [];
+    let currentStimuli: nback.TrialStimuli | null = null;
     let engineReset: (() => void) | null = null;
 
-    // nback ライブラリの trialFactory を生成（使用する刺激の種類を指定）
+    let characterMatchInput = false;
+    let positionMatchInput = false;
+
     const trialFactory = nback.newTrialFactory({
         stimulusTypes: ["character", "position"],
     });
 
-    // 2-back、20トライアル、各トライアルの間隔を2000msに設定したタスクエンジンを生成
-    const engine = nback.newTaskEngine(2, 20, 2000, trialFactory);
+    const engine = nback.newTaskEngine(2, 20, 2500, trialFactory);
 
-    /**
-     * readTrialInput は各トライアルごとにユーザー入力を読み取る関数です。
-     * ここではダミー実装として常に false を返しています。
-     * 実際のゲームでは、ボタン押下やキーボード入力に応じた結果を返すようにしてください。
-     */
     const readTrialInput = (): nback.MatchResult[] => {
-        return [
-            { stimulusType: "character", match: false },
-            { stimulusType: "position", match: false },
+        const results: nback.MatchResult[] = [
+            { stimulusType: "character", match: characterMatchInput },
+            { stimulusType: "position", match: positionMatchInput },
         ];
+        characterMatchInput = false;
+        positionMatchInput = false;
+        return results;
     };
 
-    /**
-     * onGenerateTrial はエンジンから新しいトライアルが生成されるたびに呼ばれるコールバックです。
-     * この例では、生成された刺激を generatedTrials 配列に追加して UI に表示します。
-     */
-    const onGenerateTrial = (trial: nback.Trial): void => {
-        // Svelte の再描画を促すためにスプレッド構文で新しい配列をセット
-        generatedTrials = [...generatedTrials, trial.stimuli()];
+    const onUpdate = (
+        newTrial: nback.Trial,
+        prevTrialResult?: nback.TrialResult,
+    ): void => {
+        if (prevTrialResult) {
+            trialResults = [...trialResults, prevTrialResult];
+        }
+        const stimuli = newTrial.stimuli();
+        currentStimuli = stimuli;
+        generatedTrials = [...generatedTrials, stimuli];
     };
 
-    /**
-     * onStop は全トライアル終了後に呼ばれるコールバックです。
-     * 結果をコンソールに表示し、ゲーム状態を終了に変更します。
-     */
-    const onStop = (results: nback.TrialResult[]) => {
-        console.log("ゲーム終了。結果:", results);
-        gameStarted = false;
-    };
-
-    /**
-     * startGame はゲーム開始時に呼ばれる関数です。
-     * 内部状態のリセット後、エンジンをスタートします。
-     */
     const startGame = () => {
-        // UI上のトライアル一覧をリセット
         generatedTrials = [];
+        trialResults = [];
+        currentStimuli = null;
         gameStarted = true;
-        // エンジン開始。戻り値としてリセット用の関数（もし提供されていれば）を保持
-        engineReset = engine.start(readTrialInput, onGenerateTrial, onStop);
+        engineReset = engine.start(readTrialInput, onUpdate);
     };
 
-    /**
-     * resetGame はゲーム中断・リセット用の関数です。
-     * エンジンの停止処理（提供されている場合）を呼び出し、状態を初期化します。
-     */
     const resetGame = () => {
-        if (engineReset) {
-            engineReset();
-        }
+        if (engineReset) engineReset();
         gameStarted = false;
         generatedTrials = [];
+        trialResults = [];
+        currentStimuli = null;
     };
 
-    // コンポーネントが破棄される際に、エンジンの停止処理を実行（メモリリーク防止用）
     onDestroy(() => {
-        if (engineReset) {
-            engineReset();
-        }
+        if (engineReset) engineReset();
     });
+
+    const onCharacterMatchClick = () => {
+        characterMatchInput = true;
+    };
+    const onPositionMatchClick = () => {
+        positionMatchInput = true;
+    };
+
+    let showTrials = false;
+    let showResults = false;
+    const toggleTrials = () => {
+        showTrials = !showTrials;
+    };
+    const toggleResults = () => {
+        showResults = !showResults;
+    };
 </script>
 
 <main>
-    <h1>N-back タスク ゲーム</h1>
+    <h1>N-back ゲーム</h1>
 
     {#if !gameStarted}
-        <!-- ゲーム未開始時は開始ボタンを表示 -->
         <button on:click={startGame}>ゲーム開始</button>
     {:else}
-        <!-- ゲーム開始中はリセットボタンを表示 -->
         <button on:click={resetGame}>ゲームリセット</button>
     {/if}
 
-    <section>
-        <h2>生成されたトライアル</h2>
-        {#if generatedTrials.length === 0}
-            <p>まだトライアルは生成されていません。</p>
-        {:else}
-            <ul>
-                {#each generatedTrials as trial, index}
-                    <li>
-                        <strong>トライアル {index + 1}:</strong>
-                        {#if trial.character}
-                            <span> キャラクター: {trial.character}</span>
+    <section class="grid-container">
+        <div class="grid">
+            {#each Array(3) as _, rowIndex}
+                {#each Array(3) as _, colIndex}
+                    <div class="cell">
+                        {#if currentStimuli && currentStimuli.position[0] === rowIndex && currentStimuli.position[1] === colIndex}
+                            {#if currentStimuli.character}
+                                {currentStimuli.character}
+                            {:else}
+                                ●
+                            {/if}
                         {/if}
-                        {#if trial.position}
-                            <span>
-                                - 位置: ({trial.position[0]}, {trial
-                                    .position[1]})</span
-                            >
-                        {/if}
-                    </li>
+                    </div>
                 {/each}
-            </ul>
-        {/if}
+            {/each}
+        </div>
     </section>
+
+    {#if gameStarted}
+        <section class="input-section">
+            <div class="button-row">
+                <button
+                    on:click={onCharacterMatchClick}
+                    class:active={characterMatchInput}
+                >
+                    文字マッチ
+                </button>
+                <button
+                    on:click={onPositionMatchClick}
+                    class:active={positionMatchInput}
+                >
+                    位置マッチ
+                </button>
+            </div>
+        </section>
+    {/if}
+
+    <section class="toggle-section">
+        <div class="button-row">
+            <button on:click={toggleTrials}>
+                {#if showTrials}履歴を隠す{:else}履歴を表示する{/if}
+            </button>
+            <button on:click={toggleResults}>
+                {#if showResults}結果を隠す{:else}結果を表示する{/if}
+            </button>
+        </div>
+    </section>
+
+    {#if showTrials}
+        <TrialList trials={generatedTrials} />
+    {/if}
+
+    {#if showResults}
+        <ResultList results={trialResults} />
+    {/if}
 </main>
 
 <style>
+    :root {
+        --grid-width: min(100vw, 40vh, 380px);
+        --grid-gap: 0.2rem;
+        --grid-border-color: #ccc;
+        --grid-background-color: #f9f9f9;
+        --grid-font-size: 2rem;
+        --active-button-bg: #ddd;
+    }
+
     main {
         font-family: sans-serif;
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
     }
+
     button {
-        margin: 1rem 0;
+        margin: 0.5rem;
         padding: 0.5rem 1rem;
         font-size: 1rem;
         cursor: pointer;
     }
-    ul {
-        list-style: none;
-        padding: 0;
+
+    button.active {
+        background-color: var(--active-button-bg);
     }
-    li {
-        margin: 0.5rem 0;
-        padding: 0.25rem;
-        background-color: #f4f4f4;
-        border-radius: 4px;
+
+    .grid-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .grid {
+        max-width: var(--grid-width);
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--grid-gap);
+        margin: 0 auto;
+    }
+
+    .cell {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--grid-border-color);
+        background-color: var(--grid-background-color);
+        font-size: var(--grid-font-size);
+    }
+
+    .button-row {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
     }
 </style>
