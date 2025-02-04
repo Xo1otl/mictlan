@@ -33,20 +33,15 @@ describe("TaskEngine Tests", () => {
 		const generatedTrials: Trial[] = [];
 
 		// onGenerateTrial callback: push the generated trial into generatedTrials
-		const onGenerateTrial = (trial: Trial): void => {
-			generatedTrials.push(trial);
-			console.log(trial.stimuli());
-		};
-
-		const onStop = (results: TrialResult[]) => {
-			console.debug("Results", results);
+		const onUpdate = (newTrial: Trial): void => {
+			generatedTrials.push(newTrial);
 		};
 
 		// Create the engine instance
 		const engine = newTaskEngine(n, problemCount, interval, trialFactory);
 
 		// Start the engine
-		engine.start(readTrialInput, onGenerateTrial, onStop);
+		engine.start(readTrialInput, onUpdate);
 
 		// Wait enough time for all trials to be generated.
 		// Total iterations = n + problemCount = 5, so wait a bit longer than 5*interval.
@@ -66,17 +61,18 @@ describe("TaskEngine Tests", () => {
 		const generatedTrials: Trial[] = [];
 
 		// onGenerateTrial callback increases the call count and stores the trial
-		const onGenerateTrial = (trial: Trial): void => {
+		const onUpdate = (newTrial: Trial, prevTrialResult?: TrialResult): void => {
 			callCount++;
-			generatedTrials.push(trial);
+			generatedTrials.push(newTrial);
+			console.debug("prevTrialResult", prevTrialResult);
 		};
 
 		const engine = newTaskEngine(n, problemCount, interval, trialFactory);
 
-		const reset = engine.start(readTrialInput, onGenerateTrial);
+		const reset = engine.start(readTrialInput, onUpdate);
 
-		// Wait for a short duration (e.g. 3 intervals)
-		await new Promise((resolve) => setTimeout(resolve, interval * 3));
+		// Wait for a short duration (e.g. 5 intervals)
+		await new Promise((resolve) => setTimeout(resolve, interval * 5));
 
 		// Call reset to stop the engine
 		reset();
@@ -85,7 +81,7 @@ describe("TaskEngine Tests", () => {
 		const countAtReset = callCount;
 
 		// Wait longer to ensure no additional trials are generated after reset
-		await new Promise((resolve) => setTimeout(resolve, interval * 3));
+		await new Promise((resolve) => setTimeout(resolve, interval * 5));
 
 		// The call count should remain the same after reset
 		expect(callCount).toBe(countAtReset);
