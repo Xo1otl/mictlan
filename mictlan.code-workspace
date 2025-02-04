@@ -64,6 +64,10 @@
 		"notebook.formatOnSave.enabled": true,
 		/* js/ts */
 		"typescript.updateImportsOnFileMove.enabled": "always",
+		"[svelte]": {
+			"editor.defaultFormatter": "svelte.svelte-vscode",
+			"editor.codeActionsOnSave": ["source.sortImports"]
+		},
 		"[typescript]": {
 			"editor.defaultFormatter": "biomejs.biome"
 		},

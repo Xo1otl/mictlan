@@ -1,6 +1,6 @@
 # nback
 
-[ADHDに効く](https://pmc.ncbi.nlm.nih.gov/articles/PMC6445784/)らしいので作る
+[効果がある](https://pmc.ncbi.nlm.nih.gov/articles/PMC6445784/)らしいので作る
 
 ## domain
 
