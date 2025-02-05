@@ -1,7 +1,7 @@
 <script lang="ts">
-    // nback の型定義がある前提
+    // Svelte 5 using runes: use $props() instead of `export let`
     import type { TrialStimuli } from "../../nback";
-    export let trials: TrialStimuli[] = [];
+    let { trials } = $props<{ trials: TrialStimuli[] }>();
 </script>
 
 <section class="trial-list">

@@ -1,6 +1,7 @@
 <script lang="ts">
+    // Svelte 5 using runes: use $props() instead of `export let`
     import type { TrialResult } from "../../nback";
-    export let results: TrialResult[] = [];
+    let { results } = $props<{ results: TrialResult[] }>();
 </script>
 
 <section class="result-list">
