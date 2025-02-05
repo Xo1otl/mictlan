@@ -70,6 +70,8 @@
         }),
     );
 
+    // FIXME: 表示したカードは一定時間後消す必要がある
+    // FIXME: なぜかカードが同じ位置に来る時に新しいのが表示されない
     const addTrialCard = (trial: nback.Trial) => {
         const [x, y] = trial.stimuli().position ?? [0, 0];
         if (x < 0 || x >= gridCols || y < 0 || y >= gridRows) {
@@ -83,6 +85,7 @@
         engine.start(readTrialInput, onUpdate, onStop);
     };
 
+    // FIXME: このロジックマジでどうにかしたい
     const getKey = (index: number): string => {
         const row = Math.floor(index / gridCols);
         const col = index % gridCols;
