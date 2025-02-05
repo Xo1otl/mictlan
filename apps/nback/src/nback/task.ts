@@ -20,17 +20,21 @@ export type TrialResult = {
 };
 
 export type MatchResult = {
-	stimulusType: keyof TrialStimuli;
+	stimulusType: StimulusType;
 	match: boolean;
 };
 
+export enum StimulusType {
+	Position = "position",
+	Color = "color",
+	Character = "character",
+	Shape = "shape",
+	Sound = "sound",
+	Animation = "animation",
+}
+
 export type TrialStimuli = {
-	position: [number, number];
-	color?: string;
-	character?: string;
-	shape?: string;
-	sound?: string;
-	animation?: string;
+	[key: string]: string | [number, number] | undefined;
 };
 
 type TaskState = {
@@ -106,7 +110,15 @@ export const newTaskEngine = (
 					}
 				}
 
-				const trial = trialFactory.random();
+				let trial: Trial;
+
+				try {
+					trial = trialFactory.random();
+				} catch (e) {
+					reset();
+					throw e;
+				}
+
 				state.queue.push(trial);
 				state.current_trial_idx++;
 
@@ -123,7 +135,7 @@ export const newTaskEngine = (
 };
 
 export type TrialFactoryOptions = {
-	stimulusTypes?: (keyof TrialStimuli)[];
+	stimulusTypes?: StimulusType[];
 	colors?: string[];
 	shapes?: string[];
 	characters?: string[];
@@ -133,7 +145,11 @@ export type TrialFactoryOptions = {
 };
 
 export const newTrialFactory = ({
-	stimulusTypes = ["color", "character", "position"],
+	stimulusTypes = [
+		StimulusType.Color,
+		StimulusType.Character,
+		StimulusType.Position,
+	],
 	colors = ["red", "green", "blue", "black"],
 	shapes = ["circle", "square", "triangle", "star"],
 	characters = "ABCDEHKLMO".split(""),
@@ -142,28 +158,35 @@ export const newTrialFactory = ({
 	gridSize = [3, 3],
 }: TrialFactoryOptions): TrialFactory => {
 	const random = (): Trial => {
-		const stimuli: TrialStimuli = {
-			position: [
-				Math.floor(Math.random() * gridSize[0]),
-				Math.floor(Math.random() * gridSize[1]),
-			],
-		};
-		if (stimulusTypes.includes("color")) {
-			stimuli.color = colors[Math.floor(Math.random() * colors.length)];
-		}
-		if (stimulusTypes.includes("character")) {
-			stimuli.character =
-				characters[Math.floor(Math.random() * characters.length)];
-		}
-		if (stimulusTypes.includes("shape")) {
-			stimuli.shape = shapes[Math.floor(Math.random() * shapes.length)];
-		}
-		if (stimulusTypes.includes("sound")) {
-			stimuli.sound = sounds[Math.floor(Math.random() * sounds.length)];
-		}
-		if (stimulusTypes.includes("animation")) {
-			stimuli.animation =
-				animations[Math.floor(Math.random() * animations.length)];
+		const stimuli: TrialStimuli = {};
+		for (const type of stimulusTypes) {
+			switch (type) {
+				case StimulusType.Position:
+					stimuli.position = [
+						Math.floor(Math.random() * gridSize[0]),
+						Math.floor(Math.random() * gridSize[1]),
+					];
+					break;
+				case StimulusType.Color:
+					stimuli.color = colors[Math.floor(Math.random() * colors.length)];
+					break;
+				case StimulusType.Character:
+					stimuli.character =
+						characters[Math.floor(Math.random() * characters.length)];
+					break;
+				case StimulusType.Shape:
+					stimuli.shape = shapes[Math.floor(Math.random() * shapes.length)];
+					break;
+				case StimulusType.Sound:
+					stimuli.sound = sounds[Math.floor(Math.random() * sounds.length)];
+					break;
+				case StimulusType.Animation:
+					stimuli.animation =
+						animations[Math.floor(Math.random() * animations.length)];
+					break;
+				default:
+					throw new Error(`Unsupported stimulus type: ${type}`);
+			}
 		}
 
 		return {
