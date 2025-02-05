@@ -1,7 +1,9 @@
 import { expect, test, describe } from "bun:test";
 import {
+	Color,
 	newTaskEngine,
 	newTrialFactory,
+	StimulusType,
 	type MatchResult,
 	type Trial,
 	type TrialResult,
@@ -9,17 +11,21 @@ import {
 
 describe("TaskEngine Tests", () => {
 	const trialFactory = newTrialFactory({
-		stimulusTypes: ["color", "shape", "position"],
-		colors: ["red"],
+		stimulusTypes: [
+			StimulusType.Color,
+			StimulusType.Shape,
+			StimulusType.Position,
+		],
+		colors: [Color.Red],
 		gridSize: [5, 5],
 	});
 
 	// Dummy readTrialInput that always returns a fixed input
 	const readTrialInput = (): MatchResult[] => {
 		return [
-			{ stimulusType: "color", match: true },
-			{ stimulusType: "shape", match: false },
-			{ stimulusType: "position", match: false },
+			{ stimulusType: StimulusType.Color, match: true },
+			{ stimulusType: StimulusType.Shape, match: false },
+			{ stimulusType: StimulusType.Position, match: false },
 		];
 	};
 
@@ -38,7 +44,7 @@ describe("TaskEngine Tests", () => {
 		};
 
 		// Create the engine instance
-		const engine = newTaskEngine(n, problemCount, interval, trialFactory);
+		const engine = newTaskEngine({ n, problemCount, interval, trialFactory });
 
 		// Start the engine
 		engine.start(readTrialInput, onUpdate);
@@ -67,9 +73,13 @@ describe("TaskEngine Tests", () => {
 			console.debug("prevTrialResult", prevTrialResult);
 		};
 
-		const engine = newTaskEngine(n, problemCount, interval, trialFactory);
+		const engine = newTaskEngine({ n, problemCount, interval, trialFactory });
 
-		const reset = engine.start(readTrialInput, onUpdate);
+		const onStop = () => {
+			console.debug("onStop called");
+		};
+
+		const reset = engine.start(readTrialInput, onUpdate, onStop);
 
 		// Wait for a short duration (e.g. 5 intervals)
 		await new Promise((resolve) => setTimeout(resolve, interval * 5));

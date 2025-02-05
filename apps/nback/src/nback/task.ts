@@ -2,6 +2,7 @@ export interface TaskEngine {
 	start(
 		readTrialInput: () => MatchResult[],
 		onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
+		onStop?: () => void,
 	): () => void;
 }
 
@@ -24,6 +25,22 @@ export type MatchResult = {
 	match: boolean;
 };
 
+export type TrialStimuli = {
+	[key in StimulusType]?: key extends StimulusType.Position
+		? [number, number]
+		: key extends StimulusType.Color
+			? Color
+			: key extends StimulusType.Character
+				? Character
+				: key extends StimulusType.Shape
+					? Shape
+					: key extends StimulusType.Sound
+						? Sound
+						: key extends StimulusType.Animation
+							? Animation
+							: never;
+};
+
 export enum StimulusType {
 	Position = "position",
 	Color = "color",
@@ -33,8 +50,61 @@ export enum StimulusType {
 	Animation = "animation",
 }
 
-export type TrialStimuli = {
-	[key: string]: string | [number, number] | undefined;
+export enum Color {
+	Red = "red",
+	Green = "green",
+	Purple = "purple",
+	Black = "black",
+}
+
+export enum Shape {
+	Triangle = "triangle",
+	Square = "square",
+	Pentagon = "pentagon",
+	Circle = "circle",
+}
+
+export enum Character {
+	A = "A",
+	B = "B",
+	C = "C",
+	D = "D",
+	E = "E",
+	H = "H",
+	K = "K",
+	L = "L",
+	M = "M",
+	O = "O",
+}
+
+export enum Sound {
+	Beep = "beep",
+	Boop = "boop",
+	Ring = "ring",
+}
+
+export enum Animation {
+	Spin = "spin",
+	Fade = "fade",
+	Bounce = "bounce",
+}
+
+export type TrialFactoryOptions = {
+	stimulusTypes?: StimulusType[];
+	colors?: Color[];
+	shapes?: Shape[];
+	characters?: Character[];
+	sounds?: Sound[];
+	animations?: Animation[];
+	gridSize?: [number, number];
+};
+
+export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
+	gridSize: [number, number];
+} = {
+	stimulusTypes: [StimulusType.Character, StimulusType.Position],
+	characters: Object.values(Character),
+	gridSize: [3, 3],
 };
 
 type TaskState = {
@@ -42,17 +112,34 @@ type TaskState = {
 	queue: Trial[];
 };
 
-export const newTaskEngine = (
-	n: number,
-	problemCount: number,
-	interval: number,
-	trialFactory: TrialFactory,
-): TaskEngine => {
+export type TaskEngineOptions = {
+	n: number;
+	problemCount: number;
+	interval: number;
+	trialFactory: TrialFactory;
+};
+
+export const newTaskEngine = ({
+	n,
+	problemCount,
+	interval,
+	trialFactory,
+}: TaskEngineOptions): TaskEngine => {
+	let isRunning = false;
+
 	return {
 		start(
 			readTrialInput: () => MatchResult[],
 			onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
+			onStop?: () => void,
 		): () => void {
+			if (isRunning) {
+				throw new Error(
+					"Engine is already running. Cannot start multiple times concurrently.",
+				);
+			}
+			isRunning = true;
+
 			let state: TaskState = {
 				current_trial_idx: 0,
 				queue: [],
@@ -65,10 +152,12 @@ export const newTaskEngine = (
 					clearInterval(timer);
 					timer = undefined;
 				}
+				onStop?.();
 				state = {
 					current_trial_idx: 0,
 					queue: [],
 				};
+				isRunning = false;
 			};
 
 			const loopTrial = () => {
@@ -77,7 +166,6 @@ export const newTaskEngine = (
 				if (state.queue.length === n + 1) {
 					const previousTrial = state.queue.shift();
 					if (previousTrial === undefined) {
-						reset();
 						throw new Error("previousTrial is undefined");
 					}
 					const latestTrial = state.queue[state.queue.length - 1];
@@ -90,7 +178,6 @@ export const newTaskEngine = (
 							(inp) => inp.stimulusType === sys.stimulusType,
 						);
 						if (!input) {
-							reset();
 							throw new Error(`Input result not found for ${sys.stimulusType}`);
 						}
 						return {
@@ -112,12 +199,7 @@ export const newTaskEngine = (
 
 				let trial: Trial;
 
-				try {
-					trial = trialFactory.random();
-				} catch (e) {
-					reset();
-					throw e;
-				}
+				trial = trialFactory.random();
 
 				state.queue.push(trial);
 				state.current_trial_idx++;
@@ -128,34 +210,27 @@ export const newTaskEngine = (
 			};
 
 			loopTrial();
-			timer = setInterval(loopTrial, interval);
+			timer = setInterval(() => {
+				try {
+					loopTrial();
+				} catch (e) {
+					reset();
+					throw e;
+				}
+			}, interval);
 			return reset;
 		},
 	};
 };
 
-export type TrialFactoryOptions = {
-	stimulusTypes?: StimulusType[];
-	colors?: string[];
-	shapes?: string[];
-	characters?: string[];
-	sounds?: string[];
-	animations?: string[];
-	gridSize?: [number, number];
-};
-
 export const newTrialFactory = ({
-	stimulusTypes = [
-		StimulusType.Color,
-		StimulusType.Character,
-		StimulusType.Position,
-	],
-	colors = ["red", "green", "blue", "black"],
-	shapes = ["circle", "square", "triangle", "star"],
-	characters = "ABCDEHKLMO".split(""),
-	sounds = ["beep", "boop", "ring"],
-	animations = ["spin", "fade", "bounce"],
-	gridSize = [3, 3],
+	stimulusTypes = [StimulusType.Character, StimulusType.Position],
+	colors = Object.values(Color),
+	shapes = Object.values(Shape),
+	characters = Object.values(Character),
+	sounds = Object.values(Sound),
+	animations = Object.values(Animation),
+	gridSize = DefaultTrialFactoryOptions.gridSize,
 }: TrialFactoryOptions): TrialFactory => {
 	const random = (): Trial => {
 		const stimuli: TrialStimuli = {};
