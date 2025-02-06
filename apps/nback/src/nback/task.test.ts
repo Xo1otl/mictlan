@@ -39,8 +39,8 @@ describe("TaskEngine Tests", () => {
 		const generatedTrials: Trial[] = [];
 
 		// onGenerateTrial callback: push the generated trial into generatedTrials
-		const onUpdate = (newTrial: Trial): void => {
-			generatedTrials.push(newTrial);
+		const onUpdate = (newTrial?: Trial): void => {
+			newTrial ? generatedTrials.push(newTrial) : null;
 		};
 
 		// Create the engine instance
@@ -67,9 +67,12 @@ describe("TaskEngine Tests", () => {
 		const generatedTrials: Trial[] = [];
 
 		// onGenerateTrial callback increases the call count and stores the trial
-		const onUpdate = (newTrial: Trial, prevTrialResult?: TrialResult): void => {
+		const onUpdate = (
+			newTrial?: Trial,
+			prevTrialResult?: TrialResult,
+		): void => {
 			callCount++;
-			generatedTrials.push(newTrial);
+			newTrial ? generatedTrials.push(newTrial) : null;
 			console.debug("prevTrialResult", prevTrialResult);
 		};
 
@@ -79,7 +82,7 @@ describe("TaskEngine Tests", () => {
 			console.debug("onStop called");
 		};
 
-		const reset = engine.start(readTrialInput, onUpdate, onStop);
+		const reset = engine.start(readTrialInput, onUpdate);
 
 		// Wait for a short duration (e.g. 5 intervals)
 		await new Promise((resolve) => setTimeout(resolve, interval * 5));

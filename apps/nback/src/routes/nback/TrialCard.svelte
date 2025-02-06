@@ -1,7 +1,9 @@
 <script lang="ts">
     import * as nback from "../../nback/index";
+
     const { trial }: { trial: nback.Trial } = $props();
     const stimuli = trial.stimuli();
+
     const color = stimuli.color ? stimuli.color : nback.Color.Black;
     const shape = stimuli.shape ? stimuli.shape : nback.Shape.Square;
     const character = stimuli.character;
