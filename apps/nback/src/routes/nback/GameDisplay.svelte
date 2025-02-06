@@ -11,7 +11,7 @@
     import { blur, fade, fly, scale } from "svelte/transition";
     import * as nback from "../../nback/index";
     import { spin } from "../../transition/transition";
-    import type { Config } from "./+page";
+    import type { Config, TaskResult } from "./+page";
     import TrialCard from "./TrialCard.svelte";
 
     console.log(A);
@@ -23,7 +23,7 @@
         onEnd,
     }: {
         config: Config;
-        onEnd: (results: nback.TrialResult[]) => void;
+        onEnd: (results: TaskResult) => void;
     } = $props();
 
     // 不変のステート
@@ -70,6 +70,8 @@
 
     // 画面と同期不要な変数
     let nextTrialId = 1;
+    let trialResults: nback.TrialResult[] = [];
+    let trials: nback.Trial[] = [];
 
     const getKey = (index: number): string => {
         const row = Math.floor(index / gridCols);
@@ -100,6 +102,8 @@
         shownTrials = {};
 
         if (prevTrialResult) {
+            console.log("Trial result:", prevTrialResult);
+            trialResults.push(prevTrialResult);
             for (const type of stimulusTypes) {
                 const r = prevTrialResult.matchResults.find(
                     (m) => m.stimulusType === type,
@@ -115,6 +119,7 @@
 
         if (newTrial) {
             setTimeout(() => {
+                trials.push(newTrial);
                 for (const type of stimulusTypes) {
                     inputs[type] = "none";
                 }
@@ -126,7 +131,7 @@
 
         console.log("Task が終了しました");
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        onEnd([]);
+        onEnd({ trialResults, trials });
         isRunning = false;
         showModal = false;
     };
@@ -177,6 +182,8 @@
     let reset: () => void = () => {};
 
     const startTask = () => {
+        trialResults = [];
+        trials = [];
         if (isRunning) {
             console.warn("Task is already running");
             return;
@@ -191,18 +198,18 @@
         isRunning = false;
         reset();
         showModal = false;
+        onEnd({ trialResults, trials });
     };
 </script>
 
 <main class="p-4">
-    <div class="flex justify-center mb-4">
+    <div class="flex justify-center">
         <button
             type="button"
             onclick={startTask}
-            class="text-2xl font-medium text-blue-600 hover:text-blue-800
-                   underline underline-offset-4 decoration-2 transition-colors"
+            class="text-xl text-black underline underline-offset-4"
         >
-            タスクを開始
+            タスク開始
         </button>
     </div>
 
@@ -290,7 +297,7 @@
                                         </div>
                                     {:else}
                                         <div
-                                            in:fade|global
+                                            transition:fade|global
                                             class="absolute inset-0 flex items-center justify-center"
                                         >
                                             <TrialCard

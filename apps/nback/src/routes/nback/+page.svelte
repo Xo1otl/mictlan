@@ -1,6 +1,6 @@
 <script lang="ts">
     import * as nback from "../../nback/index";
-    import type { Config } from "./+page";
+    import type { Config, TaskResult } from "./+page";
     import ConfigModal from "./ConfigModal.svelte";
     import DebugCard from "./DebugCard.svelte";
     import GameDisplay from "./GameDisplay.svelte";
@@ -17,30 +17,30 @@
         answerDisplayTime: 600,
     });
 
-    let results: nback.TrialResult[] = $state([]);
+    let taskResult: TaskResult | undefined = $state(undefined);
 
-    const onEnd = (r: nback.TrialResult[]) => {
-        results = r;
+    const onEnd = (result: TaskResult) => {
+        taskResult = result;
     };
 </script>
 
 <main class="p-4">
-    <button
-        onclick={() => {
-            showModal = true;
-        }}
-        class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 transition-colors"
-    >
-        設定を変更
-    </button>
-
+    <div class="flex justify-center">
+        <button
+            onclick={() => {
+                showModal = true;
+            }}
+            class="flex items-center gap-2 text-lg hover:underline focus:outline-none"
+        >
+            <span>Configure task⚙</span>
+        </button>
+    </div>
     {#if showModal}
         <ConfigModal bind:showModal bind:config />
     {/if}
 
     <GameDisplay {config} {onEnd} />
-    <DebugCard value={config} />
-    {#if results.length > 0}
-        <ResultDisplay {results} />
+    {#if taskResult}
+        <ResultDisplay result={taskResult} />
     {/if}
 </main>
