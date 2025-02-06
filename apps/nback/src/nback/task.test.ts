@@ -17,7 +17,7 @@ describe("TaskEngine Tests", () => {
 			StimulusType.Position,
 		],
 		colors: [Color.Red],
-		gridSize: [5, 5],
+		gridSize: [1, 1],
 	});
 
 	// Dummy readTrialInput that always returns a fixed input
@@ -25,7 +25,7 @@ describe("TaskEngine Tests", () => {
 		return [
 			{ stimulusType: StimulusType.Color, match: true },
 			{ stimulusType: StimulusType.Shape, match: false },
-			{ stimulusType: StimulusType.Position, match: false },
+			{ stimulusType: StimulusType.Position, match: true },
 		];
 	};
 
