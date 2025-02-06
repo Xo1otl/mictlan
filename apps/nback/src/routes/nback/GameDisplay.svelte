@@ -195,10 +195,11 @@
     };
 
     const abort = () => {
-        isRunning = false;
         reset();
-        showModal = false;
+        console.log("Task が中断されました", trialResults);
         onEnd({ trialResults, trials });
+        isRunning = false;
+        showModal = false;
     };
 </script>
 

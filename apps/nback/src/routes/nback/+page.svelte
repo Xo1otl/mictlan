@@ -20,6 +20,7 @@
     let taskResult: TaskResult | undefined = $state(undefined);
 
     const onEnd = (result: TaskResult) => {
+        console.log("Task ended with trialResults", result.trialResults);
         taskResult = result;
     };
 </script>
@@ -41,6 +42,6 @@
 
     <GameDisplay {config} {onEnd} />
     {#if taskResult}
-        <ResultDisplay result={taskResult} />
+        <ResultDisplay bind:result={taskResult} />
     {/if}
 </main>

@@ -2,35 +2,49 @@
     import type { TrialResult } from "../../nback";
     import type { TaskResult } from "./+page";
 
-    // Svelte 5 using runes: use $props() instead of `export let`
-    const { result }: { result: TaskResult } = $props();
+    const { result = $bindable() }: { result: TaskResult } = $props();
 
-    // trialResults を trial_idx ごとにマップ化（trial_idx は trials の index + 1 と仮定）
-    const trialResultMap = new Map<number, TrialResult | undefined>();
-    for (const trialResult of result.trialResults) {
-        trialResultMap.set(trialResult.trial_idx, trialResult);
-    }
-
-    // 全体・StimulusTypeごとの正答数・総数を集計
-    let totalCorrect = $state(0);
-    let totalCount = $state(0);
-    const typeStats: Record<string, { correct: number; total: number }> = {};
-
-    for (const trialResult of result.trialResults) {
-        for (const match of trialResult.matchResults) {
-            totalCount++;
-            if (match.match) totalCorrect++;
-            if (!typeStats[match.stimulusType]) {
-                typeStats[match.stimulusType] = { correct: 0, total: 0 };
-            }
-            typeStats[match.stimulusType].total++;
-            if (match.match) typeStats[match.stimulusType].correct++;
+    const {
+        trialResultMap,
+        totalCount,
+        totalCorrect,
+        typeStats,
+        overallAccuracy,
+    } = $derived.by(() => {
+        const trialResultMap = new Map<number, TrialResult | undefined>();
+        for (const trialResult of result.trialResults) {
+            trialResultMap.set(trialResult.trial_idx, trialResult);
         }
-    }
+        const totalCount = result.trialResults.length;
 
-    const overallAccuracy = $derived(
-        totalCount ? ((totalCorrect / totalCount) * 100).toFixed(1) : "0.0",
-    );
+        const typeStats: Record<string, { correct: number; total: number }> =
+            {};
+        let totalCorrect = 0;
+        for (const trialResult of result.trialResults) {
+            let isCorrect = true;
+            for (const match of trialResult.matchResults) {
+                if (!match.match) isCorrect = false;
+                if (!typeStats[match.stimulusType]) {
+                    typeStats[match.stimulusType] = {
+                        correct: 0,
+                        total: 0,
+                    };
+                }
+                typeStats[match.stimulusType].total++;
+                if (match.match) typeStats[match.stimulusType].correct++;
+            }
+            if (isCorrect) totalCorrect++;
+        }
+        const overallAccuracy = ((totalCorrect / totalCount) * 100).toFixed(1);
+
+        return {
+            trialResultMap,
+            totalCount,
+            totalCorrect,
+            overallAccuracy,
+            typeStats,
+        };
+    });
 </script>
 
 <section class="p-4 max-w-3xl mx-auto space-y-8">
