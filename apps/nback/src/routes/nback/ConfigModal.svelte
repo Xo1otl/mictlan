@@ -11,7 +11,8 @@
         config: Config;
     } = $props();
 
-    // 初期設定の読み込み
+    // 初期設定の読み込み、
+    // 値はmodalが開く時に初期化されるのでderiveでなくても問題ないが多分書き直したほうがいい
     const { trialFactoryOptions, taskEngineOptions } = config;
 
     /* --- Task Engine 用設定 --- */
