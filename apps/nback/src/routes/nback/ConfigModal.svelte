@@ -1,22 +1,13 @@
-<script module lang="ts">
-    export type Config = {
-        trialFactoryOptions?: nback.TrialFactoryOptions;
-        taskEngineOptions: Omit<nback.TaskEngineOptions, "trialFactory">;
-    };
-</script>
-
 <script lang="ts">
     import MultiSelect from "svelte-multiselect";
     import * as nback from "../../nback/index";
+    import type { Config } from "./+page";
 
-    // プロパティ（モーダルを閉じる関数、設定更新関数、初期設定）
     let {
-        closeModal,
-        updateConfig,
-        config,
+        showModal = $bindable(),
+        config = $bindable(),
     }: {
-        closeModal: () => void;
-        updateConfig: (config: Config) => void;
+        showModal: boolean;
         config: Config;
     } = $props();
 
@@ -27,6 +18,9 @@
     let engineN = $state(taskEngineOptions.n);
     let problemCount = $state(taskEngineOptions.problemCount);
     let interval = $state(taskEngineOptions.interval);
+
+    /* --- その他の設定 --- */
+    let answerDisplayTime = $state(config.answerDisplayTime);
 
     /* --- Trial Factory 用設定 --- */
     // 刺激種別チェックボックスの初期状態
@@ -83,7 +77,7 @@
             : nback.DefaultTrialFactoryOptions.gridSize[1],
     );
 
-    // 設定を適用する際の処理
+    // これが呼ばれるまでconfigの値は更新されない
     const applyOptions = (
         event: SubmitEvent & {
             currentTarget: EventTarget & HTMLFormElement;
@@ -135,11 +129,13 @@
             interval: interval,
         };
 
-        updateConfig({
+        config = {
             trialFactoryOptions: newTrialFactoryOptions,
             taskEngineOptions: newTaskEngineOptions,
-        });
-        closeModal();
+            answerDisplayTime: answerDisplayTime,
+        };
+
+        showModal = false;
     };
 </script>
 
@@ -148,7 +144,7 @@
     <!-- バックドロップ -->
     <button
         type="button"
-        onclick={closeModal}
+        onclick={() => (showModal = false)}
         aria-label="Close modal"
         class="absolute inset-0 bg-black bg-opacity-50"
     ></button>
@@ -165,7 +161,7 @@
                 <div class="grid grid-cols-1 gap-4">
                     <label class="block">
                         <span class="block text-sm font-medium text-gray-700"
-                            >n:</span
+                            >N:</span
                         >
                         <input
                             type="number"
@@ -177,7 +173,7 @@
                     </label>
                     <label class="block">
                         <span class="block text-sm font-medium text-gray-700">
-                            Problem Count:
+                            問題数:
                         </span>
                         <input
                             type="number"
@@ -189,12 +185,25 @@
                     </label>
                     <label class="block">
                         <span class="block text-sm font-medium text-gray-700">
-                            Interval (ms):
+                            問題表示間隔 (ms):
                         </span>
                         <input
                             type="number"
                             bind:value={interval}
                             min="0"
+                            required
+                            class="mt-1 block w-full border border-gray-300 rounded p-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                    </label>
+                    <label class="block">
+                        <span class="block text-sm font-medium text-gray-700">
+                            解答表示時間 (ms):
+                        </span>
+                        <input
+                            type="number"
+                            bind:value={answerDisplayTime}
+                            min="0"
+                            max={interval}
                             required
                             class="mt-1 block w-full border border-gray-300 rounded p-2 focus:ring-blue-500 focus:border-blue-500"
                         />
@@ -362,7 +371,7 @@
             <div class="flex justify-end gap-4 pt-4 border-t border-gray-200">
                 <button
                     type="button"
-                    onclick={closeModal}
+                    onclick={() => (showModal = false)}
                     class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100 transition-colors"
                 >
                     キャンセル

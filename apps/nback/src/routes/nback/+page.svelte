@@ -1,6 +1,7 @@
 <script lang="ts">
     import * as nback from "../../nback/index";
-    import ConfigModal, { type Config } from "./ConfigModal.svelte";
+    import type { Config } from "./+page";
+    import ConfigModal from "./ConfigModal.svelte";
     import DebugCard from "./DebugCard.svelte";
     import GameDisplay from "./GameDisplay.svelte";
     import ResultDisplay from "./ResultDisplay.svelte";
@@ -11,17 +12,10 @@
         taskEngineOptions: {
             n: 2,
             problemCount: 20,
-            interval: 2500,
+            interval: 3600,
         },
+        answerDisplayTime: 600,
     });
-
-    const closeModal = () => {
-        showModal = false;
-    };
-
-    const updateConfig = (newConfig: Config) => {
-        config = newConfig;
-    };
 
     let results: nback.TrialResult[] = $state([]);
 
@@ -41,10 +35,12 @@
     </button>
 
     {#if showModal}
-        <ConfigModal {updateConfig} {closeModal} {config} />
+        <ConfigModal bind:showModal bind:config />
     {/if}
 
     <GameDisplay {config} {onEnd} />
     <DebugCard value={config} />
-    <ResultDisplay {results} />
+    {#if results.length > 0}
+        <ResultDisplay {results} />
+    {/if}
 </main>

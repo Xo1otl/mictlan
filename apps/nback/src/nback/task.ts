@@ -125,21 +125,13 @@ export const newTaskEngine = ({
 	interval,
 	trialFactory,
 }: TaskEngineOptions): TaskEngine => {
-	let isRunning = false;
-
+	// startはステートレスなので何回呼び出しても問題ない
 	return {
 		start(
 			readTrialInput: () => MatchResult[],
 			onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
 			onStop?: () => void,
 		): () => void {
-			if (isRunning) {
-				throw new Error(
-					"Engine is already running. Cannot start multiple times concurrently.",
-				);
-			}
-			isRunning = true;
-
 			let state: TaskState = {
 				current_trial_idx: 0,
 				queue: [],
@@ -157,7 +149,6 @@ export const newTaskEngine = ({
 					current_trial_idx: 0,
 					queue: [],
 				};
-				isRunning = false;
 			};
 
 			const loopTrial = () => {
@@ -268,11 +259,22 @@ export const newTrialFactory = ({
 			compare(other: Trial): MatchResult[] {
 				const results: MatchResult[] = [];
 				for (const type of stimulusTypes) {
-					const value = stimuli[type];
-					const otherValue = other.stimuli()[type];
+					let match = false;
+					if (type === StimulusType.Position) {
+						const value = stimuli[type];
+						const otherValue = other.stimuli()[type];
+						if (!value || !otherValue) {
+							throw new Error("Position should be defined");
+						}
+						match = value[0] === otherValue[0] && value[1] === otherValue[1];
+					} else {
+						const value = stimuli[type];
+						const otherValue = other.stimuli()[type];
+						match = value === otherValue;
+					}
 					results.push({
 						stimulusType: type,
-						match: value === otherValue,
+						match,
 					});
 				}
 				return results;
