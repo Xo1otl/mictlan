@@ -9,3 +9,8 @@ export type Config = {
 	taskEngineOptions: Omit<nback.TaskEngineOptions, "trialFactory">;
 	answerDisplayTime: number;
 };
+
+export type TaskResult = {
+	trials: nback.Trial[];
+	trialResults: nback.TrialResult[];
+};
