@@ -1,7 +1,20 @@
 <script lang="ts">
+    import A from "$lib/sounds/A.mp3";
+    import B from "$lib/sounds/B.mp3";
+    import C from "$lib/sounds/C.mp3";
+    import H from "$lib/sounds/H.mp3";
+    import K from "$lib/sounds/K.mp3";
+    import L from "$lib/sounds/L.mp3";
+    import M from "$lib/sounds/M.mp3";
+    import O from "$lib/sounds/O.mp3";
+
+    import { blur, fade, fly, scale } from "svelte/transition";
     import * as nback from "../../nback/index";
+    import { spin } from "../../transition/transition";
     import type { Config } from "./+page";
     import TrialCard from "./TrialCard.svelte";
+
+    console.log(A);
 
     let showModal = $state(false);
 
@@ -53,6 +66,7 @@
         $state({});
     let isRunning = $state(false);
     let lastTrialIndex = $state(0);
+    let isDisplayingResult = $state(false);
 
     // 画面と同期不要な変数
     let nextTrialId = 1;
@@ -62,9 +76,6 @@
         const col = index % gridCols;
         return `${row}-${col}`;
     };
-
-    // 結果表示中かどうか（この間は入力停止）
-    let isDisplayingResult = $state(false);
 
     const toggleInput = (type: nback.StimulusType) => {
         if (isDisplayingResult) return; // 結果表示中は無視
@@ -82,8 +93,8 @@
         return result;
     };
 
-    const onUpdate = (
-        newTrial: nback.Trial,
+    const onUpdate = async (
+        newTrial?: nback.Trial,
         prevTrialResult?: nback.TrialResult,
     ) => {
         shownTrials = {};
@@ -102,16 +113,58 @@
             ? prevTrialResult.trial_idx - config.taskEngineOptions.n
             : 0;
 
-        setTimeout(() => {
-            for (const type of stimulusTypes) {
-                inputs[type] = "none";
-            }
-            isDisplayingResult = false;
-            addTrialEntry(newTrial);
-        }, config.answerDisplayTime);
+        if (newTrial) {
+            setTimeout(() => {
+                for (const type of stimulusTypes) {
+                    inputs[type] = "none";
+                }
+                isDisplayingResult = false;
+                addTrialEntry(newTrial);
+            }, config.answerDisplayTime);
+            return;
+        }
+
+        console.log("Task が終了しました");
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        onEnd([]);
+        isRunning = false;
+        showModal = false;
+    };
+
+    const playSound = (sound: nback.Sound) => {
+        switch (sound) {
+            case nback.Sound.A:
+                new Audio(A).play();
+                break;
+            case nback.Sound.B:
+                new Audio(B).play();
+                break;
+            case nback.Sound.C:
+                new Audio(C).play();
+                break;
+            case nback.Sound.H:
+                new Audio(H).play();
+                break;
+            case nback.Sound.K:
+                new Audio(K).play();
+                break;
+            case nback.Sound.L:
+                new Audio(L).play();
+                break;
+            case nback.Sound.M:
+                new Audio(M).play();
+                break;
+            case nback.Sound.O:
+                new Audio(O).play();
+                break;
+        }
     };
 
     const addTrialEntry = (trial: nback.Trial) => {
+        const sound = trial.stimuli().sound;
+        if (sound) {
+            playSound(sound);
+        }
         const [col, row] = trial.stimuli().position ?? [0, 0];
         if (row < 0 || row >= gridRows || col < 0 || col >= gridCols) {
             console.error("Invalid trial position:", trial.stimuli().position);
@@ -129,20 +182,15 @@
             return;
         }
         isRunning = true;
-        reset = engine.start(readTrialInput, onUpdate, onStop);
+        reset = engine.start(readTrialInput, onUpdate);
 
         showModal = true;
     };
 
-    const endTask = () => {
+    const abort = () => {
         isRunning = false;
         reset();
-
         showModal = false;
-    };
-
-    const onStop = () => {
-        onEnd([]);
     };
 </script>
 
@@ -180,14 +228,78 @@
                         >
                             {#if shownTrials[getKey(index)]}
                                 {#key shownTrials[getKey(index)].trialId}
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
+                                    {#if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Fly}
+                                        <div
+                                            transition:fly|global={{
+                                                y: "100%",
+                                            }}
+                                            class="absolute inset-0 flex items-center justify-center"
+                                        >
+                                            <TrialCard
+                                                trial={shownTrials[
+                                                    getKey(index)
+                                                ].trial}
+                                            />
+                                        </div>
+                                    {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Scale}
+                                        <div
+                                            transition:scale|global={{
+                                                duration: 1500,
+                                                opacity: 100,
+                                            }}
+                                            class="absolute inset-0 flex items-center justify-center"
+                                        >
+                                            <TrialCard
+                                                trial={shownTrials[
+                                                    getKey(index)
+                                                ].trial}
+                                            />
+                                        </div>
+                                    {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Blur}
+                                        <div
+                                            transition:blur|global
+                                            class="absolute inset-0 flex items-center justify-center"
+                                        >
+                                            <TrialCard
+                                                trial={shownTrials[
+                                                    getKey(index)
+                                                ].trial}
+                                            />
+                                        </div>
+                                    {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Spin}
+                                        <div
+                                            in:spin|global={{ duration: 1500 }}
+                                            out:fade|global
+                                            class="absolute inset-0 flex items-center justify-center"
+                                        >
+                                            <TrialCard
+                                                trial={shownTrials[
+                                                    getKey(index)
+                                                ].trial}
+                                            />
+                                        </div>
+                                    {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.None}
+                                        <div
+                                            class="absolute inset-0 flex items-center justify-center"
+                                        >
+                                            <TrialCard
+                                                trial={shownTrials[
+                                                    getKey(index)
+                                                ].trial}
+                                            />
+                                        </div>
+                                    {:else}
+                                        <div
+                                            in:fade|global
+                                            class="absolute inset-0 flex items-center justify-center"
+                                        >
+                                            <TrialCard
+                                                trial={shownTrials[
+                                                    getKey(index)
+                                                ].trial}
+                                            />
+                                        </div>
+                                    {/if}
                                 {/key}
                             {/if}
                         </div>
@@ -223,16 +335,15 @@
                 {/each}
             </div>
 
-            <!-- 終了ボタン -->
             <div class="mx-auto mt-4 pt-6 border-t border-gray-200">
                 <button
                     type="button"
-                    onclick={endTask}
+                    onclick={abort}
                     class="py-4 px-6 bg-red-500 hover:bg-red-600 text-white
                            rounded-xl font-medium transition-colors
                            shadow-sm hover:shadow-md"
                 >
-                    タスクを終了
+                    タスクを中断
                 </button>
             </div>
         </div>

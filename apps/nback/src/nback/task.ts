@@ -1,8 +1,7 @@
 export interface TaskEngine {
 	start(
 		readTrialInput: () => MatchResult[],
-		onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
-		onStop?: () => void,
+		onUpdate?: (newTrial?: Trial, prevTrialResult?: TrialResult) => void,
 	): () => void;
 }
 
@@ -65,6 +64,16 @@ export enum Shape {
 }
 
 export enum Character {
+	ZERO = "0",
+	ONE = "1",
+	TWO = "2",
+	THREE = "3",
+	FOUR = "4",
+	FIVE = "5",
+	SIX = "6",
+	SEVEN = "7",
+	EIHGT = "8",
+	NINE = "9",
 	A = "A",
 	B = "B",
 	C = "C",
@@ -78,15 +87,22 @@ export enum Character {
 }
 
 export enum Sound {
-	Beep = "beep",
-	Boop = "boop",
-	Ring = "ring",
+	A = "A",
+	B = "B",
+	C = "C",
+	H = "H",
+	K = "K",
+	L = "L",
+	M = "M",
+	O = "O",
 }
 
 export enum Animation {
+	Blur = "blur",
+	Fly = "fly",
+	Scale = "scale",
 	Spin = "spin",
-	Fade = "fade",
-	Bounce = "bounce",
+	None = "none",
 }
 
 export type TrialFactoryOptions = {
@@ -103,7 +119,18 @@ export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
 	gridSize: [number, number];
 } = {
 	stimulusTypes: [StimulusType.Character, StimulusType.Position],
-	characters: Object.values(Character),
+	characters: [
+		Character.ZERO,
+		Character.ONE,
+		Character.TWO,
+		Character.THREE,
+		Character.FOUR,
+		Character.FIVE,
+		Character.SIX,
+		Character.SEVEN,
+		Character.EIHGT,
+		Character.NINE,
+	],
 	gridSize: [3, 3],
 };
 
@@ -129,8 +156,7 @@ export const newTaskEngine = ({
 	return {
 		start(
 			readTrialInput: () => MatchResult[],
-			onUpdate?: (newTrial: Trial, prevTrialResult?: TrialResult) => void,
-			onStop?: () => void,
+			onUpdate?: (newTrial?: Trial, prevTrialResult?: TrialResult) => void,
 		): () => void {
 			let state: TaskState = {
 				current_trial_idx: 0,
@@ -144,7 +170,6 @@ export const newTaskEngine = ({
 					clearInterval(timer);
 					timer = undefined;
 				}
-				onStop?.();
 				state = {
 					current_trial_idx: 0,
 					queue: [],
@@ -181,23 +206,19 @@ export const newTaskEngine = ({
 						trial_idx: state.current_trial_idx,
 						matchResults: matchResults,
 					};
+				}
 
-					if (state.current_trial_idx >= problemCount + n) {
-						reset();
-						return;
-					}
+				state.current_trial_idx++;
+				if (state.current_trial_idx > problemCount + n) {
+					onUpdate?.(undefined, trialResult);
+					reset();
+					return;
 				}
 
 				let trial: Trial;
-
 				trial = trialFactory.random();
-
 				state.queue.push(trial);
-				state.current_trial_idx++;
-
-				if (onUpdate) {
-					onUpdate(trial, trialResult);
-				}
+				onUpdate?.(trial, trialResult);
 			};
 
 			loopTrial();
