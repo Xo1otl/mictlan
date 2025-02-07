@@ -46,10 +46,11 @@
         stimulusTypes.includes(nback.StimulusType.Sound),
     );
 
-    // 各 enum 用の MultiSelect の選択肢と初期選択状態（初期設定がある場合はそれを使い、なければ全選択をデフォルトとする）
+    // 各 enum 用の MultiSelect の選択肢と初期選択状態（初期設定がある場合はそれを使い、なければ1~5をデフォルト選択とする）
     let availableCharacters = Object.values(nback.Character);
     let selectedCharacters = $state(
-        trialFactoryOptions?.characters || availableCharacters,
+        trialFactoryOptions?.characters ||
+            nback.DefaultTrialFactoryOptions.characters,
     );
 
     let availableColors = Object.values(nback.Color);
