@@ -4,8 +4,10 @@ export const spin = (node: Element, { duration }: { duration: number }) => {
 	return {
 		duration,
 		css: (t: number, u: number) => {
+			const minScale = 0.1;
 			const eased = elasticOut(t);
-			return `transform: scale(${eased}) rotate(${eased * 360}deg);`;
+			const scaleValue = minScale + (1 - minScale) * eased;
+			return `transform: scale(${scaleValue}) rotate(${eased * 360}deg);`;
 		},
 	};
 };

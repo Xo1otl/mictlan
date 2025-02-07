@@ -118,3 +118,13 @@
         </svg>
     {/if}
 </div>
+
+<style>
+    /* SVG内のtext要素に対して変換起点を指定 */
+    svg text {
+        /* テキストのバウンディングボックスを基準に変換する */
+        transform-box: fill-box;
+        /* 中心を起点に変換する */
+        transform-origin: center;
+    }
+</style>

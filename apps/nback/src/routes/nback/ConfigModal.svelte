@@ -191,7 +191,7 @@
                         <input
                             type="number"
                             bind:value={interval}
-                            min="3000"
+                            min="4000"
                             required
                             class="mt-1 block w-full border border-gray-300 rounded p-2 focus:ring-blue-500 focus:border-blue-500"
                         />
@@ -279,6 +279,7 @@
                             Characters:
                         </span>
                         <MultiSelect
+                            --sms-font-size="0.75rem"
                             bind:selected={selectedCharacters}
                             options={availableCharacters}
                         />
@@ -291,6 +292,7 @@
                             Colors:
                         </span>
                         <MultiSelect
+                            --sms-font-size="0.75rem"
                             bind:selected={selectedColors}
                             options={availableColors}
                         />
@@ -303,6 +305,7 @@
                             Animations:
                         </span>
                         <MultiSelect
+                            --sms-font-size="0.75rem"
                             bind:selected={selectedAnimations}
                             options={availableAnimations}
                         />
@@ -315,6 +318,7 @@
                             Shapes:
                         </span>
                         <MultiSelect
+                            --sms-font-size="0.75rem"
                             bind:selected={selectedShapes}
                             options={availableShapes}
                         />
@@ -327,6 +331,7 @@
                             Sounds:
                         </span>
                         <MultiSelect
+                            --sms-font-size="0.75rem"
                             bind:selected={selectedSounds}
                             options={availableSounds}
                         />

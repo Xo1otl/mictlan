@@ -8,6 +8,7 @@
     import M from "$lib/sounds/M.mp3";
     import O from "$lib/sounds/O.mp3";
 
+    import { onDestroy } from "svelte";
     import { blur, fade, fly, scale } from "svelte/transition";
     import * as nback from "../../nback/index";
     import { spin } from "../../transition/transition";
@@ -118,7 +119,7 @@
             : 0;
 
         if (newTrial) {
-            setTimeout(() => {
+            showNextTrialTimer = setTimeout(() => {
                 trials.push(newTrial);
                 for (const type of stimulusTypes) {
                     inputs[type] = "none";
@@ -194,13 +195,21 @@
         showModal = true;
     };
 
+    // 中断の後など次の問題を表示するタイマーが残っている場合はキャンセル
+    let showNextTrialTimer: Timer;
+
     const abort = () => {
         reset();
+        showNextTrialTimer ?? clearTimeout(showNextTrialTimer);
         console.log("Task が中断されました", trialResults);
         onEnd({ trialResults, trials });
         isRunning = false;
         showModal = false;
     };
+
+    onDestroy(() => {
+        showNextTrialTimer ?? clearTimeout(showNextTrialTimer);
+    });
 </script>
 
 <main class="p-4">
@@ -253,7 +262,7 @@
                                         <div
                                             transition:scale|global={{
                                                 duration: 1500,
-                                                opacity: 100,
+                                                start: 0.1,
                                             }}
                                             class="absolute inset-0 flex items-center justify-center"
                                         >
@@ -265,7 +274,9 @@
                                         </div>
                                     {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Blur}
                                         <div
-                                            transition:blur|global
+                                            transition:blur|global={{
+                                                duration: 1200,
+                                            }}
                                             class="absolute inset-0 flex items-center justify-center"
                                         >
                                             <TrialCard
