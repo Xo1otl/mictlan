@@ -119,18 +119,13 @@ export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
 	gridSize: [number, number];
 } = {
 	stimulusTypes: [
-		StimulusType.Character,
-		StimulusType.Position,
+		StimulusType.Color,
+		StimulusType.Shape,
 		StimulusType.Sound,
+		StimulusType.Position,
 	],
-	characters: [
-		Character.ZERO,
-		Character.ONE,
-		Character.TWO,
-		Character.THREE,
-		Character.FOUR,
-		Character.FIVE,
-	],
+	colors: Object.values(Color),
+	shapes: Object.values(Shape),
 	sounds: Object.values(Sound),
 	gridSize: [3, 3],
 };
@@ -240,7 +235,14 @@ export const newTrialFactory = ({
 	stimulusTypes = [StimulusType.Character, StimulusType.Position],
 	colors = Object.values(Color),
 	shapes = Object.values(Shape),
-	characters = Object.values(Character),
+	characters = [
+		Character.ZERO,
+		Character.ONE,
+		Character.TWO,
+		Character.THREE,
+		Character.FOUR,
+		Character.FIVE,
+	],
 	sounds = Object.values(Sound),
 	animations = Object.values(Animation),
 	gridSize = DefaultTrialFactoryOptions.gridSize,

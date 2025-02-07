@@ -47,7 +47,7 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/Xo1otl/mictlan/tree/main/apps/nback">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>
