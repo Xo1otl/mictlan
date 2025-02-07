@@ -118,7 +118,11 @@ export type TrialFactoryOptions = {
 export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
 	gridSize: [number, number];
 } = {
-	stimulusTypes: [StimulusType.Character, StimulusType.Position, StimulusType.Sound],
+	stimulusTypes: [
+		StimulusType.Character,
+		StimulusType.Position,
+		StimulusType.Sound,
+	],
 	characters: [
 		Character.ZERO,
 		Character.ONE,
@@ -127,6 +131,7 @@ export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
 		Character.FOUR,
 		Character.FIVE,
 	],
+	sounds: Object.values(Sound),
 	gridSize: [3, 3],
 };
 

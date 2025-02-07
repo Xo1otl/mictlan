@@ -5,7 +5,7 @@ import type * as nback from "../../nback/index";
 export const prerender = true;
 
 export type Config = {
-	trialFactoryOptions?: nback.TrialFactoryOptions;
+	trialFactoryOptions: nback.TrialFactoryOptions;
 	taskEngineOptions: Omit<nback.TaskEngineOptions, "trialFactory">;
 	answerDisplayTime: number;
 };
