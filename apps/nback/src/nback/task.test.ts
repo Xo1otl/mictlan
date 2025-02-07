@@ -12,12 +12,12 @@ import {
 describe("TaskEngine Tests", () => {
 	const trialFactory = newTrialFactory({
 		stimulusTypes: [
-			StimulusType.Color,
-			StimulusType.Shape,
+			// StimulusType.Color,
+			// StimulusType.Shape,
 			StimulusType.Position,
 		],
 		colors: [Color.Red],
-		gridSize: [1, 1],
+		gridSize: [100, 100],
 	});
 
 	// Dummy readTrialInput that always returns a fixed input
@@ -25,22 +25,25 @@ describe("TaskEngine Tests", () => {
 		return [
 			{ stimulusType: StimulusType.Color, match: true },
 			{ stimulusType: StimulusType.Shape, match: false },
-			{ stimulusType: StimulusType.Position, match: true },
+			{ stimulusType: StimulusType.Position, match: false },
 		];
 	};
 
 	// Test 1: Verify that the engine generates the correct number of trials
 	test("generates expected number of trials", async () => {
 		const n = 2;
-		const problemCount = 3; // Total iterations should be n + problemCount = 5
+		const problemCount = 10; // Total iterations should be n + problemCount = 5
 		const interval = 10; // in milliseconds
 
 		// Array to capture generated trials via onGenerateTrial callback
 		const generatedTrials: Trial[] = [];
 
 		// onGenerateTrial callback: push the generated trial into generatedTrials
-		const onUpdate = (newTrial?: Trial): void => {
+		const onUpdate = (newTrial?: Trial, trialResult?: TrialResult): void => {
 			newTrial ? generatedTrials.push(newTrial) : null;
+			if (trialResult) {
+				console.debug("trialResult", trialResult);
+			}
 		};
 
 		// Create the engine instance
@@ -51,7 +54,7 @@ describe("TaskEngine Tests", () => {
 
 		// Wait enough time for all trials to be generated.
 		// Total iterations = n + problemCount = 5, so wait a bit longer than 5*interval.
-		await new Promise((resolve) => setTimeout(resolve, interval * 6));
+		await new Promise((resolve) => setTimeout(resolve, interval * 15));
 
 		// The engine should have generated exactly 5 trials.
 		expect(generatedTrials.length).toBe(n + problemCount);
@@ -73,14 +76,10 @@ describe("TaskEngine Tests", () => {
 		): void => {
 			callCount++;
 			newTrial ? generatedTrials.push(newTrial) : null;
-			console.debug("prevTrialResult", prevTrialResult);
+			// console.debug("prevTrialResult", prevTrialResult);
 		};
 
 		const engine = newTaskEngine({ n, problemCount, interval, trialFactory });
-
-		const onStop = () => {
-			console.debug("onStop called");
-		};
 
 		const reset = engine.start(readTrialInput, onUpdate);
 

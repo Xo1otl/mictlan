@@ -15,7 +15,8 @@ export interface Trial {
 }
 
 export type TrialResult = {
-	trial_idx: number;
+	trialIdx: number;
+	cohensKappa: Record<StimulusType, number>;
 	matchResults: MatchResult[];
 };
 
@@ -131,8 +132,31 @@ export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
 };
 
 type TaskState = {
-	current_trial_idx: number;
+	currentTrialIdx: number;
 	queue: Trial[];
+	hit: Record<StimulusType, number>;
+	correctRejection: Record<StimulusType, number>;
+	falseAlarm: Record<StimulusType, number>;
+	miss: Record<StimulusType, number>;
+};
+
+const newTaskState = (): TaskState => {
+	const defaultValues = {
+		[StimulusType.Position]: 0,
+		[StimulusType.Color]: 0,
+		[StimulusType.Character]: 0,
+		[StimulusType.Shape]: 0,
+		[StimulusType.Sound]: 0,
+		[StimulusType.Animation]: 0,
+	};
+	return {
+		currentTrialIdx: 0,
+		queue: [],
+		hit: { ...defaultValues },
+		correctRejection: { ...defaultValues },
+		falseAlarm: { ...defaultValues },
+		miss: { ...defaultValues },
+	};
 };
 
 export type TaskEngineOptions = {
@@ -154,11 +178,7 @@ export const newTaskEngine = ({
 			readTrialInput: () => MatchResult[],
 			onUpdate?: (newTrial?: Trial, prevTrialResult?: TrialResult) => void,
 		): () => void {
-			let state: TaskState = {
-				current_trial_idx: 0,
-				queue: [],
-			};
-
+			let state = newTaskState();
 			let timer: ReturnType<typeof setInterval> | undefined = undefined;
 
 			const reset = () => {
@@ -166,10 +186,7 @@ export const newTaskEngine = ({
 					clearInterval(timer);
 					timer = undefined;
 				}
-				state = {
-					current_trial_idx: 0,
-					queue: [],
-				};
+				state = newTaskState();
 			};
 
 			const loopTrial = () => {
@@ -192,20 +209,55 @@ export const newTaskEngine = ({
 						if (!input) {
 							throw new Error(`Input result not found for ${sys.stimulusType}`);
 						}
+						if (input.match && sys.match) {
+							state.hit[input.stimulusType]++;
+						}
+						if (!sys.match && !input.match) {
+							state.correctRejection[sys.stimulusType]++;
+						}
+						if (!sys.match && input.match) {
+							state.falseAlarm[sys.stimulusType]++;
+						}
+						if (sys.match && !input.match) {
+							state.miss[sys.stimulusType]++;
+						}
 						return {
 							stimulusType: sys.stimulusType,
 							match: input.match === sys.match,
 						};
 					});
 
+					let cohensKappa: Record<StimulusType, number> = {
+						[StimulusType.Position]: Number.NaN,
+						[StimulusType.Color]: Number.NaN,
+						[StimulusType.Character]: Number.NaN,
+						[StimulusType.Shape]: Number.NaN,
+						[StimulusType.Sound]: Number.NaN,
+						[StimulusType.Animation]: Number.NaN,
+					};
+
+					for (const stimulusType of Object.values(StimulusType)) {
+						const hit = state.hit[stimulusType];
+						const falseAlarm = state.falseAlarm[stimulusType];
+						const miss = state.miss[stimulusType];
+						const correctRejection = state.correctRejection[stimulusType];
+						cohensKappa[stimulusType] = calculateCohensKappa(
+							hit,
+							falseAlarm,
+							miss,
+							correctRejection,
+						);
+					}
+
 					trialResult = {
-						trial_idx: state.current_trial_idx,
+						trialIdx: state.currentTrialIdx,
+						cohensKappa: cohensKappa,
 						matchResults: matchResults,
 					};
 				}
 
-				state.current_trial_idx++;
-				if (state.current_trial_idx > problemCount + n) {
+				state.currentTrialIdx++;
+				if (state.currentTrialIdx > problemCount + n) {
 					onUpdate?.(undefined, trialResult);
 					reset();
 					return;
@@ -312,4 +364,25 @@ export const newTrialFactory = ({
 	return {
 		random,
 	};
+};
+
+const calculateCohensKappa = (
+	hit: number,
+	falseAlarm: number,
+	miss: number,
+	correctRejection: number,
+): number => {
+	const total = hit + falseAlarm + miss + correctRejection;
+	if (total === 0) return Number.NaN; // 試行がない場合
+
+	const p_o = (hit + correctRejection) / total;
+	const p_e =
+		((hit + falseAlarm) * (hit + miss) +
+			(miss + correctRejection) * (falseAlarm + correctRejection)) /
+		(total * total);
+
+	// 分母が0の場合
+	if (1 - p_e === 0) return Number.NaN;
+
+	return (p_o - p_e) / (1 - p_e);
 };
