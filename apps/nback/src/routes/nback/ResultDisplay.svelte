@@ -1,8 +1,12 @@
 <script lang="ts">
     import type { TrialResult } from "../../nback";
+    import type { Config } from "./+page";
     import type { TaskResult } from "./GameDisplay.svelte";
 
-    const { result = $bindable() }: { result: TaskResult } = $props();
+    const {
+        result = $bindable(),
+        config = $bindable(),
+    }: { result: TaskResult; config: Config } = $props();
 
     const {
         trialResultMap,
@@ -39,10 +43,12 @@
     });
 </script>
 
-<section class="p-4 max-w-3xl mx-auto space-y-8">
+<div class="p-4 space-y-8">
     <!-- 全体集計 -->
     <div>
-        <h1 class="text-2xl font-bold mb-2">タスク結果</h1>
+        <h1 class="text-2xl font-bold mb-2">
+            N={config.taskEngineOptions.n} タスク結果
+        </h1>
         <p>正答数: {totalCorrect} / {totalCount}</p>
         <p>正答率: {overallAccuracy}%</p>
     </div>
@@ -51,12 +57,10 @@
     <div>
         <h2 class="text-xl font-semibold mb-2">StimulusType別スコア</h2>
         <ul class="space-y-2">
-            {#each Object.entries(cohensKappa) as [type, score]}
-                {#if !Number.isNaN(score)}
-                    <li class="border p-2 rounded">
-                        <strong>{type}</strong>: {score.toFixed(3)}
-                    </li>
-                {/if}
+            {#each config.trialFactoryOptions.stimulusTypes! as type}
+                <li class="border p-2 rounded">
+                    <strong>{type}</strong>: {cohensKappa[type].toFixed(3)}
+                </li>
             {/each}
         </ul>
     </div>
@@ -78,7 +82,7 @@
                             <p class="underline mb-1">刺激履歴</p>
                             {#if trial.stimuli}
                                 {#each Object.entries(trial.stimuli()) as [stimulusType, value]}
-                                    <p>
+                                    <p class="whitespace-nowrap">
                                         <span class="font-medium"
                                             >{stimulusType}:</span
                                         >
@@ -114,4 +118,4 @@
             {/each}
         </ul>
     </div>
-</section>
+</div>

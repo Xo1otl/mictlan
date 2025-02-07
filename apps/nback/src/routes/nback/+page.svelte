@@ -59,9 +59,8 @@
     <GameDisplay {config} {onEnd} />
 
     {#if taskResult}
-        <ResultDisplay bind:result={taskResult} />
+        <ResultDisplay bind:result={taskResult} bind:config />
     {:else}
-        <!-- 日常生活に直結するメリットを強調した N-back task の紹介 -->
         <div class="mt-4 space-y-6">
             <section>
                 <h2 class="text-2xl font-bold">

@@ -279,8 +279,12 @@
                                         </div>
                                     {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Scale}
                                         <div
-                                            transition:scale|global={{
+                                            in:scale|global={{
                                                 duration: 1500,
+                                                start: 0.1,
+                                            }}
+                                            out:scale|global={{
+                                                duration: 400,
                                                 start: 0.1,
                                             }}
                                             class="absolute inset-0 flex items-center justify-center"
@@ -293,8 +297,11 @@
                                         </div>
                                     {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Blur}
                                         <div
-                                            transition:blur|global={{
+                                            in:blur|global={{
                                                 duration: 1200,
+                                            }}
+                                            out:blur|global={{
+                                                duration: 400,
                                             }}
                                             class="absolute inset-0 flex items-center justify-center"
                                         >

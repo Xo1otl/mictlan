@@ -198,7 +198,7 @@
                         <input
                             type="number"
                             bind:value={interval}
-                            min="4000"
+                            min="2000"
                             required
                             class="mt-1 block w-full border border-gray-300 rounded p-2 focus:ring-blue-500 focus:border-blue-500"
                         />
