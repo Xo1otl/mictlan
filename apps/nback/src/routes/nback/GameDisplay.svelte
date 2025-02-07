@@ -1,3 +1,24 @@
+<script module lang="ts">
+    export type TaskResult = {
+        cohensKappa: Record<nback.StimulusType, number>;
+        trials: nback.Trial[];
+        trialResults: nback.TrialResult[];
+    };
+
+    const newTaskResult = (): TaskResult => ({
+        trialResults: [],
+        trials: [],
+        cohensKappa: {
+            [nback.StimulusType.Position]: Number.NaN,
+            [nback.StimulusType.Color]: Number.NaN,
+            [nback.StimulusType.Character]: Number.NaN,
+            [nback.StimulusType.Shape]: Number.NaN,
+            [nback.StimulusType.Sound]: Number.NaN,
+            [nback.StimulusType.Animation]: Number.NaN,
+        },
+    });
+</script>
+
 <script lang="ts">
     import A from "$lib/sounds/A.mp3";
     import B from "$lib/sounds/B.mp3";
@@ -12,7 +33,7 @@
     import { blur, fade, fly, scale } from "svelte/transition";
     import * as nback from "../../nback/index";
     import { spin } from "../../transition/transition";
-    import type { Config, TaskResult } from "./+page";
+    import type { Config } from "./+page";
     import TrialCard from "./TrialCard.svelte";
 
     console.log(A);
@@ -71,9 +92,7 @@
 
     // 画面と同期不要な変数
     let nextTrialId = 1;
-    let trialResults: nback.TrialResult[] = [];
-    let trials: nback.Trial[] = [];
-
+    let taskResult: TaskResult = newTaskResult();
     const getKey = (index: number): string => {
         const row = Math.floor(index / gridCols);
         const col = index % gridCols;
@@ -104,7 +123,8 @@
 
         if (prevTrialResult) {
             console.log("Trial result:", prevTrialResult);
-            trialResults.push(prevTrialResult);
+            taskResult.cohensKappa = prevTrialResult.cohensKappa;
+            taskResult.trialResults.push(prevTrialResult);
             for (const type of stimulusTypes) {
                 const r = prevTrialResult.matchResults.find(
                     (m) => m.stimulusType === type,
@@ -114,13 +134,13 @@
             isDisplayingResult = true;
         }
 
-        lastTrialIndex = prevTrialResult?.trial_idx
-            ? prevTrialResult.trial_idx - config.taskEngineOptions.n
+        lastTrialIndex = prevTrialResult?.trialIdx
+            ? prevTrialResult.trialIdx - config.taskEngineOptions.n
             : 0;
 
         if (newTrial) {
             showNextTrialTimer = setTimeout(() => {
-                trials.push(newTrial);
+                taskResult.trials.push(newTrial);
                 for (const type of stimulusTypes) {
                     inputs[type] = "none";
                 }
@@ -132,7 +152,7 @@
 
         console.log("Task が終了しました");
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        onEnd({ trialResults, trials });
+        onEnd(taskResult);
         isRunning = false;
         showModal = false;
     };
@@ -183,8 +203,7 @@
     let reset: () => void = () => {};
 
     const startTask = () => {
-        trialResults = [];
-        trials = [];
+        taskResult = newTaskResult();
         if (isRunning) {
             console.warn("Task is already running");
             return;
@@ -201,8 +220,8 @@
     const abort = () => {
         reset();
         showNextTrialTimer ?? clearTimeout(showNextTrialTimer);
-        console.log("Task が中断されました", trialResults);
-        onEnd({ trialResults, trials });
+        console.log("Task が中断されました", taskResult);
+        onEnd(taskResult);
         isRunning = false;
         showModal = false;
     };

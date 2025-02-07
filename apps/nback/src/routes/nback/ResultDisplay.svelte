@@ -1,93 +1,30 @@
 <script lang="ts">
-    import {
-        DefaultTrialFactoryOptions,
-        StimulusType,
-        type TrialResult,
-    } from "../../nback";
-    import type { Config, TaskResult } from "./+page";
+    import type { TrialResult } from "../../nback";
+    import type { TaskResult } from "./GameDisplay.svelte";
 
-    const {
-        result = $bindable(),
-        config = $bindable(),
-    }: { result: TaskResult; config: Config } = $props();
+    const { result = $bindable() }: { result: TaskResult } = $props();
 
     const {
         trialResultMap,
         totalCount,
         totalCorrect,
-        scores,
+        cohensKappa,
         overallAccuracy,
     } = $derived.by(() => {
         console.log("calculating derived values");
-        const trialResultMap = new Map<number, TrialResult | undefined>();
+        const trialResultMap = new Map<number, TrialResult>();
         for (const trialResult of result.trialResults) {
-            trialResultMap.set(trialResult.trial_idx, trialResult);
+            trialResultMap.set(trialResult.trialIdx, trialResult);
         }
         const totalCount = result.trialResults.length;
 
-        const typeStats: Record<string, { correct: number; total: number }> =
-            {};
         let totalCorrect = 0;
         for (const trialResult of result.trialResults) {
             let isCorrect = true;
             for (const match of trialResult.matchResults) {
                 if (!match.match) isCorrect = false;
-                if (!typeStats[match.stimulusType]) {
-                    typeStats[match.stimulusType] = {
-                        correct: 0,
-                        total: 0,
-                    };
-                }
-                typeStats[match.stimulusType].total++;
-                if (match.match) typeStats[match.stimulusType].correct++;
             }
             if (isCorrect) totalCorrect++;
-        }
-
-        const scores: Record<string, number> = {};
-        const trialFactoryOptions = config.trialFactoryOptions;
-        for (const [stimulusType, { correct, total }] of Object.entries(
-            typeStats,
-        )) {
-            // 各 stimulus type に対応する候補配列の長さ（＝候補数）を取得
-            let possibleCount: number | undefined;
-            switch (stimulusType) {
-                case StimulusType.Color:
-                    possibleCount = trialFactoryOptions.colors?.length;
-                    break;
-                case StimulusType.Shape:
-                    possibleCount = trialFactoryOptions.shapes?.length;
-                    break;
-                case StimulusType.Character:
-                    possibleCount = trialFactoryOptions.characters?.length;
-                    break;
-                case StimulusType.Sound:
-                    possibleCount = trialFactoryOptions.sounds?.length;
-                    break;
-                case StimulusType.Animation:
-                    possibleCount = trialFactoryOptions.animations?.length;
-                    break;
-                case StimulusType.Position: {
-                    const axis: [number, number] | undefined =
-                        trialFactoryOptions.gridSize;
-                    possibleCount = axis ? axis[0] * axis[1] : undefined;
-                    break;
-                }
-            }
-            if (possibleCount === undefined) {
-                throw new Error(
-                    `possibleCount is undefined for stimulus type: ${stimulusType}`,
-                );
-            }
-            const expectedAccuracy = 1 - 1 / possibleCount; // 放置時 (常に一致しないを選択) の正答率
-            const actualAccuracy = correct / total; // 実際の正答率
-            console.log(
-                `stimulusType: ${stimulusType}, expectedAccuracy: ${expectedAccuracy}, actualAccuracy: ${actualAccuracy}`,
-            );
-            // 正規化したスコアを計算： (実際の正答率 - 放置時正答率) / (1 - 放置時正答率)
-            const score =
-                (actualAccuracy - expectedAccuracy) / (1 - expectedAccuracy);
-            scores[stimulusType] = score > 0 ? score : 0;
         }
 
         const overallAccuracy = ((totalCorrect / totalCount) * 100).toFixed(1);
@@ -97,7 +34,7 @@
             totalCount,
             totalCorrect,
             overallAccuracy,
-            scores,
+            cohensKappa: result.cohensKappa,
         };
     });
 </script>
@@ -114,10 +51,12 @@
     <div>
         <h2 class="text-xl font-semibold mb-2">StimulusType別スコア</h2>
         <ul class="space-y-2">
-            {#each Object.entries(scores) as [type, score]}
-                <li class="border p-2 rounded">
-                    <strong>{type}</strong>: {score.toFixed(3)}
-                </li>
+            {#each Object.entries(cohensKappa) as [type, score]}
+                {#if !Number.isNaN(score)}
+                    <li class="border p-2 rounded">
+                        <strong>{type}</strong>: {score.toFixed(3)}
+                    </li>
+                {/if}
             {/each}
         </ul>
     </div>
