@@ -1,12 +1,9 @@
 <script lang="ts">
     import type { TrialResult } from "../../nback";
     import type { Config } from "./+page";
-    import type { TaskResult } from "./GameDisplay.svelte";
+    import type { TaskResult } from "./GameModal.svelte";
 
-    const {
-        result = $bindable(),
-        config = $bindable(),
-    }: { result: TaskResult; config: Config } = $props();
+    const { result, config }: { result: TaskResult; config: Config } = $props();
 
     const {
         trialResultMap,

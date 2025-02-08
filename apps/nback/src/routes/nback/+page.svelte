@@ -3,13 +3,12 @@
     import * as nback from "../../nback/index";
     import type { Config } from "./+page";
     import ConfigModal from "./ConfigModal.svelte";
-    import DebugCard from "./DebugCard.svelte";
-    import GameDisplay, { type TaskResult } from "./GameDisplay.svelte";
+    import GameModal, { type TaskResult } from "./GameModal.svelte";
     import ResultDisplay from "./ResultDisplay.svelte";
 
-    let showModal = $state(false);
+    let showConfigModal = $state(false);
+    let showGameModal = $state(false);
 
-    // localStorage に設定があればそれを使い、なければデフォルトを使用
     let config: Config = $state({
         trialFactoryOptions: nback.DefaultTrialFactoryOptions,
         taskEngineOptions: {
@@ -20,17 +19,134 @@
         answerDisplayTime: 600,
     });
 
+    // 各フィールドの型検証用関数
+    // Config の各フィールドを nback の enum を使って検証する関数
+    function isValidConfig(obj: Config): obj is Config {
+        if (typeof obj !== "object" || obj === null) return false;
+
+        // answerDisplayTime: number であること
+        if (typeof obj.answerDisplayTime !== "number") return false;
+
+        // trialFactoryOptions の検証
+        if (
+            typeof obj.trialFactoryOptions !== "object" ||
+            obj.trialFactoryOptions === null
+        )
+            return false;
+        const tfo = obj.trialFactoryOptions;
+
+        // 各 enum 配列のチェック（存在する場合のみ）
+        if ("stimulusTypes" in tfo) {
+            if (
+                !Array.isArray(tfo.stimulusTypes) ||
+                !tfo.stimulusTypes.every((item: nback.StimulusType) =>
+                    Object.values(nback.StimulusType).includes(item),
+                )
+            ) {
+                return false;
+            }
+        }
+        if ("colors" in tfo) {
+            if (
+                !Array.isArray(tfo.colors) ||
+                !tfo.colors.every((item: nback.Color) =>
+                    Object.values(nback.Color).includes(item),
+                )
+            ) {
+                return false;
+            }
+        }
+        if ("shapes" in tfo) {
+            if (
+                !Array.isArray(tfo.shapes) ||
+                !tfo.shapes.every((item: nback.Shape) =>
+                    Object.values(nback.Shape).includes(item),
+                )
+            ) {
+                return false;
+            }
+        }
+        if ("characters" in tfo) {
+            if (
+                !Array.isArray(tfo.characters) ||
+                !tfo.characters.every((item: nback.Character) =>
+                    Object.values(nback.Character).includes(item),
+                )
+            ) {
+                return false;
+            }
+        }
+        if ("sounds" in tfo) {
+            if (
+                !Array.isArray(tfo.sounds) ||
+                !tfo.sounds.every((item: nback.Sound) =>
+                    Object.values(nback.Sound).includes(item),
+                )
+            ) {
+                return false;
+            }
+        }
+        if ("animations" in tfo) {
+            if (
+                !Array.isArray(tfo.animations) ||
+                !tfo.animations.every((item: nback.Animation) =>
+                    Object.values(nback.Animation).includes(item),
+                )
+            ) {
+                return false;
+            }
+        }
+
+        // gridSize の検証（存在する場合は [number, number] であること）
+        if ("gridSize" in tfo) {
+            if (
+                !Array.isArray(tfo.gridSize) ||
+                tfo.gridSize.length !== 2 ||
+                typeof tfo.gridSize[0] !== "number" ||
+                typeof tfo.gridSize[1] !== "number"
+            ) {
+                return false;
+            }
+        }
+
+        // taskEngineOptions の検証（trialFactory は除外）
+        if (
+            typeof obj.taskEngineOptions !== "object" ||
+            obj.taskEngineOptions === null
+        )
+            return false;
+        const teo = obj.taskEngineOptions;
+        if (
+            typeof teo.n !== "number" ||
+            typeof teo.problemCount !== "number" ||
+            typeof teo.interval !== "number"
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
     // コンポーネントがマウントされたときに localStorage から config を取得
     onMount(() => {
-        const savedConfig = localStorage.getItem("config");
-        if (savedConfig) {
-            config = JSON.parse(savedConfig);
+        const configString = localStorage.getItem("config");
+        if (!configString) {
+            localStorage.setItem("config", JSON.stringify(config));
+            return;
+        }
+        const savedConfig = JSON.parse(configString);
+        if (isValidConfig(savedConfig)) {
+            config = savedConfig;
+        } else {
+            console.error("Invalid config found in localStorage");
+            localStorage.setItem("config", JSON.stringify(config));
         }
     });
 
     let taskResult: TaskResult | undefined = $state(undefined);
 
-    const onEnd = (result: TaskResult) => {
+    const updateResult = (result: TaskResult) => {
+        showGameModal = false;
         taskResult = result;
     };
 
@@ -38,28 +154,50 @@
     $effect(() => {
         localStorage.setItem("config", JSON.stringify(config));
     });
+
+    const closeModal = () => {
+        showConfigModal = false;
+    };
+
+    const updateConfig = (newConfig: Config) => {
+        config = newConfig;
+        closeModal();
+    };
+
+    const startTask = () => {
+        showGameModal = true;
+    };
 </script>
 
 <main class="p-4 text-column">
-    <div class="flex justify-center">
+    <div class="flex flex-col items-center space-y-4">
         <button
             onclick={() => {
-                showModal = true;
+                showConfigModal = true;
             }}
             class="flex items-center gap-2 text-lg hover:underline focus:outline-none"
         >
             <span>Configure task⚙</span>
         </button>
+        <button
+            type="button"
+            onclick={startTask}
+            class="relative inline-flex items-center justify-center px-8 py-3 font-semibold tracking-wide text-white transition-all duration-300 ease-out rounded-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 shadow-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+            タスク開始
+        </button>
     </div>
 
-    {#if showModal}
-        <ConfigModal bind:showModal bind:config />
+    {#if showConfigModal}
+        <ConfigModal onApply={updateConfig} onCancel={closeModal} {config} />
     {/if}
 
-    <GameDisplay {config} {onEnd} />
+    {#if showGameModal}
+        <GameModal {config} onFinish={updateResult} />
+    {/if}
 
     {#if taskResult}
-        <ResultDisplay bind:result={taskResult} bind:config />
+        <ResultDisplay result={taskResult} {config} />
     {:else}
         <div class="mt-4 space-y-6">
             <section>

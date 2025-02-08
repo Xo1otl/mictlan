@@ -1,6 +1,17 @@
 # nback
 
-[効果がある](https://pmc.ncbi.nlm.nih.gov/articles/PMC6445784/)らしいので作る
+## TODO
+
+* [pwaのテンプレート](https://github.com/vite-pwa/sveltekit/tree/main/examples/sveltekit-ts)
+    * コピって全部移動すればすぐてきるかも
+* [pwa](https://github.com/vite-pwa/sveltekit/tree/main?tab=readme-ov-file)
+    * もしかしたらマジでzero configかも
+    
+## FIXME
+
+* useReducerとdispatchの組み合わせみたいなんができたらいいかもしれない
+    * reducerがstate machineみたいな感じ
+    * dispatchがstate machineに対してeventを送信する感覚
 
 ## domain
 

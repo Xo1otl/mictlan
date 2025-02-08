@@ -23,13 +23,14 @@
 </svg>
 
 <div class="flex flex-col items-center justify-center w-full h-full">
-    {#if shape === nback.Shape.Circle}
+    {#if shape === nback.Shape.Ellipse}
         <svg class="w-full h-full" viewBox="0 0 100 100">
-            <!-- 円形 -->
-            <circle
+            <!-- 楕円形(回転アニメーションに対応するため) -->
+            <ellipse
                 cx="50"
                 cy="50"
-                r="35"
+                rx="35"
+                ry="28"
                 fill="none"
                 stroke={color}
                 stroke-width="4"

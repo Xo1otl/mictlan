@@ -4,11 +4,13 @@
     import type { Config } from "./+page";
 
     let {
-        showModal = $bindable(),
-        config = $bindable(),
+        config,
+        onCancel,
+        onApply,
     }: {
-        showModal: boolean;
         config: Config;
+        onCancel: () => void;
+        onApply: (newConfig: Config) => void;
     } = $props();
 
     // 初期設定の読み込み、
@@ -137,13 +139,11 @@
             interval: interval,
         };
 
-        config = {
+        onApply({
             trialFactoryOptions: newTrialFactoryOptions,
             taskEngineOptions: newTaskEngineOptions,
             answerDisplayTime: answerDisplayTime,
-        };
-
-        showModal = false;
+        });
     };
 </script>
 
@@ -152,7 +152,7 @@
     <!-- バックドロップ -->
     <button
         type="button"
-        onclick={() => (showModal = false)}
+        onclick={onCancel}
         aria-label="Close modal"
         class="absolute inset-0 bg-black bg-opacity-50"
     ></button>
@@ -384,7 +384,7 @@
             <div class="flex justify-end gap-4 pt-4 border-t border-gray-200">
                 <button
                     type="button"
-                    onclick={() => (showModal = false)}
+                    onclick={onCancel}
                     class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100 transition-colors"
                 >
                     キャンセル
