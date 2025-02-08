@@ -3,9 +3,7 @@
 ## TODO
 
 * [pwaのテンプレート](https://github.com/vite-pwa/sveltekit/tree/main/examples/sveltekit-ts)
-    * コピって全部移動すればすぐてきるかも
 * [pwa](https://github.com/vite-pwa/sveltekit/tree/main?tab=readme-ov-file)
-    * もしかしたらマジでzero configかも
     
 ## FIXME
 
