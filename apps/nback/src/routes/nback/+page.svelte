@@ -164,7 +164,7 @@
                 return sum + value;
             }, 0) / n;
         console.log(averageKappa);
-        if (averageKappa > 0.75) {
+        if (averageKappa > 0.8) {
             taskCompleted = true;
         }
     };
