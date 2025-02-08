@@ -5,6 +5,6 @@ import { SvelteKitPWA } from "@vite-pwa/sveltekit";
 export default defineConfig({
 	plugins: [sveltekit(), SvelteKitPWA()],
 	server: {
-		allowedHosts: ["game.mictlan.site"],
+		allowedHosts: ["nback.mictlan.site"],
 	},
 });

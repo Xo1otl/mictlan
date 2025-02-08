@@ -11,6 +11,7 @@
         totalCorrect,
         cohensKappa,
         overallAccuracy,
+        shareButtonKey,
     } = $derived.by(() => {
         console.log("calculating derived values");
         const trialResultMap = new Map<number, TrialResult>();
@@ -30,17 +31,43 @@
 
         const overallAccuracy = ((totalCorrect / totalCount) * 100).toFixed(1);
 
+        const shareButtonKey = crypto.randomUUID();
+
         return {
             trialResultMap,
             totalCount,
             totalCorrect,
             overallAccuracy,
             cohensKappa: result.cohensKappa,
+            shareButtonKey,
         };
+    });
+
+    let twitterWidgetContainer: HTMLDivElement | null = null;
+    $effect(() => {
+        if (!twitterWidgetContainer) return;
+        for (const child of Array.from(twitterWidgetContainer.children)) {
+            console.log(child.id);
+            if (child.id === shareButtonKey) continue;
+            twitterWidgetContainer.removeChild(child);
+        }
+        window.twttr.widgets.load(twitterWidgetContainer);
     });
 </script>
 
 <div class="p-4 space-y-8">
+    <div bind:this={twitterWidgetContainer}>
+        {#key shareButtonKey}
+            <a
+                id={shareButtonKey}
+                href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                class="twitter-share-button"
+                data-text={`私のNBackタスクの結果は: ${totalCorrect}/${totalCount} (正答率: ${overallAccuracy}%) | タイプ別スコア: ${config.trialFactoryOptions.stimulusTypes?.map((type) => `${type}:${cohensKappa[type].toFixed(3)}`).join(" | ")} でした。\n君も挑戦して、一緒にハイスコアを目指しましょう！！`}
+                data-hashtags="nback"
+                data-show-count="false">Tweet</a
+            >
+        {/key}
+    </div>
     <!-- 全体集計 -->
     <div>
         <h1 class="text-2xl font-bold mb-2">
