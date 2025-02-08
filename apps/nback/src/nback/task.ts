@@ -1,6 +1,6 @@
 export interface TaskEngine {
 	start(
-		readTrialInput: () => MatchResult[],
+		onReadInput: () => MatchResult[],
 		onUpdate?: (newTrial?: Trial, prevTrialResult?: TrialResult) => void,
 	): () => void;
 }
@@ -61,7 +61,7 @@ export enum Shape {
 	Triangle = "triangle",
 	Square = "square",
 	Pentagon = "pentagon",
-	Circle = "circle",
+	Ellipse = "ellipse",
 }
 
 export enum Character {
@@ -175,7 +175,7 @@ export const newTaskEngine = ({
 	// startはステートレスなので何回呼び出しても問題ない
 	return {
 		start(
-			readTrialInput: () => MatchResult[],
+			onReadInput: () => MatchResult[],
 			onUpdate?: (newTrial?: Trial, prevTrialResult?: TrialResult) => void,
 		): () => void {
 			let state = newTaskState();
@@ -200,7 +200,7 @@ export const newTaskEngine = ({
 					const latestTrial = state.queue[state.queue.length - 1];
 					const systemResult = previousTrial.compare(latestTrial);
 
-					const inputResult = readTrialInput();
+					const inputResult = onReadInput();
 
 					const matchResults = systemResult.map((sys) => {
 						const input = inputResult.find(
