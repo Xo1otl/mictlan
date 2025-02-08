@@ -208,7 +208,7 @@
         const col = index % gridCols;
         return `${row}-${col}`;
     };
-    let showNextTrialTimer: Timer;
+    let showNextTrialTimer: ReturnType<typeof setTimeout>;
     let finish: () => void = () => {};
 </script>
 
@@ -330,7 +330,7 @@
                 <button
                     type="button"
                     onclick={() => toggleInput(type)}
-                    class="w-full p-6 rounded-xl border-2 text-xl font-medium transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95"
+                    class="w-full p-6 rounded-xl border-2 sm:text-xl font-medium transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95"
                     class:border-green-500={inputs[type] === "selected"}
                     class:bg-green-100={inputs[type] === "selected"}
                     class:border-blue-500={inputs[type] === "correct"}

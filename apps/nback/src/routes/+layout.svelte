@@ -1,9 +1,16 @@
 <script lang="ts">
-	import Header from './Header.svelte';
-	import '../app.css';
-	
+	import { pwaInfo } from "virtual:pwa-info";
+	import "../app.css";
+	import Header from "./Header.svelte";
+
+	const webManifestLink = $state(pwaInfo ? pwaInfo.webManifest.linkTag : "");
+
 	let { children } = $props();
 </script>
+
+<svelte:head>
+	{@html webManifestLink}
+</svelte:head>
 
 <div class="app">
 	<Header />
@@ -14,7 +21,8 @@
 
 	<footer>
 		<p>
-			visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to learn about SvelteKit
+			visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to
+			learn about SvelteKit
 		</p>
 	</footer>
 </div>

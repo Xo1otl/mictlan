@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { confetti } from "@neoconfetti/svelte";
     import { onMount } from "svelte";
     import * as nback from "../../nback/index";
     import type { Config } from "./+page";
@@ -17,6 +18,22 @@
             interval: 4000,
         },
         answerDisplayTime: 600,
+    });
+
+    // コンポーネントがマウントされたときに localStorage から config を取得
+    onMount(() => {
+        const configString = localStorage.getItem("config");
+        if (!configString) {
+            localStorage.setItem("config", JSON.stringify(config));
+            return;
+        }
+        const savedConfig = JSON.parse(configString);
+        if (isValidConfig(savedConfig)) {
+            config = savedConfig;
+        } else {
+            console.error("Invalid config found in localStorage");
+            localStorage.setItem("config", JSON.stringify(config));
+        }
     });
 
     // 各フィールドの型検証用関数
@@ -127,28 +144,32 @@
         return true;
     }
 
-    // コンポーネントがマウントされたときに localStorage から config を取得
-    onMount(() => {
-        const configString = localStorage.getItem("config");
-        if (!configString) {
-            localStorage.setItem("config", JSON.stringify(config));
-            return;
-        }
-        const savedConfig = JSON.parse(configString);
-        if (isValidConfig(savedConfig)) {
-            config = savedConfig;
-        } else {
-            console.error("Invalid config found in localStorage");
-            localStorage.setItem("config", JSON.stringify(config));
-        }
-    });
-
     let taskResult: TaskResult | undefined = $state(undefined);
 
-    const updateResult = (result: TaskResult) => {
+    const updateResult = async (result: TaskResult) => {
         showGameModal = false;
         taskResult = result;
+
+        if (result.trialResults.length < 20) {
+            return;
+        }
+
+        let n = Object.keys(result.cohensKappa).length;
+        const averageKappa =
+            Object.values(result.cohensKappa).reduce((sum, value) => {
+                if (Number.isNaN(value)) {
+                    n--;
+                    return sum;
+                }
+                return sum + value;
+            }, 0) / n;
+        console.log(averageKappa);
+        if (averageKappa > 0.75) {
+            taskCompleted = true;
+        }
     };
+
+    let taskCompleted = $state(false);
 
     // config の変更を検知して localStorage に自動保存
     $effect(() => {
@@ -166,6 +187,7 @@
 
     const startTask = () => {
         showGameModal = true;
+        taskCompleted = false;
     };
 </script>
 
@@ -260,3 +282,15 @@
         </div>
     {/if}
 </main>
+
+{#if taskCompleted}
+    <div
+        style="position: absolute; left: 50%; top: 30%"
+        use:confetti={{
+            force: 0.7,
+            stageWidth: window.innerWidth,
+            stageHeight: window.innerHeight,
+            colors: ["#ff3e00", "#40b3ff", "#676778"],
+        }}
+    ></div>
+{/if}
