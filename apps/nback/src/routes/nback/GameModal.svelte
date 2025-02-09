@@ -212,148 +212,152 @@
     let finish: () => void = () => {};
 </script>
 
-<main class="p-4">
+<!-- modal -->
+<div
+    class="fixed inset-4 z-50 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-200"
+>
+    <!-- container -->
     <div
-        class="fixed inset-4 z-50 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl
-                   flex flex-col p-6 border border-gray-200 max-h-screen"
+        class="container max-w-2xl mx-auto h-full grid grid-rows-[auto,1fr,auto]"
     >
-        <p>
-            終了: {lastTrialIndex}/{config.taskEngineOptions.problemCount}問
-        </p>
-        <br />
-        <!-- グリッド表示部分 -->
-        <div class="flex-grow flex items-center justify-center">
-            <div
-                class="grid gap-3 mx-auto w-full h-full max-h-fit max-w-fit"
-                style={`grid-template-columns: repeat(${gridCols}, 1fr);`}
-            >
-                {#each Array(gridRows * gridCols) as _, index}
-                    <div
-                        class="relative flex items-center justify-center border-2
-                               border-gray-200 rounded-xl aspect-square overflow-hidden"
-                    >
-                        {#if shownTrials[getKey(index)]}
-                            {#key shownTrials[getKey(index)].trialId}
-                                {#if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Fly}
-                                    <div
-                                        transition:fly|global={{
-                                            y: "100%",
-                                        }}
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
-                                {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Scale}
-                                    <div
-                                        in:scale|global={{
-                                            duration: 1500,
-                                            start: 0.1,
-                                        }}
-                                        out:scale|global={{
-                                            duration: 400,
-                                            start: 0.1,
-                                        }}
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
-                                {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Blur}
-                                    <div
-                                        in:blur|global={{
-                                            duration: 1200,
-                                        }}
-                                        out:blur|global={{
-                                            duration: 400,
-                                        }}
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
-                                {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Spin}
-                                    <div
-                                        in:spin|global={{ duration: 1500 }}
-                                        out:fade|global
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
-                                {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.None}
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
-                                {:else}
-                                    <div
-                                        transition:fade|global
-                                        class="absolute inset-0 flex items-center justify-center"
-                                    >
-                                        <TrialCard
-                                            trial={shownTrials[getKey(index)]
-                                                .trial}
-                                        />
-                                    </div>
-                                {/if}
-                            {/key}
-                        {/if}
-                    </div>
-                {/each}
-            </div>
+        <!-- ヘッダー領域 -->
+        <div>
+            <p>
+                終了: {lastTrialIndex}/{config.taskEngineOptions.problemCount}問
+            </p>
+            <br />
         </div>
 
-        <!-- 入力ボタン部分 -->
+        <!-- カードグリッド領域：grid の行が 1fr になっているため、ヘッダーとフッター以外の残り全体を占有 -->
         <div
-            class={`grid gap-4 mx-auto mt-4 justify-items-center ${
-                stimulusTypes.length <= 2
-                    ? `grid-cols-${stimulusTypes.length}`
-                    : stimulusTypes.length <= 4
-                      ? "grid-cols-2"
-                      : "grid-cols-3"
-            }`}
+            id="trialgrid"
+            class="grid gap-3 items-center justify-center"
+            style="
+          grid-template-columns: repeat({gridCols}, minmax(0, 1fr));
+          grid-auto-rows: 1fr;
+        "
         >
-            {#each stimulusTypes as type}
-                <button
-                    type="button"
-                    onclick={() => toggleInput(type)}
-                    class="w-full p-6 rounded-xl border-2 sm:text-xl font-medium transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95"
-                    class:border-green-500={inputs[type] === "selected"}
-                    class:bg-green-100={inputs[type] === "selected"}
-                    class:border-blue-500={inputs[type] === "correct"}
-                    class:bg-blue-100={inputs[type] === "correct"}
-                    class:border-red-500={inputs[type] === "incorrect"}
-                    class:bg-red-100={inputs[type] === "incorrect"}
-                    class:border-gray-200={inputs[type] === "none"}
+            {#each Array(gridRows * gridCols) as _, index}
+                <div
+                    class="relative items-center justify-center border-2 border-gray-200 rounded-xl w-full h-full"
                 >
-                    {type}
-                </button>
+                    {#if shownTrials[getKey(index)]}
+                        {#key shownTrials[getKey(index)].trialId}
+                            {#if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Fly}
+                                <div
+                                    transition:fly|global={{ y: "100%" }}
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <TrialCard
+                                        trial={shownTrials[getKey(index)].trial}
+                                    />
+                                </div>
+                            {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Scale}
+                                <div
+                                    in:scale|global={{
+                                        duration: 1500,
+                                        start: 0.1,
+                                    }}
+                                    out:scale|global={{
+                                        duration: 400,
+                                        start: 0.1,
+                                    }}
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <TrialCard
+                                        trial={shownTrials[getKey(index)].trial}
+                                    />
+                                </div>
+                            {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Blur}
+                                <div
+                                    in:blur|global={{ duration: 1200 }}
+                                    out:blur|global={{ duration: 400 }}
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <TrialCard
+                                        trial={shownTrials[getKey(index)].trial}
+                                    />
+                                </div>
+                            {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.Spin}
+                                <div
+                                    in:spin|global={{ duration: 1500 }}
+                                    out:fade|global
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <TrialCard
+                                        trial={shownTrials[getKey(index)].trial}
+                                    />
+                                </div>
+                            {:else if shownTrials[getKey(index)].trial.stimuli().animation === nback.Animation.None}
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <TrialCard
+                                        trial={shownTrials[getKey(index)].trial}
+                                    />
+                                </div>
+                            {:else}
+                                <div
+                                    transition:fade|global
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <TrialCard
+                                        trial={shownTrials[getKey(index)].trial}
+                                    />
+                                </div>
+                            {/if}
+                        {/key}
+                    {/if}
+                </div>
             {/each}
         </div>
 
-        <div class="mx-auto mt-4 pt-6 border-t border-gray-200">
-            <button
-                type="button"
-                onclick={abort}
-                class="py-4 px-6 bg-red-500 hover:bg-red-600 text-white
-                           rounded-xl font-medium transition-colors
-                           shadow-sm hover:shadow-md"
+        <!-- フッター領域：入力ボタンとタスク中断ボタン -->
+        <div class="space-y-4 mt-4">
+            <!-- 入力ボタン部分 -->
+            <div
+                class={`grid gap-4 mx-auto justify-items-center ${
+                    stimulusTypes.length <= 2
+                        ? `grid-cols-${stimulusTypes.length}`
+                        : stimulusTypes.length <= 4
+                          ? "grid-cols-2"
+                          : "grid-cols-3"
+                }`}
             >
-                タスクを中断
-            </button>
+                {#each stimulusTypes as type}
+                    <button
+                        type="button"
+                        onclick={() => toggleInput(type)}
+                        class="w-full p-6 rounded-xl border-2 sm:text-xl font-medium transition-all flex items-center justify-center
+                hover:scale-[1.02] active:scale-95
+                {inputs[type] === 'selected'
+                            ? 'border-green-500 bg-green-100'
+                            : ''}
+                {inputs[type] === 'correct'
+                            ? 'border-blue-500 bg-blue-100'
+                            : ''}
+                {inputs[type] === 'incorrect'
+                            ? 'border-red-500 bg-red-100'
+                            : ''}
+                {inputs[type] === 'none' ? 'border-gray-200' : ''}"
+                    >
+                        {type}
+                    </button>
+                {/each}
+            </div>
+
+            <!-- タスク中断ボタン -->
+            <div
+                class="flex justify-center mx-auto pt-6 border-t border-gray-200"
+            >
+                <button
+                    type="button"
+                    onclick={abort}
+                    class="py-4 px-6 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors shadow-sm hover:shadow-md"
+                >
+                    タスクを中断
+                </button>
+            </div>
         </div>
     </div>
-</main>
+</div>

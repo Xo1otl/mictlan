@@ -62,7 +62,7 @@
                 id={shareButtonKey}
                 href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                 class="twitter-share-button"
-                data-text={`私のNBackタスクの結果は: ${totalCorrect}/${totalCount} (正答率: ${overallAccuracy}%) | タイプ別スコア: ${config.trialFactoryOptions.stimulusTypes?.map((type) => `${type}:${cohensKappa[type].toFixed(3)}`).join(" | ")} でした。\n君も挑戦して、一緒にハイスコアを目指しましょう！！`}
+                data-text={`私の${config.taskEngineOptions.n} Backタスクの結果は: ${totalCorrect}/${totalCount} (正答率: ${overallAccuracy}%) | タイプ別スコア: ${config.trialFactoryOptions.stimulusTypes?.map((type) => `${type}:${cohensKappa[type].toFixed(3)}`).join(" | ")} でした。\n君も挑戦して、一緒にハイスコアを目指しましょう！！`}
                 data-hashtags="nback"
                 data-show-count="false">Tweet</a
             >

@@ -192,6 +192,7 @@
 </script>
 
 <main class="p-4 text-column">
+    <h1>Chrome/Edge</h1>
     <div class="flex flex-col items-center space-y-4">
         <button
             onclick={() => {
