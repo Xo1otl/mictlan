@@ -47,9 +47,9 @@
     $effect(() => {
         if (!twitterWidgetContainer) return;
         for (const child of Array.from(twitterWidgetContainer.children)) {
-            console.log(child.id);
             if (child.id === shareButtonKey) continue;
             twitterWidgetContainer.removeChild(child);
+            // ここで何も削除されない場合、コンテンツブロッカーによってツイートボタンが表示されていない可能性がある
         }
         window.twttr.widgets.load(twitterWidgetContainer);
     });
