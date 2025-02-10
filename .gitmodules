@@ -3,4 +3,4 @@
 	url = git@github.com:Xo1otl/koemade.git
 [submodule "apps/firecrawl"]
 	path = apps/firecrawl
-	url = https://github.com/mendableai/firecrawl.git
+	url = git@github.com:Xo1otl/firecrawl.git
