@@ -7,6 +7,7 @@
     import GameModal, { type TaskResult } from "./GameModal.svelte";
     import ResultDisplay from "./ResultDisplay.svelte";
 
+    const completeProblemCount = 30;
     let showConfigModal = $state(false);
     let showGameModal = $state(false);
 
@@ -14,7 +15,7 @@
         trialFactoryOptions: nback.DefaultTrialFactoryOptions,
         taskEngineOptions: {
             n: 2,
-            problemCount: 20,
+            problemCount: completeProblemCount,
             interval: 4000,
         },
         answerDisplayTime: 600,
@@ -150,7 +151,7 @@
         showGameModal = false;
         taskResult = result;
 
-        if (result.trialResults.length < 20) {
+        if (result.trialResults.length < completeProblemCount) {
             return;
         }
 
