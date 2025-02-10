@@ -29,7 +29,7 @@
     import M from "$lib/sounds/M.mp3";
     import O from "$lib/sounds/O.mp3";
 
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
     import { blur, fade, fly, scale } from "svelte/transition";
     import * as nback from "../../nback/index";
     import { spin } from "../../transition/transition";
@@ -129,31 +129,41 @@
         inputs[type] = inputs[type] === "selected" ? "none" : "selected";
     };
 
+    // 最初にロードしないとsafaridで音が鳴らない
+    const audioA = new Audio(A);
+    const audioB = new Audio(B);
+    const audioC = new Audio(C);
+    const audioH = new Audio(H);
+    const audioK = new Audio(K);
+    const audioL = new Audio(L);
+    const audioM = new Audio(M);
+    const audioO = new Audio(O);
+
     const playSound = (sound: nback.Sound) => {
         switch (sound) {
             case nback.Sound.A:
-                new Audio(A).play();
+                audioA.play();
                 break;
             case nback.Sound.B:
-                new Audio(B).play();
+                audioB.play();
                 break;
             case nback.Sound.C:
-                new Audio(C).play();
+                audioC.play();
                 break;
             case nback.Sound.H:
-                new Audio(H).play();
+                audioH.play();
                 break;
             case nback.Sound.K:
-                new Audio(K).play();
+                audioK.play();
                 break;
             case nback.Sound.L:
-                new Audio(L).play();
+                audioL.play();
                 break;
             case nback.Sound.M:
-                new Audio(M).play();
+                audioM.play();
                 break;
             case nback.Sound.O:
-                new Audio(O).play();
+                audioO.play();
                 break;
         }
     };
