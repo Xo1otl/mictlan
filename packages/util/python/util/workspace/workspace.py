@@ -86,3 +86,9 @@ def relpath(base: str, target: str) -> str:
     relative_path = os.path.relpath(target_abs_path, start_dir)
 
     return relative_path
+
+
+def read(path: str) -> str:
+    file_path = os.path.join(root_dir, path)
+    with open(file_path, 'r') as f:
+        return f.read()
