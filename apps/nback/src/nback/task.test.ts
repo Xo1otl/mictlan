@@ -21,7 +21,7 @@ describe("TaskEngine Tests", () => {
 	});
 
 	// Dummy readTrialInput that always returns a fixed input
-	const readTrialInput = (): MatchResult[] => {
+	const provideInput = (): MatchResult[] => {
 		return [
 			{ stimulusType: StimulusType.Color, match: true },
 			{ stimulusType: StimulusType.Shape, match: false },
@@ -32,17 +32,18 @@ describe("TaskEngine Tests", () => {
 	// Test 1: Verify that the engine generates the correct number of trials
 	test("generates expected number of trials", async () => {
 		const n = 2;
-		const problemCount = 10; // Total iterations should be n + problemCount = 5
+		const problemCount = 100; // Total iterations should be n + problemCount = 5
 		const interval = 10; // in milliseconds
 
 		// Array to capture generated trials via onGenerateTrial callback
 		const generatedTrials: Trial[] = [];
+		const trialResults: TrialResult[] = [];
 
 		// onGenerateTrial callback: push the generated trial into generatedTrials
 		const onUpdate = (newTrial?: Trial, trialResult?: TrialResult): void => {
 			newTrial ? generatedTrials.push(newTrial) : null;
 			if (trialResult) {
-				console.debug("trialResult", trialResult);
+				trialResults.push(trialResult);
 			}
 		};
 
@@ -50,11 +51,24 @@ describe("TaskEngine Tests", () => {
 		const engine = newTaskEngine({ n, problemCount, interval, trialFactory });
 
 		// Start the engine
-		engine.start(readTrialInput, onUpdate);
+		engine.start(provideInput, onUpdate);
 
 		// Wait enough time for all trials to be generated.
 		// Total iterations = n + problemCount = 5, so wait a bit longer than 5*interval.
-		await new Promise((resolve) => setTimeout(resolve, interval * 15));
+		await new Promise((resolve) => setTimeout(resolve, interval * 150));
+
+		let count = 0;
+		let matchCount = 0;
+		for (const trialResult of trialResults) {
+			count++;
+			for (const match of trialResult.matchResults) {
+				if (match.stimulusType === StimulusType.Position && match.match) {
+					matchCount++;
+				}
+			}
+		}
+
+		console.log("count", count, "matchCount", matchCount);
 
 		// The engine should have generated exactly 5 trials.
 		expect(generatedTrials.length).toBe(n + problemCount);
@@ -81,7 +95,7 @@ describe("TaskEngine Tests", () => {
 
 		const engine = newTaskEngine({ n, problemCount, interval, trialFactory });
 
-		const reset = engine.start(readTrialInput, onUpdate);
+		const reset = engine.start(provideInput, onUpdate);
 
 		// Wait for a short duration (e.g. 5 intervals)
 		await new Promise((resolve) => setTimeout(resolve, interval * 5));

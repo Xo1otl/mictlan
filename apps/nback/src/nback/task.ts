@@ -6,7 +6,7 @@ export interface TaskEngine {
 }
 
 export interface TrialFactory {
-	random(): Trial;
+	random(trialRef?: Trial): Trial;
 }
 
 export interface Trial {
@@ -114,6 +114,7 @@ export type TrialFactoryOptions = {
 	sounds?: Sound[];
 	animations?: Animation[];
 	gridSize?: [number, number];
+	minChance?: number;
 };
 
 export const DefaultTrialFactoryOptions: TrialFactoryOptions & {
@@ -191,9 +192,11 @@ export const newTaskEngine = ({
 
 			const loopTrial = () => {
 				let trialResult: TrialResult | undefined = undefined;
+				let trialRef: Trial | undefined;
 
 				if (state.queue.length === n + 1) {
 					const previousTrial = state.queue.shift();
+					trialRef = state.queue[0];
 					if (previousTrial === undefined) {
 						throw new Error("previousTrial is undefined");
 					}
@@ -264,7 +267,7 @@ export const newTaskEngine = ({
 				}
 
 				let trial: Trial;
-				trial = trialFactory.random();
+				trial = trialFactory.random(trialRef);
 				state.queue.push(trial);
 				onUpdate?.(trial, trialResult);
 			};
@@ -298,34 +301,95 @@ export const newTrialFactory = ({
 	sounds = Object.values(Sound),
 	animations = Object.values(Animation),
 	gridSize = DefaultTrialFactoryOptions.gridSize,
+	minChance = 0.5,
 }: TrialFactoryOptions): TrialFactory => {
-	const random = (): Trial => {
+	const random = (trialRef?: Trial): Trial => {
 		const stimuli: TrialStimuli = {};
 		for (const type of stimulusTypes) {
 			switch (type) {
-				case StimulusType.Position:
-					stimuli.position = [
-						Math.floor(Math.random() * gridSize[0]),
-						Math.floor(Math.random() * gridSize[1]),
-					];
+				case StimulusType.Position: {
+					const baseChance = 1 / (gridSize[0] * gridSize[1]);
+					const mustChance =
+						baseChance < minChance
+							? (minChance - baseChance) / (1 - baseChance)
+							: 0;
+					if (trialRef && Math.random() < mustChance) {
+						stimuli.position = trialRef.stimuli().position;
+					} else {
+						stimuli.position = [
+							Math.floor(Math.random() * gridSize[0]),
+							Math.floor(Math.random() * gridSize[1]),
+						];
+					}
 					break;
-				case StimulusType.Color:
-					stimuli.color = colors[Math.floor(Math.random() * colors.length)];
+				}
+				case StimulusType.Color: {
+					const baseChance = 1 / colors.length;
+					const mustChance =
+						baseChance < minChance
+							? (minChance - baseChance) / (1 - baseChance)
+							: 0;
+					if (trialRef && Math.random() < mustChance) {
+						stimuli.color = trialRef.stimuli().color;
+					} else {
+						stimuli.color = colors[Math.floor(Math.random() * colors.length)];
+					}
 					break;
-				case StimulusType.Character:
-					stimuli.character =
-						characters[Math.floor(Math.random() * characters.length)];
+				}
+				case StimulusType.Character: {
+					const baseChance = 1 / characters.length;
+					const mustChance =
+						baseChance < minChance
+							? (minChance - baseChance) / (1 - baseChance)
+							: 0;
+					if (trialRef && Math.random() < mustChance) {
+						stimuli.character = trialRef.stimuli().character;
+					} else {
+						stimuli.character =
+							characters[Math.floor(Math.random() * characters.length)];
+					}
 					break;
-				case StimulusType.Shape:
-					stimuli.shape = shapes[Math.floor(Math.random() * shapes.length)];
+				}
+				case StimulusType.Shape: {
+					const baseChance = 1 / shapes.length;
+					const mustChance =
+						baseChance < minChance
+							? (minChance - baseChance) / (1 - baseChance)
+							: 0;
+					if (trialRef && Math.random() < mustChance) {
+						stimuli.shape = trialRef.stimuli().shape;
+					} else {
+						stimuli.shape = shapes[Math.floor(Math.random() * shapes.length)];
+					}
 					break;
-				case StimulusType.Sound:
-					stimuli.sound = sounds[Math.floor(Math.random() * sounds.length)];
+				}
+				case StimulusType.Sound: {
+					const baseChance = 1 / sounds.length;
+					const mustChance =
+						baseChance < minChance
+							? (minChance - baseChance) / (1 - baseChance)
+							: 0;
+					if (trialRef && Math.random() < mustChance) {
+						stimuli.sound = trialRef.stimuli().sound;
+					} else {
+						stimuli.sound = sounds[Math.floor(Math.random() * sounds.length)];
+					}
 					break;
-				case StimulusType.Animation:
-					stimuli.animation =
-						animations[Math.floor(Math.random() * animations.length)];
+				}
+				case StimulusType.Animation: {
+					const baseChance = 1 / animations.length;
+					const mustChance =
+						baseChance < minChance
+							? (minChance - baseChance) / (1 - baseChance)
+							: 0;
+					if (trialRef && Math.random() < mustChance) {
+						stimuli.animation = trialRef.stimuli().animation;
+					} else {
+						stimuli.animation =
+							animations[Math.floor(Math.random() * animations.length)];
+					}
 					break;
+				}
 				default:
 					throw new Error(`Unsupported stimulus type: ${type}`);
 			}
