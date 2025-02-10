@@ -51,7 +51,7 @@
             twitterWidgetContainer.removeChild(child);
             // ここで何も削除されない場合、コンテンツブロッカーによってツイートボタンが表示されていない可能性がある
         }
-        window.twttr.widgets.load(twitterWidgetContainer);
+        window.twttr?.widgets.load(twitterWidgetContainer);
     });
 </script>
 
