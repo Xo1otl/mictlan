@@ -10,6 +10,7 @@ compose = {
     'services': {
         'imagegen': {
             'build': '.',
+            'restart': 'unless-stopped',
             'ports': [
                 f'{COMFYUI_PORT}:{COMFYUI_PORT}',
                 f'{FLUXGYM_PORT}:{FLUXGYM_PORT}'

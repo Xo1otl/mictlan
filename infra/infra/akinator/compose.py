@@ -25,7 +25,7 @@ compose = {
                 f'MYSQL_PASSWORD={akinator.MYSQL_PASSWORD}',
                 f'MYSQL_DB={akinator.MYSQL_DB}',
             ],
-            'restart': 'always',
+            'restart': 'unless-stopped',
             'command': [
                 '/bin/bash',
                 '-c',

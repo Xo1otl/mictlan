@@ -31,6 +31,7 @@ compose = {
             'container_name': 'anythingllm',
             'ports': [f'{ANYTHINGLLM_PORT}:3001'],
             'cap_add': ['SYS_ADMIN'],
+            'restart': 'unless-stopped',
             'environment': [
                 f'STORAGE_DIR={STORAGE_DIR}',
                 f'JWT_SECRET={JWT_SECRET}',
