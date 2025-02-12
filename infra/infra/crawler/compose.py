@@ -1,17 +1,19 @@
 import yaml
-from util import workspace
 from infra.db import kvs
 from . import *
+from workspace import util, path
 
-yaml_data = workspace.read("apps/firecrawl/docker-compose.yaml")
+
+files = util.readfiles("apps/firecrawl/docker-compose.yaml")
+yaml_data = files[path.Path("apps/firecrawl/docker-compose.yaml")]
 compose_data = yaml.safe_load(yaml_data)
 
 crawler_service = compose_data["services"]["api"]
 worker = compose_data["services"]["worker"]
 
 for item in [crawler_service, worker]:
-    item["build"] = workspace.relpath(
-        __file__, "apps/firecrawl/" + item["build"])
+    item["build"] = str(path.Path("apps/firecralw/" + item["build"]
+                                  ).rel2(path.Path(__file__).dir()))
     item.pop("networks")
     item.pop("extra_hosts")
     item.pop("environment")
@@ -28,6 +30,6 @@ worker["depends_on"] = ["crawler-api", "playwright-service", "redis"]
 playwright_service = compose_data["services"]["playwright-service"]
 playwright_service.pop("environment")
 playwright_service.pop("networks")
-playwright_service["build"] = workspace.relpath(
-    __file__, "apps/firecrawl/apps/playwright-service-ts")
+playwright_service["build"] = str(path.Path(
+    "apps/firecrawl/apps/playwright-service-ts").rel2(path.Path(__file__).dir()))
 playwright_service["environment"] = {"PORT": PLAYWRIGHT_SERVICE_PORT}

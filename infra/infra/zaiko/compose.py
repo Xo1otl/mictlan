@@ -1,9 +1,9 @@
-from util import workspace
 from infra import broker
 from infra.db import documentdb
 from . import *
+from workspace import path
 
-package_dir = workspace.relpath(__file__, 'apps/zaiko')
+package_dir = str(path.Path("apps/zaiko").rel2(path.Path(__file__).dir()))
 
 compose = {
     'services': {
@@ -16,7 +16,7 @@ compose = {
             'depends_on': [broker.CONSOLE_SERVICE_NAME, documentdb.SERVICE_NAME],
             'entrypoint': '/entrypoint.sh',
             'ports': [
-                "1234:80"
+                "1235:80"
             ]
         }
     }

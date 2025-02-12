@@ -1,0 +1,3 @@
+# workspace
+
+workspace内で使用するpath情報は基本的にworkspace内部での位置

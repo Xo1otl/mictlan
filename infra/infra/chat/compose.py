@@ -1,14 +1,14 @@
 from infra.ai import llm
-from util import workspace
+from workspace import path
 
 pipelines = {
     'image': 'ghcr.io/open-webui/pipelines:main',
     'container_name': 'pipelines',
     'ports': ['9099:9099'],
     'volumes': [
-        f'{workspace.relpath(__file__, "apps/chathub")}:/app/chathub',
-        f'{workspace.relpath(__file__, "apps/chathub/repositories")}:/app/repositories',
-        f'{workspace.relpath(__file__, "apps/chathub/chathub/pipelines")}:/app/pipelines',
+        f'{path.Path("apps/chathub").rel2(path.Path(__file__).dir())}:/app/chathub',
+        f'{path.Path("apps/chathub/repositories").rel2(path.Path(__file__).dir())}:/app/repositories',
+        f'{path.Path("apps/chathub/chathub/pipelines").rel2(path.Path(__file__).dir())}:/app/pipelines',
     ],
 }
 
@@ -18,7 +18,7 @@ compose = {
         'chat': {
             'image': 'ghcr.io/open-webui/open-webui:main',
             'container_name': 'open-webui',
-            'ports': ['3000:8080'],
+            'ports': ['3080:8080'],
             'environment': [
                 f'OLLAMA_BASE_URL={llm.OLLAMA_URL}'
             ],

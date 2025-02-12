@@ -1,5 +1,5 @@
-from util import workspace
 from infra import akinator
+from workspace import path
 
 entrypoint = """
 #!/bin/bash
@@ -18,7 +18,7 @@ compose = {
             'ports': ['8501:8501'],
             'depends_on': ['mysql', 'redis'],
             'volumes': [
-                f'{workspace.relpath(__file__, "apps/akinator")}:/app/akinator',
+                f'{path.Path("apps/akinator").rel2(path.Path(__file__).dir())}:/app/akinator',
             ],
             'environment': [
                 f'MYSQL_USER={akinator.MYSQL_USER}',

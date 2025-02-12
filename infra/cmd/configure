@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+
+from workspace import infra
+from workspace import path
+from workspace import util
+from infra import vpn
+from infra.db import searchengine
+from infra.db import rdb
+from infra import proxy
+from infra import observability
+from infra import broker
+from infra import mail
+from infra import ossekai
+from infra.db import documentdb
+from infra import zaiko
+from infra import asyncsns
+from infra.ai import llm
+from infra.ai import imagegen
+from infra import chat
+from infra.db import multimodaldb
+from infra.db import kvs
+from infra import knowledgebase
+from infra import akinator
+from infra import fediverse
+from infra import idp
+from infra.idp import oidc
+from infra import ldap
+from infra import crawler
+
+util.runfiles("infra/infra/**/*.tpl.py")
+
+
+class ComposeChecker:
+    def __init__(self):
+        self.used_ports = {}
+
+    def port_conflict(self, compose_entry: infra.ComposeEntry) -> infra.ComposeEntry:
+        content = compose_entry['content']
+        services = content.get("services", {})
+        conflicts = {}
+
+        for service_name, service_def in services.items():
+            for mapping in service_def.get("ports", []):
+                parts = mapping.split(":")
+                if len(parts) == 2:
+                    host_port = parts[0]
+                elif len(parts) == 3:
+                    host_port = parts[1]
+                else:
+                    print(
+                        f"Warning: Unrecognized port mapping '{mapping}' in service '{service_name}'")
+                    continue
+
+                if host_port in self.used_ports:
+                    self.used_ports[host_port].append(service_name)
+                    conflicts[host_port] = self.used_ports[host_port]
+                else:
+                    self.used_ports[host_port] = [service_name]
+
+        if conflicts:
+            print("Port conflicts detected:")
+            for port, services in conflicts.items():
+                print(f"  Host port {port} is used by: {', '.join(services)}")
+            raise ValueError("Port conflicts detected.")
+        else:
+            print("No port conflicts detected.")
+
+        return compose_entry
+
+
+checker = ComposeChecker()
+
+modules = [
+    vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap, oidc, crawler
+]
+
+ecosystem = infra.DockerEcosystem(path.Path("infra/infra/ecosystem"))
+ecosystem.use(infra.logging_middleware)
+ecosystem.use(checker.port_conflict)
+
+for module in modules:
+    ecosystem.register(module.compose)
+
+ecosystem.configure()

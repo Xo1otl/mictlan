@@ -1,1 +1,0 @@
-./secretm/cmd/secretm.sh

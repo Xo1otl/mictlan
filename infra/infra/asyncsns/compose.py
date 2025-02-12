@@ -8,7 +8,7 @@ compose = {
             'ports': [
                 '4566:4566',
                 '4510-4559:4510-4559',
-                '443:443',
+                '444:443',
             ],
             'environment': [
                 f'LOCALSTACK_AUTH_TOKEN={LOCALSTACK_AUTH_TOKEN}',

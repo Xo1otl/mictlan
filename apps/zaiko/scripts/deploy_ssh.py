@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import os
-from util import workspace
+from workspace import config
 
 # プロジェクトルートを見つける
-root = workspace.findroot()
+root = config.WORKSPACE_ROOT
 
 # ローカルの変数
 targets = ['apps/zaiko/', 'infra']  # 配列でファイルやフォルダを指定

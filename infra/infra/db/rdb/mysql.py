@@ -1,5 +1,5 @@
 import os
-from util import workspace
+from workspace import util, path
 from . import *
 
 # Variable to store the volume mappings for MySQL initialization scripts
@@ -7,8 +7,10 @@ mysql_init_script_volumes = [
     'mysql_data:/var/lib/mysql'
 ]
 
+paths = util.globpaths('infra/infra/*/[0-9]*-*.mysql.sql')
+paths = [p.rel2(path.Path(__file__).dir()) for p in paths]
 # Find all .mysql.sql files in folders under build
-for filepath in workspace.globrelpaths(__file__, 'infra/infra/*/[0-9]*-*.mysql.sql'):
+for filepath in paths:
     folder_name = os.path.basename(os.path.dirname(filepath))
     filename = os.path.basename(filepath)
     # Split the filename to insert folder name

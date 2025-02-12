@@ -1,11 +1,12 @@
 from infra import vpn
 from infra import mail
-from util import workspace
 from . import *
 import os
+from workspace import util, path
 
 # conf_filesにすべてのnginx.confファイルの相対パスを取得
-conf_files = workspace.globrelpaths(__file__, 'infra/infra/**/nginx.conf')
+paths = util.globpaths('infra/infra/**/nginx.conf')
+conf_files = [p.rel2(path.Path(__file__).dir()) for p in paths]
 
 # volumesを初期化し、entrypoint.shを追加
 volumes = [

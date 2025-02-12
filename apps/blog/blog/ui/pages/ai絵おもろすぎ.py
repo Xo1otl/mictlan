@@ -1,6 +1,5 @@
 import streamlit as st
-from util import workspace
-import os
+from workspace import path
 
 """
 ### AI絵おもろすぎ
@@ -11,8 +10,8 @@ import os
 
 """
 
-st.image(workspace.relpath(
-    os.path.join(__file__, "../"), "apps/akinator/akinator/ui/assets/akinator.png"), width=400)
+st.image(path.Path("apps/akinator/akinator/ui/assets/akinator.png")
+         .rel2(path.Path("apps/blog/blog/ui/main.py").dir()), width=400)
 
 """
 👇promptはこれ
