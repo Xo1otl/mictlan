@@ -14,6 +14,9 @@ for item in [crawler_service, worker]:
         __file__, "apps/firecrawl/" + item["build"])
     item.pop("networks")
     item.pop("extra_hosts")
+    item.pop("environment")
+    item["environment"] = {}
+    item["environment"]["HOST"] = "0.0.0.0"
     item["environment"]["REDIS_URL"] = kvs.REDIS_URL
     item["environment"]["REDIS_RATE_LIMIT_URL"] = kvs.REDIS_URL
     item["environment"]["USE_DB_AUTHENTICATION"] = False
