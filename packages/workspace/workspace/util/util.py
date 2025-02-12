@@ -18,6 +18,20 @@ def globpaths(pattern: str) -> List[path.Path]:
     return [path.Path(match) for match in matches if os.path.isfile(match)]
 
 
+def globrelpaths(base: path.Path, pattern: str) -> List[path.Path]:
+    """
+    Returns a list of Path objects matching the given glob pattern.
+    The pattern is interpreted relative to WORKSPACE_ROOT.
+    """
+    # Build the absolute pattern by joining the workspace root and the provided pattern.
+    abs_pattern = os.path.join(config.WORKSPACE_ROOT, pattern)
+    # Use glob to find matching files. recursive=True allows patterns like '**/*.py'
+    matches = glob.glob(abs_pattern, recursive=True)
+    paths = [path.Path(match) for match in matches if os.path.isfile(match)]
+    # Filter the matches to include only files.
+    return [p.rel2(base) for p in paths]
+
+
 def runfiles(pattern: str) -> None:
     """
     Executes all files matching the given glob pattern.
