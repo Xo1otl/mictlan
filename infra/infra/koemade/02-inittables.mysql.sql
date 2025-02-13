@@ -7,11 +7,27 @@ SET CHARACTER SET utf8mb4;
 
 CREATE TABLE IF NOT EXISTS accounts (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(255) NOT NULL UNIQUE, -- 一意なアカウント識別子
+    email VARCHAR(255) NOT NULL UNIQUE, -- 連絡手段
     password VARCHAR(255) NOT NULL,
     status ENUM('active', 'banned', 'suspended') NOT NULL DEFAULT 'active',
     INDEX idx_username (username)
 );
+
+CREATE TABLE IF NOT EXISTS account_reset_tokens (
+    account_id BIGINT NOT NULL,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (token),
+    FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE,
+    INDEX idx_expires_at (expires_at)
+);
+
+CREATE EVENT IF NOT EXISTS delete_expired_tokens
+ON SCHEDULE EVERY 1 HOUR
+DO
+    DELETE FROM account_reset_tokens WHERE expires_at < NOW();
 
 CREATE TABLE IF NOT EXISTS roles (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
