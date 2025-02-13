@@ -88,3 +88,10 @@ def readfiles(pattern: str) -> Dict[path.Path, str]:
         except Exception as e:
             print(f"Error reading {f}: {e}")
     return contents
+
+
+def path_representer(dumper, data):
+    '''
+    yaml.representer.Representer subclass that represents Path objects as strings.
+    '''
+    return dumper.represent_scalar('tag:yaml.org,2002:str', str(data))

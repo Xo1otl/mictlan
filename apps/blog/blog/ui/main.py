@@ -1,7 +1,5 @@
 import streamlit as st
 import os
-from streamlit.navigation.page import StreamlitPage
-from util import localfile
 
 st.set_page_config(layout="wide")
 
@@ -9,7 +7,7 @@ st.set_page_config(layout="wide")
 pages = {}
 
 
-def add_page(root, _, files):
+def add_page(root, files):
     section = os.path.basename(root)
     for file in files:
         if not file.endswith(".py"):
@@ -26,7 +24,8 @@ def add_page(root, _, files):
         pages[section].append(page)
 
 
-localfile.walkdir("pages", add_page)
+for root, dirs, files in os.walk("pages"):
+    add_page(root, files)
 
 
 pg = st.navigation(pages)

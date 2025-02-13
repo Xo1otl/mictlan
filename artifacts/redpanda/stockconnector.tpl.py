@@ -1,7 +1,7 @@
 import yaml
 import os
 from infra import broker
-from infra import rdb
+from infra.db import rdb
 
 DB_NAME = "zaiko"
 DB_USER = "zaiko_user"
@@ -55,7 +55,7 @@ sales_stocks_sql = {
     "label": "sales_stocks_sql",
     "sql_raw": {
         "driver": "mysql",
-        "dsn": f"{DB_USER}:{DB_PASSWORD}@tcp({rdb.ADDR})/{DB_NAME}?allowMultiQueries=true",
+        "dsn": f"{DB_USER}:{DB_PASSWORD}@tcp({rdb.MYSQL_ADDR})/{DB_NAME}?allowMultiQueries=true",
         "query": query,
         "unsafe_dynamic_query": True,
         "args_mapping": "root = this.Args",
