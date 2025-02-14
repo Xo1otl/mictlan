@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 qiskit = "^1.2.4"
-qiskit-ibm-runtime = "^0.34.0"
+qiskit-ibm-runtime = "^0.35.0"
 pylatexenc = "^2.10"
 qiskit-aer = "^0.16.0"
 
