@@ -1,6 +1,6 @@
 FROM apache/answer:latest as answer-builder
 
-FROM golang:1.23-alpine AS golang-builder
+FROM golang:1.24-alpine AS golang-builder
 
 COPY --from=answer-builder /usr/bin/answer /usr/bin/answer
 
