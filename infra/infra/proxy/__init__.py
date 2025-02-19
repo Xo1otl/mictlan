@@ -9,6 +9,6 @@ def compose():
     return {
         'services': {
             'nginx': nginx_service,
-            'cloudflare': cloudflare_service
+            'cloudflared': cloudflare_service
         }
     }

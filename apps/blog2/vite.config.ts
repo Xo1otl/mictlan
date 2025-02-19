@@ -20,4 +20,7 @@ export default defineConfig({
 			remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkMath],
 		}),
 	],
+	server: {
+		host: "0.0.0.0",
+	},
 });
