@@ -4,3 +4,6 @@
 [submodule "apps/firecrawl"]
 	path = apps/firecrawl
 	url = git@github.com:Xo1otl/firecrawl.git
+[submodule "apps/graphnote"]
+	path = apps/graphnote
+	url = git@github.com:Xo1otl/graphnote.git
