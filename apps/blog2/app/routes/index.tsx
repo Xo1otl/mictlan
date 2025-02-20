@@ -10,6 +10,7 @@ export default createRoute((c) => {
 	return c.render(
 		<div class={className}>
 			<h1>Hello, {name}!</h1>
+			{/* <Counter /> */}
 		</div>,
 		{ title: name },
 	);
