@@ -1,4 +1,4 @@
-import { type FC, useState, type Child } from "hono/jsx";
+import { useState, type Child, type FC } from "hono/jsx";
 import { ThemeContext, themes, useTheme } from "../hooks/theme";
 
 type LayoutProps = {
@@ -16,7 +16,6 @@ export const Layout: FC<LayoutProps> = ({
 }) => {
 	const [drawerOpen, setDrawerOpen] = useState(true);
 	const [drawerModalOpen, setDrawerModalOpen] = useState(false);
-
 	return (
 		<div class="prose lg:prose-xl max-w-none relative min-h-screen flex ">
 			<ThemeContext.Provider value={themes.default}>

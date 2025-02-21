@@ -1,7 +1,6 @@
-import math
 import numpy as np
 from scipy.integrate import solve_ivp
-from typing import Callable, List
+from typing import Callable
 
 
 class NCME:

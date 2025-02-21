@@ -6,6 +6,9 @@ class Device(Protocol):
     def phase_mismatch(self, wavelength: float) -> Callable[[float], float]:
         ...
 
+    def kappa(self, z: float) -> complex:
+        ...
+
 
 class PPMgOSLT(Device):
     params = {
@@ -19,7 +22,7 @@ class PPMgOSLT(Device):
         },
     }["ne"]
 
-    def __init__(self, T=24.5):
+    def __init__(self, z_vals: list[float], T=24.5):
         self.T = T
         self.f = (T - 24.5) * (T + 24.5 + 2 * 273.16)
 
@@ -46,6 +49,4 @@ class PPMgOSLT(Device):
         beta_omega = 2 * math.pi * N_omega / wavelength
         beta_2omega = 2 * math.pi * N_2omega / (wavelength / 2)
 
-        # K = 2 * math.pi / 7.2
-        # return lambda z: (beta_2omega - (2 * beta_omega + K)) * z
         return lambda z: (beta_2omega - 2 * beta_omega) * z

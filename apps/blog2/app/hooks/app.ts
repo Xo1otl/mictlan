@@ -1,5 +1,6 @@
 import { createContext, useContext } from "hono/jsx";
 
+
 type AppContextType = {
 	currentPage: string;
 };
