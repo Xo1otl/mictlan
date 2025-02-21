@@ -1,11 +1,11 @@
-import { useState, type Child, type FC } from "hono/jsx";
+import { useState, type FC, type ReactNode } from "react";
 import { ThemeContext, themes, useTheme } from "../hooks/theme";
 
 type LayoutProps = {
-	drawerHeadline: Child;
-	drawerContent: Child;
-	topAppBar: Child;
-	appContent: Child;
+	drawerHeadline: ReactNode;
+	drawerContent: ReactNode;
+	topAppBar: ReactNode;
+	appContent: ReactNode;
 };
 
 export const Layout: FC<LayoutProps> = ({
@@ -17,7 +17,7 @@ export const Layout: FC<LayoutProps> = ({
 	const [drawerOpen, setDrawerOpen] = useState(true);
 	const [drawerModalOpen, setDrawerModalOpen] = useState(false);
 	return (
-		<div class="prose lg:prose-xl max-w-none relative min-h-screen flex ">
+		<div className="prose lg:prose-xl max-w-none relative min-h-screen flex">
 			<ThemeContext.Provider value={themes.default}>
 				{/* md以上の場合、drawerOpenがtrueのときだけ Drawer をレンダリング */}
 				{drawerOpen && (
@@ -52,27 +52,27 @@ export const Layout: FC<LayoutProps> = ({
 
 type DrawerProps = {
 	onClose: () => void;
-	headline: Child;
-	content: Child;
+	headline: ReactNode;
+	content: ReactNode;
 };
 
 const Drawer: FC<DrawerProps> = ({ onClose, headline, content }) => {
 	const theme = useTheme();
 	return (
-		<div class={`hidden md:flex flex-col ${theme.drawerBgClass} w-64`}>
-			<div class="h-12 flex items-center p-2">
+		<div className={`hidden md:flex flex-col ${theme.drawerBgClass} w-64`}>
+			<div className="h-12 flex items-center p-2">
 				<HambergurButton onClick={onClose} />
-				<div class="ml-2 flex items-center h-full">{headline}</div>
+				<div className="ml-2 flex items-center h-full">{headline}</div>
 			</div>
-			<div class="flex-1 overflow-y-auto p-2">{content}</div>
+			<div className="flex-1 overflow-y-auto p-2">{content}</div>
 		</div>
 	);
 };
 
 type ModalDrawerProps = {
 	onClose: () => void;
-	headline: Child;
-	content: Child;
+	headline: ReactNode;
+	content: ReactNode;
 };
 
 const ModalDrawer: FC<ModalDrawerProps> = ({ onClose, headline, content }) => {
@@ -80,16 +80,16 @@ const ModalDrawer: FC<ModalDrawerProps> = ({ onClose, headline, content }) => {
 	return (
 		<>
 			<div
-				class={`fixed inset-y-0 left-0 z-50 w-64 ${theme.drawerBgClass} md:hidden`}
+				className={`fixed inset-y-0 left-0 z-50 w-64 ${theme.drawerBgClass} md:hidden`}
 			>
-				<div class="h-12 flex items-center p-2">
+				<div className="h-12 flex items-center p-2">
 					<HambergurButton onClick={onClose} />
-					<div class="ml-2 flex items-center h-full">{headline}</div>
+					<div className="ml-2 flex items-center h-full">{headline}</div>
 				</div>
-				<div class="flex-1 overflow-y-auto p-2">{content}</div>
+				<div className="flex-1 overflow-y-auto p-2">{content}</div>
 			</div>
 			<div
-				class="fixed inset-0 z-40 bg-black/50 md:hidden"
+				className="fixed inset-0 z-40 bg-black/50 md:hidden"
 				onClick={onClose}
 				onKeyUp={(e) => {
 					if (e.key === "Enter" || e.key === " ") {
@@ -102,8 +102,8 @@ const ModalDrawer: FC<ModalDrawerProps> = ({ onClose, headline, content }) => {
 };
 
 type AppProps = {
-	topBar: Child;
-	content: Child;
+	topBar: ReactNode;
+	content: ReactNode;
 	drawerOpen: boolean;
 	onDrawerOpen: () => void;
 	onModalDrawerOpen: () => void;
@@ -118,21 +118,21 @@ const App: FC<AppProps> = ({
 }) => {
 	const theme = useTheme();
 	return (
-		<div class={`flex-1 ${theme.appBgClass}`}>
-			<div class="h-12 flex items-center p-2">
+		<div className={`flex-1 ${theme.appBgClass}`}>
+			<div className="h-12 flex items-center p-2">
 				{/* md以上: Drawerが閉じている場合のみ表示 */}
 				{!drawerOpen && (
-					<div class="hidden md:inline-flex">
+					<div className="hidden md:inline-flex">
 						<HambergurButton onClick={onDrawerOpen} />
 					</div>
 				)}
 				{/* small screens: ModalDrawer を開くためのボタン */}
-				<div class="md:hidden">
+				<div className="md:hidden">
 					<HambergurButton onClick={onModalDrawerOpen} />
 				</div>
-				<div class="flex-1 flex items-center h-full ml-2">{topBar}</div>
+				<div className="flex-1 flex items-center h-full ml-2">{topBar}</div>
 			</div>
-			<div class="p-2">{content}</div>
+			<div className="p-2">{content}</div>
 		</div>
 	);
 };
@@ -144,13 +144,13 @@ type HambergurButtonProps = {
 const HambergurButton: FC<HambergurButtonProps> = ({ onClick }) => (
 	<button
 		type="button"
-		class="p-2 hover:bg-gray-300 rounded"
+		className="p-2 hover:bg-gray-300 rounded"
 		onClick={onClick}
 		aria-label="Toggle navigation drawer"
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="h-6 w-6"
+			className="h-6 w-6"
 			fill="none"
 			viewBox="0 0 24 24"
 			stroke="currentColor"
@@ -165,3 +165,16 @@ const HambergurButton: FC<HambergurButtonProps> = ({ onClick }) => (
 		</svg>
 	</button>
 );
+
+export const MyLayout: FC<{ children: ReactNode }> = ({
+	children,
+}: { children: ReactNode }) => {
+	return (
+		<Layout
+			drawerHeadline={<div>Drawer</div>}
+			drawerContent={<div>Drawer Content</div>}
+			topAppBar={<div>Top App Bar</div>}
+			appContent={children}
+		/>
+	);
+};
