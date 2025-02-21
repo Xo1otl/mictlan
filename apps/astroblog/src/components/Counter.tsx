@@ -1,18 +1,13 @@
 import type React from "react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export const Counter: React.FC = () => {
 	const [count, setCount] = useState(0);
 
 	return (
-		<button
-			type="button"
-			className={
-				"inline-block border border-black rounded bg-gray-200 px-2 py-1 text-xs font-medium uppercase leading-normal"
-			}
-			onClick={() => setCount((count) => count + 1)}
-		>
+		<Button onClick={() => setCount((count) => count + 1)}>
 			Counter {count}
-		</button>
+		</Button>
 	);
 };
