@@ -7,6 +7,7 @@ export const Demo: FC = ({ children }) => {
 			<div>{count}</div>
 			<button
 				type="button"
+				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
 				onClick={() => {
 					console.log("clicked");
 					setCount(count + 1);
@@ -14,7 +15,7 @@ export const Demo: FC = ({ children }) => {
 			>
 				Increment
 			</button>
-			{children}
+			<div className="prose lg:prose-xl max-w-none">{children}</div>
 		</>
 	);
 };

@@ -36,8 +36,7 @@ const mdx = (opts: Readonly<CompileOptions>): Plugin => {
 					    ...props.components
 					  };
 					  return _jsx(_components.math, {
-					    className: "katex-display",
-					    children: _jsxs(_components.h1, {children: "A"})
+					    children: "A"
 					  });
 					}
 					export default function MDXContent(props = {}) {
@@ -48,8 +47,7 @@ const mdx = (opts: Readonly<CompileOptions>): Plugin => {
 					      ...props
 					    })
 					  }) : _createMdxContent(props);
-					}
-										`;
+					}`;
 				}
 				if (id.includes("demo2")) {
 					console.log("===== DEMO2 =====");
