@@ -1,6 +1,6 @@
 import { type MetaFunction, Outlet } from "@remix-run/react";
-import { AppSidebar } from "~/components/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
+import { allPages } from "~/components/layout/pages";
+import { SidebarLayout } from "~/components/layout/SidebarLayout";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -11,14 +11,8 @@ export const meta: MetaFunction = () => {
 
 export default function BlogLayout() {
 	return (
-		<SidebarProvider>
-			<AppSidebar />
-			<main className="prose max-w-none w-full">
-				<SidebarTrigger />
-				<div className="container mx-auto px-4 py-2">
-					<Outlet />
-				</div>
-			</main>
-		</SidebarProvider>
+		<SidebarLayout pages={allPages}>
+			<Outlet />
+		</SidebarLayout>
 	);
 }
