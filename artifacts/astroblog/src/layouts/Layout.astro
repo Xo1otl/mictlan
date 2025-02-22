@@ -1,6 +1,6 @@
 ---
 import "@/styles/global.css";
-import { MyLayout } from './Layout.tsx';
+import { MyLayout } from './MyLayout.tsx';
 ---
 
 <!doctype html>
@@ -13,7 +13,7 @@ import { MyLayout } from './Layout.tsx';
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<MyLayout client:load>
+		<MyLayout pages={[]} client:load>
 			<slot />
 		</MyLayout>
 	</body>
