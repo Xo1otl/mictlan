@@ -16,6 +16,18 @@
     "parentId": "routes/_blog+/_layout",
     "file": "routes/_blog+/katex.mdx"
   },
+  "routes/_blog+/物理+/大学+/demo": {
+    "path": "物理/大学/demo",
+    "id": "routes/_blog+/物理+/大学+/demo",
+    "parentId": "routes/_blog+/_layout",
+    "file": "routes/_blog+/物理+/大学+/demo.mdx"
+  },
+  "routes/_blog+/物理+/テンソル": {
+    "path": "物理/テンソル",
+    "id": "routes/_blog+/物理+/テンソル",
+    "parentId": "routes/_blog+/_layout",
+    "file": "routes/_blog+/物理+/テンソル.mdx"
+  },
   "routes/_blog+/demo2": {
     "path": "demo2",
     "id": "routes/_blog+/demo2",
@@ -27,6 +39,13 @@
     "id": "routes/_blog+/demo3",
     "parentId": "routes/_blog+/_layout",
     "file": "routes/_blog+/demo3.mdx"
+  },
+  "routes/debug+/_index": {
+    "path": "debug",
+    "index": true,
+    "id": "routes/debug+/_index",
+    "parentId": "root",
+    "file": "routes/debug+/_index.tsx"
   },
   "routes/debug+/loader": {
     "path": "debug/loader",
