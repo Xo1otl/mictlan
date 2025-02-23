@@ -1,4 +1,5 @@
 @import "katex/dist/katex.min.css";
+@import "@wooorm/starry-night/style/both";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

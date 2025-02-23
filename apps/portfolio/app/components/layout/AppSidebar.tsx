@@ -12,11 +12,16 @@ import {
 } from "~/components/ui/sidebar";
 import { Link } from "@remix-run/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import type { Page } from "./pages";
+import type * as shared from "~/shared";
+import { useLayoutContext } from "./context";
 
-const PageTreeItem: React.FC<{ page: Page }> = ({ page }) => {
+const LinkTreeItem: React.FC<{ routeNode: shared.RouteNode }> = ({
+	routeNode,
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const hasChildren = Boolean(page.children && page.children.length > 0);
+	const hasChildren = Boolean(
+		routeNode.children && routeNode.children.length > 0,
+	);
 
 	return (
 		<>
@@ -27,20 +32,20 @@ const PageTreeItem: React.FC<{ page: Page }> = ({ page }) => {
 				>
 					{hasChildren &&
 						(isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
-					{page.url ? (
-						<Link to={page.url} className="flex-1">
-							{page.title}
+					{routeNode.url ? (
+						<Link to={routeNode.url} className="flex-1">
+							{routeNode.title}
 						</Link>
 					) : (
-						<span className="flex-1">{page.title}</span>
+						<span className="flex-1">{routeNode.title}</span>
 					)}
 				</SidebarMenuButton>
 			</SidebarMenuItem>
 			{hasChildren && isOpen && (
 				<div className="ml-4">
 					<SidebarMenu>
-						{page.children?.map((child) => (
-							<PageTreeItem key={child.title} page={child} />
+						{routeNode.children?.map((child) => (
+							<LinkTreeItem key={child.title} routeNode={child} />
 						))}
 					</SidebarMenu>
 				</div>
@@ -49,11 +54,8 @@ const PageTreeItem: React.FC<{ page: Page }> = ({ page }) => {
 	);
 };
 
-type AppSidebarProps = {
-	pages: Page[];
-};
-
-export const AppSidebar: React.FC<AppSidebarProps> = ({ pages }) => {
+export const AppSidebar: React.FC = () => {
+	const { routeNode } = useLayoutContext();
 	return (
 		<Sidebar>
 			<SidebarContent>
@@ -61,8 +63,8 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ pages }) => {
 					<SidebarGroupLabel>Mictlan's Blog!</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
-							{pages.map((page) => (
-								<PageTreeItem key={page.title} page={page} />
+							{routeNode.children?.map((routeNode) => (
+								<LinkTreeItem key={routeNode.title} routeNode={routeNode} />
 							))}
 						</SidebarMenu>
 					</SidebarGroupContent>

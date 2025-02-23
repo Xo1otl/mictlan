@@ -1,6 +1,6 @@
 #!/bin/bash
 # 作業ディレクトリへ移動
-cd /workspaces/mictlan/apps/astroblog
+cd /workspaces/mictlan/apps/portfolio
 
 # ビルド実行
 bun run build
@@ -29,9 +29,9 @@ if [ -f "$PID_FILE" ]; then
 fi
 
 # preview プロセスをバックグラウンドで起動し、ログを出力
-nohup bun run preview &> "$LOG_FILE" &
+nohup bun run start &> "$LOG_FILE" &
 preview_pid=$!
 
 # 新しい PID をハードコードしたファイル名で保存
 echo "$preview_pid" > "$PID_FILE"
-echo "Started preview process with PID: $preview_pid"
+echo "Started server process with PID: $preview_pid"

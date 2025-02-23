@@ -40,17 +40,28 @@
     "parentId": "routes/_blog+/_layout",
     "file": "routes/_blog+/demo3.mdx"
   },
-  "routes/debug+/_index": {
+  "routes/debug+/_layout": {
     "path": "debug",
-    "index": true,
-    "id": "routes/debug+/_index",
+    "id": "routes/debug+/_layout",
     "parentId": "root",
-    "file": "routes/debug+/_index.tsx"
+    "file": "routes/debug+/_layout.tsx"
   },
   "routes/debug+/loader": {
-    "path": "debug/loader",
+    "path": "loader",
     "id": "routes/debug+/loader",
-    "parentId": "root",
+    "parentId": "routes/debug+/_layout",
     "file": "routes/debug+/loader.tsx"
+  },
+  "routes/debug+/_index": {
+    "index": true,
+    "id": "routes/debug+/_index",
+    "parentId": "routes/debug+/_layout",
+    "file": "routes/debug+/_index.mdx"
+  },
+  "routes/debug+/mdx": {
+    "path": "mdx",
+    "id": "routes/debug+/mdx",
+    "parentId": "routes/debug+/_layout",
+    "file": "routes/debug+/mdx.mdx"
   }
 }

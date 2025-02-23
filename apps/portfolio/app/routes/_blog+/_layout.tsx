@@ -1,6 +1,6 @@
 import { type MetaFunction, Outlet } from "@remix-run/react";
-import { allPages } from "~/components/layout/pages";
 import { SidebarLayout } from "~/components/layout/SidebarLayout";
+import * as shared from "~/shared";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -10,8 +10,9 @@ export const meta: MetaFunction = () => {
 };
 
 export default function BlogLayout() {
+	const siteContext = shared.getSiteContext();
 	return (
-		<SidebarLayout pages={allPages}>
+		<SidebarLayout routeNode={siteContext.routeNode()}>
 			<Outlet />
 		</SidebarLayout>
 	);
