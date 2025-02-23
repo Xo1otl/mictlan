@@ -1,11 +1,11 @@
 import { AppSidebar } from "~/components/layout/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
 import { LayoutProvider } from "./context";
-import type * as sitedata from "~/shared";
+import type { RouteNode } from "~/hooks/useSiteMeta";
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;
-	routeNode: sitedata.RouteNode;
+	routeNode: RouteNode;
 };
 
 export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
@@ -17,8 +17,8 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
 			<SidebarProvider>
 				<AppSidebar />
 				<main className="prose max-w-none w-full">
-					<SidebarTrigger />
-					<div className="container mx-auto px-4 py-2">{children}</div>
+					<SidebarTrigger className="fixed" />
+					<div className="container mx-auto px-4 py-8">{children}</div>
 				</main>
 			</SidebarProvider>
 		</LayoutProvider>

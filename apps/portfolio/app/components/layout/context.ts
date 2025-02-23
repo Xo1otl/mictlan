@@ -1,8 +1,8 @@
 import { createContext, useContext } from "react";
-import type * as sitedata from "~/shared";
+import type { RouteNode } from "~/hooks/useSiteMeta";
 
 export type LayoutContext = {
-	routeNode: sitedata.RouteNode;
+	routeNode: RouteNode;
 };
 
 const LayoutContext = createContext<LayoutContext | undefined>(undefined);

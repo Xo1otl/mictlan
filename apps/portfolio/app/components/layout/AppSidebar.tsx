@@ -9,16 +9,16 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	useSidebar,
 } from "~/components/ui/sidebar";
 import { Link } from "@remix-run/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import type * as shared from "~/shared";
 import { useLayoutContext } from "./context";
+import type { RouteNode } from "~/hooks/useSiteMeta";
 
-const LinkTreeItem: React.FC<{ routeNode: shared.RouteNode }> = ({
-	routeNode,
-}) => {
+const LinkTreeItem: React.FC<{ routeNode: RouteNode }> = ({ routeNode }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const { toggleSidebar, isMobile } = useSidebar();
 	const hasChildren = Boolean(
 		routeNode.children && routeNode.children.length > 0,
 	);
@@ -33,7 +33,15 @@ const LinkTreeItem: React.FC<{ routeNode: shared.RouteNode }> = ({
 					{hasChildren &&
 						(isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
 					{routeNode.url ? (
-						<Link to={routeNode.url} className="flex-1">
+						<Link
+							to={routeNode.url}
+							className="flex-1 hover:underline"
+							onClick={() => {
+								if (isMobile) {
+									toggleSidebar();
+								}
+							}}
+						>
 							{routeNode.title}
 						</Link>
 					) : (
@@ -60,7 +68,9 @@ export const AppSidebar: React.FC = () => {
 		<Sidebar>
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel>Mictlan's Blog!</SidebarGroupLabel>
+					<SidebarGroupLabel>
+						<Link to="/blog">Mictlan's Blog!</Link>
+					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
 							{routeNode.children?.map((routeNode) => (

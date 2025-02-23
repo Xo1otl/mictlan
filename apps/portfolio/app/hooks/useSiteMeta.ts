@@ -1,10 +1,17 @@
+import React from "react";
 import routes from "~/assets/routes.json";
 
-export const getSiteContext = (): SiteContext => {
-	const routeNode = buildRoutes();
+export const useSiteMeta = (): SiteContext => {
+	const routes = React.useMemo(buildRoutes, []);
+	const blogRoutes = routes.children?.find((child) => {
+		return child.title === "blog";
+	});
+	if (!blogRoutes) {
+		throw new Error("blog route not found");
+	}
 	return {
-		routeNode() {
-			return routeNode;
+		blogRoute() {
+			return blogRoutes;
 		},
 	};
 };
@@ -16,7 +23,7 @@ export type RouteNode = {
 };
 
 export interface SiteContext {
-	routeNode(): RouteNode;
+	blogRoute(): RouteNode;
 }
 
 const buildRoutes = (): RouteNode => {
@@ -30,7 +37,6 @@ const buildRoutes = (): RouteNode => {
 	// 2. ツリー構築処理
 	for (const node of flatNodes) {
 		const segments = node.id.split("/").slice(1); // `routes`の部分を除去
-		console.log(segments);
 
 		let currentPath = "";
 		let parent = root;

@@ -5,63 +5,52 @@
     "parentId": "root",
     "file": "routes/_index.tsx"
   },
-  "routes/_blog+/_layout": {
-    "id": "routes/_blog+/_layout",
+  "routes/blog+/_layout": {
+    "path": "blog",
+    "id": "routes/blog+/_layout",
     "parentId": "root",
-    "file": "routes/_blog+/_layout.tsx"
+    "file": "routes/blog+/_layout.tsx"
   },
-  "routes/_blog+/katex": {
-    "path": "katex",
-    "id": "routes/_blog+/katex",
-    "parentId": "routes/_blog+/_layout",
-    "file": "routes/_blog+/katex.mdx"
+  "routes/blog+/物理+/電磁気学+/SHG": {
+    "path": "物理/電磁気学/SHG",
+    "id": "routes/blog+/物理+/電磁気学+/SHG",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/物理+/電磁気学+/SHG.mdx"
   },
-  "routes/_blog+/物理+/大学+/demo": {
-    "path": "物理/大学/demo",
-    "id": "routes/_blog+/物理+/大学+/demo",
-    "parentId": "routes/_blog+/_layout",
-    "file": "routes/_blog+/物理+/大学+/demo.mdx"
+  "routes/blog+/物理+/機械学習+/JAXについて": {
+    "path": "物理/機械学習/JAXについて",
+    "id": "routes/blog+/物理+/機械学習+/JAXについて",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/物理+/機械学習+/JAXについて.mdx"
   },
-  "routes/_blog+/物理+/テンソル": {
+  "routes/blog+/物理+/テンソル": {
     "path": "物理/テンソル",
-    "id": "routes/_blog+/物理+/テンソル",
-    "parentId": "routes/_blog+/_layout",
-    "file": "routes/_blog+/物理+/テンソル.mdx"
+    "id": "routes/blog+/物理+/テンソル",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/物理+/テンソル.mdx"
   },
-  "routes/_blog+/demo2": {
-    "path": "demo2",
-    "id": "routes/_blog+/demo2",
-    "parentId": "routes/_blog+/_layout",
-    "file": "routes/_blog+/demo2.mdx"
+  "routes/blog+/説明の仕方": {
+    "path": "説明の仕方",
+    "id": "routes/blog+/説明の仕方",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/説明の仕方.mdx"
   },
-  "routes/_blog+/demo3": {
-    "path": "demo3",
-    "id": "routes/_blog+/demo3",
-    "parentId": "routes/_blog+/_layout",
-    "file": "routes/_blog+/demo3.mdx"
-  },
-  "routes/debug+/_layout": {
-    "path": "debug",
-    "id": "routes/debug+/_layout",
-    "parentId": "root",
-    "file": "routes/debug+/_layout.tsx"
-  },
-  "routes/debug+/loader": {
-    "path": "loader",
-    "id": "routes/debug+/loader",
-    "parentId": "routes/debug+/_layout",
-    "file": "routes/debug+/loader.tsx"
-  },
-  "routes/debug+/_index": {
+  "routes/blog+/_index": {
     "index": true,
-    "id": "routes/debug+/_index",
-    "parentId": "routes/debug+/_layout",
-    "file": "routes/debug+/_index.mdx"
+    "id": "routes/blog+/_index",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/_index.mdx"
   },
-  "routes/debug+/mdx": {
-    "path": "mdx",
-    "id": "routes/debug+/mdx",
-    "parentId": "routes/debug+/_layout",
-    "file": "routes/debug+/mdx.mdx"
+  "routes/blog+/設計+/フォルダの分け方": {
+    "path": "設計/フォルダの分け方",
+    "id": "routes/blog+/設計+/フォルダの分け方",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/設計+/フォルダの分け方.mdx"
+  },
+  "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた": {
+    "path": "フロントエンド開発/Remixでサイト作ってみた",
+    "id": "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた.mdx"
   }
 }
