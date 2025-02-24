@@ -11,29 +11,65 @@
     "parentId": "root",
     "file": "routes/blog+/_layout.tsx"
   },
-  "routes/blog+/物理+/電磁気学+/SHG": {
-    "path": "物理/電磁気学/SHG",
-    "id": "routes/blog+/物理+/電磁気学+/SHG",
+  "routes/blog+/Drafts+/Draftsの役割": {
+    "path": "Drafts/Draftsの役割",
+    "id": "routes/blog+/Drafts+/Draftsの役割",
     "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/物理+/電磁気学+/SHG.mdx"
+    "file": "routes/blog+/Drafts+/Draftsの役割.mdx"
   },
-  "routes/blog+/物理+/機械学習+/JAXについて": {
-    "path": "物理/機械学習/JAXについて",
-    "id": "routes/blog+/物理+/機械学習+/JAXについて",
+  "routes/blog+/Docs+/物理+/電磁気学+/SHG": {
+    "path": "Docs/物理/電磁気学/SHG",
+    "id": "routes/blog+/Docs+/物理+/電磁気学+/SHG",
     "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/物理+/機械学習+/JAXについて.mdx"
+    "file": "routes/blog+/Docs+/物理+/電磁気学+/SHG.mdx"
   },
-  "routes/blog+/物理+/テンソル": {
-    "path": "物理/テンソル",
-    "id": "routes/blog+/物理+/テンソル",
+  "routes/blog+/Docs+/物理+/機械学習+/JAXについて": {
+    "path": "Docs/物理/機械学習/JAXについて",
+    "id": "routes/blog+/Docs+/物理+/機械学習+/JAXについて",
     "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/物理+/テンソル.mdx"
+    "file": "routes/blog+/Docs+/物理+/機械学習+/JAXについて.mdx"
   },
-  "routes/blog+/説明の仕方": {
-    "path": "説明の仕方",
-    "id": "routes/blog+/説明の仕方",
+  "routes/blog+/Docs+/物理+/テンソル": {
+    "path": "Docs/物理/テンソル",
+    "id": "routes/blog+/Docs+/物理+/テンソル",
     "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/説明の仕方.mdx"
+    "file": "routes/blog+/Docs+/物理+/テンソル.mdx"
+  },
+  "routes/blog+/Docs+/設計+/UI+/UIの状態管理": {
+    "path": "Docs/設計/UI/UIの状態管理",
+    "id": "routes/blog+/Docs+/設計+/UI+/UIの状態管理",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/Docs+/設計+/UI+/UIの状態管理.mdx"
+  },
+  "routes/blog+/Docs+/設計+/Adapter+/アダプターの書き方": {
+    "path": "Docs/設計/Adapter/アダプターの書き方",
+    "id": "routes/blog+/Docs+/設計+/Adapter+/アダプターの書き方",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/Docs+/設計+/Adapter+/アダプターの書き方.mdx"
+  },
+  "routes/blog+/Docs+/設計+/Infra+/PythonでIaC": {
+    "path": "Docs/設計/Infra/PythonでIaC",
+    "id": "routes/blog+/Docs+/設計+/Infra+/PythonでIaC",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/Docs+/設計+/Infra+/PythonでIaC.mdx"
+  },
+  "routes/blog+/Docs+/設計+/フォルダの分け方": {
+    "path": "Docs/設計/フォルダの分け方",
+    "id": "routes/blog+/Docs+/設計+/フォルダの分け方",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/Docs+/設計+/フォルダの分け方.mdx"
+  },
+  "routes/blog+/Docs+/設計+/Domain+/ドメインはインターフェース": {
+    "path": "Docs/設計/Domain/ドメインはインターフェース",
+    "id": "routes/blog+/Docs+/設計+/Domain+/ドメインはインターフェース",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/Docs+/設計+/Domain+/ドメインはインターフェース.mdx"
+  },
+  "routes/blog+/Docs+/哲学+/説明の仕方": {
+    "path": "Docs/哲学/説明の仕方",
+    "id": "routes/blog+/Docs+/哲学+/説明の仕方",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/Docs+/哲学+/説明の仕方.mdx"
   },
   "routes/blog+/_index": {
     "index": true,
@@ -41,22 +77,16 @@
     "parentId": "routes/blog+/_layout",
     "file": "routes/blog+/_index.mdx"
   },
-  "routes/blog+/設計+/フォルダの分け方": {
-    "path": "設計/フォルダの分け方",
-    "id": "routes/blog+/設計+/フォルダの分け方",
+  "routes/blog+/Posts+/メモアプリ作りたい": {
+    "path": "Posts/メモアプリ作りたい",
+    "id": "routes/blog+/Posts+/メモアプリ作りたい",
     "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/設計+/フォルダの分け方.mdx"
+    "file": "routes/blog+/Posts+/メモアプリ作りたい.mdx"
   },
-  "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた": {
-    "path": "フロントエンド開発/Remixでサイト作ってみた",
-    "id": "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた",
+  "routes/blog+/Posts+/Remixでサイト作ってみた": {
+    "path": "Posts/Remixでサイト作ってみた",
+    "id": "routes/blog+/Posts+/Remixでサイト作ってみた",
     "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた.mdx"
-  },
-  "routes/blog+/作りたいもの+/メモアプリ": {
-    "path": "作りたいもの/メモアプリ",
-    "id": "routes/blog+/作りたいもの+/メモアプリ",
-    "parentId": "routes/blog+/_layout",
-    "file": "routes/blog+/作りたいもの+/メモアプリ.mdx"
+    "file": "routes/blog+/Posts+/Remixでサイト作ってみた.mdx"
   }
 }

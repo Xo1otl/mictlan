@@ -14,7 +14,7 @@ import {
 import { Link } from "@remix-run/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useLayoutContext } from "./context";
-import type { RouteNode } from "~/hooks/useSiteMeta";
+import type { RouteNode } from "~/hooks/useSiteData";
 
 const LinkTreeItem: React.FC<{ routeNode: RouteNode }> = ({ routeNode }) => {
 	const [isOpen, setIsOpen] = useState(false);

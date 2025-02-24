@@ -1,17 +1,17 @@
 import React from "react";
 import routes from "~/assets/routes.json";
 
-export const useSiteMeta = (): SiteContext => {
+export const useSiteData = (): SiteData => {
 	const routes = React.useMemo(buildRoutes, []);
-	const blogRoutes = routes.children?.find((child) => {
+	const blogNode = routes.children?.find((child) => {
 		return child.title === "blog";
 	});
-	if (!blogRoutes) {
+	if (!blogNode) {
 		throw new Error("blog route not found");
 	}
 	return {
-		blogRoute() {
-			return blogRoutes;
+		blogNode() {
+			return blogNode;
 		},
 	};
 };
@@ -22,8 +22,8 @@ export type RouteNode = {
 	children?: RouteNode[];
 };
 
-export interface SiteContext {
-	blogRoute(): RouteNode;
+export interface SiteData {
+	blogNode(): RouteNode;
 }
 
 const buildRoutes = (): RouteNode => {

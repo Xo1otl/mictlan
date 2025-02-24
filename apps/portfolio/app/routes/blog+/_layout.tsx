@@ -1,6 +1,6 @@
 import { type MetaFunction, Outlet } from "@remix-run/react";
 import { SidebarLayout } from "~/components/layout/SidebarLayout";
-import { useSiteMeta } from "~/hooks/useSiteMeta";
+import { useSiteData } from "~/hooks/useSiteData";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -10,8 +10,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function BlogLayout() {
-	const siteMeta = useSiteMeta();
-	const blogNode = siteMeta.blogRoute();
+	const siteData = useSiteData();
+	const blogNode = siteData.blogNode();
 	return (
 		<SidebarLayout routeNode={blogNode}>
 			<Outlet />
