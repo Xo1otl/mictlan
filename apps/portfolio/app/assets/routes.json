@@ -52,5 +52,11 @@
     "id": "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた",
     "parentId": "routes/blog+/_layout",
     "file": "routes/blog+/フロントエンド開発+/Remixでサイト作ってみた.mdx"
+  },
+  "routes/blog+/作りたいもの+/メモアプリ": {
+    "path": "作りたいもの/メモアプリ",
+    "id": "routes/blog+/作りたいもの+/メモアプリ",
+    "parentId": "routes/blog+/_layout",
+    "file": "routes/blog+/作りたいもの+/メモアプリ.mdx"
   }
 }
