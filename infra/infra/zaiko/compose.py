@@ -1,6 +1,6 @@
+from . import *
 from infra import broker
 from infra.db import documentdb
-from . import *
 from workspace import path
 
 package_dir = str(path.Path("apps/zaiko").rel2(path.Path(__file__).dir()))

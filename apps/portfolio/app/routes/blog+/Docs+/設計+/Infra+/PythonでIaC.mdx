@@ -1,0 +1,77 @@
+# PythonでIaC
+
+## Contents
+
+## 導入
+
+hashicorpも使ったこと無いしAWS CDK使ってるわけでもないからにわかです
+
+そもそもselfhostで大量のアクセスがあるわけでもなく、どれもオーバーエンジニアリングなので使う機会ないです
+
+ただし、一つやっててとても便利な方法を考えたことがあるので紹介します
+
+みなさんdockerを使ってる中で、補完や自動importや変数のrenameなどが全くできないyamlファイルを手書きしてて大変だなと思ったことありますか？
+
+yamlはシリアライズ/デシリアライズすることが可能なので、全部プログラミング言語を使って書いたらいいやん！というのがこの記事の主旨です
+
+## 例
+
+pythonでcomposeを書いて、entrypointを実行してconfigureをまとめて自動生成します。
+
+### Entrypoint
+```python
+checker = ComposeChecker()
+
+modules = [
+    vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap, oidc, crawler
+]
+
+ecosystem = infra.DockerEcosystem(path.Path("infra/infra/ecosystem"))
+ecosystem.use(infra.logging_middleware)
+ecosystem.use(checker.port_conflict)
+
+for module in modules:
+    ecosystem.register(module.compose)
+
+ecosystem.configure()
+```
+
+### Compose
+```python
+from . import *
+from infra import broker
+from infra.db import documentdb
+from workspace import path
+
+package_dir = str(path.Path("apps/zaiko").rel2(path.Path(__file__).dir()))
+
+compose = {
+    'services': {
+        'zaiko': {
+            'build': package_dir,
+            'volumes': [
+                f'./entrypoint.sh:/entrypoint.sh',
+                f'./{STOCK_CONNECTOR_FILE}:/{STOCK_CONNECTOR_FILE}',
+            ],
+            'depends_on': [broker.CONSOLE_SERVICE_NAME, documentdb.SERVICE_NAME],
+            'entrypoint': '/entrypoint.sh',
+            'ports': [
+                "1235:80"
+            ]
+        }
+    }
+}
+```
+
+## 考え方
+
+よくあるweb frameworkの考え方を取り入れています。
+
+* composeを登録する
+* middlewareを噛ませることができる
+
+マジでこれでプログラマチックにconfigureできるだけでめっちゃ快適なのでぜひやってみてください。
+
+## まとめ
+
+yamlの手書きをやめよう！！！

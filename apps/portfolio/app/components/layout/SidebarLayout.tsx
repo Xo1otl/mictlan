@@ -1,7 +1,7 @@
 import { AppSidebar } from "~/components/layout/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
 import { LayoutProvider } from "./context";
-import type { RouteNode } from "~/hooks/useSiteMeta";
+import type { RouteNode } from "~/hooks/useSiteData";
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;

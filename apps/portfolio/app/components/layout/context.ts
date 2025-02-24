@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { RouteNode } from "~/hooks/useSiteMeta";
+import type { RouteNode } from "~/hooks/useSiteData";
 
 export type LayoutContext = {
 	routeNode: RouteNode;
