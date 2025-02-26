@@ -14,6 +14,7 @@ def globpaths(pattern: str) -> List[path.Path]:
     abs_pattern = os.path.join(config.WORKSPACE_ROOT, pattern)
     # Use glob to find matching files. recursive=True allows patterns like '**/*.py'
     matches = glob.glob(abs_pattern, recursive=True)
+    print(matches)
     # Filter the matches to include only files.
     return [path.Path(match) for match in matches if os.path.isfile(match)]
 
