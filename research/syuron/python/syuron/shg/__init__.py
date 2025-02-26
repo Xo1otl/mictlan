@@ -1,4 +1,15 @@
-from .ncme import *
-from .periodic_observer import PeriodicObserver, compare_transformation
-# from .grating import ChirpedGrating, calculate_refractive_index, Grating
-from .grating import calculate_refractive_index, Grating
+import jax
+from .device import *
+from .solver import *
+
+# GPUを使用するための設定
+
+
+def use_gpu():
+    try:
+        jax.config.update('jax_platform_name', 'gpu')
+        print(f"GPUを使用します: {jax.devices('gpu')}")
+        return True
+    except:
+        print("GPUが見つかりませんでした。CPUを使用します。")
+        return False
