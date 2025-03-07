@@ -1,9 +1,0 @@
-name = "Syuron"
-uuid = "7694213a-76b7-49c4-89ed-455cbde9a7e1"
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
-version = "0.1.0"
-
-[deps]
-IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
-Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-WGMODES = "8f3b0ba9-08b1-4e75-a233-48d1424bf3e5"
