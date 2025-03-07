@@ -16,7 +16,7 @@ chathub = { path = "./apps/chathub", develop = true }
 fssearch = { path = "./apps/fssearch", develop = true }
 noteprez = { path = "./apps/noteprez", develop = true }
 akinator = { path = "./apps/akinator", develop = true }
-syuron = { path = "./research/syuron/python", develop = true, optional = true }
+syuron = { path = "./research/syuron", develop = true, optional = true }
 notebook = "^7.2.2"
 nbconvert = "^7.16.4"
 playwright = "^1.48.0"
@@ -40,6 +40,7 @@ include = [
     "apps/chathub",
     "research/leetcode",
     "research/quantum",
+    "research/syuron",
     "packages/workspace",
 ]
 reportIncompatibleMethodOverride = true

@@ -1,7 +1,7 @@
 from . import Device
 from typing import Protocol
 import jax.numpy as jnp
-from jax import lax
+from jax import lax, jit
 
 
 class NCMESolver(Protocol):
