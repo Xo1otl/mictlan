@@ -1,18 +1,19 @@
-from . import *
+from . import usePPMgOSLT, solve_ncme, NCMEParams
 import jax.numpy as jnp
-from typing import List, NamedTuple, TypeAlias, Union
+from typing import List, NamedTuple, Union
+import jax
 
 
 class SpectrumParams(NamedTuple):
-    widths_dim: Union[List[List[float]], List[float]]
+    domain_widths_dim: Union[List[List[float]], List[float]]
     kappa_magnitude_dim: Union[List[float], float]
     T_dim: Union[List[float], float]
     wavelength_dim: Union[List[float], float]
-    A0_dim: Union[List[complex], complex]
-    B0_dim: Union[List[complex], complex] = 0
+    fund_power_dim: Union[List[complex], complex]
+    sh_power_dim: Union[List[complex], complex] = 0
 
 
-Spectrum: TypeAlias = jnp.ndarray
+Spectrum = jnp.ndarray
 
 
 def to_param_array(val) -> jnp.ndarray:
@@ -49,35 +50,34 @@ def to_widths_grid(val) -> jnp.ndarray:
 
 
 def analyzeSpectrum(params: SpectrumParams) -> Spectrum:
-    widths_array = to_widths_grid(params.widths_dim)
+    domain_widths_array = to_widths_grid(params.domain_widths_dim)
     kappa_array = to_param_array(params.kappa_magnitude_dim)
     T_array = to_param_array(params.T_dim)
     wavelength_array = to_param_array(params.wavelength_dim)
-    A0_array = to_param_array(params.A0_dim)
-    B0_array = to_param_array(params.B0_dim)
+    fund_power_array = to_param_array(params.fund_power_dim)
+    sh_power_array = to_param_array(params.sh_power_dim)
 
-    # meshgrid preparation
-    kappa, T, wavelength, A0, B0 = jnp.meshgrid(
+    kappa, T, wavelength, fund_power, sh_power = jnp.meshgrid(
         kappa_array,
         T_array,
         wavelength_array,
-        A0_array,
-        B0_array,
+        fund_power_array,
+        sh_power_array,
         indexing='ij'
     )
 
     phase_mismatch_fn = usePPMgOSLT(wavelength, T)
 
-    def solve_single_widths(widths):
+    @jax.vmap
+    def mapped_solve(domain_widths):
         return solve_ncme(NCMEParams(
-            fund_wave_power=A0,
-            sh_wave_power=B0,
+            fund_power=fund_power,
+            sh_power=sh_power,
             kappa_magnitude=kappa,
             phase_mismatch_fn=phase_mismatch_fn,
-            widths=widths
+            domain_widths=domain_widths
         ))
 
-    mapped_solve = jax.vmap(solve_single_widths)
-    results = mapped_solve(widths_array)
+    results = mapped_solve(domain_widths_array)
 
     return results
