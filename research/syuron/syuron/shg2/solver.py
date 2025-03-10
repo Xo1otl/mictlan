@@ -45,7 +45,7 @@ def integrate_domain(state, domain_tuple, kappa_magnitude, phase_mismatch_fn):
     # 符号付きのkappaを定義
     kappa = kappa_magnitude * sign
 
-    n_steps = 1000
+    n_steps = 100
     dz = domain_width / n_steps
     dz_domain = (dz, domain_width)
 
