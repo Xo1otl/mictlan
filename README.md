@@ -25,11 +25,9 @@
 # Idea
 
 - shebangは`#!/usr/bin/env python`、shellscript引退
-- 今回考えた state machine を使った設計で、しかのこダイアグラムをポチポチ進められるページを作りたい
 - camunda みたいなサービスを go で作りたい
 - ターミナルから AI 呼び出せる機能を作る、一つのターミナルにつき一つの会話
   - AI は API Key ではなく Playwright を使って行い無限に話せるようにする
-- ねずっちの謎掛けが AI で普通にできそうだからそれを行うサイト作ってみたい
 - julia で workspace やりたい時、direnv に julia の alias 書いて workspace ファイルに追加した julia のパッケージを全部 activate すればいい説
 
 # TODO
