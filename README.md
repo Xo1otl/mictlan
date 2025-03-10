@@ -27,7 +27,7 @@
 - shebangは`#!/usr/bin/env python`、shellscript引退
 - camunda みたいなサービスを go で作りたい
 - ターミナルから AI 呼び出せる機能を作る、一つのターミナルにつき一つの会話
-  - AI は API Key ではなく Playwright を使って行い無限に話せるようにする
+  - Playwright を使ってスクレイピング
 - julia で workspace やりたい時、direnv に julia の alias 書いて workspace ファイルに追加した julia のパッケージを全部 activate すればいい説
 
 # TODO
