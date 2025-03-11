@@ -55,5 +55,6 @@ def usePPMgOSLT(wavelength: Wavelength, t: T) -> Callable[[Z], PhaseMismatch]:
 
     beta_omega = 2 * jnp.pi * N_omega / wavelength
     beta_2omega = 2 * jnp.pi * N_2omega / (wavelength / 2)
+    phase_mismatch = beta_2omega - 2 * beta_omega
 
-    return lambda z: (beta_2omega - 2 * beta_omega) * z
+    return lambda z: phase_mismatch * z

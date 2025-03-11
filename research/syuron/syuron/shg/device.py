@@ -57,6 +57,7 @@ class PPMgOSLT(Device):
         # メッシュの設定
         self.steps = 100000
         self.h = self.L / self.steps
+        print(self.h)
 
         # z値とkappa値を事前計算
         self._z_indices = jnp.arange(self.steps) * self.h
