@@ -2,12 +2,14 @@ from . import Z, PhaseMismatch
 from typing import NamedTuple, Callable, Tuple
 import jax.numpy as jnp
 from jax import lax
+import jax
 
 EffTensor = jnp.ndarray
 FundPower = jnp.ndarray
 SHPower = jnp.ndarray
 KappaMagnitude = jnp.ndarray
 DomainWidths = jnp.ndarray
+StepIndex = int
 
 
 class NCMEParams(NamedTuple):
@@ -18,11 +20,13 @@ class NCMEParams(NamedTuple):
     domain_widths: DomainWidths
 
 
-State = Tuple[FundPower, SHPower, Z]
+StepState = Tuple[FundPower, SHPower, StepIndex]
 
 
-def runge_kutta_step(state: State, dz, kappa, phase_mismatch_fn):
-    fund_wave_power, sh_wave_power, z = state
+def runge_kutta_step(state: StepState, z0, dz, kappa, phase_mismatch_fn):
+    fund_wave_power, sh_wave_power, index = state
+
+    z = z0 + dz * index  # 累積加算すると誤差が蓄積するので、毎回計算する
 
     def derivative(A, B, z_val):
         phase_mismatch_val = phase_mismatch_fn(z_val)
@@ -43,21 +47,26 @@ def runge_kutta_step(state: State, dz, kappa, phase_mismatch_fn):
         (dz / 6) * (k1_A + 2 * k2_A + 2 * k3_A + k4_A)
     new_sh_wave_power = sh_wave_power + \
         (dz / 6) * (k1_B + 2 * k2_B + 2 * k3_B + k4_B)
-    new_z = z + dz
+    new_index = index + 1
 
-    return (new_fund_wave_power, new_sh_wave_power, new_z), None
+    return (new_fund_wave_power, new_sh_wave_power, new_index), None
 
 
-def integrate_domain(state: State, domain_tuple, kappa_magnitude, phase_mismatch_fn):
-    domain_index, domain_width = domain_tuple
+DomainState = Tuple[FundPower, SHPower, Z]
+
+
+def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, phase_mismatch_fn):
+    domain_index, domain_width = domain_info
     n_steps = 1000
+    fund_wave_power, sh_wave_power, current_z = domain_state
 
-    return lax.cond(
+    (new_fund_wave_power, new_sh_wave_power, _), _ = lax.cond(
         domain_width == 0,
         lambda state: (state, None),
         lambda state: lax.scan(
             lambda state, _: runge_kutta_step(
                 state,
+                current_z,
                 domain_width / n_steps,
                 kappa_magnitude *
                 jnp.where((domain_index % 2) == 0, 1.0, -1.0),
@@ -67,8 +76,10 @@ def integrate_domain(state: State, domain_tuple, kappa_magnitude, phase_mismatch
             None,
             length=n_steps
         ),
-        state
+        (fund_wave_power, sh_wave_power, 0)
     )
+
+    return (new_fund_wave_power, new_sh_wave_power, current_z + domain_width), None
 
 
 def solve_ncme(params: NCMEParams) -> EffTensor:
@@ -76,8 +87,8 @@ def solve_ncme(params: NCMEParams) -> EffTensor:
                   params.sh_power.astype(jnp.complex64), 0.0)
     domain_indices = jnp.arange(params.domain_widths.shape[0])
     final_state, _ = lax.scan(
-        lambda state, z: integrate_domain(
-            state, z, params.kappa_magnitude, params.phase_mismatch_fn),
+        lambda state, domain_info: integrate_domain(
+            state, domain_info, params.kappa_magnitude, params.phase_mismatch_fn),
         init_state,
         (domain_indices, params.domain_widths)
     )
