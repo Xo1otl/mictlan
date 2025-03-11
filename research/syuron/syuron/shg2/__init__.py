@@ -4,7 +4,6 @@ from .solver import *
 from .spectrum import *
 
 
-
 # GPUを使用するための設定
 def use_gpu():
     try:
