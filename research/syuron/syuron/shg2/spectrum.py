@@ -68,6 +68,7 @@ def analyzeSpectrum(params: SpectrumParams) -> Spectrum:
 
     phase_mismatch_fn = usePPMgOSLT(wavelength, T)
 
+    @jax.jit
     @jax.vmap
     def mapped_solve(domain_widths):
         return solve_ncme(NCMEParams(
