@@ -1,6 +1,6 @@
 from typing import Tuple
 from .solver import *
-from .use_device import *
+from .use_material import *
 from jax import lax
 
 type StepIndex = int
@@ -36,13 +36,13 @@ def runge_kutta_step(state: StepState, z0, dz, kappa, phase_mismatch_fn) -> Tupl
     return (new_fund_power, new_sh_power, new_index), None
 
 
-type DomainState = Tuple[FundPower, SHPower, Z]
+type DomainIndex = int
+type DomainState = Tuple[FundPower, SHPower, Z, DomainIndex]
 
 
-def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, phase_mismatch_fn) -> Tuple[DomainState, None]:
-    domain_index, domain_width = domain_info
-    n_steps = 1000
-    fund_power, sh_power, current_z = domain_state
+def integrate_domain(state: DomainState, domain_stack: DomainStack, phase_mismatch_fn: PhaseMismatchFn, mesh_density: int) -> Tuple[DomainState, None]:
+    fund_power, sh_power, current_z, domain_index = state
+    domain_width, kappa = domain_stack[domain_index]
 
     (new_fund_power, new_sh_power, _), _ = lax.cond(
         domain_width == 0,
@@ -51,31 +51,29 @@ def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, ph
             lambda state, _: runge_kutta_step(
                 state,
                 current_z,
-                domain_width / n_steps,
-                kappa_magnitude *
-                jnp.where((domain_index % 2) == 0, 1.0, -1.0),
+                domain_width / mesh_density,
+                kappa,
                 phase_mismatch_fn
             ),
             state,
             None,
-            length=n_steps
+            length=mesh_density
         ),
         (fund_power, sh_power, 0)
     )
 
-    return (new_fund_power, new_sh_power, current_z + domain_width), None
+    return (new_fund_power, new_sh_power, current_z + domain_width, domain_index + 1), None
 
 
 def solve_ncme(params: NCMEParams) -> EffTensor:
     init_state = (params.fund_power.astype(jnp.complex64),
-                  params.sh_power.astype(jnp.complex64), 0.0)
-    domain_indices = jnp.arange(params.domain_widths.shape[0])
+                  params.sh_power.astype(jnp.complex64), 0.0, 0)
     final_state, _ = lax.scan(
-        lambda state, domain_info: integrate_domain(
-            state, domain_info, params.kappa_magnitude, params.phase_mismatch_fn),
+        lambda state, _: integrate_domain(
+            state, params.domain_stack, params.phase_mismatch_fn, mesh_density=params.mesh_density),
         init_state,
-        (domain_indices, params.domain_widths)
+        length=len(params.domain_stack)
     )
-    _, final_sh_power, _ = final_state
+    _, final_sh_power, _, _ = final_state
 
     return jnp.abs(final_sh_power)**2 / jnp.abs(params.fund_power)**2

@@ -7,4 +7,4 @@ type Wavelength = jnp.ndarray
 type T = jnp.ndarray
 
 type PhaseMismatchFn = Callable[[Z], PhaseMismatch]
-type UseDevice = Callable[[Wavelength, T], PhaseMismatchFn]
+type UseMaterial = Callable[[Wavelength, T], PhaseMismatchFn]
