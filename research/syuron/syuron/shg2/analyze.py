@@ -1,19 +1,16 @@
-from . import usePPMgOSLT, solve_ncme, NCMEParams
+from . import solve_ncme, NCMEParams, UseDevice, EffTensor
 import jax.numpy as jnp
 from typing import List, NamedTuple, Union
 import jax
 
 
-class SpectrumParams(NamedTuple):
+class Params(NamedTuple):
     domain_widths_dim: Union[List[List[float]], List[float]]
     kappa_magnitude_dim: Union[List[float], float]
     T_dim: Union[List[float], float]
     wavelength_dim: Union[List[float], float]
     fund_power_dim: Union[List[complex], complex]
     sh_power_dim: Union[List[complex], complex] = 0
-
-
-Spectrum = jnp.ndarray
 
 
 def to_param_array(val) -> jnp.ndarray:
@@ -49,7 +46,7 @@ def to_widths_grid(val) -> jnp.ndarray:
         "Invalid type for widths_range conversion: expected list or nested list")
 
 
-def analyzeSpectrum(params: SpectrumParams) -> Spectrum:
+def analyze(params: Params, useDevice: UseDevice) -> EffTensor:
     domain_widths_array = to_widths_grid(params.domain_widths_dim)
     kappa_array = to_param_array(params.kappa_magnitude_dim)
     T_array = to_param_array(params.T_dim)
@@ -66,7 +63,7 @@ def analyzeSpectrum(params: SpectrumParams) -> Spectrum:
         indexing='ij'
     )
 
-    phase_mismatch_fn = usePPMgOSLT(wavelength, T)
+    phase_mismatch_fn = useDevice(wavelength, T)
 
     @jax.jit
     @jax.vmap

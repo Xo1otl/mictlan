@@ -1,28 +1,28 @@
-from . import Z, PhaseMismatch
-from typing import NamedTuple, Callable, Tuple
+from . import Z, PhaseMismatchFn
+from typing import NamedTuple, Tuple
 import jax.numpy as jnp
 from jax import lax
 
-EffTensor = jnp.ndarray
-FundPower = jnp.ndarray
-SHPower = jnp.ndarray
-KappaMagnitude = jnp.ndarray
-DomainWidths = jnp.ndarray
-StepIndex = int
+type EffTensor = jnp.ndarray
+type FundPower = jnp.ndarray
+type SHPower = jnp.ndarray
+type KappaMagnitude = jnp.ndarray
+type DomainWidths = jnp.ndarray
+type StepIndex = int
 
 
 class NCMEParams(NamedTuple):
     fund_power: FundPower
     sh_power: SHPower
     kappa_magnitude: KappaMagnitude
-    phase_mismatch_fn: Callable[[Z], PhaseMismatch]
+    phase_mismatch_fn: PhaseMismatchFn
     domain_widths: DomainWidths
 
 
-StepState = Tuple[FundPower, SHPower, StepIndex]
+type StepState = Tuple[FundPower, SHPower, StepIndex]
 
 
-def runge_kutta_step(state: StepState, z0, dz, kappa, phase_mismatch_fn):
+def runge_kutta_step(state: StepState, z0, dz, kappa, phase_mismatch_fn) -> Tuple[StepState, None]:
     fund_power, sh_power, index = state
 
     z = z0 + dz * index  # 累積加算すると誤差が蓄積するので、毎回計算する
@@ -51,10 +51,10 @@ def runge_kutta_step(state: StepState, z0, dz, kappa, phase_mismatch_fn):
     return (new_fund_power, new_sh_power, new_index), None
 
 
-DomainState = Tuple[FundPower, SHPower, Z]
+type DomainState = Tuple[FundPower, SHPower, Z]
 
 
-def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, phase_mismatch_fn):
+def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, phase_mismatch_fn) -> Tuple[DomainState, None]:
     domain_index, domain_width = domain_info
     n_steps = 300
     fund_power, sh_power, current_z = domain_state
