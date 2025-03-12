@@ -1,9 +1,9 @@
 import jax.numpy as jnp
-from .device import *
+from .use_device import *
 
 
 
-def usePPMgOSLT(wavelength: Wavelength, t: T) -> PhaseMismatchFn:
+def use_mgoslt(wavelength: Wavelength, t: T) -> PhaseMismatchFn:
     """
     周期分極構造の幅リストからPPMgOSLTのパラメータを計算する関数
 

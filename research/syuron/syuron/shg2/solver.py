@@ -1,4 +1,4 @@
-from .device import *
+from .use_device import *
 from typing import NamedTuple, Callable
 import jax.numpy as jnp
 
