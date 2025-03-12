@@ -41,7 +41,7 @@ type DomainState = Tuple[FundPower, SHPower, Z]
 
 def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, phase_mismatch_fn) -> Tuple[DomainState, None]:
     domain_index, domain_width = domain_info
-    n_steps = 1000
+    n_steps = 300
     fund_power, sh_power, current_z = domain_state
 
     (new_fund_power, new_sh_power, _), _ = lax.cond(
