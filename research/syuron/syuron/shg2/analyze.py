@@ -47,7 +47,7 @@ def to_widths_grid(val) -> jnp.ndarray:
         "Invalid type for widths_range conversion: expected list or nested list")
 
 
-def analyze(params: Params, useDevice: UseDevice, solver_fn: SolverFn) -> EffTensor:
+def analyze(params: Params, use_device: UseDevice, solver_fn: SolverFn) -> EffTensor:
     domain_widths_array = to_widths_grid(params.domain_widths_dim)
     kappa_array = to_param_array(params.kappa_magnitude_dim)
     T_array = to_param_array(params.T_dim)
@@ -64,7 +64,7 @@ def analyze(params: Params, useDevice: UseDevice, solver_fn: SolverFn) -> EffTen
         indexing='ij'
     )
 
-    phase_mismatch_fn = useDevice(wavelength, T)
+    phase_mismatch_fn = use_device(wavelength, T)
 
     @jax.jit
     @jax.vmap
