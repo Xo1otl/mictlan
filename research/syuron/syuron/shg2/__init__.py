@@ -1,8 +1,8 @@
 import jax
 from .device import *
-from .mgoslt import *
-from .solver import *
 from .analyze import *
+from .mgoslt_device import *
+from .ncme_solver import *
 
 
 # GPUを使用するための設定

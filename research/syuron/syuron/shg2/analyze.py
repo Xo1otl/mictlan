@@ -1,4 +1,5 @@
-from . import solve_ncme, NCMEParams, UseDevice, EffTensor
+from .device import *
+from .solver import *
 import jax.numpy as jnp
 from typing import List, NamedTuple, Union
 import jax
@@ -46,7 +47,7 @@ def to_widths_grid(val) -> jnp.ndarray:
         "Invalid type for widths_range conversion: expected list or nested list")
 
 
-def analyze(params: Params, useDevice: UseDevice) -> EffTensor:
+def analyze(params: Params, useDevice: UseDevice, solver_fn: SolverFn) -> EffTensor:
     domain_widths_array = to_widths_grid(params.domain_widths_dim)
     kappa_array = to_param_array(params.kappa_magnitude_dim)
     T_array = to_param_array(params.T_dim)
@@ -68,7 +69,7 @@ def analyze(params: Params, useDevice: UseDevice) -> EffTensor:
     @jax.jit
     @jax.vmap
     def mapped_solve(domain_widths):
-        return solve_ncme(NCMEParams(
+        return solver_fn(NCMEParams(
             fund_power=fund_power,
             sh_power=sh_power,
             kappa_magnitude=kappa,
