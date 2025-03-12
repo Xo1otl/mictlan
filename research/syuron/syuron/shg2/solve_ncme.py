@@ -1,6 +1,6 @@
 from typing import Tuple
 from .solver import *
-from .device import *
+from .use_device import *
 from jax import lax
 
 type StepState = Tuple[FundPower, SHPower, StepIndex]
@@ -40,7 +40,7 @@ type DomainState = Tuple[FundPower, SHPower, Z]
 
 def integrate_domain(domain_state: DomainState, domain_info, kappa_magnitude, phase_mismatch_fn) -> Tuple[DomainState, None]:
     domain_index, domain_width = domain_info
-    n_steps = 300
+    n_steps = 1000
     fund_power, sh_power, current_z = domain_state
 
     (new_fund_power, new_sh_power, _), _ = lax.cond(

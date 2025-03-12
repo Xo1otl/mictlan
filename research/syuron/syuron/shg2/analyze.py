@@ -1,4 +1,4 @@
-from .device import *
+from .use_device import *
 from .solver import *
 import jax.numpy as jnp
 from typing import List, NamedTuple, Union
