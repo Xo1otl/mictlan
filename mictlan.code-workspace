@@ -85,8 +85,6 @@
 		},
 		/* php */
 		"php.completion.autoimport": "fqn",
-		/* julia */
-		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
 		"remote.autoForwardPortsFallback": 0,
 		"search.exclude": {
 			"**/node_modules": true,

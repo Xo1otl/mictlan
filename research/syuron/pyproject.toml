@@ -6,11 +6,15 @@ authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 pandas = "^2.2.3"
 scipy = "^1.14.1"
 numpy = "^2.1.2"
 matplotlib = "^3.9.2"
+jax = "0.5.2"
+jax-cuda12-pjrt = "0.5.1"
+jax-cuda12-plugin = "0.5.1"
+jaxlib = "0.5.1"
 
 [build-system]
 requires = ["poetry-core"]
