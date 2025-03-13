@@ -1,9 +1,8 @@
 import jax.numpy as jnp
-from .use_material import *
+from syuron import shg
 
 
-
-def use_mgoslt(wavelength: Wavelength, t: T) -> PhaseMismatchFn:
+def use_material(wavelength: shg.Wavelength, t: shg.T) -> shg.PhaseMismatchFn:
     """
     周期分極構造の幅リストからPPMgOSLTのパラメータを計算する関数
 
@@ -27,7 +26,7 @@ def use_mgoslt(wavelength: Wavelength, t: T) -> PhaseMismatchFn:
         },
     }["ne"]
 
-    def _n_eff(wavelength: Wavelength, t: T) -> jnp.ndarray:
+    def _n_eff(wavelength: shg.Wavelength, t: shg.T) -> jnp.ndarray:
         f = (t - 24.5) * (t + 24.5 + 2 * 273.16)
         # セルマイヤーの分散式による計算
         lambda_sq = wavelength ** 2
