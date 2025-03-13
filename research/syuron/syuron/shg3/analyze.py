@@ -28,7 +28,7 @@ def to_domain_stack_grid(val) -> jnp.ndarray:
 
 
 def analyze(params: Params, use_material: UseMaterial, solver_fn: SolverFn) -> EffTensor:
-    domains_grid = to_domain_stack_grid(params.domain_stack_dim)
+    domain_stack_grid = to_domain_stack_grid(params.domain_stack_dim)
     T_grid = to_grid(params.T_dim)
     wavelength_grid = to_grid(params.wavelength_dim)
     fund_power_grid = to_grid(params.fund_power_dim)
@@ -55,6 +55,6 @@ def analyze(params: Params, use_material: UseMaterial, solver_fn: SolverFn) -> E
             mesh_density=params.mesh_density
         ))
 
-    results = mapped_solve(domains_grid)
+    results = mapped_solve(domain_stack_grid)
 
     return results
