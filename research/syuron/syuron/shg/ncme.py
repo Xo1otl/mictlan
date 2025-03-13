@@ -1,23 +1,12 @@
+from .domain import *
 from .use_material import *
-from typing import NamedTuple, Callable, List
+from typing import NamedTuple, Callable
 import jax.numpy as jnp
 
 type FundPower = jnp.ndarray
 type SHPower = jnp.ndarray
 type KappaMagnitude = jnp.ndarray
 type EffTensor = jnp.ndarray
-
-# domainの情報は並列計算できないため float で定義
-type DomainWidth = float
-type Kappa = float
-
-
-class Domain(NamedTuple):
-    width: DomainWidth
-    kappa: Kappa
-
-
-type DomainStack = List[Domain]
 
 
 class NCMEParams(NamedTuple):
