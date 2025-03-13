@@ -1,60 +1,83 @@
-from .use_material import *
+from typing import Tuple
+from .domain import *
 from .ncme import *
-from .solve_ncme import *
-import jax.numpy as jnp
-from typing import List, NamedTuple, Union
-import jax
+from .analyze import *
+from .use_material import *
+from jax import lax
+from functools import partial
+
+type StepIndex = int
+type StepState = Tuple[FundPower, SHPower, StepIndex]
 
 
-class Params(NamedTuple):
-    domain_stack_dim: Union[List[DomainStack], DomainStack]
-    T_dim: Union[List[float], float]
-    wavelength_dim: Union[List[float], float]
-    fund_power_dim: Union[List[complex], complex]
-    sh_power_dim: Union[List[complex], complex] = 0
-    mesh_density: int = 1000
+def runge_kutta_step(state: StepState, z0, dz, kappa, phase_mismatch_fn) -> Tuple[StepState, None]:
+    fund_power, sh_power, index = state
+
+    z = z0 + dz * index  # 累積加算すると誤差が蓄積するので、毎回計算する
+
+    def derivative(A, B, z_val):
+        phase_mismatch_val = phase_mismatch_fn(z_val)
+        dA_dz = -1j * jnp.conj(kappa) * jnp.conj(A) * \
+            B * jnp.exp(-1j * phase_mismatch_val)
+        dB_dz = -1j * kappa * A**2 * jnp.exp(1j * phase_mismatch_val)
+        return dA_dz, dB_dz
+
+    k1_A, k1_B = derivative(fund_power, sh_power, z)
+    k2_A, k2_B = derivative(fund_power + 0.5 * dz *
+                            k1_A, sh_power + 0.5 * dz * k1_B, z + 0.5 * dz)
+    k3_A, k3_B = derivative(fund_power + 0.5 * dz *
+                            k2_A, sh_power + 0.5 * dz * k2_B, z + 0.5 * dz)
+    k4_A, k4_B = derivative(fund_power + dz * k3_A,
+                            sh_power + dz * k3_B, z + dz)
+
+    new_fund_power = fund_power + \
+        (dz / 6) * (k1_A + 2 * k2_A + 2 * k3_A + k4_A)
+    new_sh_power = sh_power + \
+        (dz / 6) * (k1_B + 2 * k2_B + 2 * k3_B + k4_B)
+    new_index = index + 1
+
+    return (new_fund_power, new_sh_power, new_index), None
 
 
-def to_grid(val) -> jnp.ndarray:
-    if isinstance(val, list):
-        return jnp.array(val)
-    return jnp.array([val])
+type DomainIndex = int
+type DomainState = Tuple[FundPower, SHPower, Z]
 
 
-def to_domain_stack_grid(val) -> jnp.ndarray:
-    if val and not isinstance(val[0], list):
-        return jnp.array([val])
-    return jnp.array(val)
+def integrate_domain(state: DomainState, domain: Domain, phase_mismatch_fn: PhaseMismatchFn, mesh_density: int) -> Tuple[DomainState, None]:
+    fund_power, sh_power, current_z = state
+    domain_width, kappa = domain
 
-
-def analyze_ncme(params: Params, use_material: UseMaterial, solver_fn: NCMESolverFn) -> EffTensor:
-    domain_stack_grid = to_domain_stack_grid(params.domain_stack_dim)
-    T_grid = to_grid(params.T_dim)
-    wavelength_grid = to_grid(params.wavelength_dim)
-    fund_power_grid = to_grid(params.fund_power_dim)
-    sh_power_grid = to_grid(params.sh_power_dim)
-
-    T, wavelength, fund_power, sh_power = jnp.meshgrid(
-        T_grid,
-        wavelength_grid,
-        fund_power_grid,
-        sh_power_grid,
-        indexing='ij'
+    scan_fn = partial(
+        runge_kutta_step,
+        z0=current_z,
+        dz=domain_width / mesh_density,
+        kappa=kappa,
+        phase_mismatch_fn=phase_mismatch_fn
     )
 
-    phase_mismatch_fn = use_material(wavelength, T)
+    (new_fund_power, new_sh_power, _), _ = lax.scan(
+        lambda state, _: scan_fn(state),
+        (fund_power, sh_power, 0),
+        length=mesh_density
+    )
 
-    @jax.jit
-    @jax.vmap
-    def mapped_solve(domain_stack):
-        return solver_fn(NCMEParams(
-            fund_power=fund_power,
-            sh_power=sh_power,
-            phase_mismatch_fn=phase_mismatch_fn,
-            domain_stack=domain_stack,
-            mesh_density=params.mesh_density
-        ))
+    return (new_fund_power, new_sh_power, current_z + domain_width), None
 
-    results = mapped_solve(domain_stack_grid)
 
-    return results
+def solve_ncme(params: NCMEParams) -> EffTensor:
+    init_state = (params.fund_power.astype(jnp.complex64),
+                  params.sh_power.astype(jnp.complex64), 0.0)
+    scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
+                      mesh_density=params.mesh_density)
+    final_state, _ = lax.scan(
+        scan_fn,
+        init_state,
+        xs=params.domain_stack  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
+    )
+    _, final_sh_power, _ = final_state
+
+    return jnp.abs(final_sh_power)**2 / jnp.abs(params.fund_power)**2
+
+
+def analyze_ncme(params: Params, use_material: UseMaterial) -> EffTensor:
+    return analyze(params, use_material, solve_ncme)
