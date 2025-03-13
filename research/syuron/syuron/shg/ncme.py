@@ -7,10 +7,14 @@ type SHPower = jnp.ndarray
 type KappaMagnitude = jnp.ndarray
 type EffTensor = jnp.ndarray
 
+# domainの情報は並列計算できないため float で定義
+type DomainWidth = float
+type Kappa = float
+
 
 class Domain(NamedTuple):
-    width: float
-    kappa: float
+    width: DomainWidth
+    kappa: Kappa
 
 
 type DomainStack = List[Domain]
@@ -24,4 +28,4 @@ class NCMEParams(NamedTuple):
     mesh_density: int
 
 
-type SolverFn = Callable[[NCMEParams], EffTensor]
+type NCMESolverFn = Callable[[NCMEParams], EffTensor]

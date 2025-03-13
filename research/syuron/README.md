@@ -1,10 +1,34 @@
 # syuron
 
+シミュレーションデータを基にして設計空間を近似するのをサロゲートモデルというらしい
 機械学習で逆設計
 shgのシミュレーションはpythonで行う
 
+# 参考文献
+* https://chatgpt.com/share/67d2ab46-c6b0-800b-a3fb-1cf1c48c0878
+* https://www.mdpi.com/2673-3269/5/1/9#:~:text=training%20an%20artificial%20neural%20network,in%20comparison%20with
+
+
+# Modules
+
+## mgoslt
+
+## train
+* gen_dataset
+* train
+    * model
+    * hyper_params
+* preprocess
+* 
+
 # TODO
 
+* デバイス構造を楽に生成するためのモジュール欲しい
+* 出力の値を規格化するか整数にしてやらんと、今の教師データは1E-6とかのスケールだから学習しにくい
+* 遺伝的アルゴリズムがいいっぽい
+* GNN試したい
+
+## その他・ウエムー
 * グラフの正当性を検証する
 * プロトン交換導波路を使うから作り方等考えとく
 * デバイスの作り方の計画を立てる

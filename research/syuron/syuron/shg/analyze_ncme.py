@@ -1,5 +1,6 @@
 from .use_material import *
-from .solver import *
+from .ncme import *
+from .solve_ncme import *
 import jax.numpy as jnp
 from typing import List, NamedTuple, Union
 import jax
@@ -15,7 +16,6 @@ class Params(NamedTuple):
 
 
 def to_grid(val) -> jnp.ndarray:
-    """Convert a single parameter value or a list of values to a jnp.array."""
     if isinstance(val, list):
         return jnp.array(val)
     return jnp.array([val])
@@ -27,7 +27,7 @@ def to_domain_stack_grid(val) -> jnp.ndarray:
     return jnp.array(val)
 
 
-def analyze(params: Params, use_material: UseMaterial, solver_fn: SolverFn) -> EffTensor:
+def analyze_ncme(params: Params, use_material: UseMaterial, solver_fn: NCMESolverFn) -> EffTensor:
     domain_stack_grid = to_domain_stack_grid(params.domain_stack_dim)
     T_grid = to_grid(params.T_dim)
     wavelength_grid = to_grid(params.wavelength_dim)
@@ -46,12 +46,12 @@ def analyze(params: Params, use_material: UseMaterial, solver_fn: SolverFn) -> E
 
     @jax.jit
     @jax.vmap
-    def mapped_solve(domains):
+    def mapped_solve(domain_stack):
         return solver_fn(NCMEParams(
             fund_power=fund_power,
             sh_power=sh_power,
             phase_mismatch_fn=phase_mismatch_fn,
-            domain_stack=domains,
+            domain_stack=domain_stack,
             mesh_density=params.mesh_density
         ))
 
