@@ -2,7 +2,7 @@ import jax
 from .domain import *
 from .use_material import *
 from .analyze import *
-from .analyze_ncme import *
+from .solve_ncme import *
 
 
 # GPUを使用するための設定

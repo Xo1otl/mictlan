@@ -4,7 +4,7 @@ from syuron import shg
 
 def use_material(wavelength: shg.Wavelength, t: shg.T) -> shg.PhaseMismatchFn:
     """
-    周期分極構造の幅リストからPPMgOSLTのパラメータを計算する関数
+    MgO:SLT 周期分極構造の幅リストからPPMgOSLTのパラメータを計算する関数
 
     Args:
         widths: 分極ドメインの幅リスト (m)
