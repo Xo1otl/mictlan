@@ -1,15 +1,15 @@
-from typing import Protocol
+import jax.numpy as jnp
+from typing import Iterable, Tuple, Callable, NamedTuple
+
+type Inputs = jnp.ndarray
+type Outputs = jnp.ndarray
+type Dataset = Iterable[Tuple[Inputs, Outputs]]
 
 
-class Dataset(Protocol):
-    def generate(self) -> None:
-        ...
+class Batch(NamedTuple):
+    inputs: jnp.ndarray
+    outputs: jnp.ndarray
 
-    def save(self, path: str) -> None:
-        ...
 
-    def preprocess(self) -> None:
-        ...
-
-    def load(self, path: str) -> None:
-        ...
+type BatchSize = int
+type LoaderFn = Callable[[BatchSize], Dataset]

@@ -8,6 +8,10 @@ shgのシミュレーションはpythonで行う
 * https://chatgpt.com/share/67d2ab46-c6b0-800b-a3fb-1cf1c48c0878
 * https://www.mdpi.com/2673-3269/5/1/9#:~:text=training%20an%20artificial%20neural%20network,in%20comparison%20with
 
+# TODO
+* 入出力ひっくり返してみる
+* MNIST と同じ条件のデータ作ってみる
+* https://web.wakayama-u.ac.jp/~ntakayuk/palmtree-j.htm (NN以外もいろいろあるっぽい)
 
 # Modules
 
@@ -19,10 +23,8 @@ shgのシミュレーションはpythonで行う
     * model
     * hyper_params
 * preprocess
-* 
 
 # TODO
-
 * デバイス構造を楽に生成するためのモジュール欲しい
 * 出力の値を規格化するか整数にしてやらんと、今の教師データは1E-6とかのスケールだから学習しにくい
 * 遺伝的アルゴリズムがいいっぽい
