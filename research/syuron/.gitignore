@@ -1,2 +1,3 @@
 activity_logs/
 ./dataset/
+*.tfrecord
