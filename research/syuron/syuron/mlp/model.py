@@ -15,5 +15,6 @@ type Loss = float
 
 
 type UseState = Callable[[ScalarOrSchedule, int, List[int], int], ModelState]
-type TrainStep = Callable[[ModelState, dataset.Batch], Tuple[ModelState, Loss]]
+type TrainStep = Callable[[ModelState, dataset.Batch,
+                           'LossFn'], Tuple[ModelState, Loss]]
 type LossFn = Callable[[ModelParams, dataset.Batch, ApplyFn], Loss]

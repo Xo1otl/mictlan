@@ -6,7 +6,7 @@ from flax.training import train_state
 from typing import Tuple, List
 from optax import ScalarOrSchedule
 from syuron import dataset
-from .model import ModelState, ModelParams, ApplyFn, Loss
+from .model import ModelState, ModelParams, ApplyFn, Loss, LossFn
 
 
 class MLP(nn.Module):
@@ -33,14 +33,14 @@ def use_state(learning_rate: ScalarOrSchedule, input_size: int, hidden_sizes: Li
     return state
 
 
-def loss_fn(params: ModelParams, batch: dataset.Batch, apply_fn: ApplyFn) -> Loss:
+def mse_loss_fn(params: ModelParams, batch: dataset.Batch, apply_fn: ApplyFn) -> Loss:
     preds = apply_fn(params, batch.inputs)
     square_error = jnp.square(preds - batch.outputs)
     loss = jnp.mean(square_error)
     return loss  # type: ignore
 
 
-def train_step(state: ModelState, batch: dataset.Batch) -> Tuple[ModelState, Loss]:
+def train_step(state: ModelState, batch: dataset.Batch, loss_fn: LossFn) -> Tuple[ModelState, Loss]:
     loss, grads = jax.value_and_grad(loss_fn)(
         state.params, batch, state.apply_fn)
     new_state = state.apply_gradients(grads=grads)

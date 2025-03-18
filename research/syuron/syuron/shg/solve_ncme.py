@@ -76,4 +76,4 @@ def solve_ncme(params: NCMEParams) -> EffTensor:
     )
     _, final_sh_power, _ = final_state
 
-    return jnp.abs(final_sh_power)**2 / jnp.abs(params.fund_power)**2
+    return final_sh_power / params.fund_power
