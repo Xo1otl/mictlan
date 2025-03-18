@@ -5,7 +5,7 @@ from bayes_opt import BayesianOptimization
 from tqdm import tqdm
 
 
-def bayesian_optim(loader_fn: dataset.LoaderFn, use_state: UseState,
+def bayesian_optim(dataset: dataset.Dataset, use_state: UseState,
                    train_step: TrainStep, loss_fn: LossFn,
                    init_points: int = 5, n_iter: int = 25) -> Tuple[ModelState, Loss]:
     # train_and_evalをラップした関数。hidden_sizesの各要素は整数化して扱う。
@@ -14,7 +14,7 @@ def bayesian_optim(loader_fn: dataset.LoaderFn, use_state: UseState,
             learning_rate=learning_rate,
             hidden_sizes=[int(hidden_size_1), int(hidden_size_2)]
         )
-        return train_and_eval(loader_fn, use_state, train_step, loss_fn, op_params, epochs)
+        return train_and_eval(dataset, use_state, train_step, loss_fn, op_params, epochs)
 
     def objective(learning_rate: float, hidden_size_1: float, hidden_size_2: float) -> float:
         epochs = 1  # パラメータチューニング中は1エポックで評価する
@@ -64,22 +64,20 @@ class OptimizableParams(NamedTuple):
     hidden_sizes: List[int]
 
 
-def train_and_eval(loader_fn: dataset.LoaderFn, use_state: UseState, train_step: TrainStep, loss_fn: LossFn, op_params: OptimizableParams, epochs: int) -> Tuple[ModelState, Loss]:
+def train_and_eval(ds: dataset.Dataset, use_state: UseState, train_step: TrainStep, loss_fn: LossFn, op_params: OptimizableParams, epochs: int) -> Tuple[ModelState, Loss]:
     learning_rate, hidden_sizes = op_params
-    batch_size = 512
-    ds_np = loader_fn(batch_size)
 
     # サンプルバッチから入力次元と出力次元を取得
-    sample_batch = next(iter(ds_np))
-    input_sample, output_sample = sample_batch  # それぞれ形状: (784,), (10,)
-    input_size = input_sample.shape[-1]
-    output_size = output_sample.shape[-1]
+    sample_batch = next(iter(ds))
+    sample_inputs, sample_outputs = sample_batch
+    input_size = sample_inputs.shape[-1]  # (batch_size, input_size)
+    output_size = sample_outputs.shape[-1]  # (batch_size, output_size)
 
     # モデル初期化
     state = use_state(learning_rate, input_size, hidden_sizes, output_size)
 
     # 初期損失の計算
-    batch = dataset.Batch(inputs=input_sample, outputs=output_sample)
+    batch = dataset.Batch(inputs=sample_inputs, outputs=sample_outputs)
     init_loss = loss_fn(state.params, batch, state.apply_fn)
     print("Initial loss:", init_loss)
 
@@ -88,7 +86,7 @@ def train_and_eval(loader_fn: dataset.LoaderFn, use_state: UseState, train_step:
     for epoch in range(epochs):
         epoch_loss = 0.0
         count = 0
-        for batch_data in tqdm(ds_np, desc=f"Epoch {epoch+1}/{epochs}"):
+        for batch_data in tqdm(ds, desc=f"Epoch {epoch+1}/{epochs}"):
             inputs, outputs = batch_data
             batch = dataset.Batch(inputs=inputs, outputs=outputs)
             state, loss = train_step(state, batch)

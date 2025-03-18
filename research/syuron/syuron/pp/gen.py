@@ -14,17 +14,17 @@ def fixed(num_domains: int, width_dim: List[float], kappa_val: float) -> shg.Dom
     return tensor
 
 
-def random(num_stacks: int, num_domains: int, kappa_val: float, min_width: float, max_width: float) -> shg.DomainTensor:
+def random(num_superlattices: int, num_domains: int, kappa_val: float, min_width: float, max_width: float) -> shg.DomainTensor:
     key = jax.random.PRNGKey(42)
     random_widths = jax.random.uniform(key, shape=(
-        num_stacks, num_domains), minval=min_width, maxval=max_width)
+        num_superlattices, num_domains), minval=min_width, maxval=max_width)
     random_widths = jnp.round(random_widths, 2)
 
     indices = jnp.arange(num_domains)
     kappa_vector = jnp.where(indices % 2 == 0, kappa_val, -kappa_val)
-    kappa_stacks = jnp.broadcast_to(kappa_vector, (num_stacks, num_domains))
+    kappa_superlattices = jnp.broadcast_to(kappa_vector, (num_superlattices, num_domains))
 
-    tensor = jnp.stack([random_widths, kappa_stacks], axis=-1)
+    tensor = jnp.stack([random_widths, kappa_superlattices], axis=-1)
     return tensor
 
 

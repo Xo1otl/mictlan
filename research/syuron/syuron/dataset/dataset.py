@@ -1,5 +1,5 @@
 import jax.numpy as jnp
-from typing import Iterable, Tuple, Callable, NamedTuple
+from typing import Iterable, Tuple, NamedTuple
 
 type Inputs = jnp.ndarray
 type Outputs = jnp.ndarray
@@ -12,4 +12,3 @@ class Batch(NamedTuple):
 
 
 type BatchSize = int
-type LoaderFn = Callable[[BatchSize], Dataset]

@@ -21,9 +21,8 @@ def prepare_mnist_mlp_dataset():
     return ds
 
 
-def load_mnist(batch_size=1024) -> Dataset:
-    save_path = path.Path(
-        'research/syuron/dataset/mnist_flattened.tfrecord').abs()
+def load(filepath: path.Path, batch_size=1024) -> Dataset:
+    save_path = filepath.abs()
     dataset = tf.data.Dataset.load(save_path)
     ds = dataset.batch(batch_size)
     ds_np = tfds.as_numpy(ds)

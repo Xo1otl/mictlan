@@ -72,7 +72,7 @@ def solve_ncme(params: NCMEParams) -> EffTensor:
     final_state, _ = lax.scan(
         scan_fn,
         init_state,
-        xs=params.domain_stack  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
+        xs=params.superlattice  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
     )
     _, final_sh_power, _ = final_state
 
