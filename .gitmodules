@@ -7,3 +7,6 @@
 [submodule "apps/graphnote"]
 	path = apps/graphnote
 	url = git@github.com:Xo1otl/graphnote.git
+[submodule "research/qunasys"]
+	path = research/qunasys
+	url = git@github.com:Xo1otl/qunasys.git
