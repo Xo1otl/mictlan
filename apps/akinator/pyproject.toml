@@ -6,7 +6,7 @@ authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 streamlit = "^1.41.1"
 mysql-connector-python = "^9.1.0"
 redis = "^5.1.1"
