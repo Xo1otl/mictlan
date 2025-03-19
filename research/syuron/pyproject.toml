@@ -14,7 +14,7 @@ matplotlib = "^3.10.1"
 jax = "0.5.2"
 jax-cuda12-pjrt = "0.5.1"
 jax-cuda12-plugin = "0.5.1"
-jaxlib = "0.5.1"
+jaxlib = "0.5.3"
 
 [build-system]
 requires = ["poetry-core"]
