@@ -40,14 +40,10 @@
 				"args": [
 					"--use_api",
 					"True",
-					"--api_model",
-					"gpt-4o",
-					"--problem_name",
-					"bactgrow",
 					"--spec_path",
-					"specs/specification_bactgrow_numpy.txt",
+					"specs/specification_npda_numpy.txt",
 					"--log_path",
-					"out"
+					"out/npda2"
 				]
 			}
 		]
