@@ -10,3 +10,6 @@
 [submodule "research/qunasys"]
 	path = research/qunasys
 	url = git@github.com:Xo1otl/qunasys.git
+[submodule "research/funsearch"]
+	path = research/funsearch
+	url = git@github.com:Xo1otl/funsearch.git
