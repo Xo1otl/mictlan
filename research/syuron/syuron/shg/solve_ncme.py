@@ -47,6 +47,7 @@ def integrate_domain(state: DomainState, domain: Domain, phase_mismatch_fn: Phas
     fund_power, sh_power, current_z = state
     domain_width, kappa = domain
 
+    # FIXME: ここをルンゲクッタ法ではなく、解析的に解く方法があるらしい
     scan_fn = partial(
         runge_kutta_step,
         z0=current_z,
