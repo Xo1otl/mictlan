@@ -33,7 +33,7 @@
 			},
 			{
 				"name": "Python:LLM-SR",
-				"cwd": "/workspaces/mictlan/research/qunasys/vendor/LLM-SR",
+				"cwd": "/workspaces/mictlan/research/qunasys/LLM-SR",
 				"type": "debugpy",
 				"request": "launch",
 				"program": "main.py",
@@ -43,7 +43,7 @@
 					"--spec_path",
 					"specs/specification_npda_numpy.txt",
 					"--log_path",
-					"out/npda2"
+					"out/debug"
 				]
 			}
 		]
