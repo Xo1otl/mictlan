@@ -41,6 +41,7 @@ include = [
     "research/leetcode",
     "research/quantum",
     "research/syuron",
+    "research/funsearch",
     "packages/workspace",
 ]
 reportIncompatibleMethodOverride = true
