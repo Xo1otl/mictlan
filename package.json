@@ -11,8 +11,7 @@
 		"packages/lib/ts",
 		"apps/personal-site",
 		"apps/ossekai/web",
-		"apps/asyncsns",
-		"apps/blog2"
+		"apps/asyncsns"
 	],
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4"

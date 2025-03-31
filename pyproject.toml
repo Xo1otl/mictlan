@@ -17,7 +17,6 @@ fssearch = { path = "./apps/fssearch", develop = true }
 noteprez = { path = "./apps/noteprez", develop = true }
 akinator = { path = "./apps/akinator", develop = true }
 syuron = { path = "./research/syuron", develop = true, optional = true }
-qunasys = { path = "./research/qunasys", develop = true, optional = true }
 notebook = "^7.3.3"
 nbconvert = "^7.16.6"
 playwright = "^1.51.0"
