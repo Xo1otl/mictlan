@@ -5,7 +5,7 @@ import os
 postgres_init_script_volumes = ['postgres_data:/var/lib/postgresql/data']
 
 # Find all .mysql.sql files in folders under build
-for filepath in util.globrelpaths(path.Path(__file__).dir(), 'infra/infra/*/[0-9]*-*.postgres.sql'):
+for filepath in util.globrelpaths(path.Path(__file__).dir(), 'infra/src/infra/*/[0-9]*-*.postgres.sql'):
     folder_name = os.path.basename(os.path.dirname(filepath))
     filename = os.path.basename(filepath)
     # Split the filename to insert folder name

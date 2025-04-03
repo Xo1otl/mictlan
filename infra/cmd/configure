@@ -27,7 +27,7 @@ from infra.idp import oidc
 from infra import ldap
 from infra import crawler
 
-util.runfiles("infra/infra/**/*.tpl.py")
+util.runfiles("infra/src/infra/**/*.tpl.py")
 
 
 class ComposeChecker:
@@ -74,7 +74,7 @@ modules = [
     vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap, oidc, crawler
 ]
 
-ecosystem = infra.DockerEcosystem(path.Path("infra/infra/ecosystem"))
+ecosystem = infra.DockerEcosystem(path.Path("infra/src/infra/ecosystem"))
 ecosystem.use(infra.logging_middleware)
 ecosystem.use(checker.port_conflict)
 

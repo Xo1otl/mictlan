@@ -1,16 +1,15 @@
-[tool.poetry]
+[project]
 name = "util"
 version = "0.1.0"
 description = ""
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
+requires-python = ">=3.10, <4.0" # Poetryの ^3.10 を変換
+dependencies = [
+    "ipython>=8.34.0",
+]
 
-
-[tool.poetry.dependencies]
-python = "^3.10"
-ipython = "^8.26.0"
-
-
+# ビルドシステムの設定 (hatchling を使用)
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

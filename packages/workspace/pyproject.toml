@@ -1,14 +1,12 @@
-[tool.poetry]
+[project]
 name = "workspace"
 version = "0.1.0"
 description = ""
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-
+requires-python = ">=3.12"
+dependencies = ["pyyaml>=6.0.2"]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

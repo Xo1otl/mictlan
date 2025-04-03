@@ -1,13 +1,15 @@
-[tool.poetry]
+[project]
 name = "infra"
 version = "0.1.0"
 description = "infrastructure as code"
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["workspace"]
 
-[tool.poetry.dependencies]
-python = "^3.10"
+[tool.uv.sources]
+workspace = { workspace = true }
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

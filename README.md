@@ -32,6 +32,8 @@
 
 # TODO
 
+* poetry 引退して [uv](https://github.com/astral-sh/uv) に移行する
+
 ## CloudFlare利用
 DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストしたい
 * vpnサーバーはudpなのでcomposeでFQDNではなくipを指定する必要がある (WebUIはhttps)
