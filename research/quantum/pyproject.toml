@@ -1,18 +1,13 @@
-[tool.poetry]
+[project]
 name = "quantum"
 version = "0.1.0"
 description = ""
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-qiskit = "^1.2.4"
-qiskit-ibm-runtime = "^0.37.0"
-pylatexenc = "^2.10"
-qiskit-aer = "^0.16.0"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires-python = ">=3.12"
+dependencies = [
+    "qiskit>=1.2.4,<2.0.0",
+    "qiskit-ibm-runtime>=0.37.0,<0.38.0",
+    "pylatexenc>=2.10,<3.0.0",
+    "qiskit-aer>=0.16.0,<0.17.0",
+]

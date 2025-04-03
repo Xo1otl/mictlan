@@ -1,20 +1,23 @@
-[tool.poetry]
+[project]
 name = "akinator"
 version = "0.1.0"
 description = ""
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "streamlit>=1.41.1",
+    "mysql-connector-python>=9.1.0",
+    "redis>=5.1.1",
+    "workspace",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-streamlit = "^1.41.1"
-mysql-connector-python = "^9.1.0"
-redis = "^5.1.1"
-
+[tool.uv.sources]
+workspace = { workspace = true }
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.pyright]
 reportIncompatibleMethodOverride = true

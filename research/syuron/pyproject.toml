@@ -1,21 +1,18 @@
-[tool.poetry]
+[project]
 name = "syuron"
 version = "0.1.0"
 description = ""
-authors = ["Xo1otl <xolotl.mictl4n@gmail.com>"]
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.12"
-pandas = "^2.2.3"
-scipy = "^1.15.2"
-numpy = "^2.2.4"
-matplotlib = "^3.10.1"
-jax = "0.5.2"
-jax-cuda12-pjrt = "0.5.1"
-jax-cuda12-plugin = "0.5.1"
-jaxlib = "0.5.1"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2.3",
+    "scipy>=1.15.2,<2.0.0",
+    "numpy>=2.2.4,<3.0.0",
+    "matplotlib>=3.10.1,<4.0.0",
+    "jax[cuda12]>=0.5.2",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

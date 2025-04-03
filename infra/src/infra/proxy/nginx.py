@@ -6,7 +6,7 @@ from workspace import util, path
 
 # conf_filesにすべてのnginx.confファイルの相対パスを取得
 conf_files = util.globrelpaths(
-    path.Path(__file__).dir(), 'infra/infra/**/nginx.conf')
+    path.Path(__file__).dir(), 'infra/src/infra/**/nginx.conf')
 
 # volumesを初期化し、entrypoint.shを追加
 volumes = [

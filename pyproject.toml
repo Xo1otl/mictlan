@@ -1,52 +1,70 @@
-[tool.poetry]
+[project]
 name = "mictlan"
 version = "0.1.0"
 description = ""
-authors = ["Xolotl <xolotl.mictl4n@gmail.com>"]
-package-mode = false
+authors = [{ name = "Xolotl", email = "xolotl.mictl4n@gmail.com" }]
+requires-python = ">=3.12"
+dependencies = [
+    "notebook>=7.3.3",
+    "nbconvert>=7.16.6",
+    "playwright>=1.51.0",
 
-[tool.poetry.dependencies]
-python = "^3.12"
-# 共有するパッケージはPEPに準拠してインストール可能にしdependencesに追加する
-infra = { path = "./infra", develop = true }
-util = { path = "./packages/util/python", develop = true }
-workspace = { path = "./packages/workspace", develop = true }
-quantum = { path = "./research/quantum", develop = true }
-chathub = { path = "./apps/chathub", develop = true }
-fssearch = { path = "./apps/fssearch", develop = true }
-noteprez = { path = "./apps/noteprez", develop = true }
-akinator = { path = "./apps/akinator", develop = true }
-syuron = { path = "./research/syuron", develop = true, optional = true }
-notebook = "^7.3.3"
-nbconvert = "^7.16.6"
-playwright = "^1.51.0"
-
-[tool.poetry.extras]
-gpu = [
-    "syuron", # 機械学習できる環境のみ
+    # libというよりはアプリケーションなものはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
+    "syuron",
+    "funsearch",
+    "quantum",
+    "noteprez",
+    "blog",
+    "akinator",
+    "fssearch",
 ]
 
+[project.optional-dependencies]
+gpu = ["syuron"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+    "infra",
+    "packages/util/python",
+    "packages/workspace",
+    "research/quantum",
+    "apps/chathub",
+    "apps/fssearch",
+    "apps/noteprez",
+    "apps/akinator",
+    "apps/blog",
+    "research/syuron",
+    "research/funsearch",
+]
+
+[tool.uv.sources]
+syuron = { workspace = true }
+funsearch = { workspace = true }
+quantum = { workspace = true }
+noteprez = { workspace = true }
+blog = { workspace = true }
+akinator = { workspace = true }
+fssearch = { workspace = true }
+
 [tool.pyright]
-# pylanceはここで指定したフォルダ内のファイルのみ検出する
 include = [
     "infra",
-    "**/python",
+    "packages/util/python",
     "scripts",
     "build",
     "apps/personal-site/web/notebook",
     "apps/noteprez",
-    "apps/akinator/**",
+    "apps/akinator",
     "apps/fssearch",
     "apps/chathub",
     "research/leetcode",
     "research/quantum",
     "research/syuron",
-    "research/funsearch",
     "packages/workspace",
+    "research/funsearch",
 ]
 reportIncompatibleMethodOverride = true
 reportAbstractUsage = true
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
