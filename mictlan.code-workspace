@@ -41,7 +41,9 @@
 					"--use_api",
 					"True",
 					"--spec_path",
-					"specs/specification_npda_numpy.txt",
+					"specs/specification_bactgrow_numpy.txt",
+					"--problem_name",
+					"bactgrow",
 					"--log_path",
 					"out/debug"
 				]
