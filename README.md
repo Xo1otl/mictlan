@@ -33,6 +33,7 @@
 # TODO
 
 * poetry 引退して [uv](https://github.com/astral-sh/uv) に移行する
+* uv に移行したのでできてるか試す secrets は export してあるから build cpu container ビルドして gpu ビルドしてみる
 
 ## CloudFlare利用
 DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストしたい

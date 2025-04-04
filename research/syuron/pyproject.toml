@@ -7,10 +7,14 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pandas>=2.2.3",
-    "scipy>=1.15.2,<2.0.0",
-    "numpy>=2.2.4,<3.0.0",
-    "matplotlib>=3.10.1,<4.0.0",
+    "scipy>=1.15.2",
+    "numpy>=2.2.4",
+    "matplotlib>=3.10.1",
     "jax[cuda12]>=0.5.2",
+    "flax>=0.10.5",
+    "tensorflow[and-cuda]",
+    "tensorflow_datasets",
+    "bayesian-optimization"
 ]
 
 [build-system]
