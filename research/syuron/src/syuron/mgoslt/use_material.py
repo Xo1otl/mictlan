@@ -4,15 +4,21 @@ from syuron import shg
 
 def use_material(wavelength: shg.Wavelength, t: shg.T) -> shg.PhaseMismatchFn:
     """
-    MgO:SLT 周期分極構造の幅リストからPPMgOSLTのパラメータを計算する関数
+    MgO:SLT材料における、指定された波長と温度での位相不整合関数を計算します。
+
+    この関数は、MgO:SLTの異常光線(extraordinary ray)に対する
+    温度依存のセルマイヤー方程式を用いて、基本波(ω)と
+    第二高調波(2ω)の屈折率を計算し、それらから単位長さあたりの
+    位相不整合 Δβ = β(2ω) - 2β(ω) を求めます。
 
     Args:
-        widths: 分極ドメインの幅リスト (m)
-        kappa_magnitude: 非線形結合係数の大きさ
+        wavelength: 基本波の波長 (µm)。
+        t: 材料の温度 (摂氏)。
 
     Returns:
-        kappa_magnitude: 非線形結合係数の大きさ (constant)
-        phase_mismatch: 波長と温度に依存する位相不整合関数
+        位相不整合関数 (shg.PhaseMismatchFn)。
+        この関数は距離 `z` (µm) を引数に取り、
+        その地点での累積位相不整合量 `Δβ * z` (ラジアン) を返します。
     """
     # 材料パラメータ
     params = {
