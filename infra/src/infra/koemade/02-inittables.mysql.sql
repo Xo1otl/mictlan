@@ -168,7 +168,8 @@ INSERT INTO tags (name, category) VALUES ('快活', 'キャラ別タグ');
 INSERT INTO tags (name, category) VALUES ('セクシー・渋め', 'キャラ別タグ');
 
 -- Insert admin user
-INSERT INTO accounts (username, password) VALUES (
+INSERT INTO accounts (username, email, password) VALUES (
+    'admin@koemade.net',
     'admin@koemade.net',
     '$2y$10$1ohq7F7XDTRZa7L9y6FYVui1Bq/8ncdFU0fWeS1ALLBo0z4C4u8qm' -- Abcd1234*
 );
@@ -184,7 +185,8 @@ SET @admin_role_id = (SELECT id FROM roles WHERE name = 'admin');
 INSERT INTO account_role (account_id, role_id) VALUES (@admin_account_id, @admin_role_id);
 
 -- Insert another user
-INSERT INTO accounts (username, password) VALUES (
+INSERT INTO accounts (username, email, password) VALUES (
+    'qlovolp.ttt@gmail.com',
     'qlovolp.ttt@gmail.com',
     '$2y$10$1ohq7F7XDTRZa7L9y6FYVui1Bq/8ncdFU0fWeS1ALLBo0z4C4u8qm' -- Abcd1234*
 );
