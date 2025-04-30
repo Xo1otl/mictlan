@@ -45,6 +45,7 @@ def generate_account():
     username = fake.unique.user_name() + "@example.com"
     return {
         "username": username,
+        "email": username,  # Add email field
         "password": HASHED_PASSWORD
     }
 
@@ -104,14 +105,11 @@ def generate_voice(account_id):
     mime_type = random.choice(mime_types)
     file_extension = mime_type.split('/')[-1]
     filename = f"{account_id}_{fake.word()}_{random.randint(1000, 9999)}.{file_extension}"
-    voice_hash = hashlib.sha256(
-        (str(account_id) + filename).encode()).hexdigest()
     return {
         "title": fake.sentence(nb_words=4),
         "account_id": account_id,
         "mime_type": mime_type,
         "path": filename,
-        "hash": voice_hash
     }
 
 
@@ -159,7 +157,7 @@ def generate_tags():
     for category in categories:
         for _ in range(5):  # 各カテゴリに5つのタグを生成
             tags.append({
-                "name": fake.word(),
+                "name": fake.unique.word(), # Use unique word
                 "category": category
             })
     return tags

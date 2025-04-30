@@ -52,6 +52,7 @@
 	},
 	"settings": {
 		"chat.agent.enabled": true,
+		"accessibility.voice.speechLanguage": "ja-JP",
 		"remote.extensionKind": {
 			"asvetliakov.vscode-neovim": ["workspace"],
 			"Oracle.mysql-shell-for-vs-code": ["ui"]
