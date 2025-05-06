@@ -130,7 +130,7 @@ SELECT
     v.path AS source_url
 FROM
     voices v
-LEFT JOIN
+INNER JOIN
     actor_profiles ap ON v.account_id = ap.account_id
 LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id  -- accountsテーブルの結合を削除
