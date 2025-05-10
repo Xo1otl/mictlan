@@ -132,8 +132,12 @@ FROM
     voices v
 INNER JOIN
     actor_profiles ap ON v.account_id = ap.account_id
+INNER JOIN
+    accounts acc ON v.account_id = acc.id
 LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id  -- accountsテーブルの結合を削除
+WHERE
+    acc.status != 'banned'
 GROUP BY
     v.id, ap.account_id, ap.display_name, ar.name, v.path;  -- GROUP BYを調整
     
@@ -152,12 +156,16 @@ SELECT
     nsfw.extreme_surcharge AS actor_price_nsfw_extreme
 FROM
     actor_profiles ap
+INNER JOIN
+    accounts acc ON ap.account_id = acc.id
 LEFT JOIN
     actor_ranks ar ON ap.rank_id = ar.id
 LEFT JOIN
     profile_images pi ON ap.account_id = pi.account_id
 LEFT JOIN
-    nsfw_options nsfw ON ap.account_id = nsfw.account_id;
+    nsfw_options nsfw ON ap.account_id = nsfw.account_id
+WHERE
+    acc.status != 'banned';
  
 -- Insert data into the tags table with the corresponding tag types
 INSERT INTO tags (name, category) VALUES ('10代', '年代別タグ');
