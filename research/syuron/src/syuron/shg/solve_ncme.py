@@ -65,10 +65,48 @@ def integrate_domain(state: DomainState, domain: Domain, phase_mismatch_fn: Phas
     return (new_fund_power, new_sh_power, current_z + domain_width), None
 
 
+def integrate_domain_npda(state: DomainState,
+                          domain: Domain,
+                          # Assumes this returns Phi(z)
+                          phase_mismatch_fn: PhaseMismatchFn,
+                          mesh_density: int  # Not used by NPDA
+                          ) -> Tuple[DomainState, None]:
+    fund_power_in, sh_power_in, current_z_global = state
+    domain_width, kappa_d = domain
+
+    fund_power_out = fund_power_in
+    A_in_sq = fund_power_in**2
+    Ld = domain_width
+
+    phi_start_global = phase_mismatch_fn(current_z_global)
+    phi_end_global = phase_mismatch_fn(current_z_global + Ld)
+
+    alpha = (phi_end_global - phi_start_global) / 2.0
+
+    sinc_argument = alpha / jnp.pi
+    sinc_val = jnp.sinc(sinc_argument)
+
+    exp_term_local_sinc = jnp.exp(1j * alpha)
+
+    generated_sh_component_relative_phase = -1j * kappa_d * \
+        A_in_sq * Ld * exp_term_local_sinc * sinc_val
+
+    global_phase_factor_at_domain_start = jnp.exp(1j * phi_start_global)
+    generated_sh_component = generated_sh_component_relative_phase * \
+        global_phase_factor_at_domain_start
+
+    sh_power_out = sh_power_in + generated_sh_component
+    new_z_global = current_z_global + domain_width
+
+    return (fund_power_out, sh_power_out, new_z_global), None
+
+
 def solve_ncme(params: NCMEParams) -> EffTensor:
     init_state = (params.fund_power.astype(jnp.complex64),
                   params.sh_power.astype(jnp.complex64), 0.0)
-    scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
+    # scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
+    #                   mesh_density=params.mesh_density)
+    scan_fn = partial(integrate_domain_npda, phase_mismatch_fn=params.phase_mismatch_fn,
                       mesh_density=params.mesh_density)
     final_state, _ = lax.scan(
         scan_fn,
