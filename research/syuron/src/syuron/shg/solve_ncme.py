@@ -69,7 +69,6 @@ def integrate_domain_npda(state: DomainState,
                           domain: Domain,
                           # Assumes this returns Phi(z)
                           phase_mismatch_fn: PhaseMismatchFn,
-                          mesh_density: int  # Not used by NPDA
                           ) -> Tuple[DomainState, None]:
     fund_power_in, sh_power_in, current_z_global = state
     domain_width, kappa_d = domain
@@ -106,12 +105,12 @@ def solve_ncme(params: NCMEParams) -> EffTensor:
                   params.sh_power.astype(jnp.complex64), 0.0)
     # scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
     #                   mesh_density=params.mesh_density)
-    scan_fn = partial(integrate_domain_npda, phase_mismatch_fn=params.phase_mismatch_fn,
-                      mesh_density=params.mesh_density)
+    scan_fn = partial(integrate_domain_npda,
+                      phase_mismatch_fn=params.phase_mismatch_fn)
     final_state, _ = lax.scan(
         scan_fn,
         init_state,
-        xs=params.superlattice  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
+        xs=params.grating  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
     )
     _, final_sh_power, _ = final_state
 

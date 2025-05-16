@@ -7,10 +7,10 @@ class Domain(NamedTuple):
     kappa: float
 
 
-type Superlattice = List[Domain]
+type Grating = List[Domain]
 
-# (a, b, 2) の形状を持つテンソル、aはスーパーラティスの数、bはドメインの数
+# (a, b, 2) の形状を持つテンソル、aはグレーティングの数、bはドメインの数
 type DomainTensor = jnp.ndarray
 
 # DomainTensor の場合 b がそろってるが、それ以外の型では揃える必要がない
-type SuperlatticeDim = Union[List[Superlattice], Superlattice, DomainTensor]
+type GratingDim = Union[List[Grating], Grating, DomainTensor]

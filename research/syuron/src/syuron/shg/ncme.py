@@ -12,7 +12,7 @@ type EffTensor = jnp.ndarray
 class NCMEParams(NamedTuple):
     fund_power: FundPower
     sh_power: SHPower
-    superlattice: Superlattice
+    grating: Grating
     phase_mismatch_fn: PhaseMismatchFn
     mesh_density: int
 
