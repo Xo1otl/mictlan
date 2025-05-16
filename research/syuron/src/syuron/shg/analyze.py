@@ -7,7 +7,7 @@ import jax
 
 
 class Params(NamedTuple):
-    superlattice_dim: SuperlatticeDim
+    grating_dim: GratingDim
     T_dim: Union[List[float], float, jnp.ndarray]
     wavelength_dim: Union[List[float], float, jnp.ndarray]
     fund_power_dim: Union[List[complex], complex, jnp.ndarray]
@@ -23,11 +23,11 @@ def to_grid(val) -> jnp.ndarray:
     return jnp.array([val])
 
 
-def to_superlattice_grid(val) -> jnp.ndarray:
+def to_grating_grid(val) -> jnp.ndarray:
     if isinstance(val, jnp.ndarray):
         if val.ndim != 3 or val.shape[-1] != 2:
             raise ValueError(
-                "(num_superlattices, num_domains, 2) の形状を持つ配列を入力してください")
+                "(num_gratings, num_domains, 2) の形状を持つ配列を入力してください")
         return val
     if isinstance(val[0], list):
         return jnp.array(val)
@@ -35,7 +35,7 @@ def to_superlattice_grid(val) -> jnp.ndarray:
 
 
 def analyze(params: Params, use_material: UseMaterial, solver_fn: NCMESolverFn) -> EffTensor:
-    superlattice_grid = to_superlattice_grid(params.superlattice_dim)
+    grating_grid = to_grating_grid(params.grating_dim)
     T_grid = to_grid(params.T_dim)
     wavelength_grid = to_grid(params.wavelength_dim)
     fund_power_grid = to_grid(params.fund_power_dim)
@@ -53,15 +53,15 @@ def analyze(params: Params, use_material: UseMaterial, solver_fn: NCMESolverFn) 
 
     @jax.jit
     @jax.vmap
-    def mapped_solve(superlattice):
+    def mapped_solve(grating):
         return solver_fn(NCMEParams(
             fund_power=fund_power,
             sh_power=sh_power,
             phase_mismatch_fn=phase_mismatch_fn,
-            superlattice=superlattice,
+            grating=grating,
             mesh_density=params.mesh_density
         ))
 
-    results = mapped_solve(superlattice_grid)
+    results = mapped_solve(grating_grid)
 
     return results
