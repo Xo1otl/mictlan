@@ -53,6 +53,25 @@ def periodical(num_domains: int, period_dim: List[float], kappa_val: float, duty
     return tensor
 
 
+def concatenate(domain_tensors: List[shg.DomainTensor]) -> shg.DomainTensor:
+    if not domain_tensors:
+        raise ValueError("domain_tensors must not be empty")
+
+    # 最初のテンソルの形状を取得
+    first_shape = domain_tensors[0].shape
+
+    # 全てのテンソルが同じ形状であることを確認
+    for tensor in domain_tensors:
+        if tensor.shape[1:] != first_shape[1:]:
+            raise ValueError(
+                "All domain tensors must have the same shape except for the first dimension")
+
+    # ドメインテンソルを連結
+    concatenated_tensor = jnp.concatenate(domain_tensors, axis=1)
+
+    return concatenated_tensor
+
+
 def random(num_gratings: int, num_domains: int, kappa_val: float, min_width: float, max_width: float) -> shg.DomainTensor:
     key = jax.random.PRNGKey(42)
     random_widths = jax.random.uniform(key, shape=(
