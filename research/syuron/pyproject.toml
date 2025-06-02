@@ -6,15 +6,16 @@ authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pandas>=2.2.3",
-    "scipy>=1.15.2",
-    "numpy>=2.2.4",
-    "matplotlib>=3.10.1",
-    "jax[cuda12]>=0.5.2",
-    "flax>=0.10.5",
-    "tensorflow[and-cuda]",
+    "pandas",
+    "scipy",
+    "numpy",
+    "matplotlib",
+    "jax[cuda12]",
+    "flax",
     "tensorflow_datasets",
-    "bayesian-optimization"
+    "bayesian-optimization",
+    "matplotlib",
+    "ipykernel",
 ]
 
 [build-system]
