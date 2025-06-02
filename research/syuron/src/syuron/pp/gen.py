@@ -60,11 +60,30 @@ def concatenate(domain_tensors: List[shg.DomainTensor]) -> shg.DomainTensor:
     # 最初のテンソルの形状を取得
     first_shape = domain_tensors[0].shape
 
-    # 全てのテンソルが同じ形状であることを確認
-    for tensor in domain_tensors:
-        if tensor.shape[1:] != first_shape[1:]:
+    # 連結軸 (axis=1) 以外の次元の形状が一致しているか確認
+    for i, tensor in enumerate(domain_tensors):
+        if i == 0:  # 最初のテンソルはスキップ
+            continue
+
+        # 0番目の次元のチェック
+        if tensor.shape[0] != first_shape[0]:  # type: ignore
             raise ValueError(
-                "All domain tensors must have the same shape except for the first dimension")
+                f"Dimension 0 mismatch: Tensor {i} shape {tensor.shape[0]} "
+                f"does not match first tensor shape"
+                f"{first_shape[0]}"  # type: ignore
+            )
+        # 2番目以降の次元のチェック (axis=1 は連結するのでチェックしない)
+        if len(tensor.shape) > 2 and len(first_shape) > 2:  # 3次元以上の場合
+            if tensor.shape[2:] != first_shape[2:]:
+                raise ValueError(
+                    f"Dimensions from 2 onwards mismatch: Tensor {i} shape {tensor.shape[2:]} "
+                    f"does not match first tensor shape {first_shape[2:]}"
+                )
+        elif len(tensor.shape) != len(first_shape):  # 次元数自体が異なる場合 (2次元と3次元など)
+            raise ValueError(
+                f"Number of dimensions mismatch: Tensor {i} has {len(tensor.shape)} dimensions, "
+                f"first tensor has {len(first_shape)} dimensions."
+            )
 
     # ドメインテンソルを連結
     concatenated_tensor = jnp.concatenate(domain_tensors, axis=1)

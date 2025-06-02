@@ -38,7 +38,6 @@ members = [
     "apps/blog",
     "research/syuron",
     "research/funsearch",
-    "research/qsim",
 ]
 
 [tool.uv.sources]

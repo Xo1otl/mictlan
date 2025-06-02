@@ -73,6 +73,7 @@ DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストし�
 - devcontainer を閉じる時毎回 close connection をしないと永久に connection が溜まっていく、リセットしたい時は下のコマンドで接続を貼り直す
   - X 転送の socket が消えずに/tmp/.x11-unix が増殖していくから定期的に消さなあかんのかもしれない
   - 開いてる最中にバグるなどしたらコネクションが遺ってしまうのかもしれない
+- docker contextを作成 `docker context create --docker host="ssh://Username@10.8.0.2" workstation`
 - docker sock を閉じる`netsh interface portproxy delete v4tov4 listenport=2375 listenaddress=10.8.0.2`
 - docker sock の forward `netsh interface portproxy add v4tov4 listenport=2375 listenaddress=10.8.0.2 connectaddress=127.0.0.1 connectport=2375`
 - `docker context create workstation --docker "host=tcp://10.8.0.2:2375"`
