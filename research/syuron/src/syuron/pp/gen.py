@@ -53,6 +53,68 @@ def periodical(num_domains: int, period_dim: List[float], kappa_val: float, duty
     return tensor
 
 
+def periodical_length_limited(lengths: List[float], period: float, kappa_val: float) -> shg.DomainTensor:
+    """
+    指定された長さのリストに対して、周期分極反転構造を生成します。
+    各長さに対して、指定の周期で分極構造を作成し、
+    長さの制限内で打ち切ります。
+    短いグレーティングは長さ0のドメインでパディングされます。
+
+    Args:
+        lengths: グレーティングの長さのリスト。
+        period: 分極の周期 (分極の上下セットの幅)。
+        kappa_val: カッパ値の絶対値。
+
+    Returns:
+        (num_gratings, max_domains, 2) の形状を持つDomainTensor。
+        最後の次元は [width, kappa] です。
+    """
+    # 入力を JAX 配列に変換
+    lengths_array = jnp.array(lengths)
+    num_gratings = len(lengths)
+
+    # 1周期内のドメイン幅（50%デューティ）
+    domain_width = period / 2.0
+
+    # 各グレーティングの最大ドメイン数を計算
+    max_domains_per_grating = jnp.ceil(
+        lengths_array / domain_width).astype(int)
+    max_domains = jnp.max(max_domains_per_grating)
+
+    # ドメインインデックスのグリッドを作成 (num_gratings, max_domains)
+    domain_indices = jnp.arange(max_domains)[None, :]  # (1, max_domains)
+
+    # 各ドメインの開始位置を計算 (num_gratings, max_domains)
+    # (1, max_domains) -> (num_gratings, max_domains) by broadcast
+    domain_starts = domain_indices * domain_width
+
+    # 各ドメインの終了位置を計算
+    domain_ends = domain_starts + domain_width
+
+    # 各グレーティングの長さを (num_gratings, 1) に reshape してブロードキャスト
+    lengths_reshaped = lengths_array[:, None]  # (num_gratings, 1)
+
+    # ドメインが有効かどうかを判定（開始位置がグレーティング長さ未満）
+    # (num_gratings, max_domains)
+    valid_domains = domain_starts < lengths_reshaped
+
+    # 各ドメインの実際の幅を計算（グレーティング長さでクリップ）
+    actual_ends = jnp.minimum(domain_ends, lengths_reshaped)
+    widths = jnp.where(valid_domains, actual_ends - domain_starts, 0.0)
+
+    # カッパ値を計算（偶数インデックス: +kappa, 奇数インデックス: -kappa）
+    kappas_sign = jnp.where(domain_indices %
+                            2 == 0, 1.0, -1.0)  # (1, max_domains)
+    kappas = jnp.where(valid_domains, kappas_sign * kappa_val,
+                       0.0)  # (num_gratings, max_domains)
+
+    # 幅とカッパ値をスタックしてテンソルを作成
+    # (num_gratings, max_domains, 2)
+    tensor = jnp.stack([widths, kappas], axis=-1)
+
+    return tensor
+
+
 def concatenate(domain_tensors: List[shg.DomainTensor]) -> shg.DomainTensor:
     if not domain_tensors:
         raise ValueError("domain_tensors must not be empty")
