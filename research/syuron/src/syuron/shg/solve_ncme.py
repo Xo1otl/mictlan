@@ -105,8 +105,21 @@ def integrate_domain_npda(state: DomainState,
 def solve_ncme(params: NCMEParams) -> EffTensor:
     init_state = (params.fund_power.astype(jnp.complex64),
                   params.sh_power.astype(jnp.complex64), 0.0)
-    # scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
-    #                   mesh_density=params.mesh_density)
+    scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
+                      mesh_density=params.mesh_density)
+    final_state, _ = lax.scan(
+        scan_fn,
+        init_state,
+        xs=params.grating  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
+    )
+    _, final_sh_power, _ = final_state
+
+    return final_sh_power / params.fund_power
+
+
+def solve_ncme_npda(params: NCMEParams) -> EffTensor:
+    init_state = (params.fund_power.astype(jnp.complex64),
+                  params.sh_power.astype(jnp.complex64), 0.0)
     scan_fn = partial(integrate_domain_npda,
                       phase_mismatch_fn=params.phase_mismatch_fn)
     final_state, _ = lax.scan(
