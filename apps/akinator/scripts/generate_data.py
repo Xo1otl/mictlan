@@ -5,8 +5,7 @@ from pydantic import BaseModel, Field, model_validator
 from typing import Dict
 import time
 import concurrent.futures
-import google.generativeai as genai
-from infra.ai import llm
+import google.genai
 import typing_extensions as typing
 
 questions = [

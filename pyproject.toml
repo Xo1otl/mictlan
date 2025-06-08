@@ -8,6 +8,9 @@ dependencies = [
     "notebook>=7.3.3",
     "nbconvert>=7.16.6",
     "playwright>=1.51.0",
+    "jax[cuda]",
+    "optax",
+    "pandas",
 
     # libというよりはアプリケーションなものはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
     "syuron",
