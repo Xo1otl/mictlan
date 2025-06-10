@@ -6,6 +6,7 @@ import jax.numpy as jnp
 type FundPower = jnp.ndarray
 type SHPower = jnp.ndarray
 type KappaMagnitude = jnp.ndarray
+# domainの数,温度,基本波初期振幅,SH波初期振幅など
 type EffTensor = jnp.ndarray
 
 
