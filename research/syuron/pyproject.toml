@@ -16,6 +16,7 @@ dependencies = [
     "bayesian-optimization",
     "matplotlib",
     "ipykernel",
+    "manim",
 ]
 
 [build-system]
