@@ -114,6 +114,7 @@
 			"**/*.min.css": true,
 			"**/*-min.css": true,
 			"**/movies.json": true
-		}
+		},
+		"svg.preview.background": "custom"
 	}
 }
