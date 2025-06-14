@@ -17,6 +17,7 @@ dependencies = [
     "matplotlib",
     "ipykernel",
     "manim",
+    "gdsfactory[full]",
 ]
 
 [build-system]
