@@ -67,6 +67,16 @@ DNSをCloudFlareにしてCloudFlare Tunnelでhttp/httpsはすべてホストし�
 
 # Note
 
+## CUDAのインストール
+4.7. Windows Subsystem for Linux
+These instructions must be used if you are installing in a WSL environment.
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt update
+sudo apt install cuda-toolkit
+```
+
 - vpn用のfirewall設定
   - vpnネットワークをprivateに追加`Set-NetConnectionProfile -InterfaceAlias "<config>" -NetworkCategory Private`
   - 10.8.0.0/24を許可`New-NetFirewallRule -DisplayName "Allow VPN Traffic" -Direction Inbound -Action Allow -Profile Private -RemoteAddress 10.8.0.0/24`
