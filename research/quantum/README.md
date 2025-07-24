@@ -19,3 +19,6 @@ clean architectureなので理解してからinterfaceに合わせて実装す�
 
 1. 補題分割してグラフにする
 2. とりあえず古典部分だけ
+
+# 課題
+* https://docs.qulacs.org/en/latest/apply/6.2_vqe.html これを参考にしてanzatsをオプティマイズ
