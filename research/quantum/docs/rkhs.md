@@ -68,3 +68,6 @@ $$\langle Tf, g \rangle_{\mathcal{H}} = \langle f, g \rangle_{L^2}$$
 
 この恒等式から、作用素 $T$ がRKHSの内積 $\langle \cdot, \cdot \rangle_{\mathcal{H}}$ に関しても自己共役であるという、以下の性質が導かれます。
 $$\langle Tf, g \rangle_{\mathcal{H}} = \langle f, Tg \rangle_{\mathcal{H}}$$
+
+## まとめ
+RKHSは、カーネル積分作用素の固有関数を正規直交基底とし、対応する固有値の逆数倍で伸縮した関数空間
