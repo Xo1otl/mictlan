@@ -10,4 +10,5 @@ dependencies = [
     "qiskit-ibm-runtime>=0.37.0,<0.38.0",
     "pylatexenc>=2.10,<3.0.0",
     "qiskit-aer>=0.17.0,<0.18.0",
+    "qulacs"
 ]
