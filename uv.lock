@@ -2939,6 +2939,7 @@ dependencies = [
     { name = "optax" },
     { name = "pandas" },
     { name = "playwright" },
+    { name = "plotly" },
     { name = "quantum" },
     { name = "syuron" },
 ]
@@ -2961,6 +2962,7 @@ requires-dist = [
     { name = "optax" },
     { name = "pandas" },
     { name = "playwright", specifier = ">=1.51.0" },
+    { name = "plotly" },
     { name = "quantum", virtual = "research/quantum" },
     { name = "syuron", editable = "research/syuron" },
     { name = "syuron", marker = "extra == 'gpu'", editable = "research/syuron" },
@@ -3825,6 +3827,19 @@ wheels = [
 ]
 
 [[package]]
+name = "plotly"
+version = "6.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "narwhals" },
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6e/5c/0efc297df362b88b74957a230af61cd6929f531f72f48063e8408702ffba/plotly-6.2.0.tar.gz", hash = "sha256:9dfa23c328000f16c928beb68927444c1ab9eae837d1fe648dbcda5360c7953d", size = 6801941, upload-time = "2025-06-26T16:20:45.765Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ed/20/f2b7ac96a91cc5f70d81320adad24cc41bf52013508d649b1481db225780/plotly-6.2.0-py3-none-any.whl", hash = "sha256:32c444d4c940887219cb80738317040363deefdfee4f354498cc0b6dab8978bd", size = 9635469, upload-time = "2025-06-26T16:20:40.76Z" },
+]
+
+[[package]]
 name = "pluggy"
 version = "1.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -4634,6 +4649,7 @@ dependencies = [
     { name = "qiskit" },
     { name = "qiskit-aer" },
     { name = "qiskit-ibm-runtime" },
+    { name = "qulacs" },
 ]
 
 [package.metadata]
@@ -4642,6 +4658,26 @@ requires-dist = [
     { name = "qiskit", specifier = ">=1.2.4,<2.0.0" },
     { name = "qiskit-aer", specifier = ">=0.17.0,<0.18.0" },
     { name = "qiskit-ibm-runtime", specifier = ">=0.37.0,<0.38.0" },
+    { name = "qulacs" },
+]
+
+[[package]]
+name = "qulacs"
+version = "0.6.12"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1c/96/5dfdfc42281b4c110b1156d54f87df87a44f5d8625759e8d38a95a66a457/qulacs-0.6.12.tar.gz", hash = "sha256:ab62ec4244bc8fdf243b66cffec02e31ba4ec183f69aab6946d989fea4f89559", size = 804576, upload-time = "2025-06-06T01:23:10.128Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/91/55/2ddc10aa44dcbd96f389f5e626283376c946f365e7a93290176a14474482/qulacs-0.6.12-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:d7365f8886071f57183ba626c129b794e01f40e08e3e3c05f7979a3011444d16", size = 780547, upload-time = "2025-06-06T01:32:11.284Z" },
+    { url = "https://files.pythonhosted.org/packages/93/a4/781900269a04f90c83dae853bd4edf0207f7eda28a40dab0877b43c2dabe/qulacs-0.6.12-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:be1eeca7ff073fc0ad93160ee54b0a9228b6c8b0eb87e538ddb9894981eaaf76", size = 681048, upload-time = "2025-06-06T01:26:31.211Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/cb/b69c2f984e519cba36dcc2f4f22fe2e8c31252395b63332f9b6f6d22595b/qulacs-0.6.12-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2de6a3d97f0eb54f764ddf69a08874515752b750dc9bdfc56d165ac1b405b7ca", size = 969616, upload-time = "2025-06-06T01:27:26.528Z" },
+    { url = "https://files.pythonhosted.org/packages/15/68/0c95587e1c70df95a2ee17744ecfa7c404af72f5010ac4053ca60ec3bed3/qulacs-0.6.12-cp312-cp312-win_amd64.whl", hash = "sha256:9c3ed2e32962c0dab62aac8a9505a08f23ff97316807e8c72600295e456aaf6a", size = 844784, upload-time = "2025-06-06T01:33:22.877Z" },
+    { url = "https://files.pythonhosted.org/packages/91/61/b068769cd042cb6f67700fdd24fe13036a381c4e9f2c8c7b80aa37498b1b/qulacs-0.6.12-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:d31d7af9df9e4d57fe539f187069364df77e63e536a5a3f53a214b2541a0f3ef", size = 780652, upload-time = "2025-06-06T01:32:05.193Z" },
+    { url = "https://files.pythonhosted.org/packages/72/90/bd27f4c66e9d567f4c06fe3296445b70aaf4129c2e3bd110c04a44db42cb/qulacs-0.6.12-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:831443d670a5aa715396a51b8904bf6365ad09b37e4f0f230fcda60fe184e891", size = 680910, upload-time = "2025-06-06T01:27:43.493Z" },
+    { url = "https://files.pythonhosted.org/packages/05/a0/2cfb4004efaf4b38b3d711fff739bca1615c32a9a85493ec85cf30e7038b/qulacs-0.6.12-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:19937ebb7b3c488da19b6e5e35b3a1dacec35fda1866af60d1a840d858727349", size = 969698, upload-time = "2025-06-06T01:31:41.108Z" },
 ]
 
 [[package]]

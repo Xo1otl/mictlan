@@ -52,7 +52,6 @@
 	},
 	"settings": {
 		"chat.agent.enabled": true,
-		"accessibility.voice.speechLanguage": "ja-JP",
 		"remote.extensionKind": {
 			"asvetliakov.vscode-neovim": ["workspace"],
 			"Oracle.mysql-shell-for-vs-code": ["ui"]
@@ -72,7 +71,7 @@
 		"git.autofetch": true,
 		"git.enableSmartCommit": true,
 		/* python */
-		"python.analysis.typeCheckingMode": "standard",
+		"python.analysis.typeCheckingMode": "strict",
 		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない

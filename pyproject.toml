@@ -8,6 +8,7 @@ dependencies = [
     "notebook>=7.3.3",
     "nbconvert>=7.16.6",
     "playwright>=1.51.0",
+    "plotly",
     "jax[cuda]",
     "optax",
     "pandas",
@@ -71,3 +72,5 @@ include = [
 ]
 reportIncompatibleMethodOverride = true
 reportAbstractUsage = true
+reportMissingTypeArgument = "error"
+reportUnknownVariableType = "error"
