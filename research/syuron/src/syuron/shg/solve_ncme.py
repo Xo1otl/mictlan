@@ -103,8 +103,8 @@ def integrate_domain_npda(state: DomainState,
 
 
 def solve_ncme(params: NCMEParams) -> EffTensor:
-    init_state = (params.fund_power.astype(jnp.complex64),
-                  params.sh_power.astype(jnp.complex64), 0.0)
+    init_state = (params.fund_power.astype(jnp.complex128),
+                  params.sh_power.astype(jnp.complex128), 0.0)
     scan_fn = partial(integrate_domain, phase_mismatch_fn=params.phase_mismatch_fn,
                       mesh_density=params.mesh_density)
     final_state, _ = lax.scan(
@@ -118,8 +118,8 @@ def solve_ncme(params: NCMEParams) -> EffTensor:
 
 
 def solve_ncme_npda(params: NCMEParams) -> EffTensor:
-    init_state = (params.fund_power.astype(jnp.complex64),
-                  params.sh_power.astype(jnp.complex64), 0.0)
+    init_state = (params.fund_power.astype(jnp.complex128),
+                  params.sh_power.astype(jnp.complex128), 0.0)
     scan_fn = partial(integrate_domain_npda,
                       phase_mismatch_fn=params.phase_mismatch_fn)
     final_state, _ = lax.scan(
