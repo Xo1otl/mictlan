@@ -1,0 +1,543 @@
+Starting Bayesian optimization for SA parameters...
+|   iter    |  target   | coolin... | initia... |
+-------------------------------------------------
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.59 seconds.
+Final cost: 361.7
+Params: temp=362.96, rate=0.99941 -> Final Cost: 361.7330
+*** New best cost found: 361.7330 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.38 seconds.
+Final cost: 451.3
+Params: temp=158.14, rate=0.99900 -> Final Cost: 451.3494
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 199.1
+Params: temp=55.25, rate=0.99915 -> Final Cost: 199.1471
+*** New best cost found: 199.1471 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 260.6
+Params: temp=179.32, rate=0.99918 -> Final Cost: 260.5962
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 310.4
+Params: temp=274.02, rate=0.99939 -> Final Cost: 310.3549
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 455.1
+Params: temp=56.35, rate=0.99960 -> Final Cost: 455.1186
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 87.69
+Params: temp=55.29, rate=0.99906 -> Final Cost: 87.6943
+*** New best cost found: 87.6943 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.36 seconds.
+Final cost: 214.6
+Params: temp=318.12, rate=0.99915 -> Final Cost: 214.5685
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.70 seconds.
+Final cost: 414.7
+Params: temp=55.36, rate=0.99931 -> Final Cost: 414.6946
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.52 seconds.
+Final cost: 263.1
+Params: temp=89.11, rate=0.99939 -> Final Cost: 263.1035
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 59.47
+Params: temp=229.13, rate=0.99988 -> Final Cost: 59.4749
+*** New best cost found: 59.4749 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.52 seconds.
+Final cost: 300.8
+Params: temp=55.29, rate=0.99967 -> Final Cost: 300.8223
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.55 seconds.
+Final cost: 576.9
+Params: temp=202.51, rate=0.99960 -> Final Cost: 576.9383
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.56 seconds.
+Final cost: 402.3
+Params: temp=354.00, rate=0.99955 -> Final Cost: 402.3436
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 488.9
+Params: temp=209.28, rate=0.99915 -> Final Cost: 488.8905
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 568.6
+Params: temp=179.33, rate=0.99999 -> Final Cost: 568.5995
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 516.5
+Params: temp=144.70, rate=0.99934 -> Final Cost: 516.4979
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 504.2
+Params: temp=339.99, rate=0.99919 -> Final Cost: 504.2153
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 408.6
+Params: temp=213.87, rate=0.99990 -> Final Cost: 408.5547
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 695.6
+Params: temp=345.21, rate=0.99917 -> Final Cost: 695.6030
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.54 seconds.
+Final cost: 412.6
+Params: temp=205.95, rate=0.99971 -> Final Cost: 412.5949
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.55 seconds.
+Final cost: 739.8
+Params: temp=317.31, rate=0.99908 -> Final Cost: 739.7612
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 52.98
+Params: temp=193.69, rate=0.99901 -> Final Cost: 52.9805
+*** New best cost found: 52.9805 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 434.8
+Params: temp=418.08, rate=0.99922 -> Final Cost: 434.8114
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 613.1
+Params: temp=391.49, rate=0.99951 -> Final Cost: 613.1259
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 84.42
+Params: temp=308.76, rate=0.99984 -> Final Cost: 84.4185
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.57 seconds.
+Final cost: 943.5
+Params: temp=386.59, rate=0.99978 -> Final Cost: 943.5353
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.52 seconds.
+Final cost: 94.63
+Params: temp=188.84, rate=0.99901 -> Final Cost: 94.6318
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.73 seconds.
+Final cost: 485.3
+Params: temp=249.11, rate=0.99946 -> Final Cost: 485.2723
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 173
+Params: temp=54.72, rate=0.99949 -> Final Cost: 172.9596
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.54 seconds.
+Final cost: 47.39
+Params: temp=115.08, rate=0.99931 -> Final Cost: 47.3874
+*** New best cost found: 47.3874 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 192.6
+Params: temp=74.74, rate=0.99987 -> Final Cost: 192.6023
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.52 seconds.
+Final cost: 96.79
+Params: temp=23.53, rate=0.99902 -> Final Cost: 96.7901
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 587.3
+Params: temp=200.94, rate=0.99906 -> Final Cost: 587.3458
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 164
+Params: temp=156.09, rate=0.99973 -> Final Cost: 163.9698
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.56 seconds.
+Final cost: 630.5
+Params: temp=473.44, rate=0.99966 -> Final Cost: 630.5428
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 458.4
+Params: temp=55.29, rate=0.99975 -> Final Cost: 458.3680
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 88.04
+Params: temp=327.40, rate=0.99908 -> Final Cost: 88.0389
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 475
+Params: temp=240.49, rate=0.99989 -> Final Cost: 474.9885
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.52 seconds.
+Final cost: 903.9
+Params: temp=434.09, rate=0.99943 -> Final Cost: 903.9266
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.54 seconds.
+Final cost: 430.2
+Params: temp=55.24, rate=0.99992 -> Final Cost: 430.2026
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.45 seconds.
+Final cost: 433.8
+Params: temp=233.74, rate=0.99992 -> Final Cost: 433.8248
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 260.3
+Params: temp=421.73, rate=0.99987 -> Final Cost: 260.2833
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 440.6
+Params: temp=406.42, rate=0.99961 -> Final Cost: 440.5612
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 196.9
+Params: temp=89.11, rate=0.99912 -> Final Cost: 196.9233
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 274.8
+Params: temp=229.13, rate=0.99914 -> Final Cost: 274.8337
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.35 seconds.
+Final cost: 41.62
+Params: temp=55.29, rate=0.99976 -> Final Cost: 41.6211
+*** New best cost found: 41.6211 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.37 seconds.
+Final cost: 95.25
+Params: temp=23.53, rate=0.99918 -> Final Cost: 95.2535
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 411.4
+Params: temp=338.17, rate=0.99916 -> Final Cost: 411.3958
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.63 seconds.
+Final cost: 474.4
+Params: temp=498.93, rate=0.99929 -> Final Cost: 474.4092
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.44 seconds.
+Final cost: 410.1
+Params: temp=206.02, rate=0.99995 -> Final Cost: 410.1176
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 169.3
+Params: temp=433.34, rate=0.99913 -> Final Cost: 169.2905
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 424.3
+Params: temp=54.72, rate=0.99945 -> Final Cost: 424.3397
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.46 seconds.
+Final cost: 497.6
+Params: temp=482.23, rate=0.99967 -> Final Cost: 497.6106
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.36 seconds.
+Final cost: 383.9
+Params: temp=101.29, rate=0.99919 -> Final Cost: 383.9114
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.41 seconds.
+Final cost: 478
+Params: temp=229.13, rate=0.99970 -> Final Cost: 477.9531
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.61 seconds.
+Final cost: 173.7
+Params: temp=106.16, rate=0.99977 -> Final Cost: 173.6953
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 574.4
+Params: temp=363.04, rate=0.99994 -> Final Cost: 574.4172
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.41 seconds.
+Final cost: 298.6
+Params: temp=309.50, rate=0.99929 -> Final Cost: 298.5889
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.38 seconds.
+Final cost: 132.5
+Params: temp=130.71, rate=0.99974 -> Final Cost: 132.5073
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 474.2
+Params: temp=475.54, rate=0.99929 -> Final Cost: 474.1753
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 471
+Params: temp=133.62, rate=0.99922 -> Final Cost: 471.0195
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.45 seconds.
+Final cost: 174.3
+Params: temp=339.85, rate=0.99976 -> Final Cost: 174.3242
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.45 seconds.
+Final cost: 264.5
+Params: temp=335.43, rate=0.99925 -> Final Cost: 264.5437
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 390.5
+Params: temp=89.73, rate=0.99974 -> Final Cost: 390.5451
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.57 seconds.
+Final cost: 250.1
+Params: temp=250.23, rate=0.99965 -> Final Cost: 250.1313
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.54 seconds.
+Final cost: 189.5
+Params: temp=114.66, rate=0.99969 -> Final Cost: 189.5347
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.51 seconds.
+Final cost: 412.7
+Params: temp=88.18, rate=0.99945 -> Final Cost: 412.7316
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.57 seconds.
+Final cost: 245.6
+Params: temp=81.54, rate=0.99927 -> Final Cost: 245.6068
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.49 seconds.
+Final cost: 527.9
+Params: temp=255.05, rate=0.99906 -> Final Cost: 527.9094
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 116.3
+Params: temp=245.66, rate=0.99921 -> Final Cost: 116.3280
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.44 seconds.
+Final cost: 410.8
+Params: temp=446.62, rate=0.99989 -> Final Cost: 410.7874
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.35 seconds.
+Final cost: 48.99
+Params: temp=16.85, rate=0.99938 -> Final Cost: 48.9933
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.45 seconds.
+Final cost: 246.8
+Params: temp=364.97, rate=0.99960 -> Final Cost: 246.7912
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.34 seconds.
+Final cost: 401.3
+Params: temp=271.36, rate=0.99984 -> Final Cost: 401.3002
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 547.5
+Params: temp=379.65, rate=0.99926 -> Final Cost: 547.4817
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.39 seconds.
+Final cost: 341.2
+Params: temp=184.57, rate=0.99927 -> Final Cost: 341.2321
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.47 seconds.
+Final cost: 116.6
+Params: temp=433.63, rate=0.99922 -> Final Cost: 116.5606
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.38 seconds.
+Final cost: 73.67
+Params: temp=275.95, rate=0.99935 -> Final Cost: 73.6653
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.36 seconds.
+Final cost: 717.7
+Params: temp=301.93, rate=0.99912 -> Final Cost: 717.6985
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.36 seconds.
+Final cost: 411.3
+Params: temp=357.68, rate=0.99915 -> Final Cost: 411.3400
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.35 seconds.
+Final cost: 126.2
+Params: temp=31.02, rate=0.99975 -> Final Cost: 126.1672
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.47 seconds.
+Final cost: 448.8
+Params: temp=389.55, rate=0.99979 -> Final Cost: 448.7921
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.41 seconds.
+Final cost: 500.2
+Params: temp=193.69, rate=0.99902 -> Final Cost: 500.1964
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 439.9
+Params: temp=492.66, rate=0.99982 -> Final Cost: 439.9378
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 431.5
+Params: temp=456.77, rate=0.99977 -> Final Cost: 431.4832
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.63 seconds.
+Final cost: 662.1
+Params: temp=323.38, rate=0.99967 -> Final Cost: 662.0914
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.47 seconds.
+Final cost: 424.7
+Params: temp=136.41, rate=0.99941 -> Final Cost: 424.7304
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.44 seconds.
+Final cost: 261.5
+Params: temp=288.01, rate=0.99961 -> Final Cost: 261.4704
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 171.7
+Params: temp=236.77, rate=0.99970 -> Final Cost: 171.6581
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.52 seconds.
+Final cost: 31.03
+Params: temp=35.35, rate=0.99985 -> Final Cost: 31.0304
+*** New best cost found: 31.0304 ***
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.47 seconds.
+Final cost: 191.6
+Params: temp=35.24, rate=0.99902 -> Final Cost: 191.6362
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 105.3
+Params: temp=44.94, rate=0.99966 -> Final Cost: 105.3256
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.44 seconds.
+Final cost: 102.3
+Params: temp=310.18, rate=0.99969 -> Final Cost: 102.3312
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.47 seconds.
+Final cost: 311.1
+Params: temp=311.36, rate=0.99991 -> Final Cost: 311.0909
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.40 seconds.
+Final cost: 486.7
+Params: temp=184.92, rate=0.99908 -> Final Cost: 486.6849
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 339.8
+Params: temp=126.32, rate=0.99912 -> Final Cost: 339.8279
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.57 seconds.
+Final cost: 242.7
+Params: temp=126.64, rate=0.99961 -> Final Cost: 242.7098
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.49 seconds.
+Final cost: 128
+Params: temp=342.22, rate=0.99936 -> Final Cost: 127.9833
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 343
+Params: temp=321.69, rate=0.99901 -> Final Cost: 343.0282
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.45 seconds.
+Final cost: 161.7
+Params: temp=251.03, rate=0.99923 -> Final Cost: 161.6961
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.53 seconds.
+Final cost: 150.7
+Params: temp=87.60, rate=0.99998 -> Final Cost: 150.6668
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.61 seconds.
+Final cost: 440.5
+Params: temp=49.33, rate=0.99967 -> Final Cost: 440.5020
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.50 seconds.
+Final cost: 132.5
+Params: temp=312.80, rate=0.99930 -> Final Cost: 132.5402
+
+Starting JAX compiled Batch SA (batch_size=1)...
+Finished in 4.48 seconds.
+Final cost: 623.7
+Params: temp=266.16, rate=0.99920 -> Final Cost: 623.7043
+
+=================================================
+Bayesian optimization finished.
+
+Best score during optimization: 31.0304
+Best parameters found: {'cooling_rate': np.float64(0.9998497144205435), 'initial_temp': np.float64(35.34734913899874)}
+
+Using the best signal and history found during the optimization process.
