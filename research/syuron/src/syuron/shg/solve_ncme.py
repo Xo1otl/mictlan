@@ -47,7 +47,6 @@ def integrate_domain(state: DomainState, domain: Domain, phase_mismatch_fn: Phas
     fund_power, sh_power, current_z = state
     domain_width, kappa = domain
 
-    # FIXME: ここをルンゲクッタ法ではなく、解析的に解く方法があるらしい
     scan_fn = partial(
         runge_kutta_step,
         z0=current_z,
@@ -110,7 +109,7 @@ def solve_ncme(params: NCMEParams) -> EffTensor:
     final_state, _ = lax.scan(
         scan_fn,
         init_state,
-        xs=params.grating  # type: ignore pylanceでエラーが出るけど無視したら動く、推論のバグ？
+        xs=params.grating  # type: ignore
     )
     _, final_sh_power, _ = final_state
 

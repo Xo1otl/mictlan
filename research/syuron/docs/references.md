@@ -1,0 +1,2 @@
+https://www.researchgate.net/publication/367037032_Efficient_Third-Harmonic_Generation_by_Inhomogeneous_Quasi-Phase-Matching_in_Quadratic_Crystals
+
