@@ -10,10 +10,12 @@
 
 最初に提示された方程式は、マクスウェル方程式から出発し、緩慢変化包絡線近似（SVEA）を適用して導出される標準的な結合波方程式です。
 
-$$
-\frac{\partial}{\partial z}E_1 = i \frac{k_{10}^2}{2k_1} \chi^{(2)}(z) [2E_2 E_1^* \exp(i\Delta k_1 z) + 2E_3 E_2^* \exp(i\Delta k_2 z)] \quad (1)
-$$
-（他の方程式も同様）
+$$\frac{\partial}{\partial z}E_1 = i \frac{k_{10}^2}{2k_1} \chi^{(2)}(z) [2E_2 E_1^* \exp(i\Delta k_1 z) + 2E_3 E_2^* \exp(i\Delta k_2 z)] \quad (1)$$
+
+$$\frac{\partial}{\partial z}E_2 = i \frac{k_{20}^2}{2k_2} \chi^{(2)}(z) [E_1^2 \exp(-i\Delta k_1 z) + 2E_3 E_1^* \exp(i\Delta k_2 z)] \quad (2)$$
+
+$$\frac{\partial}{\partial z}E_3 = i \frac{k_{30}^2}{2k_3} \chi^{(2)}(z) [2E_1 E_2 \exp(-i\Delta k_2 z)] \quad (3)$$
+
 
 ここで係数 $\frac{k_{j0}^2}{2k_j}$ は $\frac{\omega_j}{2 n_j c}$ と書き直すことができ、物理定数（周波数 $\omega_j$、屈折率 $n_j$、非線形感受率 $\chi^{(2)}$）と明確に対応しています。このモデルは**物理的に厳密であり、高い信頼性**を持ちます。
 
