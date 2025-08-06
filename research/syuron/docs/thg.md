@@ -97,7 +97,7 @@ $$\frac{d\boldsymbol{A}}{dz} = \boldsymbol{f}(\boldsymbol{A}, z; \kappa(z))$$
 
 ここで、関数 $\boldsymbol{f}$ は、採用するモデルに応じた方程式に対応します。
 
-$k$番目の区間 $[z_k, z_{k+1}]$ において結合係数 $\kappa_k$ が一定である場合、この区間における伝播は、始点での振幅ベクトル $\boldsymbol{A}(z_k)$ を終点での振幅ベクトル $\boldsymbol{A}(z_{k+1})$ に写す非線形な「伝播演算子」$\mathcal{P}_k$ を用いて、以下のように定義できます。
+$k$番目の区間 $[z_k, z_{k+1}]$ において結合係数 $\kappa_k$ は一定であり、この区間における伝播は、始点での振幅ベクトル $\boldsymbol{A}(z_k)$ を終点での振幅ベクトル $\boldsymbol{A}(z_{k+1})$ に写す非線形な「伝播演算子」$\mathcal{P}_k$ を用いて、以下のように定義できます。
 
 $$\boldsymbol{A}(z_{k+1}) = \mathcal{P}_k \left[ \boldsymbol{A}(z_k) \right]$$
 
