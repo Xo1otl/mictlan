@@ -51,6 +51,9 @@
 		]
 	},
 	"settings": {
+		"vim.handleKeys": {
+			"<C-f>": false
+		},
 		"chat.agent.enabled": true,
 		"remote.extensionKind": {
 			"asvetliakov.vscode-neovim": ["workspace"],
