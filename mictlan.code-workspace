@@ -52,7 +52,8 @@
 	},
 	"settings": {
 		"vim.handleKeys": {
-			"<C-f>": false
+			"<C-f>": false,
+			"<C-r>": false
 		},
 		"chat.agent.enabled": true,
 		"remote.extensionKind": {

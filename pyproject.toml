@@ -13,7 +13,7 @@ dependencies = [
     "optax",
     "pandas",
 
-    # libというよりはアプリケーションなものはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
+    # libはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
     "syuron",
     "funsearch",
     "quantum",
@@ -21,6 +21,7 @@ dependencies = [
     "blog",
     "akinator",
     "fssearch",
+    "cwes",
 ]
 
 [project.optional-dependencies]
@@ -42,6 +43,7 @@ members = [
     "apps/blog",
     "research/syuron",
     "research/funsearch",
+    "research/cwes",
 ]
 
 [tool.uv.sources]
@@ -52,6 +54,7 @@ noteprez = { workspace = true }
 blog = { workspace = true }
 akinator = { workspace = true }
 fssearch = { workspace = true }
+cwes = { workspace = true }
 
 [tool.pyright]
 include = [
@@ -67,6 +70,7 @@ include = [
     "research/leetcode",
     "research/quantum",
     "research/syuron",
+    "research/cwes",
     "packages/workspace",
     "research/funsearch",
 ]
