@@ -67,9 +67,7 @@ $$
 
 単一ドメイン内（結合係数 $\kappa(z) = \kappa_k$ が一定）において、この変換により、ベクトル $\boldsymbol{B}(z) = [B_1, B_2, B_3]^T$ に対する方程式系は、以下の半線形（Semilinear）な自励系に帰着されます。
 
-$$
-\frac{d\boldsymbol{B}}{dz} = \boldsymbol{L}\boldsymbol{B} + \boldsymbol{N}(\boldsymbol{B})
-$$
+$$\frac{d\boldsymbol{B}}{dz} = \boldsymbol{L}\boldsymbol{B} + \boldsymbol{N}(\boldsymbol{B})$$
 
 ここで、$\boldsymbol{L}$ は剛直性の原因となる線形演算子（対角行列）、$\boldsymbol{N}(\boldsymbol{B})$ は非線形項です。
 
@@ -90,9 +88,7 @@ $$
 
 区間 $[z_n, z_n+h]$ における厳密解は、定数変化公式（Variation-of-Constants formula）により与えられます。
 
-$$
-\boldsymbol{B}(z_n+h) = e^{\boldsymbol{L}h}\boldsymbol{B}(z_n) + \int_0^h e^{\boldsymbol{L}(h-\tau)} \boldsymbol{N}(\boldsymbol{B}(z_n+\tau)) d\tau
-$$
+$$\boldsymbol{B}(z_n+h) = e^{\boldsymbol{L}h}\boldsymbol{B}(z_n) + \int_0^h e^{\boldsymbol{L}(h-\tau)} \boldsymbol{N}(\boldsymbol{B}(z_n+\tau)) d\tau$$
 
 ETD法は、この積分項を数値的に近似します。例えば、広く用いられる4次のETDルンゲ＝クッタ法（ETDRK4）では、非線形項 $\boldsymbol{N}(\boldsymbol{B})$ を複数点で評価し、それらを$\varphi$関数（$\varphi_0(z)=e^z, \varphi_{k+1}(z) = (\varphi_k(z) - 1/k!)/z$）の線形結合で重み付けすることで、積分を4次精度で近似します。$\boldsymbol{L}$が対角行列であるため、これらの行列関数の計算は容易です。これが伝播演算子 $\mathcal{P}_k$ の具体的な計算手法となります。
 
@@ -186,8 +182,6 @@ $\boldsymbol{f}$ は $\kappa$ に線形であるため、分極反転構造（$\
 最適化過程でドメインが消滅する（$z_k = z_{k+1}$）場合、パラメータ空間の境界に到達します。しかし、ドメイン長がゼロに近づくと、そのドメインの伝播演算子 $\mathcal{P}_k$ は恒等写像に滑らかに近づくため、目的関数の微分可能性は境界上でも維持されます。
 
 結論として、与えられた標準的な問題設定の下では、目的関数は滑らかであり、標準的な勾配の枠組みで十分対応可能です。
-
-承知いたしました。問1(1)で示したExponential Integratorの枠組みを適用するための数学的定式化について、途中式を省略せず、より詳細に解説します。
 
 ### **目標**
 
