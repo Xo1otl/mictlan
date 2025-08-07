@@ -51,11 +51,11 @@ $$
 
 **1. $B_1$ の方程式**
 
-式(4)を $z$ で微分します。
+式(4)を $z$ で微分する。
 $$\frac{dA_1}{dz} = \frac{dB_1}{dz}$$
-これに式(1)を代入します。
+これに式(1)を代入する。
 $$\frac{dB_1}{dz} = i \kappa_k \left[ A_2 A_1^* e^{i\Delta k_1 z} + A_3 A_2^* e^{i\Delta k_2 z} \right]$$
-右辺の $A_k$ を $B_k$ を用いて書き換えます（式(4)〜(6)を代入）。
+右辺の $A_k$ を $B_k$ を用いて書き換える（式(4)〜(6)を代入）。
 $$
 \begin{aligned}
 \frac{dB_1}{dz} &= i \kappa_k \left[ (B_2 e^{-i\Delta k_1 z}) (B_1^*) e^{i\Delta k_1 z} + (B_3 e^{-i(\Delta k_1 + \Delta k_2) z}) (B_2^* e^{i\Delta k_1 z}) e^{i\Delta k_2 z} \right] \\
@@ -110,10 +110,10 @@ $$
 $$
 右辺の $A_k$ を $B_k$ で書き換える。
 $$
-\begin{aligned}
+\begin{align}
 \frac{dB_3}{dz} &= i(\Delta k_1 + \Delta k_2) B_3 + i \, 3\kappa_k (B_1) (B_2 e^{-i\Delta k_1 z}) e^{i\Delta k_1 z} \\
 &= i(\Delta k_1 + \Delta k_2) B_3 + i \, 3\kappa_k B_1 B_2 \tag{9}
-\end{aligned}
+\end{align}
 $$
 
 ### **ステップ2：半線形自励系への整理**
@@ -169,7 +169,7 @@ $$\frac{d\boldsymbol{B}}{dz} = \boldsymbol{L}\boldsymbol{B} + \boldsymbol{N}(\bo
 
 まず、式を移項する。
 $$\frac{d\boldsymbol{B}}{dz} - \boldsymbol{L}\boldsymbol{B} = \boldsymbol{N}(\boldsymbol{B})$$
-この方程式の積分因子は $e^{-\boldsymbol{L}z}$ です。両辺に左から積分因子を掛ける。
+この方程式の積分因子は $e^{-\boldsymbol{L}z}$ である。両辺に左から積分因子を掛ける。
 $$e^{-\boldsymbol{L}z} \left( \frac{d\boldsymbol{B}}{dz} - \boldsymbol{L}\boldsymbol{B} \right) = e^{-\boldsymbol{L}z} \boldsymbol{N}(\boldsymbol{B})$$
 行列指数関数の微分の性質 $\frac{d}{dz} e^{-\boldsymbol{L}z} = -\boldsymbol{L} e^{-\boldsymbol{L}z}$ と積の微分法則から、左辺は以下のようにまとめられる。
 $$\frac{d}{dz} \left( e^{-\boldsymbol{L}z} \boldsymbol{B}(z) \right) = e^{-\boldsymbol{L}z} \boldsymbol{N}(\boldsymbol{B}(z))$$
