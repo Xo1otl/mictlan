@@ -16,7 +16,6 @@ dependencies = [
     "bayesian-optimization",
     "matplotlib",
     "ipykernel",
-    "manim",
     "gdsfactory[full]",
 ]
 
