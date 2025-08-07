@@ -5,13 +5,14 @@ description = ""
 authors = [{ name = "Xolotl", email = "xolotl.mictl4n@gmail.com" }]
 requires-python = ">=3.12"
 dependencies = [
-    "notebook>=7.3.3",
-    "nbconvert>=7.16.6",
-    "playwright>=1.51.0",
+    "notebook",
+    "nbconvert",
+    "playwright",
     "plotly",
     "jax[cuda]",
     "optax",
     "pandas",
+    "japanize_matplotlib",
 
     # libはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
     "syuron",
