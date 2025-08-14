@@ -54,12 +54,12 @@
 		"vim.handleKeys": {
 			"<C-f>": false
 		},
+		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
 		"chat.agent.enabled": true,
 		"remote.extensionKind": {
 			"asvetliakov.vscode-neovim": ["workspace"],
 			"Oracle.mysql-shell-for-vs-code": ["ui"]
 		},
-		"vscode-neovim.neovimExecutablePaths.linux": "/home/vscode/.local/bin/nvim",
 		"extensions.experimental.affinity": {
 			"asvetliakov.vscode-neovim": 1
 		},
