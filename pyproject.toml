@@ -22,7 +22,7 @@ dependencies = [
     "blog",
     "akinator",
     "fssearch",
-    "cwes",
+    "qpm",
 ]
 
 [project.optional-dependencies]
@@ -44,7 +44,7 @@ members = [
     "apps/blog",
     "research/syuron",
     "research/funsearch",
-    "research/cwes",
+    "research/qpm",
 ]
 
 [tool.uv.sources]
@@ -55,7 +55,7 @@ noteprez = { workspace = true }
 blog = { workspace = true }
 akinator = { workspace = true }
 fssearch = { workspace = true }
-cwes = { workspace = true }
+qpm = { workspace = true }
 
 [tool.pyright]
 include = [
@@ -71,7 +71,7 @@ include = [
     "research/leetcode",
     "research/quantum",
     "research/syuron",
-    "research/cwes",
+    "research/qpm",
     "packages/workspace",
     "research/funsearch",
 ]
