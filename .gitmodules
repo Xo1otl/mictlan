@@ -13,6 +13,6 @@
 [submodule "research/qunasys"]
 	path = research/qunasys
 	url = git@github.com:Xo1otl/qunasys.git
-[submodule "research/cwes"]
-	path = research/cwes
-	url = git@github.com:Xo1otl/cwes.git
+[submodule "research/qpm"]
+	path = research/qpm
+	url = git@github.com:Xo1otl/qpm.git
