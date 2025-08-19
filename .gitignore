@@ -31,3 +31,4 @@ build/devcontainer/dotfiles/.ssh/id_ed25519_Xo1otl.pub
 
 *.docx
 .gradio/
+backup/
