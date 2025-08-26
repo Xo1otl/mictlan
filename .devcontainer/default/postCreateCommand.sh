@@ -3,7 +3,7 @@
 # fishのpathは適用されないのでフルパスで実行
 (
   (/home/vscode/.bun/bin/bun install --cwd /workspaces/mictlan) &
-  (/home/vscode/.local/bin/uv venv --directory /workspaces/mictlan/.venv && source /workspaces/mictlan/.venv/bin/activate && /home/vscode/.local/bin/uv sync --directory /workspaces/mictlan) &
+  (/home/vscode/.local/bin/uv venv --directory /workspaces/mictlan && source /workspaces/mictlan/.venv/bin/activate && /home/vscode/.local/bin/uv sync --directory /workspaces/mictlan) &
   (
     # workspace managerを先にインストール
     /home/vscode/.local/bin/composer install --working-dir=/workspaces/mictlan/scripts/phpm &&
