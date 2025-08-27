@@ -4557,10 +4557,10 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "pylatexenc", specifier = ">=2.10,<3.0.0" },
-    { name = "qiskit", specifier = ">=1.2.4,<2.0.0" },
-    { name = "qiskit-aer", specifier = ">=0.17.0,<0.18.0" },
-    { name = "qiskit-ibm-runtime", specifier = ">=0.37.0,<0.38.0" },
+    { name = "pylatexenc" },
+    { name = "qiskit" },
+    { name = "qiskit-aer" },
+    { name = "qiskit-ibm-runtime" },
     { name = "qulacs" },
 ]
 

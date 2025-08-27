@@ -29,7 +29,8 @@
 				"tamasfe.even-better-toml",
 				"devsense.phptools-vscode",
 				"mongodb.mongodb-vscode",
-				"svelte.svelte-vscode"
+				"svelte.svelte-vscode",
+				"julialang.language-julia"
 			]
 		}
 	},
