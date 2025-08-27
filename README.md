@@ -96,22 +96,5 @@ sudo apt install cuda-toolkit
 - docker compose up(select services)は devcontainer から volume マウントができない、mount ある場合ホストマシンから実行すべし
 - システムのクリップボードも使えるようにする設定(keybindindgs.json は devcontainer ではなくホストマシンの設定)
 
-```json
-// Place your key bindings in this file to override the defaults
-[
-  {
-    "key": "ctrl+c",
-    "command": "-vscode-neovim.escape",
-    "when": "editorTextFocus && neovim.ctrlKeysNormal.c && neovim.init && !dirtyDiffVisible && !findWidgetVisible && !inReferenceSearchEditor && !markersNavigationVisible && !notebookCellFocused && !notificationCenterVisible && !parameterHintsVisible && !referenceSearchVisible && neovim.mode == 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
-  {
-    "key": "ctrl+c",
-    "command": "-vscode-neovim.escape",
-    "when": "editorTextFocus && neovim.ctrlKeysInsert.c && neovim.init && neovim.mode != 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "workbench.action.quickchat.launchInlineChat"
-  }
-]
-```
+# git submoduleの使い方
+- `git submodule update --init`の後`git submodule foreach 'git checkout main'`でDetached状態からブランチに移動する必要がある、それか.gitmodulesでremoteを設定すべきらしい。
