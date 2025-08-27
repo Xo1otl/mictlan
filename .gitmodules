@@ -1,15 +1,20 @@
 [submodule "apps/koemade"]
 	path = apps/koemade
 	url = git@github.com:Xo1otl/koemade.git
+	branch = main
 [submodule "apps/graphnote"]
 	path = apps/graphnote
 	url = git@github.com:Xo1otl/graphnote.git
+	branch = main
 [submodule "research/funsearch"]
 	path = research/funsearch
 	url = git@github.com:Xo1otl/funsearch.git
+	branch = main
 [submodule "research/qunasys"]
 	path = research/qunasys
 	url = git@github.com:Xo1otl/qunasys.git
+	branch = main
 [submodule "research/qpm"]
 	path = research/qpm
 	url = git@github.com:Xo1otl/qpm.git
+	branch = main
