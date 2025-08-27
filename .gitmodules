@@ -1,9 +1,6 @@
 [submodule "apps/koemade"]
 	path = apps/koemade
 	url = git@github.com:Xo1otl/koemade.git
-[submodule "apps/firecrawl"]
-	path = apps/firecrawl
-	url = git@github.com:Xo1otl/firecrawl.git
 [submodule "apps/graphnote"]
 	path = apps/graphnote
 	url = git@github.com:Xo1otl/graphnote.git
