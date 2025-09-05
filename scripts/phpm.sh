@@ -1,1 +1,0 @@
-./phpm/cmd/phpm.sh

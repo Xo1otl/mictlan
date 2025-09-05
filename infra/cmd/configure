@@ -13,10 +13,8 @@ from infra import mail
 from infra import ossekai
 from infra.db import documentdb
 from infra import zaiko
-from infra import asyncsns
 from infra.ai import llm
 from infra.ai import imagegen
-from infra import chat
 from infra.db import multimodaldb
 from infra.db import kvs
 from infra import knowledgebase
@@ -25,7 +23,6 @@ from infra import fediverse
 from infra import idp
 from infra.idp import oidc
 from infra import ldap
-from infra import crawler
 
 util.runfiles("infra/src/infra/**/*.tpl.py")
 
@@ -71,7 +68,7 @@ class ComposeChecker:
 checker = ComposeChecker()
 
 modules = [
-    vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, asyncsns, llm, chat, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap, oidc, crawler
+    vpn, searchengine, rdb, proxy, observability, broker, mail, ossekai, documentdb, zaiko, llm, multimodaldb, imagegen, kvs, knowledgebase, akinator, fediverse, idp, ldap, oidc
 ]
 
 ecosystem = infra.DockerEcosystem(path.Path("infra/src/infra/ecosystem"))
