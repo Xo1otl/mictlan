@@ -4,7 +4,7 @@
     "": {
       "name": "basic",
       "dependencies": {
-        "@hono/vite-ssg": "^0.1.1",
+        "@hono/vite-ssg": "^0.2.0",
         "@mdx-js/rollup": "^3.1.0",
         "@tailwindcss/vite": "^4.0.7",
         "@types/bun": "^1.2.2",
@@ -125,7 +125,7 @@
 
     "@hono/vite-dev-server": ["@hono/vite-dev-server@0.19.0", "", { "dependencies": { "@hono/node-server": "^1.12.0", "minimatch": "^9.0.3" }, "peerDependencies": { "hono": "*", "miniflare": "*", "wrangler": "*" }, "optionalPeers": ["miniflare", "wrangler"] }, "sha512-myMc4Nm0nFQSPaeE6I/a1ODyDR5KpQ4EHodX4Tu/7qlB31GfUemhUH/WsO91HJjDEpRRpsT4Zbg+PleMlpTljw=="],
 
-    "@hono/vite-ssg": ["@hono/vite-ssg@0.1.2", "", { "peerDependencies": { "hono": ">=4.0.0" } }, "sha512-d8/UsYEwJtjyo6DDYa5VA9LnCDBSz33tUH4UxQjujsXlKSRExYnaqJbu+wL84mF3oi3g9XXOt1AtxqmCZJr3LA=="],
+    "@hono/vite-ssg": ["@hono/vite-ssg@0.2.0", "", { "peerDependencies": { "hono": ">=4.8.0" } }, "sha512-SI7m/yf/om8Mr6Ka5ryoppksvG2h9sDAy/BaGqF6hXfhEo3TPmOURTlporxndfIaIw/ztf5MKYuyL2C23hOjFg=="],
 
     "@img/sharp-darwin-arm64": ["@img/sharp-darwin-arm64@0.33.5", "", { "optionalDependencies": { "@img/sharp-libvips-darwin-arm64": "1.0.4" }, "os": "darwin", "cpu": "arm64" }, "sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ=="],
 
