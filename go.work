@@ -1,7 +1,6 @@
 go 1.23.2
 
 use (
-	apps/ossekai
 	apps/scratchai
 	apps/zaiko
 	packages/lib/go

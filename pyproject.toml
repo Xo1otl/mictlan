@@ -17,11 +17,8 @@ dependencies = [
     # libはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
     "syuron",
     "funsearch",
-    "quantum",
-    "noteprez",
     "blog",
     "akinator",
-    "fssearch",
     "qpm",
 ]
 
@@ -36,10 +33,6 @@ members = [
     "infra",
     "packages/util/python",
     "packages/workspace",
-    "research/quantum",
-    "apps/chathub",
-    "apps/fssearch",
-    "apps/noteprez",
     "apps/akinator",
     "apps/blog",
     "research/syuron",
@@ -50,11 +43,8 @@ members = [
 [tool.uv.sources]
 syuron = { workspace = true }
 funsearch = { workspace = true }
-quantum = { workspace = true }
-noteprez = { workspace = true }
 blog = { workspace = true }
 akinator = { workspace = true }
-fssearch = { workspace = true }
 qpm = { workspace = true }
 
 [tool.pyright]
@@ -63,13 +53,7 @@ include = [
     "packages/util/python",
     "scripts",
     "build",
-    "apps/personal-site/web/notebook",
-    "apps/noteprez",
     "apps/akinator",
-    "apps/fssearch",
-    "apps/chathub",
-    "research/leetcode",
-    "research/quantum",
     "research/syuron",
     "research/qpm",
     "packages/workspace",
