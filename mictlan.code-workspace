@@ -78,10 +78,10 @@
 		"python.analysis.typeCheckingMode": "strict",
 		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
-			"\"pylint.args\": [\"--disable=C0111\"]" // docstringがなくてもいちいち警告ださない
+			"--disable=C0111" // docstringがなくてもいちいち警告ださない
 		],
 		"[python]": {
-			"editor.defaultFormatter": "ms-python.autopep8"
+			"editor.defaultFormatter": "ms-python.black-formatter"
 		},
 		"notebook.formatOnSave.enabled": true,
 		/* js/ts */

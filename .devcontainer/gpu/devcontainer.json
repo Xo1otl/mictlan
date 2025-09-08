@@ -13,7 +13,7 @@
 			"extensions": [
 				"golang.go",
 				"leanprover.lean4",
-				"ms-python.autopep8",
+				"ms-python.black-formatter",
 				"ms-python.debugpy",
 				"ms-python.pylint",
 				"ms-python.python",
