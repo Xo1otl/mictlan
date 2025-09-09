@@ -24,7 +24,7 @@ require (
 )
 
 require (
-	github.com/hamba/avro/v2 v2.28.0
+	github.com/hamba/avro/v2 v2.30.0
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
