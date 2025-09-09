@@ -1,6 +1,7 @@
-go 1.23.2
+go 1.25.0
 
 use (
+	./playground/biparallel
 	apps/scratchai
 	apps/zaiko
 	packages/lib/go
