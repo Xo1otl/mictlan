@@ -18,7 +18,6 @@ fish_add_path $HOME/.juliaup/bin # user installed binaries
 fish_add_path /workspaces/mictlan/scripts # workspace scripts
 
 direnv hook fish | source
-direnv export fish | source
 
 function cd
   builtin cd $argv; and ls -a
