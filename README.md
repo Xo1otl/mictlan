@@ -97,5 +97,5 @@ sudo apt install cuda-toolkit
 - システムのクリップボードも使えるようにする設定(keybindindgs.json は devcontainer ではなくホストマシンの設定)
 
 # git submoduleの使い方
-- `git submodule update --init`の後`git submodule foreach 'git checkout main'`でDetached状態からブランチに移動する必要がある、それか.gitmodulesでremoteを設定すべきらしい。
+- `git submodule update --init --recursive`の後`git submodule foreach 'git checkout main'`でDetached状態からブランチに移動する必要がある、それか.gitmodulesでremoteを設定すべきらしい。
 - それか`git submodule set-branch`で初期化で`update --remote`するとDetachedではなく特定のbranchを追跡するようにできる。こっちを採用してる

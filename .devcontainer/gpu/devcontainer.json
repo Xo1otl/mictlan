@@ -26,16 +26,17 @@
 				"biomejs.biome",
 				"ms-azuretools.vscode-docker",
 				"tamasfe.even-better-toml",
-				"devsense.phptools-vscode",
 				"mongodb.mongodb-vscode",
 				"svelte.svelte-vscode",
-				"julialang.language-julia"
+				"julialang.language-julia",
+				"jebbs.plantuml"
 			]
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers/features/go:1": {},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		// base image作るときに設定したfeatureは再度設定する必要がない
+		// "ghcr.io/devcontainers/features/go:1": {},
+		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	"postCreateCommand": "/bin/bash scripts/postCreateCommand.sh"
 }

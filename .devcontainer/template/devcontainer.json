@@ -26,7 +26,8 @@
 				"julialang.language-julia",
 				"svelte.svelte-vscode",
 
-				// その他
+				// その他 (上のほうが重要)
+				"vscodevim.vim",
 				"ms-toolsai.jupyter",
 				"bierner.markdown-mermaid",
 				"jebbs.plantuml",
@@ -42,5 +43,5 @@
 		// miseでgo入れて拡張機能の指示でその他のツール入れた方が速い
 		// "ghcr.io/devcontainers/features/go:1": {},
 	},
-	"postCreateCommand": "/bin/sh scripts/postCreateCommand.sh"
+	"postCreateCommand": "/bin/sh .devcontainer/template/postCreateCommand.sh"
 }

@@ -15,5 +15,5 @@ RUN sudo apt update && \
     curl -LsSf https://astral.sh/uv/install.sh | sh && \
     /home/vscode/.local/bin/uv python install 3.12
 
-
+# 上でUSER指定してても、COPYはrootで行われるため明示的に権限を設定する
 COPY --chown=vscode:vscode dotfiles/ /home/vscode

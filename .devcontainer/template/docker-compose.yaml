@@ -1,0 +1,11 @@
+name: mictlan
+
+services:
+  devcontainer:
+    build:
+      dockerfile: Dockerfile
+    image: mictlan-devcontainer-template:latest
+    volumes:
+      - ../..:/workspaces/mictlan:cached
+    command: >
+      /bin/bash -c "sudo chown -R vscode:vscode /workspaces/mictlan && sleep infinity"
