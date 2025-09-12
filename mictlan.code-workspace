@@ -5,9 +5,6 @@
 			"path": "."
 		}
 	],
-	"extensions": {
-		"recommendations": ["ms-vsliveshare.vsliveshare"]
-	},
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [
@@ -19,34 +16,11 @@
 				"webRoot": "${workspaceFolder:mictlan}/apps/ossekai/web"
 			},
 			{
-				"name": "Debug php",
-				"type": "php",
-				"request": "launch",
-				"port": 7003
-			},
-			{
 				"name": "Python:Streamlit",
 				"type": "debugpy",
 				"request": "launch",
 				"module": "streamlit",
 				"args": ["run", "${file}", "--server.port", "1234"]
-			},
-			{
-				"name": "Python:LLM-SR",
-				"cwd": "/workspaces/mictlan/research/qunasys/LLM-SR",
-				"type": "debugpy",
-				"request": "launch",
-				"program": "main.py",
-				"args": [
-					"--use_api",
-					"True",
-					"--spec_path",
-					"specs/specification_bactgrow_numpy.txt",
-					"--problem_name",
-					"bactgrow",
-					"--log_path",
-					"out/debug"
-				]
 			}
 		]
 	},
@@ -56,19 +30,11 @@
 		},
 		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
 		"julia.NumThreads": "auto",
-		"chat.agent.enabled": true,
-		"remote.extensionKind": {
-			"asvetliakov.vscode-neovim": ["workspace"],
-			"Oracle.mysql-shell-for-vs-code": ["ui"]
-		},
-		"extensions.experimental.affinity": {
-			"asvetliakov.vscode-neovim": 1
-		},
 		"editor.codeLens": true,
 		"files.autoSave": "afterDelay",
 		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
-		"bun.runtime": "/home/john/.bun/bin/bun",
-		"bun.debugTerminal.stopOnEntry": false,
+		"bun.runtime": "/home/vscode/.local/share/mise/installs/bun/1.2.21/bin/bun",
+		// "bun.debugTerminal.stopOnEntry": false,
 		"terminal.integrated.defaultProfile.linux": "fish",
 		/* git */
 		"git.confirmSync": false,
