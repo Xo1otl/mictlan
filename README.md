@@ -99,3 +99,8 @@ sudo apt install cuda-toolkit
 # git submoduleの使い方
 - `git submodule update --init --recursive`の後`git submodule foreach 'git checkout main'`でDetached状態からブランチに移動する必要がある、それか.gitmodulesでremoteを設定すべきらしい。
 - それか`git submodule set-branch`で初期化で`update --remote`するとDetachedではなく特定のbranchを追跡するようにできる。こっちを採用してる
+
+# gcloudとterraformの設定
+* `gcloud auth application-default login` -> `terraform init` -> `terraform plan`
+* `gcloud auth login`
+* TODO: configファイルをdotfileのsecretsとして含めたら楽
