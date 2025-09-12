@@ -3,7 +3,7 @@
 {
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"dockerComposeFile": "../../build/devcontainer-gpu/docker-compose.yaml",
+	"dockerComposeFile": "docker-compose.yaml",
 	"service": "devcontainer-gpu",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"shutdownAction": "none",
@@ -24,7 +24,6 @@
 				"ms-vscode.live-server",
 				"statelyai.stately-vscode",
 				"biomejs.biome",
-				"github.copilot",
 				"ms-azuretools.vscode-docker",
 				"tamasfe.even-better-toml",
 				"devsense.phptools-vscode",
@@ -38,5 +37,5 @@
 		"ghcr.io/devcontainers/features/go:1": {},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
-	"postCreateCommand": "/bin/bash .devcontainer/default/postCreateCommand.sh && . /workspaces/mictlan/.venv/bin/activate && /home/vscode/.local/bin/uv sync --directory /workspaces/mictlan --extra gpu"
+	"postCreateCommand": "/bin/bash scripts/postCreateCommand.sh"
 }

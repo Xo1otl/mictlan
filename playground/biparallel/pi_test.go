@@ -28,7 +28,7 @@ func workerPool[Req, Res any](
 }
 
 // --- 制御ループ ---
-// TODO: もう一つだけ、リアルタイムロギングのための送信チャンネルを追加する
+// TODO: リアルタイムロギングのための送信チャンネルを追加して、EventをDispatchする
 func controlLoop[S, Req, Res any](
 	dispatch func(state S, reqCh chan<- Req),
 	propagate func(state S, result Res),

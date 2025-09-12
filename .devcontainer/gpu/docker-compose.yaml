@@ -4,6 +4,7 @@ services:
   devcontainer-gpu:
     build:
       dockerfile: Dockerfile
+    image: mictlan-devcontainer-gpu:latest
     volumes:
       - ../..:/workspaces/mictlan:cached
     command: >

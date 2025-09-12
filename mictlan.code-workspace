@@ -118,6 +118,7 @@
 			"**/*-min.css": true,
 			"**/movies.json": true
 		},
-		"svg.preview.background": "custom"
+		"svg.preview.background": "custom",
+		"plantuml.server": "https://www.plantuml.com/plantuml",
 	}
 }
