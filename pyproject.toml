@@ -1,7 +1,7 @@
 [project]
 name = "mictlan"
 version = "0.1.0"
-description = ""
+description = "all in one monorepo"
 authors = [{ name = "Xolotl", email = "xolotl.mictl4n@gmail.com" }]
 requires-python = ">=3.12"
 dependencies = [
