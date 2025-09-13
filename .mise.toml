@@ -1,0 +1,4 @@
+[settings]
+experimental = true
+npm.bun = true
+python.uv_venv_auto = true

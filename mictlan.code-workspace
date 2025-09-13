@@ -42,7 +42,7 @@
 		"git.enableSmartCommit": true,
 		/* python */
 		"python.analysis.typeCheckingMode": "strict",
-		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
+		// "python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"--disable=C0111" // docstringがなくてもいちいち警告ださない
 		],
@@ -71,8 +71,6 @@
 		"[json]": {
 			"editor.defaultFormatter": "biomejs.biome"
 		},
-		/* php */
-		"php.completion.autoimport": "fqn",
 		"remote.autoForwardPortsFallback": 0,
 		"search.exclude": {
 			"**/node_modules": true,
@@ -85,6 +83,6 @@
 			"**/movies.json": true
 		},
 		"svg.preview.background": "custom",
-		"plantuml.server": "https://www.plantuml.com/plantuml",
+		"plantuml.server": "https://www.plantuml.com/plantuml"
 	}
 }
