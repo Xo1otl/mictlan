@@ -9,14 +9,15 @@ dependencies = [
     "pandas",
     "scipy",
     "numpy",
-    "matplotlib",
-    "jax[cuda12]",
-    "flax",
     "tensorflow_datasets",
     "bayesian-optimization",
-    "matplotlib",
     "ipykernel",
     "gdsfactory[full]",
+    "optax",
+    "flax",
+    "matplotlib",
+    "japanize_matplotlib",
+    "plotly",
 ]
 
 [build-system]

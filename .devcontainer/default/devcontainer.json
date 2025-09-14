@@ -11,7 +11,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				// 言語関連
+				// programming languages
 				"golang.go",
 				// pythonは言語 + linter + formatter
 				"ms-python.python",
@@ -24,13 +24,17 @@
 				"leanprover.lean4",
 				// juliaはjitなのでpythonより速い
 				"julialang.language-julia",
+
+				// other markup languages
 				"svelte.svelte-vscode",
+				"bierner.markdown-mermaid",
+				"tamasfe.even-better-toml",
+				"jebbs.plantuml",
+				"jock.svg",
 
 				// その他
+				"vscodevim.vim",
 				"ms-toolsai.jupyter",
-				"bierner.markdown-mermaid",
-				"jebbs.plantuml",
-				"tamasfe.even-better-toml",
 				"ms-azuretools.vscode-docker",
 				"ms-vscode.live-server",
 				"statelyai.stately-vscode",
@@ -42,5 +46,5 @@
 		// miseでgo入れて拡張機能の指示でその他のツール入れた方が速い
 		// "ghcr.io/devcontainers/features/go:1": {},
 	},
-	"postCreateCommand": "/bin/sh scripts/postCreateCommand.sh"
+	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
 }

@@ -3,16 +3,11 @@ name = "mictlan"
 version = "0.1.0"
 description = "all in one monorepo"
 authors = [{ name = "Xolotl", email = "xolotl.mictl4n@gmail.com" }]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
     "notebook",
     "nbconvert",
     "playwright",
-    "plotly",
-    "jax[cuda]",
-    "optax",
-    "pandas",
-    "japanize_matplotlib",
 
     # libはworkspaceの依存とすることで自動でインストールできる、sourcesへの追加も必要
     "syuron",
@@ -23,7 +18,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-gpu = ["syuron"]
+cuda = ["jax[cuda]"]
 
 [tool.uv]
 package = false
@@ -52,7 +47,6 @@ include = [
     "infra",
     "packages/util/python",
     "scripts",
-    "build",
     "apps/akinator",
     "research/syuron",
     "research/qpm",

@@ -4,10 +4,10 @@
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerComposeFile": "docker-compose.yaml",
-	"service": "devcontainer-template",
+	"service": "devcontainer-cuda",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"shutdownAction": "none",
-	"runServices": ["devcontainer-template"],
+	"runServices": ["devcontainer-cuda"],
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -46,5 +46,5 @@
 		// miseでgo入れて拡張機能の指示でその他のツール入れた方が速い
 		// "ghcr.io/devcontainers/features/go:1": {},
 	},
-	"postCreateCommand": "/bin/sh .devcontainer/template/postCreateCommand.sh"
+	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
 }

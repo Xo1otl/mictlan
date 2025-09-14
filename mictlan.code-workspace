@@ -25,24 +25,10 @@
 		]
 	},
 	"settings": {
-		"vim.handleKeys": {
-			"<C-f>": false
-		},
-		"remote.extensionKind": {
-			"vscodevim.vim": ["ui"]
-		},
+		// プログラミング言語
+		/* julia */
 		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
 		"julia.NumThreads": "auto",
-		"editor.codeLens": true,
-		"files.autoSave": "afterDelay",
-		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
-		"bun.runtime": "/home/vscode/.local/share/mise/installs/bun/1.2.21/bin/bun",
-		// "bun.debugTerminal.stopOnEntry": false,
-		"terminal.integrated.defaultProfile.linux": "fish",
-		/* git */
-		"git.confirmSync": false,
-		"git.autofetch": true,
-		"git.enableSmartCommit": true,
 		/* python */
 		"python.analysis.typeCheckingMode": "strict",
 		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
@@ -54,6 +40,8 @@
 		},
 		"notebook.formatOnSave.enabled": true,
 		/* js/ts */
+		"bun.runtime": "/home/vscode/.local/share/mise/installs/bun/1.2.21/bin/bun",
+		// "bun.debugTerminal.stopOnEntry": false,
 		"typescript.updateImportsOnFileMove.enabled": "always",
 		"[typescript]": {
 			"editor.defaultFormatter": "biomejs.biome"
@@ -74,18 +62,35 @@
 			"editor.defaultFormatter": "svelte.svelte-vscode",
 			"editor.codeActionsOnSave": ["source.sortImports"]
 		},
+
+		// マークアップ言語
+		"svg.preview.background": "custom",
+		"plantuml.server": "https://www.plantuml.com/plantuml",
+
+		// その他
+		"git.confirmSync": false,
+		"git.autofetch": true,
+		"git.enableSmartCommit": true,
+		"vim.handleKeys": {
+			"<C-f>": false
+		},
+		"remote.extensionKind": {
+			"vscodevim.vim": ["ui"]
+		},
+		"editor.codeLens": true,
+		"files.autoSave": "afterDelay",
+		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
+		"terminal.integrated.defaultProfile.linux": "fish",
 		"remote.autoForwardPortsFallback": 0,
 		"search.exclude": {
+			"**/.venv": true,
 			"**/node_modules": true,
-			"**/bower_components": true,
 			"**/*.code-search": true,
 			"**/go.work.sum": true,
 			"**/known_hosts": true,
 			"**/*.min.css": true,
 			"**/*-min.css": true,
 			"**/movies.json": true
-		},
-		"svg.preview.background": "custom",
-		"plantuml.server": "https://www.plantuml.com/plantuml"
+		}
 	}
 }
