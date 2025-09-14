@@ -1,2 +1,4 @@
 [env]
 _.path = ["./scripts"]
+OLLAMA_HOST = "http://ollama:11434"
+GOOGLE_CLOUD_PROJECT = "gen-lang-client-0573713639"

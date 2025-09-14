@@ -46,5 +46,8 @@
 		// miseでgo入れて拡張機能の指示でその他のツール入れた方が速い
 		// "ghcr.io/devcontainers/features/go:1": {},
 	},
+	"remoteEnv": {
+		"PATH": "/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
+	},
 	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
 }
