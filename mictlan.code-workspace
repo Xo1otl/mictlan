@@ -5,6 +5,7 @@
 			"path": "."
 		}
 	],
+	"extensions": { "recommendations": ["vscodevim.vim"] },
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [
@@ -73,9 +74,6 @@
 		"git.enableSmartCommit": true,
 		"vim.handleKeys": {
 			"<C-f>": false
-		},
-		"remote.extensionKind": {
-			"vscodevim.vim": ["ui"]
 		},
 		"editor.codeLens": true,
 		"files.autoSave": "afterDelay",
