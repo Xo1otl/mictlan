@@ -23,10 +23,4 @@ RUN apt-get update && apt-get install -y curl gpg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-USER vscode
-
-# mise is used to install language environments
-# 最新版はglobalにインストールする。古いものが必要な場合は`.mise.toml`で対応する
-RUN mise use -g python uv julia bun go
-
 COPY --chown=vscode:vscode dotfiles/ /home/vscode

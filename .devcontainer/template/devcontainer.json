@@ -4,10 +4,10 @@
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerComposeFile": "docker-compose.yaml",
-	"service": "devcontainer",
+	"service": "devcontainer-template",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"shutdownAction": "none",
-	"runServices": ["devcontainer"],
+	"runServices": ["devcontainer-template"],
 	"customizations": {
 		"vscode": {
 			"extensions": [

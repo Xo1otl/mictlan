@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo HELLO
+# mise install
+echo AAA

@@ -28,6 +28,9 @@
 		"vim.handleKeys": {
 			"<C-f>": false
 		},
+		"remote.extensionKind": {
+			"vscodevim.vim": ["ui"]
+		},
 		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
 		"julia.NumThreads": "auto",
 		"editor.codeLens": true,
@@ -42,7 +45,7 @@
 		"git.enableSmartCommit": true,
 		/* python */
 		"python.analysis.typeCheckingMode": "strict",
-		// "python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
+		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"--disable=C0111" // docstringがなくてもいちいち警告ださない
 		],
@@ -52,10 +55,6 @@
 		"notebook.formatOnSave.enabled": true,
 		/* js/ts */
 		"typescript.updateImportsOnFileMove.enabled": "always",
-		"[svelte]": {
-			"editor.defaultFormatter": "svelte.svelte-vscode",
-			"editor.codeActionsOnSave": ["source.sortImports"]
-		},
 		"[typescript]": {
 			"editor.defaultFormatter": "biomejs.biome"
 		},
@@ -70,6 +69,10 @@
 		},
 		"[json]": {
 			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[svelte]": {
+			"editor.defaultFormatter": "svelte.svelte-vscode",
+			"editor.codeActionsOnSave": ["source.sortImports"]
 		},
 		"remote.autoForwardPortsFallback": 0,
 		"search.exclude": {

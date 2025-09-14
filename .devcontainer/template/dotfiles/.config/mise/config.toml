@@ -1,2 +1,9 @@
+[tools]
+go = "latest"
+julia = "latest"
+python = "latest"
+terraform = "latest"
+uv = "latest"
+bun = "latest"
 [settings]
 trusted_config_paths = ['/workspaces/mictlan']

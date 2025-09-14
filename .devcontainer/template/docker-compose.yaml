@@ -1,7 +1,7 @@
 name: mictlan
 
 services:
-  devcontainer:
+  devcontainer-template:
     build:
       dockerfile: Dockerfile
     image: mictlan-devcontainer-template:latest

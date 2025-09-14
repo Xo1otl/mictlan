@@ -59,7 +59,7 @@ include = [
     "packages/workspace",
     "research/funsearch",
 ]
-reportIncompatibleMethodOverride = true
-reportAbstractUsage = true
+# reportIncompatibleMethodOverride = true
+# reportAbstractUsage = true
 # reportMissingTypeArgument = "error"
 # reportUnknownVariableType = "error"
