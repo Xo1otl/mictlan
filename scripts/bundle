@@ -96,15 +96,11 @@ def main():
     )
     parser.add_argument(
         "pattern_file",
-        help="含める/除外するパターンが記述されたファイル (デフォルト: .secrets)",
-        nargs="?",
-        default=".secrets",
+        help="含める/除外するパターンが記述されたファイル",
     )
     parser.add_argument(
         "output_archive",
-        help="作成するtarアーカイブのパス (デフォルト: secrets.tar.gz)",
-        nargs="?",
-        default="secrets.tar.gz",
+        help="作成するtarアーカイブのパス",
     )
     parser.add_argument(
         "--search-path",

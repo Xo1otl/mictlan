@@ -28,11 +28,10 @@
 	"settings": {
 		// プログラミング言語
 		/* julia */
-		"julia.executablePath": "/home/vscode/.juliaup/bin/julia",
 		"julia.NumThreads": "auto",
 		/* python */
 		"python.analysis.typeCheckingMode": "strict",
-		"python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
+		// "python.defaultInterpreterPath": "/workspaces/mictlan/.venv/bin/python",
 		"pylint.args": [
 			"--disable=C0111" // docstringがなくてもいちいち警告ださない
 		],
@@ -84,10 +83,12 @@
 			"**/.venv": true,
 			"**/node_modules": true,
 			"**/*.code-search": true,
-			"**/go.work.sum": true,
+			"**.sum": true,
+			"**.lock": true,
+			"**.csv": true,
 			"**/known_hosts": true,
-			"**/*.min.css": true,
-			"**/*-min.css": true,
+			"**.min.css": true,
+			"**-min.css": true,
 			"**/movies.json": true
 		}
 	}

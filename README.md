@@ -26,6 +26,7 @@
 - それか`git submodule set-branch`で初期化で`update --remote`するとDetachedではなく特定のbranchを追跡するようにできる。こっちを採用してる
 
 # Memo
+- `bundle .secrets secretm.tar.gz`などでクレデンシャルを全部バンドルして運ぶと便利(配るのは禁止)
 - shebangは`#!/usr/bin/env python`、shellscript引退
 - [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 - lean のダウンロードはエディタの通知に従ってやる
