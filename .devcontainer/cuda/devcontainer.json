@@ -41,6 +41,9 @@
 			]
 		}
 	},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+	},
 	"remoteEnv": {
 		"PATH": "/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
 	},
