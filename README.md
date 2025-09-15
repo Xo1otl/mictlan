@@ -26,7 +26,7 @@
 - それか`git submodule set-branch`で初期化で`update --remote`するとDetachedではなく特定のbranchを追跡するようにできる。こっちを採用してる
 
 # Memo
-- `bundle .secrets secretm.tar.gz`などでクレデンシャルを全部バンドルして運ぶと便利(配るのは禁止)
+- `bundle .secrets secretm.tar.gz`などでクレデンシャルを全部バンドルして運ぶと便利(個人専用、share禁止)
 - shebangは`#!/usr/bin/env python`、shellscript引退
 - [lean のワークスペースについて](https://github.com/leanprover/lean4/blob/master/src/lake/README.md)
 - lean のダウンロードはエディタの通知に従ってやる
@@ -38,8 +38,3 @@
    1. 事前イベントを発火して中間状態への遷移を試みる、無理だったら処理しないでエラーを返す
    2. 処理を実行する、処理に失敗したら取り消しイベントで事前イベント発火前の状態に戻る。エラーの定義は処理の中で行える
    3. 事後イベントを発火して事後状態へ遷移する、中間状態と事後イベントは自動生成されるので未定義のミスは発生せずかならず遷移できる
-
-# TODO
-* `gcloud auth application-default login` -> `terraform init` -> `terraform plan`
-* `gcloud auth login`
-* TODO: configファイルをdotfileのsecretsとして含めたら楽

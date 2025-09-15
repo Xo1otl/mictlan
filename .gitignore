@@ -24,8 +24,10 @@ awsconfig.json
 .env
 id_ed25519_Xo1otl
 credentials
+*credentials.json
 *.tar*
 .secrets
+lemmy.hjson
 
 build/devcontainer/dotfiles/.ssh/id_ed25519_Xo1otl.pub
 
