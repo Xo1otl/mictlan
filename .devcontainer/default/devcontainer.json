@@ -42,12 +42,11 @@
 		}
 	},
 	"features": {
-		// miseでgo入れて拡張機能の指示でその他のツール入れた方が速い
-		// "ghcr.io/devcontainers/features/go:1": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
 	},
 	"remoteEnv": {
 		"PATH": "/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
 	},
-	"initializeCommand": "/bin/sh .devcontainer/default/initializeCommand.sh",
-	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
+	"initializeCommand": "/bin/bash .devcontainer/default/initializeCommand.sh",
+	"postCreateCommand": "/bin/bash .devcontainer/postCreateCommand.sh"
 }
