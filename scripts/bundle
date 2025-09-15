@@ -1,0 +1,195 @@
+#!/usr/bin/env python
+import sys
+import subprocess
+import argparse
+from typing import List, Tuple
+
+
+def parse_pattern_file(filepath: str) -> Tuple[List[str], List[str]]:
+    """
+    パターンファイルを読み込み、含めるパターンと除外するパターンを返す。
+
+    - '!'で始まる行は除外リストへ。
+    - '#'で始まる行と空行は無視する。
+    - それ以外は含めるリストへ。
+    """
+    includes = []
+    excludes = []
+    with open(filepath, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if line.startswith("!"):
+                # 先頭の'!'を取り除いて追加
+                excludes.append(line[1:])
+            else:
+                includes.append(line)
+    return includes, excludes
+
+
+def build_find_command(
+    includes: List[str], excludes: List[str], search_path: str = "."
+) -> List[str]:
+    """findコマンドの引数リストを動的に構築する。"""
+    if not includes:
+        print(
+            "エラー: 含めるパターンが指定されていません。空のアーカイブが作成されます。",
+            file=sys.stderr,
+        )
+        return []
+
+    cmd = ["find", search_path]
+
+    # --- 除外(-prune)部分の構築 ---
+    if excludes:
+        # 各除外パスを -o -path './pattern' の形式に変換
+        exclude_args = []
+        for pattern in excludes:
+            if exclude_args:
+                exclude_args.append("-o")
+            # ディレクトリ名でマッチさせるため -name を使用する
+            exclude_args.append("-name")
+            exclude_args.append(pattern)
+
+        cmd.extend(["(", *exclude_args, ")", "-prune", "-o"])
+
+    # --- 含める部分の構築 ---
+    include_args = []
+    for pattern in includes:
+        if include_args:
+            include_args.append("-o")
+
+        # '**/foo.txt' や 'foo.txt' -> -name 'foo.txt'
+        # 'some/path/file' や '/backup' -> -path '*/some/path/file'
+        if "/" in pattern:
+            # `**/` を `*/` に変換し、先頭のスラッシュを削除
+            cleaned_pattern = pattern.replace("**/", "*/").lstrip("/")
+            include_args.extend(
+                [
+                    "-path",
+                    (
+                        f"*{cleaned_pattern}"
+                        if not cleaned_pattern.startswith("*")
+                        else cleaned_pattern
+                    ),
+                ]
+            )
+        else:
+            # パスを含まない場合はファイル名として扱う
+            include_args.extend(["-name", pattern])
+
+    # ()でグループ化する
+    cmd.extend(["(", *include_args, ")"])
+
+    # スペース等を含むファイル名を安全に扱うため -print0 を使う
+    cmd.append("-print0")
+
+    return cmd
+
+
+def main():
+    """メイン処理"""
+    parser = argparse.ArgumentParser(
+        description="パターンファイルに基づき、findとtarを連携させて効率的にアーカイブを作成します。",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.add_argument(
+        "pattern_file",
+        help="含める/除外するパターンが記述されたファイル (デフォルト: .secrets)",
+        nargs="?",
+        default=".secrets",
+    )
+    parser.add_argument(
+        "output_archive",
+        help="作成するtarアーカイブのパス (デフォルト: secrets.tar.gz)",
+        nargs="?",
+        default="secrets.tar.gz",
+    )
+    parser.add_argument(
+        "--search-path",
+        default=".",
+        help="検索を開始するディレクトリ (デフォルト: カレントディレクトリ)",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="実際にコマンドを実行せず、生成されるfindコマンドを表示する",
+    )
+
+    args = parser.parse_args()
+
+    try:
+        print(f"[*] パターンファイル '{args.pattern_file}' を読み込んでいます...")
+        includes, excludes = parse_pattern_file(args.pattern_file)
+        print(f"    - 含めるパターン: {len(includes)}件")
+        print(f"    - 除外するパターン: {len(excludes)}件")
+
+        find_cmd = build_find_command(includes, excludes, args.search_path)
+        if not find_cmd:
+            sys.exit(1)
+
+        print("\n[*] 以下のfindコマンドを生成しました:")
+        # 人間が読みやすいようにコマンドを表示
+        print(
+            " ".join(
+                f'"{arg}"' if " " in arg or arg in ["(", ")"] else arg
+                for arg in find_cmd
+            )
+        )
+
+        if args.dry_run:
+            print("\n[INFO] ドライランモードのため、ここで終了します。")
+            sys.exit(0)
+
+        # --- tarコマンドの準備 ---
+        tar_cmd = [
+            "tar",
+            "-czvf",  # c:作成, z:gzip圧縮, v:詳細表示, f:ファイル指定
+            args.output_archive,
+            "--null",  # findの-print0に対応
+            "--files-from=-",  # 標準入力からファイルリストを読む
+        ]
+
+        print(f"\n[*] アーカイブ '{args.output_archive}' の作成を開始します...")
+
+        with subprocess.Popen(find_cmd, stdout=subprocess.PIPE) as find_proc:
+            with subprocess.Popen(tar_cmd, stdin=find_proc.stdout) as tar_proc:
+                if find_proc.stdout:
+                    find_proc.stdout.close()
+
+            tar_return_code = tar_proc.returncode
+
+        find_return_code = find_proc.returncode
+
+        if find_return_code != 0:
+            print(
+                f"\n[WARNING] findコマンドがエラーで終了しました (終了コード: {find_return_code})",
+                file=sys.stderr,
+            )
+
+        if tar_return_code == 0:
+            print(
+                f"\n[SUCCESS] アーカイブが正常に作成されました: {args.output_archive}"
+            )
+        else:
+            print(
+                f"\n[ERROR] tarコマンドの実行中にエラーが発生しました (終了コード: {tar_return_code})",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
+    except FileNotFoundError:
+        print(
+            f"エラー: パターンファイル '{args.pattern_file}' が見つかりません。",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    except OSError as e:
+        # findやtarコマンドが見つからない場合など
+        print(f"\n[ERROR] コマンドの実行に失敗しました: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

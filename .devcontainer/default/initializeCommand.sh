@@ -4,7 +4,7 @@
 #
 # 主な役割:
 # 1. Gitサブモジュールの初期化と更新
-# 2. DockerfileのCOPYで使われる機密情報ファイル (secrets.tar) の展開
+# 2. DockerfileのCOPYで使われる機密情報ファイル (secrets.tar.gz) の展開
 # -----------------------------------------------------------------------------
 
 # コマンドが失敗した場合、または未定義の変数を使用した場合にスクリプトを終了させる
@@ -43,13 +43,13 @@ echo "▶ Checking out the 'main' branch for each submodule..."
 git submodule foreach 'git checkout main || true'
 echo "✔ Submodules are on the 'main' branch."
 
-# --- 2. 機密情報ファイル (secrets.tar) の展開 ---
-SECRETS_FILE="secrets.tar"
+# --- 2. 機密情報ファイル (secrets.tar.gz) の展開 ---
+SECRETS_FILE="secrets.tar.gz"
 
 echo "▶ Checking for secrets archive ($SECRETS_FILE)..."
 if [ -f "$SECRETS_FILE" ]; then
   echo "  Found ${SECRETS_FILE}. Extracting for Dockerfile COPY..."
-  tar -xvf "$SECRETS_FILE"
+  tar -xzvf "$SECRETS_FILE"
   
   echo "✔ Secrets have been successfully extracted."
 else
