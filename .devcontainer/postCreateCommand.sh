@@ -54,6 +54,9 @@ echo "Starting parallel setup for Bun, Python, and Git..."
     git lfs pull && \
     git config pull.rebase true && \
     git remote set-url origin git@github.com:Xo1otl/mictlan.git
+    # TODO: secrets.tarを見つけたら自動展開
+    # NOTE: gitのクレデンシャルが
+    # TODO: git submodule --init --updateしてから
   ) &
 
   # --- すべてのバックグラウンドジョブの終了を待つ ---

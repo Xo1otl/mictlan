@@ -48,5 +48,6 @@
 	"remoteEnv": {
 		"PATH": "/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
 	},
+	"initializeCommand": "/bin/sh .devcontainer/default/initializeCommand.sh",
 	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
 }

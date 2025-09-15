@@ -25,7 +25,7 @@ awsconfig.json
 id_ed25519_Xo1otl
 credentials
 credentials.tar.gz
-secrets.tar.gz
+secrets.tar
 
 build/devcontainer/dotfiles/.ssh/id_ed25519_Xo1otl.pub
 
