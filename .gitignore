@@ -23,6 +23,7 @@ awsconfig.json
 id_ed25519_*
 credentials
 *credentials.json
+*.tfvars
 *.tar.gz
 .secrets
 backup/
@@ -32,3 +33,5 @@ backup/
 *.docx
 .initialized
 GEMINI.md
+.terraform/
+tfplan
