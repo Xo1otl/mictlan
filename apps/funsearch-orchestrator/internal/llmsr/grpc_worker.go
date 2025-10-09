@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"mictlan/orchestrator/internal/pb"
+	"funsearch-orchestrator/internal/pb"
 )
 
 // TODO: skeletonを送ってるだけだが、シグネチャも必要なのか？それともdraftという名前で変更適用対象としてのoriginalを含めるか。

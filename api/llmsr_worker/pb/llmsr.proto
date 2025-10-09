@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package llmsr_worker.pb;
 
-option go_package = "mictlan/orchestrator/internal/pb;pb";
+option go_package = "funsearch-orchestrator/internal/pb;pb";
 
 // llmsr-worker service definition.
 service LLMSR {

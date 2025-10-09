@@ -282,7 +282,7 @@ const file_pb_llmsr_proto_rawDesc = "" +
 	"\x05score\x18\x02 \x01(\x01R\x05score2\xa7\x01\n" +
 	"\x05LLMSR\x12N\n" +
 	"\apropose\x12\x1f.llmsr_worker.pb.ProposeRequest\x1a .llmsr_worker.pb.ProposeResponse\"\x00\x12N\n" +
-	"\aobserve\x12\x1f.llmsr_worker.pb.ObserveRequest\x1a .llmsr_worker.pb.ObserveResponse\"\x00B%Z#mictlan/orchestrator/internal/pb;pbb\x06proto3"
+	"\aobserve\x12\x1f.llmsr_worker.pb.ObserveRequest\x1a .llmsr_worker.pb.ObserveResponse\"\x00B'Z%funsearch-orchestrator/internal/pb;pbb\x06proto3"
 
 var (
 	file_pb_llmsr_proto_rawDescOnce sync.Once

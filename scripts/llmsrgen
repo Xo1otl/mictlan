@@ -7,7 +7,7 @@ cd "$ROOT_DIR"
 
 # --- Generate Go code ---
 echo "Generating Go gRPC code..."
-GO_OUT_DIR="apps/orchestrator/internal/"
+GO_OUT_DIR="apps/funsearch-orchestrator/internal/"
 mkdir -p "$GO_OUT_DIR"
 protoc \
   -I api/llmsr_worker \

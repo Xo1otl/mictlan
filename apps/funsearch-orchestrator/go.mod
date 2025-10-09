@@ -1,4 +1,4 @@
-module mictlan/orchestrator
+module funsearch-orchestrator
 
 go 1.25.1
 

@@ -1,10 +1,10 @@
 package llmsr
 
 import (
-	"mictlan/orchestrator/internal/bilevel"
-	"mictlan/orchestrator/internal/pb"
 	"bufio"
 	"context"
+	"funsearch-orchestrator/internal/bilevel"
+	"funsearch-orchestrator/internal/pb"
 	"math/rand"
 	"os/exec"
 	"path/filepath"

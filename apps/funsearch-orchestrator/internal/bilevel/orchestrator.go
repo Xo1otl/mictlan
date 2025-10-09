@@ -3,7 +3,7 @@ package bilevel
 import (
 	"context"
 
-	"mictlan/orchestrator/internal/pipeline"
+	"funsearch-orchestrator/internal/pipeline"
 )
 
 // --- Public API ---
