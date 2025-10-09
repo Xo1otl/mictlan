@@ -8,9 +8,9 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "alphaprobe",
     "funsearch",
     "llmsr-worker",
+    "mictlan",
 ]
 
 [[package]]
@@ -30,46 +30,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/0b/03/a88171e277e8caa88
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a5/45/30bb92d442636f570cb5651bc661f52b610e2eec3f891a5dc3a4c3667db0/aiofiles-24.1.0-py3-none-any.whl", hash = "sha256:b4ec55f4195e3eb5d7abd1bf7e061763e864dd4954231fb8539a0ef8bb8260e5", size = 15896, upload-time = "2024-06-24T11:02:01.529Z" },
 ]
-
-[[package]]
-name = "alphaprobe"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "funsearch" },
-    { name = "japanize-matplotlib" },
-    { name = "llmsr-worker" },
-    { name = "matplotlib" },
-    { name = "nbconvert" },
-    { name = "notebook" },
-    { name = "playwright" },
-]
-
-[package.optional-dependencies]
-cuda = [
-    { name = "jax", extra = ["cuda"] },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "grpcio-tools" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "funsearch", editable = "artifacts/funsearch" },
-    { name = "japanize-matplotlib" },
-    { name = "jax", extras = ["cuda"], marker = "extra == 'cuda'" },
-    { name = "llmsr-worker", editable = "apps/llmsr-worker" },
-    { name = "matplotlib" },
-    { name = "nbconvert" },
-    { name = "notebook" },
-    { name = "playwright" },
-]
-provides-extras = ["cuda"]
-
-[package.metadata.requires-dev]
-dev = [{ name = "grpcio-tools", specifier = ">=1.75.1" }]
 
 [[package]]
 name = "annotated-types"
@@ -1557,6 +1517,48 @@ wheels = [
 ]
 
 [[package]]
+name = "mictlan"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "funsearch" },
+    { name = "japanize-matplotlib" },
+    { name = "llmsr-worker" },
+    { name = "matplotlib" },
+    { name = "nbconvert" },
+    { name = "notebook" },
+    { name = "playwright" },
+    { name = "tmmax" },
+]
+
+[package.optional-dependencies]
+cuda = [
+    { name = "jax", extra = ["cuda"] },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "grpcio-tools" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "funsearch", editable = "artifacts/funsearch" },
+    { name = "japanize-matplotlib" },
+    { name = "jax", extras = ["cuda"], marker = "extra == 'cuda'" },
+    { name = "llmsr-worker", editable = "apps/llmsr-worker" },
+    { name = "matplotlib" },
+    { name = "nbconvert" },
+    { name = "notebook" },
+    { name = "playwright" },
+    { name = "tmmax" },
+]
+provides-extras = ["cuda"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "grpcio-tools", specifier = ">=1.75.1" }]
+
+[[package]]
 name = "mistune"
 version = "3.1.4"
 source = { registry = "https://pypi.org/simple" }
@@ -2756,6 +2758,21 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/7a/fd/7a5ee21fd08ff70d3d33a5781c255cbe779659bd03278feb98b19ee550f4/tinycss2-1.4.0.tar.gz", hash = "sha256:10c0972f6fc0fbee87c3edb76549357415e94548c1ae10ebccdea16fb404a9b7", size = 87085, upload-time = "2024-10-24T14:58:29.895Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e6/34/ebdc18bae6aa14fbee1a08b63c015c72b64868ff7dae68808ab500c492e2/tinycss2-1.4.0-py3-none-any.whl", hash = "sha256:3a49cf47b7675da0b15d0c6e1df8df4ebd96e9394bb905a5775adb0d884c5289", size = 26610, upload-time = "2024-10-24T14:58:28.029Z" },
+]
+
+[[package]]
+name = "tmmax"
+version = "1.1.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jax" },
+    { name = "matplotlib" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "scipy" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5d/ba/84f9e2a31ba5af8116d997f83c1976800b5a548034ce63df2db7734f4cb6/tmmax-1.1.3-py3-none-any.whl", hash = "sha256:6331bcf05de4091655c380aaf9e9e93d0fd90c0844af8a795d1984f948e86ed8", size = 640936, upload-time = "2025-05-30T17:28:35.576Z" },
 ]
 
 [[package]]

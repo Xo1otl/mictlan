@@ -1,7 +1,0 @@
-#!/usr/bin/fish
-
-# スクリプトが置かれているディレクトリの絶対パスを取得
-set script_dir (dirname (status --current-filename))
-
-# 取得したパスを基準に、各ファイルの絶対パスを指定
-nohup python -u "$script_dir/../ui/main.py" > "$script_dir/../ui/stdout.log" 2> "$script_dir/../ui/stderr.log" &
