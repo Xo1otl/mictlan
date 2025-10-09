@@ -29,7 +29,8 @@ credentials
 backup/
 .ssh/
 tfplan
-.tfstate
+*.tfstate
+*.tfstate.backup
 
 # other
 *.docx
