@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+.venv/
+.juliaup/
+bun.lockb
+vendor/
+
+# build outputs
+dist/
+out/
+__pycache__/
+.pytest_cache/
+
+# ide and development tools
+.lake/
+__debug_bin*
+.gradio/
+.vscode/
+
+# sensitive files
+awsconfig.json
+.env
+id_ed25519_*
+credentials
+*credentials.json
+*.tar.gz
+.secrets
+backup/
+.ssh/
+
+# other
+*.docx
+.initialized
+GEMINI.md

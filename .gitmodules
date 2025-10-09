@@ -1,0 +1,6 @@
+[submodule "artifacts/funsearch"]
+	path = artifacts/funsearch
+	url = git@github.com:Xo1otl/funsearch.git
+[submodule "research/paint_radiation"]
+	path = research/paint_radiation
+	url = git@github.com:QunaSys/paint_radiation.git

@@ -1,0 +1,47 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"shutdownAction": "none",
+	"runServices": ["devcontainer"],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				// programming languages
+				"golang.go",
+				// python: lanugage server + linter/formatter
+				"ms-python.python",
+				"charliermarsh.ruff",
+				// js/ts: language server + linter/formatter
+				"oven.bun-vscode",
+				"biomejs.biome",
+				// julia
+				"julialang.language-julia",
+
+				// other markup languages
+				"bierner.markdown-mermaid",
+				"tamasfe.even-better-toml",
+				"jebbs.plantuml",
+
+				// その他
+				"ms-toolsai.jupyter",
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.live-server",
+				"statelyai.stately-vscode",
+				"mongodb.mongodb-vscode"
+			]
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+	},
+	"remoteEnv": {
+		"PATH": "/home/vscode/.local/share/mise/shims:${containerEnv:PATH}"
+	},
+	"initializeCommand": "/bin/bash .devcontainer/default/initializeCommand.sh",
+	"postCreateCommand": "/bin/bash .devcontainer/postCreateCommand.sh"
+}

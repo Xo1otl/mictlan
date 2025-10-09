@@ -1,0 +1,66 @@
+{
+	"folders": [
+		{
+			"name": "mictlan",
+			"path": "."
+		}
+	],
+	"extensions": { "recommendations": ["vscodevim.vim"] },
+	"settings": {
+		// プログラミング言語
+		/* go */
+		"go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.25.1",
+		/* julia */
+		"julia.NumThreads": "auto",
+		"julia.executablePath": "${env:HOME}/.local/share/mise/shims/julia",
+		/* python */
+		"python.terminal.activateEnvironment": false, // let mise activate venv
+		"python.terminal.activateEnvInCurrentTerminal": false,
+		"python.analysis.typeCheckingMode": "strict", // vscodeの設定
+		"cursorpyright.analysis.typeCheckingMode": "strict", // cursorの設定
+		"[python]": {
+			"editor.defaultFormatter": "charliermarsh.ruff"
+		},
+		"notebook.formatOnSave.enabled": true,
+		/* js/ts */
+		"bun.runtime": "${env:HOME}/.local/share/mise/shims/bun",
+		"typescript.updateImportsOnFileMove.enabled": "always",
+		"[typescript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[jsonc]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[json]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+
+		// マークアップ言語
+		"plantuml.server": "https://www.plantuml.com/plantuml",
+
+		// その他
+		"git.confirmSync": false,
+		"git.autofetch": true,
+		"git.enableSmartCommit": true,
+		"vim.handleKeys": {
+			"<C-f>": false
+		},
+		"editor.codeLens": true,
+		"files.autoSave": "afterDelay",
+		"editor.formatOnSave": true, // Ctrl+sでリフォーマットする
+		"terminal.integrated.defaultProfile.linux": "fish",
+		"remote.autoForwardPortsFallback": 0,
+		"search.exclude": {
+			"**/.venv": true,
+			"**/node_modules": true,
+			"**/*.sum": true,
+			"**/*.lock": true
+		}
+	}
+}

@@ -1,0 +1,4 @@
+[env]
+_.path = ["./scripts"]
+_.python.venv = ".venv"
+_.file = { path = ".env", redact = true }

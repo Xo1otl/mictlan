@@ -1,0 +1,43 @@
+[project]
+name = "mictlan"
+version = "0.1.0"
+description = "all in one monorepo"
+authors = [{ name = "Xolotl", email = "xolotl.mictl4n@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = [
+    # scriptsで必要なpackage
+    "nbconvert",
+    "playwright",
+    # Jupyterで使用するpackage
+    "notebook",
+    "matplotlib",
+    "japanize_matplotlib",
+    # workspace packages
+    "funsearch",
+    "llmsr-worker",
+    "tmmax",
+]
+
+[project.optional-dependencies]
+cuda = ["jax[cuda]"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["artifacts/funsearch", "apps/llmsr-worker"]
+
+[tool.uv.sources]
+funsearch = { workspace = true }
+llmsr-worker = { workspace = true }
+
+[tool.ruff]
+include = ["scripts", "artifacts/funsearch", "apps/llmsr-worker"]
+exclude = ["**/pb"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D"]
+
+[dependency-groups]
+dev = ["grpcio-tools>=1.75.1"]

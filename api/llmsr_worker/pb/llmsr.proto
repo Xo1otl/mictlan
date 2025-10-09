@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package llmsr_worker.pb;
+
+option go_package = "mictlan/orchestrator/internal/pb;pb";
+
+// llmsr-worker service definition.
+service LLMSR {
+  // propose generates new program skeletons based on parent programs.
+  rpc propose(ProposeRequest) returns (ProposeResponse) {}
+
+  // observe evaluates a given program skeleton and returns its performance score.
+  rpc observe(ObserveRequest) returns (ObserveResponse) {}
+}
+
+// Represents a program with its skeleton and score, used as input for Propose.
+message Program {
+  string skeleton = 1;
+  double score = 2;
+}
+
+// The request message for the Propose RPC.
+message ProposeRequest {
+  repeated Program parents = 1;
+}
+
+// The response message for the Propose RPC.
+message ProposeResponse {
+  repeated string skeletons = 1;
+}
+
+// The request message for the Observe RPC.
+message ObserveRequest {
+  string skeleton = 1;
+}
+
+// The response message for the Observe RPC.
+message ObserveResponse {
+  // The original skeleton from the request, to associate the score correctly.
+  string skeleton = 1;
+  double score = 2;
+}

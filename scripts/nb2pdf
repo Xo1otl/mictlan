@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import time
+import argparse
+from nbconvert import HTMLExporter
+from playwright.sync_api import sync_playwright
+from traitlets.config import Config
+
+
+def convert_notebook_to_html(notebook_path: str) -> str:
+    c = Config()
+    c.HTMLExporter.exclude_input_prompt = True
+    c.HTMLExporter.exclude_output_prompt = True
+    html_exporter = HTMLExporter(config=c)
+    body, _ = html_exporter.from_file(notebook_path)
+    return body
+
+
+def save_html_as_pdf(html_str: str, output_path: str):
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        time.sleep(0.5)  # monkey patch for waiting chromium launch
+        page = browser.new_page()
+        page.set_content(html_str)
+        page.add_style_tag(
+            content="* { font-family: 'Noto Sans CJK JP', 'Hiragino Kaku Gothic ProN', "
+            "'メイリオ', sans-serif !important; }"
+        )
+        time.sleep(1)  # monkey patch for waiting mathjax load
+        page.pdf(path=output_path, scale=0.6, format="A4")
+        browser.close()
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Convert Jupyter notebook to PDF")
+    parser.add_argument("-f", "--file", help="Notebook file path")
+    parser.add_argument(
+        "-o", "--output", help="Output PDF file path (default: output.pdf)"
+    )
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    html = convert_notebook_to_html(args.file)
+    if args.output is None:
+        args.output = args.file.replace(".ipynb", ".pdf")
+    save_html_as_pdf(html, args.output)
+    print("PDFを保存しました:", args.output)

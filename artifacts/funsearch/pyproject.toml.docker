@@ -1,0 +1,21 @@
+[project]
+name = "funsearch"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai",
+    "jax",
+    "optax",
+    "pandas",
+    "gradio",
+    "matplotlib",
+    "setuptools",
+    "japanize_matplotlib",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
