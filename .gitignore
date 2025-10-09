@@ -28,10 +28,11 @@ credentials
 .secrets
 backup/
 .ssh/
+tfplan
+.tfstate
 
 # other
 *.docx
 .initialized
 GEMINI.md
 .terraform/
-tfplan
