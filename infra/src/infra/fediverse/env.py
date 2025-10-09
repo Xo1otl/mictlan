@@ -1,0 +1,5 @@
+DBUSER = 'lemmy'
+DBNAME = 'lemmy'
+DBPASSWORD = 'h71BIDej311Hkal'
+SMTP_PASSWORD = 'UfudjcjJ746*'
+SMTP_EMAIL = 'xolotl@mictlan.site'
