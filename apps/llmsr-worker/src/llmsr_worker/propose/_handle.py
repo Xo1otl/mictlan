@@ -1,6 +1,7 @@
 from ._types import Request, Response
 
 
+# TODO: factoryを用意してprompt_templateをcaptureする形でDIするのがいいかなぁ
 def handle(request: Request) -> Response:
     if not request.parents:
         msg = "No parents provided"
@@ -18,7 +19,7 @@ def handle(request: Request) -> Response:
     # The template's parser has all the necessary context captured.
     candidates = parse(proposal)
     """
-    # **無意味なmock実装**
+    # **meaningless mock implementation**
     best_parent = max(request.parents, key=lambda p: p.score)
     val = int(best_parent.score)
 
