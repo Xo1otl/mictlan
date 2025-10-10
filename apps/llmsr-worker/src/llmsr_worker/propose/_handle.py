@@ -7,7 +7,7 @@ def handle(request: Request) -> Response:
         raise ValueError(msg)
 
     """
-    # A prompt_template is responsible for creating a prompt and a parser for the LLM's output.
+    # A prompt_template is responsible for creating a prompt and a parserFunc for the LLM's output.
     # It is determined from the function signature and parent candidates.
     prompt, parse = prompt_template.build(signature, parents)
 
