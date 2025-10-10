@@ -69,6 +69,6 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "mictlan_tunnel_confi
 }
 
 resource "local_file" "tunnel_token_file" {
-  content  = data.cloudflare_zero_trust_tunnel_cloudflared_token.mictlan_tunnel_token.token
-  filename = "${path.module}/cloudflared-token"
+  content  = "CLOUDFLARE_TUNNEL_TOKEN=${data.cloudflare_zero_trust_tunnel_cloudflared_token.mictlan_tunnel_token.token}"
+  filename = "${path.module}/.env"
 }

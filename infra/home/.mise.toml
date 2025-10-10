@@ -1,0 +1,6 @@
+[env]
+_.file = { path = ".env", redact = true }
+
+[tasks.cloudflared]
+description = "devcontainer内のサービスを公開するトンネルを立ち上げる"
+run = "docker run --rm --network mictlan_default cloudflare/cloudflared:latest tunnel --no-autoupdate run --token $CLOUDFLARE_TUNNEL_TOKEN"
