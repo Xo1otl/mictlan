@@ -7,15 +7,18 @@ def handle(request: Request) -> Response:
         raise ValueError(msg)
 
     """
-    1. llmsrの場合はskeletonのシグネチャがベースとなるかな
-    2. alpha evolveの場合はbaseが元のプログラム
+    # A prompt_template is responsible for creating a prompt and a parser for the LLM's output.
+    # It is determined from the function signature and parent candidates.
+    prompt, parse = prompt_template.build(signature, parents)
 
-    original, query = prompt_sampler.build(request.parents)
-    diffs = llm.generate(query)
-    for diff in diffs:
-        skeleton = original.apply(diff)
-        new_skeletons.append(skeleton)
+    # The single creative stochastic step where the LLM generates a proposal.
+    proposal = llm.generate(prompt)
+
+    # Create well-formed candidate solutions ready for evaluation.
+    # The template's parser has all the necessary context captured.
+    candidates = parse(proposal)
     """
+    # **無意味なmock実装**
     best_parent = max(request.parents, key=lambda p: p.score)
     val = int(best_parent.score)
 

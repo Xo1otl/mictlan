@@ -13,7 +13,7 @@ dependencies = [
     "matplotlib",
     "japanize_matplotlib",
     # workspace packages
-    "funsearch",
+    # "funsearch",
     "llmsr-worker",
     "tmmax",
 ]
@@ -34,6 +34,7 @@ llmsr-worker = { workspace = true }
 [tool.ruff]
 include = ["scripts", "artifacts/funsearch", "apps/llmsr-worker"]
 exclude = ["**/pb"]
+line-length = 120
 
 [tool.ruff.lint]
 select = ["ALL"]

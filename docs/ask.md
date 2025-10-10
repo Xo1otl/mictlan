@@ -1,5 +1,4 @@
 ## Memo
-* 推敲の時に、`Please remove any modifiers or exaggerations and revise your writing to focus on describing only the "how" and "what" necessary to reproduce the logic.`を追記するといい感じになる。GEMINI.mdでこの手順追加しようかな
 * orchestratorの実装側での型引数名の例
     ```go
     // B(asis): Proposeの入力
@@ -10,8 +9,10 @@
     ```
 
 # Prompt
-1. Read @docs/README.md
-2. Process @apps/funsearch-orchestrator/docs/task.md:
+1. Read @docs/architecture.md
+2. Read @apps/llmsr-worker/src/llmsr_worker/propose/_handle.py
+3. Read @api/llmsr_worker/pb/llmsr.proto
+3. Process @docs/task.md
    - If the "Your Task" section is present, execute its instructions.
    - If the "Question" section is present, answer its questions.
-It is important that you read files in exact order. Let's begin.
+It is important that you read files in the exact order. Let's begin.

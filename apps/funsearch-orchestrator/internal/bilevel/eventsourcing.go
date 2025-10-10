@@ -23,9 +23,9 @@ func Replay[PReq, ORes any](State State[PReq, ORes], trace []StateEvent[ORes]) {
 	for _, event := range trace {
 		switch event.Type {
 		case CallIssue:
-			_, _, _ = State.Issue()
+			State.Issue()
 		case CallUpdate:
-			_, _ = State.Update(event.Payload)
+			State.Update(event.Payload)
 		}
 	}
 }

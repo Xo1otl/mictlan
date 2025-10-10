@@ -1521,7 +1521,6 @@ name = "mictlan"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "funsearch" },
     { name = "japanize-matplotlib" },
     { name = "llmsr-worker" },
     { name = "matplotlib" },
@@ -1543,7 +1542,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "funsearch", editable = "artifacts/funsearch" },
     { name = "japanize-matplotlib" },
     { name = "jax", extras = ["cuda"], marker = "extra == 'cuda'" },
     { name = "llmsr-worker", editable = "apps/llmsr-worker" },
