@@ -40,9 +40,11 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "mictlan_tunnel" {
   config_src = "cloudflare"
 }
 
-resource "cloudflare_dns_record" "portfolio" {
+resource "cloudflare_dns_record" "dynamic_cnames" {
+  for_each = { for rule in var.ingress_rules : rule.subdomain => rule }
+
   zone_id = var.cloudflare_zone_id
-  name    = "portfolio"
+  name    = each.key
   content = "${cloudflare_zero_trust_tunnel_cloudflared.mictlan_tunnel.id}.cfargotunnel.com"
   type    = "CNAME"
   ttl     = 1
@@ -59,12 +61,15 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "mictlan_tunnel_confi
   tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.mictlan_tunnel.id
 
   config = {
-    ingress = [{
-      hostname = "portfolio.mictlan.cc"
-      service  = "http://devcontainer:1111"
-      }, {
-      service = "http_status:404"
-    }]
+    ingress = concat(
+      [for rule in var.ingress_rules : {
+        hostname = "${rule.subdomain}.${var.domain}"
+        service  = "http://devcontainer:${rule.port}"
+      }],
+      [{
+        service = "http_status:404"
+      }]
+    )
   }
 }
 
