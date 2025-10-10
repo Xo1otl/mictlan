@@ -26,6 +26,7 @@
 				"bierner.markdown-mermaid",
 				"tamasfe.even-better-toml",
 				"jebbs.plantuml",
+				"hashicorp.terraform",
 
 				// その他
 				"ms-toolsai.jupyter",
