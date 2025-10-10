@@ -9,7 +9,7 @@
 	"settings": {
 		// プログラミング言語
 		/* go */
-		"go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.25.1",
+		"go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.25.2",
 		/* julia */
 		"julia.NumThreads": "auto",
 		"julia.executablePath": "${env:HOME}/.local/share/mise/shims/julia",
