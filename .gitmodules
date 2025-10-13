@@ -4,3 +4,6 @@
 [submodule "research/paint_radiation"]
 	path = research/paint_radiation
 	url = git@github.com:QunaSys/paint_radiation.git
+[submodule "research/qpm"]
+	path = research/qpm
+	url = git@github.com:Xo1otl/qpm.git
