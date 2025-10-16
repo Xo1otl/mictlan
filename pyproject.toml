@@ -43,3 +43,10 @@ ignore = ["D"]
 
 [dependency-groups]
 dev = ["grpcio-tools>=1.75.1"]
+
+[tool.pyright]
+typeCheckingMode = "strict"
+# pyrightの設定は個々のpyproject.tomlではなくrootに一元的に書く必要がある
+executionEnvironments = [
+    { root = "research/qpm", reportUnknownVariableType = "none", reportUnknownMemberType = "none", reportUnknownArgumentType = "none" },
+]
