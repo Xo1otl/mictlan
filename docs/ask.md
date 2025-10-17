@@ -9,8 +9,8 @@
     ```
 
 # Prompt
-1. Read @research/qpm/src/qpm/cwes/_solver.py
-2. Read @research/qpm/src/qpm/cwes/_visualize.py
+1. Read @research/qpm/docs/README.md
+2. Read @research/qpm/examples/optimization/optimize_thg.ipynb
 3. Process @docs/task.md
    - If the "Task" section is present, execute its instructions.
    - If the "Question" section is present, answer its questions.

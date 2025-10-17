@@ -1,15 +1,16 @@
-# API Design Ideas
+**Subject: Locating solutions in a complex loss landscape**
 
-## Design Goal
+**System:**
+*   **Algorithm:** L-BFGS
+*   **Parameters:** High-dimensional vector `w`
 
-The goal is to design a flexible API for running simulations. The API must handle general patterns of execution based on which parameters are fixed versus which are being swept.
+**Behavior:**
+*   The optimizer converges to a local minimum.
+*   The resulting `w` is jagged and provides a suboptimal objective value.
+*   The final solution is sensitive to initialization.
 
-The primary execution patterns are:
-1.  **Single Run**: All parameters (`superlattice`, `delta_k_pair`, `b_initial`) are single, fixed values for a single simulation.
-2.  **1D Sweep**: One parameter is an array of values to be iterated over, while all other parameters remain fixed.
-3.  **N-D Sweep (Future Possibility)**: Two or more parameters are arrays of values, defining a grid of simulations to be executed.
+**Hypothesis:**
+The loss landscape contains many local minima corresponding to jagged parameter vectors. Broader basins corresponding to smoother vectors exist.
 
-The API must handle the **Single Run** and **1D Sweep** patterns, while being extensible enough to handle **N-D Sweeps** in the future without requiring a fundamental redesign.
-
-# **Task**
-Consider better approach.
+**Request:**
+What techniques can alter the search dynamics or the effective loss landscape to favor the discovery of these smoother solutions?
