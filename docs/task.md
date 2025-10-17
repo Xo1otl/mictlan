@@ -1,16 +1,4 @@
-**Subject: Locating solutions in a complex loss landscape**
-
-**System:**
-*   **Algorithm:** L-BFGS
-*   **Parameters:** High-dimensional vector `w`
-
-**Behavior:**
-*   The optimizer converges to a local minimum.
-*   The resulting `w` is jagged and provides a suboptimal objective value.
-*   The final solution is sensitive to initialization.
-
-**Hypothesis:**
-The loss landscape contains many local minima corresponding to jagged parameter vectors. Broader basins corresponding to smoother vectors exist.
-
-**Request:**
-What techniques can alter the search dynamics or the effective loss landscape to favor the discovery of these smoother solutions?
+# Objective
+Instead of maximizing power at a single point, I want to achieve a broad, flat-top THW conversion spectrum over a defined range of wavelengths, while maintaining high efficiency.
+# Task
+Propose a differentiable mathematical method to quantitatively evaluate the broad, flat-top spectrum.
