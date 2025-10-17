@@ -9,10 +9,9 @@
     ```
 
 # Prompt
-1. Read @docs/architecture.md
-2. Read @apps/llmsr-worker/src/llmsr_worker/propose/_handle.py
-3. Read @api/llmsr_worker/pb/llmsr.proto
+1. Read @research/qpm/src/qpm/cwes/_solver.py
+2. Read @research/qpm/src/qpm/cwes/_visualize.py
 3. Process @docs/task.md
-   - If the "Your Task" section is present, execute its instructions.
+   - If the "Task" section is present, execute its instructions.
    - If the "Question" section is present, answer its questions.
-It is important that you read files in the exact order. Let's begin.
+Let's begin.

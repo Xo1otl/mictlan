@@ -1,14 +1,15 @@
-# Objective
-Define a generalized protocol for the `propose` step in evolutionary algorithms.
+# API Design Ideas
 
-# Core Task
-Decompose the `propose` function into a sequence of abstract, universal stages. The goal is to create a conceptual framework, not a specific implementation. This protocol should serve as a universal blueprint applicable to a wide range of evolutionary search methods.
+## Design Goal
 
-# Key Requirements
-The resulting protocol must be general enough to accommodate, but not be limited by, the following variations:
+The goal is to design a flexible API for running simulations. The API must handle general patterns of execution based on which parameters are fixed versus which are being swept.
 
-* **Parent Selection:** Handling single or multiple parents as input.
-* **Modification Strategy:** Applying modifications as either diffs/patches or complete rewrites.
-* **Candidate Generation:** Producing single or multiple candidate solutions as output.
+The primary execution patterns are:
+1.  **Single Run**: All parameters (`superlattice`, `delta_k_pair`, `b_initial`) are single, fixed values for a single simulation.
+2.  **1D Sweep**: One parameter is an array of values to be iterated over, while all other parameters remain fixed.
+3.  **N-D Sweep (Future Possibility)**: Two or more parameters are arrays of values, defining a grid of simulations to be executed.
 
-Your definition should identify the fundamental concepts and their interactions within the `propose` step (e.g., parent selection, modification generation, candidate construction) to establish a truly generalized procedure.
+The API must handle the **Single Run** and **1D Sweep** patterns, while being extensible enough to handle **N-D Sweeps** in the future without requiring a fundamental redesign.
+
+# **Task**
+Consider better approach.
