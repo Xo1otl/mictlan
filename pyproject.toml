@@ -10,13 +10,13 @@ dependencies = [
     "playwright",
     # Jupyterで使用するpackage
     "notebook",
-    "matplotlib",
-    "japanize_matplotlib",
+    "ipywidgets",
+    "tqdm",
+    "plotly",
     # workspace packages
     "llmsr-worker",
     "tmmax",
     "qpm",
-    "tqdm",
 ]
 
 [project.optional-dependencies]
