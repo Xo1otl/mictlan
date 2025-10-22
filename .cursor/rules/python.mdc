@@ -1,0 +1,41 @@
+---
+globs: *.py
+alwaysApply: false
+---
+# Development Conventions
+- Use the latest syntax (Python 3.13+, Go 1.25+, Bun).
+### Adopt Go's design philosophy
+The use of any class that is not a `@dataclass` or a `Protocol` is strictly prohibited.
+- **`struct`**: Always use `@dataclass`. This is analogous to Go's `struct`. These dataclasses are not required to be immutable, aligning with the nature of Go structs. Any complex initialization logic must be delegated to factory functions. Instance methods on the `@dataclass` serve as its method receivers.
+- **`interface`**: Define interfaces using `typing.Protocol`.
+### **Namespaced Packages (Go-style)**: Treat directories as the namespaced modules.
+- A package is a directory with an `__init__.py`. Logic is implemented in internal files.
+- The `__init__.py` file **must** define the package's public API by importing members from its files and setting `__all__`.
+- **Always import the package itself**, not its internal files. Access members through the package's namespace.
+### Example: Package `p1`
+#### `lib/p1/_internal.py`
+```python
+# Avoid: 
+# class P1TypeA:
+# Prefer:
+@dataclass
+class TypeA:
+    val: int
+def func_a(c: TypeA) -> int:
+    ...
+```
+#### `lib/p1/__init__.py`
+```python
+from ._internal import TypeA, func_a
+__all__ = ["TypeA", "func_a"]
+```
+#### Usage: `main.py`
+Import the `p1` package from the `lib` directory.
+```python
+# Avoid: 
+# from lib.p1 import TypeA
+# Prefer:
+from lib import p1
+instance = p1.TypeA(10) # MUST Access API members via the 'p1' namespace
+result = p1.func_a(instance)
+```

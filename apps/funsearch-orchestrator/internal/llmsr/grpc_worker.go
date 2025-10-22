@@ -8,11 +8,11 @@ import (
 )
 
 // TODO: skeletonを送ってるだけだが、シグネチャも必要なのか？それともdraftという名前で変更適用対象としてのoriginalを含めるか。
-func NewGRPCPropose(client pb.LLMSRClient) func(context.Context, ProposeRequest) ProposeResult {
+func NewGRPCPropose(client pb.FUNSEARCHClient) func(context.Context, ProposeRequest) ProposeResult {
 	return func(ctx context.Context, req ProposeRequest) ProposeResult {
-		pbParents := make([]*pb.Program, len(req.Parents))
+		pbParents := make([]*pb.Candidate, len(req.Parents))
 		for i, p := range req.Parents {
-			pbParents[i] = &pb.Program{Skeleton: string(p.Skeleton), Score: p.Score}
+			pbParents[i] = &pb.Candidate{Hypothesis: string(p.Skeleton), Quantitative: p.Score}
 		}
 
 		pbReq := &pb.ProposeRequest{Parents: pbParents}
@@ -21,8 +21,8 @@ func NewGRPCPropose(client pb.LLMSRClient) func(context.Context, ProposeRequest)
 			return ProposeResult{Err: fmt.Errorf("%w: gRPC propose error: %w", ErrInPropose, err)}
 		}
 
-		skeletons := make([]Skeleton, len(resp.Skeletons))
-		for i, s := range resp.Skeletons {
+		skeletons := make([]Skeleton, len(resp.Hypothesises))
+		for i, s := range resp.Hypothesises {
 			skeletons[i] = Skeleton(s)
 		}
 
@@ -33,7 +33,7 @@ func NewGRPCPropose(client pb.LLMSRClient) func(context.Context, ProposeRequest)
 	}
 }
 
-func NewGRPCObserve(client pb.LLMSRClient) func(context.Context, ObserveRequest) ObserveResult {
+func NewGRPCObserve(client pb.FUNSEARCHClient) func(context.Context, ObserveRequest) ObserveResult {
 	return func(ctx context.Context, req ObserveRequest) ObserveResult {
 		if req.Err != nil {
 			return ObserveResult{
@@ -42,7 +42,7 @@ func NewGRPCObserve(client pb.LLMSRClient) func(context.Context, ObserveRequest)
 			}
 		}
 
-		pbReq := &pb.ObserveRequest{Skeleton: string(req.Query)}
+		pbReq := &pb.ObserveRequest{Hypothesis: string(req.Query)}
 		resp, err := client.Observe(ctx, pbReq)
 		if err != nil {
 			return ObserveResult{
@@ -53,8 +53,8 @@ func NewGRPCObserve(client pb.LLMSRClient) func(context.Context, ObserveRequest)
 		}
 
 		return ObserveResult{
-			Query:    Skeleton(resp.Skeleton),
-			Evidence: resp.Score,
+			Query:    Skeleton(resp.Hypothesis),
+			Evidence: resp.Quantitative,
 			Metadata: req.Metadata,
 		}
 	}

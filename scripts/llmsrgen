@@ -10,23 +10,23 @@ echo "Generating Go gRPC code..."
 GO_OUT_DIR="apps/funsearch-orchestrator/internal/"
 mkdir -p "$GO_OUT_DIR"
 protoc \
-  -I api/llmsr_worker \
+  -I api/funsearch_worker \
   --go_out="$GO_OUT_DIR" --go_opt=paths=source_relative \
   --go-grpc_out="$GO_OUT_DIR" --go-grpc_opt=paths=source_relative \
-  api/llmsr_worker/pb/llmsr.proto
+  api/funsearch_worker/pb/funsearch.proto
 echo "Generated Go gRPC code in $GO_OUT_DIR"
 
 echo "" # Add a newline for better readability
 
 # --- Generate Python code ---
 echo "Generating Python gRPC code..."
-PYTHON_OUT_DIR="apps/llmsr-worker/src/"
+PYTHON_OUT_DIR="apps/funsearch-worker/src/"
 python -m grpc_tools.protoc \
   -I api \
   --python_out="$PYTHON_OUT_DIR" \
   --grpc_python_out="$PYTHON_OUT_DIR" \
   --pyi_out="$PYTHON_OUT_DIR" \
-  api/llmsr_worker/pb/llmsr.proto
+  api/funsearch_worker/pb/funsearch.proto
 echo "Generated Python gRPC code in $PYTHON_OUT_DIR"
 
 echo "Done."

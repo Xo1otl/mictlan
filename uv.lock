@@ -4,7 +4,7 @@ requires-python = "==3.13.*"
 
 [manifest]
 members = [
-    "llmsr-worker",
+    "funsearch-worker",
     "mictlan",
     "qpm",
 ]
@@ -414,6 +414,31 @@ sdist = { url = "https://files.pythonhosted.org/packages/de/e0/bab50af11c2d75c9c
 wheels = [
     { url = "https://files.pythonhosted.org/packages/47/71/70db47e4f6ce3e5c37a607355f80da8860a33226be640226ac52cb05ef2e/fsspec-2025.9.0-py3-none-any.whl", hash = "sha256:530dc2a2af60a414a832059574df4a6e10cce927f6f4a78209390fe38955cfb7", size = 199289, upload-time = "2025-09-02T19:10:47.708Z" },
 ]
+
+[[package]]
+name = "funsearch-worker"
+version = "0.1.0"
+source = { editable = "apps/funsearch-worker" }
+dependencies = [
+    { name = "grpcio" },
+    { name = "grpcio-reflection" },
+    { name = "pytest" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "grpcio-tools" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "grpcio", specifier = ">=1.75.1" },
+    { name = "grpcio-reflection", specifier = ">=1.75.1" },
+    { name = "pytest", specifier = ">=8.4.2" },
+]
+
+[package.metadata.requires-dev]
+dev = [{ name = "grpcio-tools", specifier = ">=1.75.1" }]
 
 [[package]]
 name = "greenlet"
@@ -1029,31 +1054,6 @@ wheels = [
 ]
 
 [[package]]
-name = "llmsr-worker"
-version = "0.1.0"
-source = { editable = "apps/llmsr-worker" }
-dependencies = [
-    { name = "grpcio" },
-    { name = "grpcio-reflection" },
-    { name = "pytest" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "grpcio-tools" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "grpcio", specifier = ">=1.75.1" },
-    { name = "grpcio-reflection", specifier = ">=1.75.1" },
-    { name = "pytest", specifier = ">=8.4.2" },
-]
-
-[package.metadata.requires-dev]
-dev = [{ name = "grpcio-tools", specifier = ">=1.75.1" }]
-
-[[package]]
 name = "markdown-it-py"
 version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1152,8 +1152,8 @@ name = "mictlan"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "funsearch-worker" },
     { name = "ipywidgets" },
-    { name = "llmsr-worker" },
     { name = "nbconvert" },
     { name = "notebook" },
     { name = "playwright" },
@@ -1175,9 +1175,9 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "funsearch-worker", editable = "apps/funsearch-worker" },
     { name = "ipywidgets" },
     { name = "jax", extras = ["cuda"], marker = "extra == 'cuda'" },
-    { name = "llmsr-worker", editable = "apps/llmsr-worker" },
     { name = "nbconvert" },
     { name = "notebook" },
     { name = "playwright" },

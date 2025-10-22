@@ -1,0 +1,14 @@
+[project]
+name = "funsearch-worker"
+version = "0.1.0"
+description = "funsearch worker gRPC server"
+readme = "README.md"
+authors = [{ name = "Xo1otl", email = "xolotl.mictl4n@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = ["grpcio>=1.75.1", "grpcio-reflection>=1.75.1", "pytest>=8.4.2"]
+
+[project.scripts]
+funsearch-worker = "funsearch_worker:main"
+
+[dependency-groups]
+dev = ["grpcio-tools>=1.75.1"]

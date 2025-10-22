@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package funsearch_worker.pb;
+
+option go_package = "funsearch-orchestrator/internal/pb;pb";
+
+// funsearch-worker service definition.
+service FUNSEARCH {
+  // propose generates new candidate hypothesises based on parent candidates.
+  rpc propose(ProposeRequest) returns (ProposeResponse) {}
+
+  // observe evaluates a given candidate hypothesis and returns its performance quantitative.
+  rpc observe(ObserveRequest) returns (ObserveResponse) {}
+}
+
+// Represents a candidate with its hypothesis and quantitative, used as input for Propose.
+message Candidate {
+  string hypothesis = 1;
+  double quantitative = 2;
+  string qualitative = 3;
+}
+
+// The request message for the Propose RPC.
+message ProposeRequest {
+  repeated Candidate parents = 1;
+  string specification = 2;
+}
+
+// The response message for the Propose RPC.
+message ProposeResponse {
+  repeated string hypothesises = 1;
+}
+
+// The request message for the Observe RPC.
+message ObserveRequest {
+  string hypothesis = 1;
+}
+
+// The response message for the Observe RPC.
+message ObserveResponse {
+  // The original hypothesis from the request, to associate the quantitative correctly.
+  string hypothesis = 1;
+  double quantitative = 2;
+  string qualitative = 3;
+}

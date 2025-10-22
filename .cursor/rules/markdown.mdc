@@ -1,0 +1,25 @@
+---
+globs: *.md
+alwaysApply: false
+---
+# When asked to refine "Prompts":
+Aggressively apply Occam's Razor to distill the core instruction.
+
+# When asked to refine "Documents":
+
+## Format
+```md
+# Introduction
+... WHY ...
+# Overview
+... **decriptivetitle1** ... **decriptivetitle2** ...
+# DecriptiveTitle1
+# DecriptiveTitle2
+```
+
+## Generate **step-by-step**:
+- Step 1: Write the Introduction of Why.
+- Step 2: Compose the Overview. Identify and bold any key terms that require detailed explanation later.
+- Step 3: Create a separate, structured, self-contained section for each bolded term from the `Overview`.
+- Step 4: Remove any modifiers or exaggerations in each section to focus on describing only the necessary "How" and "What".
+- Step 5: Perform a strict revision of the entire document to remove all redundant, exaggerated, and superfluous language.

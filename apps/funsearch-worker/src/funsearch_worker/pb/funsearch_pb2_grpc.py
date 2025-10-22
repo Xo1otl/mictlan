@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from llmsr_worker.pb import llmsr_pb2 as llmsr__worker_dot_pb_dot_llmsr__pb2
+from funsearch_worker.pb import funsearch_pb2 as funsearch__worker_dot_pb_dot_funsearch__pb2
 
 GRPC_GENERATED_VERSION = '1.75.1'
 GRPC_VERSION = grpc.__version__
@@ -18,15 +18,15 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in llmsr_worker/pb/llmsr_pb2_grpc.py depends on'
+        + f' but the generated code in funsearch_worker/pb/funsearch_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class LLMSRStub(object):
-    """llmsr-worker service definition.
+class FUNSEARCHStub(object):
+    """funsearch-worker service definition.
     """
 
     def __init__(self, channel):
@@ -36,58 +36,58 @@ class LLMSRStub(object):
             channel: A grpc.Channel.
         """
         self.propose = channel.unary_unary(
-                '/llmsr_worker.pb.LLMSR/propose',
-                request_serializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ProposeRequest.SerializeToString,
-                response_deserializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ProposeResponse.FromString,
+                '/funsearch_worker.pb.FUNSEARCH/propose',
+                request_serializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ProposeRequest.SerializeToString,
+                response_deserializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ProposeResponse.FromString,
                 _registered_method=True)
         self.observe = channel.unary_unary(
-                '/llmsr_worker.pb.LLMSR/observe',
-                request_serializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ObserveRequest.SerializeToString,
-                response_deserializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ObserveResponse.FromString,
+                '/funsearch_worker.pb.FUNSEARCH/observe',
+                request_serializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ObserveRequest.SerializeToString,
+                response_deserializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ObserveResponse.FromString,
                 _registered_method=True)
 
 
-class LLMSRServicer(object):
-    """llmsr-worker service definition.
+class FUNSEARCHServicer(object):
+    """funsearch-worker service definition.
     """
 
     def propose(self, request, context):
-        """propose generates new program skeletons based on parent programs.
+        """propose generates new candidate hypothesises based on parent candidates.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def observe(self, request, context):
-        """observe evaluates a given program skeleton and returns its performance score.
+        """observe evaluates a given candidate hypothesis and returns its performance quantitative.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_LLMSRServicer_to_server(servicer, server):
+def add_FUNSEARCHServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'propose': grpc.unary_unary_rpc_method_handler(
                     servicer.propose,
-                    request_deserializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ProposeRequest.FromString,
-                    response_serializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ProposeResponse.SerializeToString,
+                    request_deserializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ProposeRequest.FromString,
+                    response_serializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ProposeResponse.SerializeToString,
             ),
             'observe': grpc.unary_unary_rpc_method_handler(
                     servicer.observe,
-                    request_deserializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ObserveRequest.FromString,
-                    response_serializer=llmsr__worker_dot_pb_dot_llmsr__pb2.ObserveResponse.SerializeToString,
+                    request_deserializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ObserveRequest.FromString,
+                    response_serializer=funsearch__worker_dot_pb_dot_funsearch__pb2.ObserveResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'llmsr_worker.pb.LLMSR', rpc_method_handlers)
+            'funsearch_worker.pb.FUNSEARCH', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('llmsr_worker.pb.LLMSR', rpc_method_handlers)
+    server.add_registered_method_handlers('funsearch_worker.pb.FUNSEARCH', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class LLMSR(object):
-    """llmsr-worker service definition.
+class FUNSEARCH(object):
+    """funsearch-worker service definition.
     """
 
     @staticmethod
@@ -104,9 +104,9 @@ class LLMSR(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/llmsr_worker.pb.LLMSR/propose',
-            llmsr__worker_dot_pb_dot_llmsr__pb2.ProposeRequest.SerializeToString,
-            llmsr__worker_dot_pb_dot_llmsr__pb2.ProposeResponse.FromString,
+            '/funsearch_worker.pb.FUNSEARCH/propose',
+            funsearch__worker_dot_pb_dot_funsearch__pb2.ProposeRequest.SerializeToString,
+            funsearch__worker_dot_pb_dot_funsearch__pb2.ProposeResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -131,9 +131,9 @@ class LLMSR(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/llmsr_worker.pb.LLMSR/observe',
-            llmsr__worker_dot_pb_dot_llmsr__pb2.ObserveRequest.SerializeToString,
-            llmsr__worker_dot_pb_dot_llmsr__pb2.ObserveResponse.FromString,
+            '/funsearch_worker.pb.FUNSEARCH/observe',
+            funsearch__worker_dot_pb_dot_funsearch__pb2.ObserveRequest.SerializeToString,
+            funsearch__worker_dot_pb_dot_funsearch__pb2.ObserveResponse.FromString,
             options,
             channel_credentials,
             insecure,

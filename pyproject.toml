@@ -14,7 +14,7 @@ dependencies = [
     "tqdm",
     "plotly",
     # workspace packages
-    "llmsr-worker",
+    "funsearch-worker",
     "tmmax",
     "qpm",
 ]
@@ -26,14 +26,14 @@ cuda = ["jax[cuda]"]
 package = false
 
 [tool.uv.workspace]
-members = ["apps/llmsr-worker", "research/qpm"]
+members = ["apps/funsearch-worker", "research/qpm"]
 
 [tool.uv.sources]
-llmsr-worker = { workspace = true }
+funsearch-worker = { workspace = true }
 qpm = { workspace = true }
 
 [tool.ruff]
-include = ["scripts", "apps/llmsr-worker", "research"]
+include = ["scripts", "apps/funsearch-worker", "research"]
 exclude = ["**/pb"]
 line-length = 120
 
@@ -46,6 +46,7 @@ dev = ["grpcio-tools>=1.75.1"]
 
 [tool.pyright]
 typeCheckingMode = "strict"
+reportMissingTypeStubs = false
 # pyrightの設定は個々のpyproject.tomlではなくrootに一元的に書く必要がある
 executionEnvironments = [
     { root = "research/qpm", reportUnknownVariableType = "none", reportUnknownMemberType = "none", reportUnknownArgumentType = "none" },

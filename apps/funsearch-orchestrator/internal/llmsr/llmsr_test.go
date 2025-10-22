@@ -1,9 +1,10 @@
-package llmsr
+package llmsr_test
 
 import (
 	"bufio"
 	"context"
 	"funsearch-orchestrator/internal/bilevel"
+	"funsearch-orchestrator/internal/llmsr"
 	"funsearch-orchestrator/internal/pb"
 	"math/rand"
 	"os/exec"
@@ -25,7 +26,7 @@ const (
 	eliminationRate    = 0.5
 	migrationInterval  = 25
 	proposeConcurrency = 1
-	observeConcurrency = 1
+	observeConcurrency = 2
 	testTimeout        = 6 * time.Second
 	scoreQuantization  = 2
 	t0                 = 0
@@ -37,13 +38,13 @@ func useTestRng() *rand.Rand {
 	return rand.New(rand.NewSource(42))
 }
 
-func newInitialState(t *testing.T, observeFn bilevel.ObserveFunc[ObserveRequest, ObserveResult]) (*DeterministicState, float64) {
+func newInitialState(t *testing.T, observeFn bilevel.ObserveFunc[llmsr.ObserveRequest, llmsr.ObserveResult]) (*llmsr.DeterministicState, float64) {
 	ctx, cancel := context.WithTimeout(context.Background(), testTimeout)
 	defer cancel()
 
 	initialSkeleton := "-100"
-	initialScore := observeFn(ctx, ObserveRequest{Query: Skeleton(initialSkeleton)}).Evidence
-	state, err := NewDeterministicState(initialSkeleton, initialScore, maxEvaluations, numIslands, migrationInterval, scoreQuantization, eliminationRate, t0, n, tp, useTestRng())
+	initialScore := observeFn(ctx, llmsr.ObserveRequest{Query: llmsr.Skeleton(initialSkeleton)}).Evidence
+	state, err := llmsr.NewDeterministicState(initialSkeleton, initialScore, maxEvaluations, numIslands, migrationInterval, scoreQuantization, eliminationRate, t0, n, tp, useTestRng())
 	if err != nil {
 		t.Fatalf("Failed to create initial state: %v", err)
 	}
@@ -51,11 +52,11 @@ func newInitialState(t *testing.T, observeFn bilevel.ObserveFunc[ObserveRequest,
 }
 
 func TestLLMSR_WithMock(t *testing.T) {
-	runnerState, initialScore := newInitialState(t, MockObserve)
-	esState, trace := bilevel.WithEventSourcing(runnerState)
-	runLLMSR(t, esState, MockPropose, MockObserve)
+	runnerState, initialScore := newInitialState(t, llmsr.MockObserve)
+	esState, getTrace := bilevel.WithEventSourcing(runnerState)
+	runLLMSR(t, esState, llmsr.MockPropose, llmsr.MockObserve)
 
-	events := trace()
+	events := getTrace()
 	logStateSummary(t, runnerState, initialScore, events)
 
 	assert.True(t, runnerState.EvaluationsCount >= maxEvaluations, "Should have completed at least the specified number of evaluations")
@@ -63,7 +64,7 @@ func TestLLMSR_WithMock(t *testing.T) {
 
 	t.Log("--- Running Simulation with sequence and Mock workers ---")
 
-	simulatedState, _ := newInitialState(t, MockObserve)
+	simulatedState, _ := newInitialState(t, llmsr.MockObserve)
 	bilevel.Replay(simulatedState, events)
 	logStateSummary(t, simulatedState, initialScore, events)
 }
@@ -81,7 +82,7 @@ func TestLLMSR_WithGRPCServer(t *testing.T) {
 
 	cmd := exec.CommandContext(ctx,
 		pythonPath, "-u",
-		"-c", "import llmsr_worker; llmsr_worker.main()",
+		"-c", "import funsearch_worker; funsearch_worker.main()",
 	)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -124,15 +125,15 @@ func TestLLMSR_WithGRPCServer(t *testing.T) {
 	}
 	defer conn.Close()
 
-	client := pb.NewLLMSRClient(conn)
-	proposeFn := NewGRPCPropose(client)
-	observeFn := NewGRPCObserve(client)
+	client := pb.NewFUNSEARCHClient(conn)
+	proposeFn := llmsr.NewGRPCPropose(client)
+	observeFn := llmsr.NewGRPCObserve(client)
 
 	state, initialScore := newInitialState(t, observeFn)
-	esState, trace := bilevel.WithEventSourcing(state)
+	esState, getTrace := bilevel.WithEventSourcing(state)
 	runLLMSR(t, esState, proposeFn, observeFn)
 
-	events := trace()
+	events := getTrace()
 	logStateSummary(t, state, initialScore, events)
 
 	assert.True(t, state.EvaluationsCount >= maxEvaluations, "Should have completed at least the specified number of evaluations")
@@ -140,16 +141,16 @@ func TestLLMSR_WithGRPCServer(t *testing.T) {
 
 	t.Log("--- Running Simulation with gRPC sequence and Mock workers ---")
 
-	simulatedState, _ := newInitialState(t, MockObserve)
+	simulatedState, _ := newInitialState(t, llmsr.MockObserve)
 	bilevel.Replay(simulatedState, events)
 	logStateSummary(t, simulatedState, initialScore, events)
 }
 
-func runLLMSR(t *testing.T, state bilevel.State[ProposeRequest, ObserveResult], proposeFn bilevel.ProposeFunc[ProposeRequest, ProposeResult], observeFn bilevel.ObserveFunc[ObserveRequest, ObserveResult]) {
+func runLLMSR(t *testing.T, state bilevel.State[llmsr.ProposeRequest, llmsr.ObserveResult], proposeFn bilevel.ProposeFunc[llmsr.ProposeRequest, llmsr.ProposeResult], observeFn bilevel.ObserveFunc[llmsr.ObserveRequest, llmsr.ObserveResult]) {
 	ctx, cancel := context.WithTimeout(context.Background(), testTimeout)
 	defer cancel()
 
-	adapter := NewAdapter()
+	adapter := llmsr.NewAdapter()
 
 	orchestrator := bilevel.NewOrchestrator(
 		proposeFn,
@@ -174,12 +175,12 @@ func runLLMSR(t *testing.T, state bilevel.State[ProposeRequest, ObserveResult], 
 	}
 }
 
-func logStateSummary(t *testing.T, state *DeterministicState, initialScore float64, trace []bilevel.StateEvent[ObserveResult]) {
+func logStateSummary(t *testing.T, state *llmsr.DeterministicState, initialScore float64, trace []bilevel.StateEvent[llmsr.ObserveResult]) {
 	t.Log("--- State Summary ---")
 	t.Logf("Total Islands: %d", len(state.Islands))
 
 	// Sort islands by ID for consistent logging
-	sortedIslands := make([]*Island, 0, len(state.Islands))
+	sortedIslands := make([]*llmsr.Island, 0, len(state.Islands))
 	for _, island := range state.Islands {
 		sortedIslands = append(sortedIslands, island)
 	}
@@ -239,8 +240,8 @@ func logStateSummary(t *testing.T, state *DeterministicState, initialScore float
 	t.Log("---------------------")
 }
 
-func getBestScore(s *DeterministicState) ProgramScore {
-	bestScore := ProgramScore(-1e9)
+func getBestScore(s *llmsr.DeterministicState) llmsr.ProgramScore {
+	bestScore := llmsr.ProgramScore(-1e9)
 	for _, island := range s.Islands {
 		islandBest := island.BestProgram.Score
 		if islandBest > bestScore {
