@@ -418,7 +418,7 @@ wheels = [
 [[package]]
 name = "funsearch-worker"
 version = "0.1.0"
-source = { editable = "apps/funsearch-worker" }
+source = { editable = "apps/alphaprobe/apps/funsearch-worker" }
 dependencies = [
     { name = "grpcio" },
     { name = "grpcio-reflection" },
@@ -1175,7 +1175,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "funsearch-worker", editable = "apps/funsearch-worker" },
+    { name = "funsearch-worker", editable = "apps/alphaprobe/apps/funsearch-worker" },
     { name = "ipywidgets" },
     { name = "jax", extras = ["cuda"], marker = "extra == 'cuda'" },
     { name = "nbconvert" },
