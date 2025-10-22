@@ -14,7 +14,7 @@ dependencies = [
     "tqdm",
     "plotly",
     # workspace packages
-    "funsearch-worker",
+    "worker",
     "tmmax",
     "qpm",
 ]
@@ -26,14 +26,14 @@ cuda = ["jax[cuda]"]
 package = false
 
 [tool.uv.workspace]
-members = ["apps/alphaprobe/apps/funsearch-worker", "research/qpm"]
+members = ["apps/alphaprobe/apps/worker", "research/qpm"]
 
 [tool.uv.sources]
-funsearch-worker = { workspace = true }
+worker = { workspace = true }
 qpm = { workspace = true }
 
 [tool.ruff]
-include = ["scripts", "apps/alphaprobe/apps/funsearch-worker", "research"]
+include = ["scripts", "apps/alphaprobe/apps/worker", "research"]
 exclude = ["**/pb"]
 line-length = 120
 

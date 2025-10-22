@@ -4,9 +4,9 @@ requires-python = "==3.13.*"
 
 [manifest]
 members = [
-    "funsearch-worker",
     "mictlan",
     "qpm",
+    "worker",
 ]
 
 [[package]]
@@ -414,31 +414,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/de/e0/bab50af11c2d75c9c
 wheels = [
     { url = "https://files.pythonhosted.org/packages/47/71/70db47e4f6ce3e5c37a607355f80da8860a33226be640226ac52cb05ef2e/fsspec-2025.9.0-py3-none-any.whl", hash = "sha256:530dc2a2af60a414a832059574df4a6e10cce927f6f4a78209390fe38955cfb7", size = 199289, upload-time = "2025-09-02T19:10:47.708Z" },
 ]
-
-[[package]]
-name = "funsearch-worker"
-version = "0.1.0"
-source = { editable = "apps/alphaprobe/apps/funsearch-worker" }
-dependencies = [
-    { name = "grpcio" },
-    { name = "grpcio-reflection" },
-    { name = "pytest" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "grpcio-tools" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "grpcio", specifier = ">=1.75.1" },
-    { name = "grpcio-reflection", specifier = ">=1.75.1" },
-    { name = "pytest", specifier = ">=8.4.2" },
-]
-
-[package.metadata.requires-dev]
-dev = [{ name = "grpcio-tools", specifier = ">=1.75.1" }]
 
 [[package]]
 name = "greenlet"
@@ -1152,7 +1127,6 @@ name = "mictlan"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "funsearch-worker" },
     { name = "ipywidgets" },
     { name = "nbconvert" },
     { name = "notebook" },
@@ -1161,6 +1135,7 @@ dependencies = [
     { name = "qpm" },
     { name = "tmmax" },
     { name = "tqdm" },
+    { name = "worker" },
 ]
 
 [package.optional-dependencies]
@@ -1175,7 +1150,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "funsearch-worker", editable = "apps/alphaprobe/apps/funsearch-worker" },
     { name = "ipywidgets" },
     { name = "jax", extras = ["cuda"], marker = "extra == 'cuda'" },
     { name = "nbconvert" },
@@ -1185,6 +1159,7 @@ requires-dist = [
     { name = "qpm", editable = "research/qpm" },
     { name = "tmmax" },
     { name = "tqdm" },
+    { name = "worker", editable = "apps/alphaprobe/apps/worker" },
 ]
 provides-extras = ["cuda"]
 
@@ -2358,6 +2333,31 @@ sdist = { url = "https://files.pythonhosted.org/packages/41/53/2e0253c5efd69c965
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ca/51/5447876806d1088a0f8f71e16542bf350918128d0a69437df26047c8e46f/widgetsnbextension-4.0.14-py3-none-any.whl", hash = "sha256:4875a9eaf72fbf5079dc372a51a9f268fc38d46f767cbf85c43a36da5cb9b575", size = 2196503, upload-time = "2025-04-10T13:01:23.086Z" },
 ]
+
+[[package]]
+name = "worker"
+version = "0.1.0"
+source = { editable = "apps/alphaprobe/apps/worker" }
+dependencies = [
+    { name = "grpcio" },
+    { name = "grpcio-reflection" },
+    { name = "pytest" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "grpcio-tools" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "grpcio", specifier = ">=1.75.1" },
+    { name = "grpcio-reflection", specifier = ">=1.75.1" },
+    { name = "pytest", specifier = ">=8.4.2" },
+]
+
+[package.metadata.requires-dev]
+dev = [{ name = "grpcio-tools", specifier = ">=1.75.1" }]
 
 [[package]]
 name = "zipp"
