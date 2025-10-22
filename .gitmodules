@@ -7,3 +7,6 @@
 [submodule "research/qpm"]
 	path = research/qpm
 	url = git@github.com:Xo1otl/qpm.git
+[submodule "apps/alphaprobe"]
+	path = apps/alphaprobe
+	url = git@github.com:Xo1otl/alphaprobe.git
