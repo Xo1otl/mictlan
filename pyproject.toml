@@ -41,6 +41,14 @@ line-length = 120
 select = ["ALL"]
 ignore = ["D"]
 
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = [
+    "S101", # assert
+    "S102", # exec
+    "T201", # print
+    "E501", # line too long
+]
+
 [dependency-groups]
 dev = ["grpcio-tools>=1.75.1"]
 
