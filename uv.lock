@@ -5,6 +5,7 @@ requires-python = "==3.13.*"
 [manifest]
 members = [
     "mictlan",
+    "paint-radiation",
     "qpm",
     "worker",
 ]
@@ -429,6 +430,8 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ee/43/3cecdc0349359e1a527cbf2e3e28e5f8f06d3343aaf82ca13437a9aa290f/greenlet-3.2.4-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:23768528f2911bcd7e475210822ffb5254ed10d71f4028387e5a99b4c6699671", size = 610497, upload-time = "2025-08-07T13:18:31.636Z" },
     { url = "https://files.pythonhosted.org/packages/b8/19/06b6cf5d604e2c382a6f31cafafd6f33d5dea706f4db7bdab184bad2b21d/greenlet-3.2.4-cp313-cp313-musllinux_1_1_aarch64.whl", hash = "sha256:00fadb3fedccc447f517ee0d3fd8fe49eae949e1cd0f6a611818f4f6fb7dc83b", size = 1121662, upload-time = "2025-08-07T13:42:41.117Z" },
     { url = "https://files.pythonhosted.org/packages/a2/15/0d5e4e1a66fab130d98168fe984c509249c833c1a3c16806b90f253ce7b9/greenlet-3.2.4-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:d25c5091190f2dc0eaa3f950252122edbbadbb682aa7b1ef2f8af0f8c0afefae", size = 1149210, upload-time = "2025-08-07T13:18:24.072Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/53/f9c440463b3057485b8594d7a638bed53ba531165ef0ca0e6c364b5cc807/greenlet-3.2.4-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:6e343822feb58ac4d0a1211bd9399de2b3a04963ddeec21530fc426cc121f19b", size = 1564759, upload-time = "2025-11-04T12:42:19.395Z" },
+    { url = "https://files.pythonhosted.org/packages/47/e4/3bb4240abdd0a8d23f4f88adec746a3099f0d86bfedb623f063b2e3b4df0/greenlet-3.2.4-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:ca7f6f1f2649b89ce02f6f229d7c19f680a6238af656f61e0115b24857917929", size = 1634288, upload-time = "2025-11-04T12:42:21.174Z" },
     { url = "https://files.pythonhosted.org/packages/0b/55/2321e43595e6801e105fcfdee02b34c0f996eb71e6ddffca6b10b7e1d771/greenlet-3.2.4-cp313-cp313-win_amd64.whl", hash = "sha256:554b03b6e73aaabec3745364d6239e9e012d64c68ccd0b8430c64ccc14939a8b", size = 299685, upload-time = "2025-08-07T13:24:38.824Z" },
 ]
 
@@ -739,6 +742,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/4f/ca/c70e5439eec1abc1a93bad521452dbddeefa68128f256991e6845e9fc56a/jaxlib-0.7.1-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:66b33cc15040af5b8d16d3006811eb31372e9f4cfe09393d6cea91795366bfa4", size = 57787598, upload-time = "2025-08-20T15:56:41.372Z" },
     { url = "https://files.pythonhosted.org/packages/1f/54/6d54d6d6a2019cbffa7316de038002b0250568199f2b4138326eb27e3910/jaxlib-0.7.1-cp313-cp313t-manylinux2014_aarch64.whl", hash = "sha256:58558fa29fd7d6342c066f837e58fcba335182837a959affc128660c089702de", size = 85286808, upload-time = "2025-08-20T15:56:46.087Z" },
     { url = "https://files.pythonhosted.org/packages/79/e2/a0ce0ac2aa9b12a83f3bb27c570361017743c5cf82f1044771daa4c865a6/jaxlib-0.7.1-cp313-cp313t-manylinux_2_27_x86_64.whl", hash = "sha256:944f7555960d69f1d1c435fff0a76e4edd6a878fe47fe1781f7a0d63b61072e5", size = 81252495, upload-time = "2025-08-20T15:56:51.172Z" },
+]
+
+[[package]]
+name = "jdata"
+version = "0.8.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f0/07/f2c43c61a528f1b49ac12b14b6a973cf2133abe7f67ee8a07a0586783f50/jdata-0.8.3.tar.gz", hash = "sha256:73a67c3c2e7337d030d6f3fcae1c160c0465ed7553f8b1c5302037a6459684b7", size = 67999, upload-time = "2025-09-04T15:58:08.396Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b4/8e/d4b6ec389b67be3badfdd8429cf4bb81484dde9d419bba39af9e56d524a8/jdata-0.8.3-py2.py3-none-any.whl", hash = "sha256:fa149469b86b5a759b9f303fa06e90adc7113ebc2ef95f28d0011194f403a503", size = 59281, upload-time = "2025-09-04T15:58:07.218Z" },
 ]
 
 [[package]]
@@ -1523,6 +1538,25 @@ wheels = [
 ]
 
 [[package]]
+name = "paint-radiation"
+version = "0.1.0"
+source = { virtual = "research/paint_radiation" }
+
+[package.dev-dependencies]
+dev = [
+    { name = "jdata" },
+    { name = "pmcx" },
+]
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "jdata", specifier = ">=0.8.3" },
+    { name = "pmcx", specifier = ">=0.6.1" },
+]
+
+[[package]]
 name = "pandas"
 version = "2.3.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1660,6 +1694,17 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
+]
+
+[[package]]
+name = "pmcx"
+version = "0.6.1"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7f/8d/7e8a702e512803d1884542700e42fa6976832a26d87f829b62412c88908d/pmcx-0.6.1-cp313-cp313-macosx_10_18_universal2.whl", hash = "sha256:18bbc733c91bfe4d9521b6bdde09763aa1d720466bbe9a41ad892341f49b3a3b", size = 5062585, upload-time = "2025-10-11T16:18:54.734Z" },
+    { url = "https://files.pythonhosted.org/packages/61/56/86e75ab2745c3444ce0d85525b54fa5155cecc877155067692ef75715a5b/pmcx-0.6.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:279ca5996d091afb8d1ee527ed7d3a0870b2d62ecbdab516104f265057a9e90d", size = 4911159, upload-time = "2025-10-11T15:50:19.011Z" },
+    { url = "https://files.pythonhosted.org/packages/de/b1/d0f5147b7e1ce774fce3ec4aff7fb4209c8330e434106d482cb5d9357482/pmcx-0.6.1-cp313-cp313-win_amd64.whl", hash = "sha256:210daa5d56d0978010c2c9fbdba7be4d447153bab14f5e9d44d6fdb392f9cbf6", size = 4642675, upload-time = "2025-10-11T15:56:21.995Z" },
+    { url = "https://files.pythonhosted.org/packages/e9/26/c1ae65b95c48278d74e2b2197ea7b6f49598cb303de074b1c31a33e2ee53/pmcx-0.6.1-cp313-cp313t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:9b11224ffa49c96f84b4861d00414b994585e602324b201e1f5e65e69258958b", size = 4912893, upload-time = "2025-10-11T15:50:20.672Z" },
 ]
 
 [[package]]

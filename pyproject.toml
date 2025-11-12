@@ -26,7 +26,11 @@ cuda = ["jax[cuda]"]
 package = false
 
 [tool.uv.workspace]
-members = ["apps/alphaprobe/apps/worker", "research/qpm"]
+members = [
+    "apps/alphaprobe/apps/worker",
+    "research/qpm",
+    "research/paint_radiation",
+]
 
 [tool.uv.sources]
 worker = { workspace = true }
