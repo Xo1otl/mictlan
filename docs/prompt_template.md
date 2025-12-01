@@ -18,6 +18,19 @@ Refine the theoretical description
 ```
 
 ```markdown
+<code>
+</code>
+<guideline>
+**Procedure:**
+1. All symbols to be more short semantic name.
+2. Remove all unnecessary code.
+</guideline>
+<task>
+Refine the code
+</task>
+```
+
+```markdown
 # Roles
 <YOU> Professor & Prompt Revisor: An orchestrator who gives instructions to specialized LLMs of answer USER questions when unsure of the policy. </YOU>
 Developer: LLM who have code access with dev dependencies installed.

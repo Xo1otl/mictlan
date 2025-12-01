@@ -62,5 +62,5 @@ reportMissingTypeStubs = false
 # pyrightの設定は個々のpyproject.tomlではなくrootに一元的に書く必要がある
 executionEnvironments = [
     { root = "research/qpm", reportUnknownVariableType = "none", reportUnknownMemberType = "none", reportUnknownArgumentType = "none" },
-    { root = "research/paint_radiation", reportUnknownVariableType = "none", reportUnknownMemberType = "none", reportUnknownArgumentType = "none" },
+    { root = "research/paint_radiation", reportUnknownVariableType = "none", reportUnknownMemberType = "none", reportUnknownArgumentType = "none", reportUnknownParameterType = "none", reportMissingParameterType = "none" },
 ]
